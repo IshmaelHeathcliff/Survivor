@@ -1,0 +1,35 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# 项目结构指南
+
+## 目录结构
+### 核心目录 (`Assets/Scripts/`)
+- `Core/` - 核心系统和基础功能
+  - `Scene/` - 场景加载管理
+- `Gameplay/` - 游戏游玩机制相关
+  - `Character/` - 角色相关系统
+    - `Player/` - 玩家控制器和组件实现
+    - `Enemy/` - 敌人控制器和组件实现
+    - `Damage/` - 伤害系统接口和实现
+    - `Modifier/` - 词条系统接口和实现
+    - `Stat/` - 角色数据系统接口和实现
+    - `State/` - 状态系统接口和实现
+- `UI/` - 用户界面相关
+- `Data/` - 数据与资源系统相关
+- `Utilities/` - 辅助工具类
+- `Editor/` - Unity 编辑器扩展
+
+### 主要文件
+- [GameManager.cs](mdc:Assets/Scripts/GameManager.cs) - 游戏管理器
+- [QFramework.cs](mdc:Assets/Scripts/Core/QFramework.cs) - QFramework 框架
+- [Survivor.cs](mdc:Assets/Scripts/Survivor.cs) QFramework 框架入口
+
+### 角色系统
+- [CharacterController.cs](mdc:Assets/Scripts/Character/CharacterController.cs) - 角色控制器基类
+- [MoveController.cs](mdc:Assets/Scripts/Character/MoveController.cs) - 移动控制器基类
+- [AttackerController.cs](mdc:Assets/Scripts/Character/Damage/AttackerController.cs) - 攻击器控制器基类
+- [Attacker.cs](mdc:Assets/Scripts/Character/Damage/Attacker.cs) - 攻击器基类
+- [Damageable.cs](mdc:Assets/Scripts/Character/Damage/Damageable.cs) - 受伤器基类
