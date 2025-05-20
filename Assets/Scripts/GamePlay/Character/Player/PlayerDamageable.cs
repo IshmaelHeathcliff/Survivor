@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Character.Damage
 {
+    [RequireComponent(typeof(Collider2D))]
     public class PlayerDamageable : Damageable
     {
         PlayerModel _model;

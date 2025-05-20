@@ -1,0 +1,13 @@
+[
+  {
+    "ID": "1",
+    "Name": "健实",
+    "Description": "加强生命",
+    "ModifierID": [
+      "health_base",
+      "health_increase",
+      "health_more"
+    ],
+    "Icon": "Assets/Artworks/UI/buff.aseprite[buff]"
+  }
+]
