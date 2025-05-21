@@ -17,7 +17,7 @@ namespace Character.Modifier
     {
         protected static IStat GetStat(IStatModifier modifier)
         {
-            return PixelRPG.Interface.GetSystem<ModifierSystem>().GetStat(modifier);
+            return GameFrame.Interface.GetSystem<ModifierSystem>().GetStat(modifier);
         }
 
         public int Level { get; set; }

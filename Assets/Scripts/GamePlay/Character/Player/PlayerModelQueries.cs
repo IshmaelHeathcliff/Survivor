@@ -10,7 +10,7 @@ namespace Character
             return this.GetModel<PlayersModel>().Default().Position;
         }
     }
-    
+
     public class PlayerDirectionQuery : AbstractQuery<Vector2>
     {
         protected override Vector2 OnDo()

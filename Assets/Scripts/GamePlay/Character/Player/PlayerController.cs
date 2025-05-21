@@ -28,14 +28,17 @@ namespace Character
             Stats.Mana.SetMaxValue();
         }
 
-        protected override void Awake()
+        protected override void OnInit()
         {
-            base.Awake();
             ID = "player";
             AttackerController = GetController<PlayerAttackerController>();
             MoveController = GetController<PlayerMoveController>();
             Damageable = GetController<PlayerDamageable>();
             Model = this.GetModel<PlayersModel>().Default();
+        }
+
+        protected override void OnDeinit()
+        {
         }
     }
 }

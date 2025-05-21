@@ -22,7 +22,7 @@ namespace Scene
 
         public IArchitecture GetArchitecture()
         {
-            return PixelRPG.Interface;
+            return GameFrame.Interface;
         }
     }
 }

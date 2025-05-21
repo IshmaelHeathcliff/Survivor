@@ -7,7 +7,7 @@ namespace Character.Modifier
 {
     public class ModifierSystem : AbstractSystem
     {
-        Dictionary<string, ModifierInfo> _modifierInfoCache;
+        Dictionary<string, ModifierInfo> _modifierInfoCache = new();
         const string JsonPath = "Preset";
         const string JsonName = "Modifiers.json";
 

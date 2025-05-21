@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Core
 {
-    public abstract class MonoSingleton<T> : MonoBehaviour where T: MonoSingleton<T>
+    public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T>
     {
         protected static T _instance;
 
@@ -19,11 +19,11 @@ namespace Core
                 {
                     _instance = Create();
                 }
-            
+
                 return _instance;
             }
         }
-    
+
         protected static bool Quitting;
 
         protected static T Create()
@@ -39,16 +39,16 @@ namespace Core
             {
                 _instance = (T)this;
             }
-        
-            if(_instance != this)
+
+            if (_instance != this)
             {
                 Destroy(gameObject);
                 return;
             }
-        
+
             DontDestroyOnLoad(gameObject);
         }
-    
+
         protected void OnDestroy()
         {
             if (_instance == this)

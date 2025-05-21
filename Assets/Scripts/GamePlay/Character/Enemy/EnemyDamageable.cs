@@ -12,17 +12,18 @@ namespace Character.Damage
 
         FSM<EnemyStateId> _fsm;
 
-        void Awake()
+        protected override void OnInit()
         {
+            base.OnInit();
             OnHurt = new EasyEvent();
             OnDeath = new EasyEvent();
+            _fsm = (CharacterController as IHasFSM<EnemyStateId>).FSM;
         }
+
 
         void Start()
         {
             SetStats(CharacterController.Stats);
-
-            _fsm = (CharacterController as IHasFSM<EnemyStateId>).FSM;
 
             OnHurt.Register(() => Hurt().Forget()).UnRegisterWhenDisabled(this);
             OnDeath.Register(Dead).UnRegisterWhenDisabled(this);

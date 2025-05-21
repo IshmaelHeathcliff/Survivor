@@ -80,9 +80,9 @@ namespace Character.Enemy
             return SqrDistanceToPlayer() > _detectRadius * _detectRadius;
         }
 
-        void Start()
+        protected override void OnInit()
         {
-            Model.BindTransform(transform);
+            base.OnInit();
             Speed = _speed;
         }
     }

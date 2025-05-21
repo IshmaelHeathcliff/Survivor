@@ -11,16 +11,19 @@ namespace Character.Damage
         bool CanAttack { get; set; }
     }
 
-    public abstract class AttackerController : MonoBehaviour, IController, IAttackerController
+    public abstract class AttackerController : CharacterControlled, IController, IAttackerController
     {
-        public ICharacterController Controller { get; set; }
-        protected ICharacterModel Model => Controller.Model;
-
-        public ICharacterController CharacterController { get; set; }
-
+        protected ICharacterModel Model => CharacterController.Model;
         public bool CanAttack { get; set; } = true;
-
         protected List<IAttacker> Attackers = new();
+
+        protected override void OnInit()
+        {
+        }
+
+        protected override void OnDeinit()
+        {
+        }
 
         public IAttacker GetOrCreateAttacker()
         {
@@ -49,7 +52,7 @@ namespace Character.Damage
 
         public IArchitecture GetArchitecture()
         {
-            return PixelRPG.Interface;
+            return GameFrame.Interface;
         }
     }
 

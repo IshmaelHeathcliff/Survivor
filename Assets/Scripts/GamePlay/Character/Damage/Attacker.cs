@@ -60,7 +60,7 @@ namespace Character.Damage
         public abstract UniTaskVoid Attack();
         public IArchitecture GetArchitecture()
         {
-            return PixelRPG.Interface;
+            return GameFrame.Interface;
         }
     }
 }

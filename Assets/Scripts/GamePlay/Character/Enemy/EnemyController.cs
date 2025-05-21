@@ -28,15 +28,17 @@ namespace Character.Enemy
             Stats.Health.SetMaxValue();
         }
 
-        protected override void Awake()
+        protected override void OnInit()
         {
-            base.Awake();
-
             ID ??= GUID.Generate().ToString();
             AttackerController = GetController<EnemyAttackerController>();
             Damageable = GetController<EnemyDamageable>();
             MoveController = GetController<EnemyMoveController>();
             Model = this.GetModel<EnemiesModel>().GetModel(ID);
+        }
+
+        protected override void OnDeinit()
+        {
         }
     }
 }

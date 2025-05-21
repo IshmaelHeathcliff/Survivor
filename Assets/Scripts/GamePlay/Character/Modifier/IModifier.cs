@@ -24,7 +24,7 @@ namespace Character.Modifier
     {
         protected static ModifierInfo GetModifierInfo(string modifierId)
         {
-            return PixelRPG.Interface.GetSystem<ModifierSystem>().GetModifierInfo(modifierId);
+            return GameFrame.Interface.GetSystem<ModifierSystem>().GetModifierInfo(modifierId);
         }
 
         public string FactoryID { get; set; }

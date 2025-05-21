@@ -45,7 +45,7 @@ namespace Character.Stat
 
         public IArchitecture GetArchitecture()
         {
-            return PixelRPG.Interface;
+            return GameFrame.Interface;
         }
     }
 }

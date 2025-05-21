@@ -5,7 +5,7 @@ using Character.Player;
 using SaveLoad;
 using Scene;
 
-public class PixelRPG : Architecture<PixelRPG>
+public class GameFrame : Architecture<GameFrame>
 {
     protected override void Init()
     {

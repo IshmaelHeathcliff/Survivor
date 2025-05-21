@@ -11,7 +11,7 @@ namespace Character.Damage
         Cold,
         Chaos
     }
-    
+
     public abstract class Damage
     {
         public List<string> Keywords { get; set; }
@@ -49,7 +49,7 @@ namespace Character.Damage
         public override void Apply()
         {
             // Debug.Log("Damage Applied");
-            
+
             if (!IsHit())
             {
                 // Debug.Log("Damage Not Hit");
@@ -80,7 +80,7 @@ namespace Character.Damage
                 case >= 100f:
                     return true;
                 default:
-                    return Random.Range(0f, 1f) < critical/100f;
+                    return Random.Range(0f, 1f) < critical / 100f;
             }
         }
 
@@ -126,7 +126,7 @@ namespace Character.Damage
         {
         }
     }
-    
+
     public class DamageOverTime : Damage
     {
         float _duration;

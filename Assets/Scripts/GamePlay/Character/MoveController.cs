@@ -14,13 +14,10 @@ namespace Character
     }
 
     [RequireComponent(typeof(Animator), typeof(Rigidbody2D))]
-    public abstract class MoveController : MonoBehaviour, IMoveController, IController
+    public abstract class MoveController : CharacterControlled, IMoveController, IController
     {
-        public ICharacterController CharacterController { get; set; }
-
         protected Animator Animator;
         protected Rigidbody2D Rigidbody;
-
         protected ICharacterModel Model => CharacterController.Model;
 
         static readonly int Y = Animator.StringToHash("Y");
@@ -44,6 +41,19 @@ namespace Character
             get => Model.Position;
             set => Model.Position = value;
         }
+
+        protected override void OnInit()
+        {
+            Animator = GetComponentInChildren<Animator>();
+            Rigidbody = GetComponent<Rigidbody2D>();
+            Model.BindTransform(transform);
+        }
+
+        protected override void OnDeinit()
+        {
+
+        }
+
         public async UniTask PlayAnimation(string stateName)
         {
             Animator.Play(stateName);
@@ -73,15 +83,9 @@ namespace Character
             Position = position;
         }
 
-        protected virtual void Awake()
-        {
-            Animator = GetComponentInChildren<Animator>();
-            Rigidbody = GetComponent<Rigidbody2D>();
-        }
-
         public IArchitecture GetArchitecture()
         {
-            return PixelRPG.Interface;
+            return GameFrame.Interface;
         }
     }
 }

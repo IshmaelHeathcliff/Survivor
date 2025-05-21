@@ -65,6 +65,6 @@ public class GameManager : MonoBehaviour, IController
 
     public IArchitecture GetArchitecture()
     {
-        return PixelRPG.Interface;
+        return GameFrame.Interface;
     }
 }

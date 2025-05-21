@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using System.Collections.Generic;
 using System.Linq;
-
+using Sirenix.OdinInspector;
 [System.Serializable]
 public class TerrainType
 {
@@ -21,6 +21,7 @@ public class InfiniteMapGenerator : MonoBehaviour
 
     [Header("渲染设置")]
     [SerializeField] string _sortingLayerName = "Default";  // 排序层级名称
+    [SerializeField] SortingLayer _sortingLayer;             // 排序层级
     [SerializeField] int _orderInLayer;                     // 层级内排序
     [SerializeField] Material _tileMaterial;                // 瓦片材质
 
@@ -53,6 +54,20 @@ public class InfiniteMapGenerator : MonoBehaviour
             UpdateChunks();
             _lastUpdateTime = Time.time;
         }
+    }
+
+    [Button]
+    void UpdateChunksInEditor()
+    {
+        if (_camera == null)
+        {
+            _camera = Camera.main.transform;
+        }
+        if (_grid == null)
+        {
+            _grid = FindFirstObjectByType<Grid>();
+        }
+        UpdateChunks();
     }
 
     void UpdateChunks()
@@ -157,19 +172,19 @@ public class InfiniteMapGenerator : MonoBehaviour
         return _terrainTypes[0].Tile;
     }
 
-    void OnDrawGizmos()
-    {
-        if (_camera != null)
-        {
-            var chunkCenter = new Vector3(
-                Mathf.Floor(_camera.position.x / _chunkSize) * _chunkSize + _chunkSize / 2f,
-                Mathf.Floor(_camera.position.y / _chunkSize) * _chunkSize + _chunkSize / 2f,
-                0
-            );
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawWireCube(chunkCenter, new Vector3(_chunkSize, _chunkSize, 0));
-        }
-    }
+    // void OnDrawGizmos()
+    // {
+    //     if (_camera != null)
+    //     {
+    //         var chunkCenter = new Vector3(
+    //             Mathf.Floor(_camera.position.x / _chunkSize) * _chunkSize + _chunkSize / 2f,
+    //             Mathf.Floor(_camera.position.y / _chunkSize) * _chunkSize + _chunkSize / 2f,
+    //             0
+    //         );
+    //         Gizmos.color = Color.yellow;
+    //         Gizmos.DrawWireCube(chunkCenter, new Vector3(_chunkSize, _chunkSize, 0));
+    //     }
+    // }
 
 #if UNITY_EDITOR
     void OnValidate()

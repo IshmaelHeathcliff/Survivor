@@ -6,7 +6,15 @@ namespace Character.Enemy
 {
     public class EnemyAttackerController : AttackerController
     {
-        public FSM<EnemyStateId> FSM => (CharacterController as IHasFSM<EnemyStateId>).FSM;
+        FSM<EnemyStateId> _fsm;
+        public FSM<EnemyStateId> FSM => _fsm;
+
+        protected override void OnInit()
+        {
+            base.OnInit();
+            _fsm = (CharacterController as IHasFSM<EnemyStateId>).FSM;
+        }
+
         protected override IAttacker GetOrCreateAttackerInternal()
         {
             EnemyAttacker attacker = GetComponentInChildren<EnemyAttacker>();

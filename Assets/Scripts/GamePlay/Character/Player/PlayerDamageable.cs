@@ -9,15 +9,17 @@ namespace Character.Damage
     {
         PlayerModel _model;
 
-        void Awake()
+        protected override void OnInit()
         {
+            base.OnInit();
+            _model = this.GetModel<PlayersModel>().Default();
             OnHurt = new EasyEvent();
             OnDeath = new EasyEvent();
         }
 
+
         void Start()
         {
-            _model = this.GetModel<PlayersModel>().Default();
             Stat.Stats stats = _model.Stats;
             Health = stats.Health;
             Defence = stats.Defence;

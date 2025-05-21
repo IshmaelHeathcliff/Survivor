@@ -12,7 +12,6 @@ namespace Character.Player
         [SerializeField] float _attackInterval;
         [SerializeField] GameObject _playerAttacker;
         PlayerInput.PlayerActions _playerInput;
-        bool _canAttack = true;
 
         void Face(Vector2 direction)
         {

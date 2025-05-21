@@ -18,9 +18,8 @@ namespace Character.Damage
         void TakeDamage(float damage);
 
     }
-    public class Damageable : MonoBehaviour, IDamageable, IController
+    public abstract class Damageable : CharacterControlled, IDamageable, IController
     {
-        public ICharacterController CharacterController { get; set; }
 
         public EasyEvent OnHurt { get; protected set; }
         public EasyEvent OnDeath { get; protected set; }
@@ -32,6 +31,14 @@ namespace Character.Damage
         public IStat ColdResistance { get; protected set; }
         public IStat ChaosResistance { get; protected set; }
         public bool IsDamageable { get; set; } = true;
+
+        protected override void OnInit()
+        {
+        }
+
+        protected override void OnDeinit()
+        {
+        }
 
         public void SetStats(Stats stats)
         {
@@ -63,7 +70,7 @@ namespace Character.Damage
 
         public IArchitecture GetArchitecture()
         {
-            return PixelRPG.Interface;
+            return GameFrame.Interface;
         }
     }
 }

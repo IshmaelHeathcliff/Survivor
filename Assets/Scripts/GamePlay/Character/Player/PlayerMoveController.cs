@@ -13,6 +13,12 @@ namespace Character
 
         static readonly int Walking = Animator.StringToHash("Walking");
 
+        protected override void OnInit()
+        {
+            base.OnInit();
+            Speed = _speed;
+        }
+
 
         void Move()
         {
@@ -57,11 +63,6 @@ namespace Character
             _playerInput.Move.canceled -= MoveAction;
         }
 
-        void Start()
-        {
-            Model.BindTransform(transform);
-            Speed = _speed;
-        }
 
         void OnEnable()
         {

@@ -14,15 +14,20 @@ namespace Character
         IStateContainer StateContainer { get; }
         void BindTransform(Transform transform);
     }
-    
-    public abstract class CharacterModel: ICharacterModel
+
+    public abstract class CharacterModel : ICharacterModel
     {
         Transform _transform;
+
+        /// <summary>
+        /// 绑定Transform，需要CharacterController在Start中调用以绑定Transform，故查询Player位置需要在Start之后
+        /// </summary>
+        /// <param name="transform"></param>
         public void BindTransform(Transform transform)
         {
             _transform = transform;
         }
-        
+
         public float Speed { get; set; }
 
         public Vector2 Position
@@ -39,18 +44,18 @@ namespace Character
     public abstract class CharactersModel<T> : AbstractModel where T : ICharacterModel
     {
         readonly Dictionary<string, T> _models = new();
-        
+
         public T GetModel(string id)
         {
             return _models[id];
         }
-        
+
         public T AddModel(string id, T model)
         {
             _models.Add(id, model);
             return model;
         }
-        
+
         public void RemoveModel(string id)
         {
             _models.Remove(id);
