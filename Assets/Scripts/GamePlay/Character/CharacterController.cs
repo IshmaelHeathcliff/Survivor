@@ -77,7 +77,7 @@ namespace Character
 
         public bool Initialized { get; set; }
 
-        // ! 由于Model和ID都需要在子类的Awake中设置，所以Stats不能在Awake中调用
+        // ! Model、ID、Stats都需要在初始化后再调用
         public Stats Stats => Model.Stats;
 
         public string ID
@@ -86,11 +86,11 @@ namespace Character
             set => _characterId = value;
         }
 
-        protected T GetController<T>() where T : ICharacterControlled
+        protected T GetControlled<T>() where T : ICharacterControlled
         {
-            T controller = GetComponentInChildren<T>();
-            controller.CharacterController = this;
-            return controller;
+            T controlled = GetComponentInChildren<T>();
+            controlled.CharacterController = this;
+            return controlled;
         }
 
         protected abstract void SetStats();
@@ -102,11 +102,19 @@ namespace Character
 
         public void Init()
         {
-            OnInit();
+            AttackerController = GetControlled<IAttackerController>();
+            MoveController = GetControlled<IMoveController>();
+            Damageable = GetControlled<IDamageable>();
 
             ModifierSystem = this.GetSystem<ModifierSystem>();
+
+            // 初始化ID、Model、Stats
+            OnInit();
+
             Stats.FactoryID = ID;
             ModifierSystem.RegisterFactory(Stats);
+            SetStats();
+
             Initialized = true;
         }
 
@@ -117,11 +125,14 @@ namespace Character
         }
 
         /// <summary>
-        /// 需要获取AttackerController, MoveController, Damageable, Model的引用
+        /// 需要完成ID的初始化并获取Model的引用
         /// </summary>
         protected abstract void OnInit();
 
-        protected abstract void OnDeinit();
+        protected virtual void OnDeinit()
+        {
+            ModifierSystem.UnregisterFactory(ID);
+        }
 
         protected virtual void Awake()
         {
@@ -129,16 +140,6 @@ namespace Character
             {
                 Init();
             }
-        }
-
-        protected virtual void Start()
-        {
-            SetStats();
-        }
-
-        protected virtual void OnDisable()
-        {
-            ModifierSystem.UnregisterFactory(ID);
         }
 
         protected virtual void OnDestroy()
@@ -171,10 +172,15 @@ namespace Character
             FSM.FixedUpdate();
         }
 
-        protected override void Start()
+        protected override void OnInit()
         {
-            base.Start();
             AddStates();
+        }
+
+        protected override void OnDeinit()
+        {
+            base.OnDeinit();
+            FSM.Clear();
         }
     }
 }

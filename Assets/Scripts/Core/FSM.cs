@@ -175,6 +175,10 @@ namespace Core
                 SecondsOfCurrentState = 0.0f;
                 state.Enter();
             }
+            else
+            {
+                Debug.LogError($"State {t} not found");
+            }
         }
 
         public void FixedUpdate()

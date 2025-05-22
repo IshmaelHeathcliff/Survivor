@@ -16,7 +16,6 @@ namespace Character.Enemy
             FSM.AddState(EnemyStateId.Chase, new EnemyChaseState(FSM, this));
             FSM.AddState(EnemyStateId.Hurt, new EnemyHurtState(FSM, this));
             FSM.AddState(EnemyStateId.Dead, new EnemyDeadState(FSM, this));
-            FSM.StartState(EnemyStateId.Idle);
         }
 
         protected override void SetStats()
@@ -30,15 +29,19 @@ namespace Character.Enemy
 
         protected override void OnInit()
         {
+            base.OnInit();
             ID ??= GUID.Generate().ToString();
-            AttackerController = GetController<EnemyAttackerController>();
-            Damageable = GetController<EnemyDamageable>();
-            MoveController = GetController<EnemyMoveController>();
             Model = this.GetModel<EnemiesModel>().GetModel(ID);
         }
 
         protected override void OnDeinit()
         {
+            base.OnDeinit();
+        }
+
+        void Start()
+        {
+            FSM.StartState(EnemyStateId.Idle);
         }
     }
 }

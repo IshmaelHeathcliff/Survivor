@@ -30,15 +30,17 @@ namespace Character
 
         protected override void OnInit()
         {
-            ID = "player";
-            AttackerController = GetController<PlayerAttackerController>();
-            MoveController = GetController<PlayerMoveController>();
-            Damageable = GetController<PlayerDamageable>();
-            Model = this.GetModel<PlayersModel>().Default();
+            if (ID == null || ID == "")
+            {
+                ID = "player";
+            }
+
+            Model = this.GetModel<PlayersModel>().GetModel(ID);
         }
 
         protected override void OnDeinit()
         {
+            base.OnDeinit();
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Character
         Transform _transform;
 
         /// <summary>
-        /// 绑定Transform，需要CharacterController在Start中调用以绑定Transform，故查询Player位置需要在Start之后
+        /// 绑定Transform，需要在MoveController初始化后调用
         /// </summary>
         /// <param name="transform"></param>
         public void BindTransform(Transform transform)
@@ -47,6 +47,12 @@ namespace Character
 
         public T GetModel(string id)
         {
+            if (!_models.ContainsKey(id))
+            {
+                Debug.LogError($"Model {id} not found");
+                return Default();
+            }
+
             return _models[id];
         }
 
