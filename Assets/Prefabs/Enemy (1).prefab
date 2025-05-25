@@ -91,7 +91,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41b7e17aedd74612aef7a158f38709ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hurtTime: 1
+  _hurtTime: 0.2
 --- !u!1 &7152041979365510245
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,7 +314,7 @@ MonoBehaviour:
   _attackSpeed: 8
   _detectRadius: 10
   _attackRadius: 4
-  _idleTime: 0.5
+  _idleTime: 0.1
 --- !u!114 &4516161229600512672
 MonoBehaviour:
   m_ObjectHideFlags: 0

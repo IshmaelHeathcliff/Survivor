@@ -56,6 +56,7 @@ namespace Character.Stat
         public Stat LightningResistance { get; } = new Stat(LightningResistanceName);
         public Stat ColdResistance { get; } = new Stat(ColdResistanceName);
         public Stat ChaosResistance { get; } = new Stat(ChaosResistanceName);
+
         public string FactoryID { get; set; }
 
 

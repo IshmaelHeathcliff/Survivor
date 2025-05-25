@@ -1703,9 +1703,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d7f9307732b47409411a29650e68958, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _distanceToPlayer: 0
-  _attackInterval: 0
-  _playerAttacker: {fileID: 5580549006898965969, guid: ba1a9a448ca0fc243be7d024590436d4, type: 3}
+  _attackInterval: 0.5
+  _playerAttacker: {fileID: 5290981914726441479, guid: 6394c3fa8f99c5d459e42407e9bb9c51, type: 3}
 --- !u!1 &960632273
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,21 +8,15 @@ namespace Character.Player
 {
     public class PlayerAttackerController : AttackerController
     {
-        [SerializeField] float _distanceToPlayer;
         [SerializeField] float _attackInterval;
         [SerializeField] GameObject _playerAttacker;
         PlayerInput.PlayerActions _playerInput;
 
-        void Face(Vector2 direction)
-        {
-            transform.localPosition = direction.normalized * _distanceToPlayer;
-            transform.right = direction.normalized;
-        }
-
         protected override IAttacker GetOrCreateAttackerInternal()
         {
-            Face(Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()) - transform.position);
+            Vector3 playerPos = this.SendQuery(new PlayerPositionQuery());
             PlayerAttacker attacker = Instantiate(_playerAttacker, transform).GetComponent<PlayerAttacker>();
+            attacker.Direction = ((Vector2)(Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()) - playerPos)).normalized;
             attacker.SetStats(CharacterController.Stats);
             transform.DetachChildren();
             return attacker;
@@ -41,9 +35,14 @@ namespace Character.Player
             CanAttack = true;
         }
 
-        void AttackAction(InputAction.CallbackContext context)
+        void Update()
         {
             Attack().Forget();
+        }
+
+        void AttackAction(InputAction.CallbackContext context)
+        {
+            // Attack().Forget();
         }
 
         void RegisterActions()

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -9,9 +10,12 @@ namespace Character.Damage
     {
         [SerializeField] float _animationTime;
         [SerializeField] float _animationSpeed;
+        [SerializeField] float _animationRotationSpeed;
 
         Collider2D _collider;
         SpriteRenderer _renderer;
+
+        public Vector2 Direction { get; set; }
 
         void Awake()
         {
@@ -40,16 +44,19 @@ namespace Character.Damage
             };
 
 
-            var damage = new AttackDamage(this, damageable, keywords, DamageType.Physical, 10, 1, 1);
+            var damage = new AttackDamage(this, damageable, keywords, DamageType.Physical, 100, 1, 1);
             damage.Apply();
         }
 
         protected override async UniTask Play()
         {
+            transform.right = Direction;
             float leftTime = _animationTime;
             while (leftTime > 0)
             {
-                transform.Translate(Vector3.right * (1 + _animationSpeed) * Time.fixedDeltaTime);
+                this.GetCancellationTokenOnDestroy().ThrowIfCancellationRequested();
+                transform.Translate((1 + _animationSpeed) * Time.fixedDeltaTime * Direction, Space.World);
+                transform.Rotate(0, 0, _animationRotationSpeed * 360 * Time.fixedDeltaTime);
                 leftTime -= Time.fixedDeltaTime;
                 await UniTask.WaitForFixedUpdate(this.GetCancellationTokenOnDestroy());
             }
@@ -57,9 +64,16 @@ namespace Character.Damage
 
         public override async UniTaskVoid Attack()
         {
-            await Play().SuppressCancellationThrow();
-            AttackerController.RemoveAttacker(this);
-            Destroy(gameObject);
+            try
+            {
+                await Play();
+                AttackerController.RemoveAttacker(this);
+                Destroy(gameObject);
+            }
+            catch (OperationCanceledException)
+            {
+
+            }
         }
     }
 }
