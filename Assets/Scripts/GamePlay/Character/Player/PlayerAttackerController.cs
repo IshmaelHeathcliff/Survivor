@@ -14,9 +14,10 @@ namespace Character.Player
 
         protected override IAttacker GetOrCreateAttackerInternal()
         {
-            Vector3 playerPos = this.SendQuery(new PlayerPositionQuery());
+            Vector2 playerPos = this.SendQuery(new PlayerPositionQuery());
+            Vector2 direction = ((Vector2)Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()) - playerPos).normalized;
             PlayerAttacker attacker = Instantiate(_playerAttacker, transform).GetComponent<PlayerAttacker>();
-            attacker.Direction = ((Vector2)(Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()) - playerPos)).normalized;
+            attacker.Direction = direction;
             attacker.SetStats(CharacterController.Stats);
             transform.DetachChildren();
             return attacker;
