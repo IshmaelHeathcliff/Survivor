@@ -1,4 +1,5 @@
 ﻿using Character.Player;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,8 @@ namespace Character
     {
         [SerializeField] Slider _healthSlider;
         [SerializeField] Slider _manaSlider;
+        [SerializeField] TextMeshProUGUI _coinText;
+        [SerializeField] TextMeshProUGUI _woodText;
 
         PlayerModel _model;
 
@@ -44,6 +47,16 @@ namespace Character
             {
                 _manaSlider = transform.Find("Mana").GetComponent<Slider>();
             }
+
+            if (_coinText == null)
+            {
+                _coinText = transform.Find("Coin").GetComponentInChildren<TextMeshProUGUI>();
+            }
+
+            if (_woodText == null)
+            {
+                _woodText = transform.Find("Wood").GetComponent<TextMeshProUGUI>();
+            }
         }
 
         void Awake()
@@ -59,6 +72,18 @@ namespace Character
             mana.Register(OnMaxManaChanged).UnRegisterWhenDisabled(this);
             health.RegisterWithInitValue(OnHealthChanged).UnRegisterWhenDisabled(this);
             mana.RegisterWithInitValue(OnManaChanged).UnRegisterWhenDisabled(this);
+            _model.Coin.RegisterWithInitValue(OnCoinChanged).UnRegisterWhenDisabled(this);
+            _model.Wood.RegisterWithInitValue(OnWoodChanged).UnRegisterWhenDisabled(this);
+        }
+
+        void OnCoinChanged(int coin)
+        {
+            _coinText.text = coin.ToString();
+        }
+
+        void OnWoodChanged(int wood)
+        {
+            _woodText.text = wood.ToString();
         }
 
         void Start()

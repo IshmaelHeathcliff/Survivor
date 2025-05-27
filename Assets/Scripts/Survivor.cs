@@ -16,6 +16,7 @@ public class GameFrame : Architecture<GameFrame>
         RegisterSystem(new InputSystem());
         RegisterSystem(new ModifierSystem());
         RegisterSystem(new StateCreateSystem());
+        RegisterSystem(new DropSystem());
 
         RegisterUtility(new SaveLoadUtility());
     }

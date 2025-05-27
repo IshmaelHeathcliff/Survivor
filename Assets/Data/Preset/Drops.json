@@ -1,0 +1,12 @@
+[
+  {
+    "DropID": "coin",
+    "Name": "金币",
+    "DropPrefab": "Assets/Prefabs/coin.prefab"
+  },
+  {
+    "DropID": "wood",
+    "Name": "木头",
+    "DropPrefab": "Assets/Prefabs/wood.prefab"
+  }
+]

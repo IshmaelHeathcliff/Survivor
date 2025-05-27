@@ -11,6 +11,7 @@ namespace Character.Damage
         [SerializeField] float _hurtTime = 1f;
 
         FSM<EnemyStateId> _fsm;
+        DropSystem _dropSystem;
 
         protected override void OnInit()
         {
@@ -18,6 +19,7 @@ namespace Character.Damage
             OnHurt = new EasyEvent();
             OnDeath = new EasyEvent();
             _fsm = (CharacterController as IHasFSM<EnemyStateId>).FSM;
+            _dropSystem = GameFrame.Interface.GetSystem<DropSystem>();
         }
 
 
@@ -59,6 +61,8 @@ namespace Character.Damage
         void Dead()
         {
             _fsm.ChangeState(EnemyStateId.Dead);
+            GameObject drop = _dropSystem.GetDrop("coin");
+            Instantiate(drop, transform.position, Quaternion.identity);
         }
     }
 }
