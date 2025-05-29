@@ -58,6 +58,11 @@ namespace Character
 
         public T AddModel(string id, T model)
         {
+            if (_models.ContainsKey(id))
+            {
+                return _models[id];
+            }
+
             _models.Add(id, model);
             return model;
         }

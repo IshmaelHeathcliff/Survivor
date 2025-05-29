@@ -8,6 +8,6 @@
       "health_increase",
       "health_more"
     ],
-    "Icon": "Assets/Artworks/UI/buff.aseprite[buff]"
+    "Icon": "Assets/Textures/UI/icons.aseprite[icons_2]"
   }
 ]

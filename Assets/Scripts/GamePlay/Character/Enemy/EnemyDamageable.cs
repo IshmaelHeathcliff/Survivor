@@ -3,6 +3,7 @@ using Character.Enemy;
 using Core;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace Character.Damage
 {
@@ -61,8 +62,8 @@ namespace Character.Damage
         void Dead()
         {
             _fsm.ChangeState(EnemyStateId.Dead);
-            GameObject drop = _dropSystem.GetDrop("coin");
-            Instantiate(drop, transform.position, Quaternion.identity);
+            string dropAddress = _dropSystem.GetDropAddress("coin");
+            Addressables.InstantiateAsync(dropAddress, transform.position, Quaternion.identity);
         }
     }
 }

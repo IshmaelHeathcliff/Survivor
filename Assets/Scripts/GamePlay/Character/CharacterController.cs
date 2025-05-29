@@ -3,6 +3,7 @@ using Character.Modifier;
 using Character.Stat;
 using UnityEngine;
 using Core;
+using UnityEngine.AddressableAssets;
 
 namespace Character
 {
@@ -97,7 +98,7 @@ namespace Character
 
         public void DestroyController()
         {
-            Destroy(gameObject);
+            Addressables.ReleaseInstance(gameObject);
         }
 
         public void Init()

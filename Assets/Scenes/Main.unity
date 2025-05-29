@@ -672,7 +672,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u8FD9\u91CC\u663E\u793A\u4EBA\u7269\u5C5E\u6027\n\u8FD9\u91CC\u663E\u793A\u4EBA\u7269\u5C5E\u6027\n\u8FD9\u91CC\u663E\u793A\u4EBA\u7269\u5C5E\u6027\n\u8FD9\u91CC\u663E\u793A\u4EBA\u7269\u5C5E\u6027\n\u8FD9\u91CC\u663E\u793A\u4EBA\u7269\u5C5E\u6027\n\u8FD9\u91CC\u663E\u793A\u4EBA\u7269\u5C5E\u6027\n\u8FD9\u91CC\u663E\u793A\u4EBA\u7269\u5C5E\u6027\n\u8FD9\u91CC\u663E\u793A\u4EBA\u7269\u5C5E\u6027\n\u8FD9\u91CC\u663E\u793A\u4EBA\u7269\u5C5E\u6027\n\u8FD9\u91CC\u663E\u793A\u4EBA\u7269\u5C5E\u6027\n\u8FD9\u91CC\u663E\u793A\u4EBA\u7269\u5C5E\u6027\n\u8FD9\u91CC\u663E\u793A\u4EBA\u7269\u5C5E\u6027\n\u8FD9\u91CC\u663E\u793A\u4EBA\u7269\u5C5E\u6027\n\u8FD9\u91CC\u663E\u793A\u4EBA\u7269\u5C5E\u6027\n\u8FD9\u91CC\u663E\u793A\u4EBA\u7269\u5C5E\u6027\n\u8FD9\u91CC\u663E\u793A\u4EBA\u7269\u5C5E\u6027"
+  m_text: "\u8FD9\u91CC\u663E\u793A\u4EBA\u7269\u5C5E\u6027"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 85aabdaa0ca9e484ebf549fa139b3d58, type: 2}
   m_sharedMaterial: {fileID: -2611560245766485534, guid: 85aabdaa0ca9e484ebf549fa139b3d58, type: 2}
@@ -1499,8 +1499,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _healthSlider: {fileID: 768642909}
   _manaSlider: {fileID: 1894329755}
-  _coinText: {fileID: 0}
-  _woodText: {fileID: 0}
+  _coinText: {fileID: 2014063405}
+  _woodText: {fileID: 279715106}
 --- !u!1 &703353468
 GameObject:
   m_ObjectHideFlags: 0
@@ -2045,6 +2045,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1231926278}
   - component: {fileID: 1231926277}
+  - component: {fileID: 1231926279}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2079,6 +2080,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1231926279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1231926276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b24212872b1c33b4cbf7ebbc8ac6b1c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1341668215
 GameObject:
   m_ObjectHideFlags: 0
@@ -9179,7 +9192,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78612bb89db046a4d8c73bcd3955820e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyPrefab: {fileID: 7152041979365510245, guid: 2a4e5b1401850e8439853b4d55a5adc0, type: 3}
+  _enemyReference:
+    m_AssetGUID: 2a4e5b1401850e8439853b4d55a5adc0
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 1
   _maxCount: 50
   _generateGap: 0.2
   _minDistance: 10

@@ -8,7 +8,8 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class DropSystem : AbstractSystem
 {
-    readonly Dictionary<string, GameObject> _dropPrefabs = new();
+    Dictionary<string, DropInfo> _dropInfos = new();
+    readonly List<GameObject> _dropPrefabs = new();
 
     const string JsonPath = "Preset";
     const string JsonName = "Drops.json";
@@ -30,21 +31,22 @@ public class DropSystem : AbstractSystem
 
     async void LoadDrops()
     {
-        List<DropInfo> dropInfoList = this.GetUtility<SaveLoadUtility>().Load<List<DropInfo>>(JsonName, JsonPath);
-        foreach (DropInfo dropInfo in dropInfoList)
+        var dropInfos = this.GetUtility<SaveLoadUtility>().Load<List<DropInfo>>(JsonName, JsonPath);
+        foreach (DropInfo dropInfo in dropInfos)
         {
             AsyncOperationHandle<GameObject> handle = Addressables.LoadAssetAsync<GameObject>(dropInfo.DropPrefab);
             _dropPrefabHandles.Add(handle);
             GameObject prefab = await handle;
-            _dropPrefabs.Add(dropInfo.DropID, prefab);
+            _dropPrefabs.Add(prefab);
+            _dropInfos.Add(dropInfo.DropID, dropInfo);
         }
     }
 
-    public GameObject GetDrop(string dropId)
+    public string GetDropAddress(string dropId)
     {
-        if (_dropPrefabs.TryGetValue(dropId, out GameObject prefab))
+        if (_dropInfos.TryGetValue(dropId, out DropInfo dropInfo))
         {
-            return prefab;
+            return dropInfo.DropPrefab;
         }
 
         Debug.LogError($"Drop prefab not found: {dropId}");

@@ -2,6 +2,7 @@
 using Cysharp.Threading.Tasks;
 using System;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.InputSystem;
 
 namespace Character.Player
@@ -9,17 +10,22 @@ namespace Character.Player
     public class PlayerAttackerController : AttackerController
     {
         [SerializeField] float _attackInterval;
-        [SerializeField] GameObject _playerAttacker;
+        [SerializeField] AssetReferenceGameObject _playerAttackerReference;
         PlayerInput.PlayerActions _playerInput;
 
-        protected override IAttacker GetOrCreateAttackerInternal()
+        protected override async UniTask<IAttacker> GetOrCreateAttackerInternalAsync()
         {
             Vector2 playerPos = this.SendQuery(new PlayerPositionQuery());
             Vector2 direction = ((Vector2)Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()) - playerPos).normalized;
-            PlayerAttacker attacker = Instantiate(_playerAttacker, transform).GetComponent<PlayerAttacker>();
+
+            var obj = await Addressables.InstantiateAsync(_playerAttackerReference, transform)
+                                        .ToUniTask(cancellationToken: GlobalCancellation.GetCombinedToken(this));
+            PlayerAttacker attacker = obj.GetComponent<PlayerAttacker>();
+
             attacker.Direction = direction;
             attacker.SetStats(CharacterController.Stats);
             transform.DetachChildren();
+
             return attacker;
         }
 
@@ -31,7 +37,7 @@ namespace Character.Player
             }
 
             CanAttack = false;
-            GetOrCreateAttacker();
+            await GetOrCreateAttackerAsync();
             await UniTask.Delay(TimeSpan.FromSeconds(_attackInterval));
             CanAttack = true;
         }

@@ -1,5 +1,6 @@
 using Character.Player;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 public class Drop : MonoBehaviour, IController
 {
@@ -15,7 +16,7 @@ public class Drop : MonoBehaviour, IController
         if (other.gameObject.CompareTag("Player"))
         {
             this.GetModel<PlayersModel>().Default().Coin.Value += 1;
-            Destroy(gameObject);
+            Addressables.ReleaseInstance(gameObject);
         }
     }
 }

@@ -57,13 +57,13 @@ namespace Character
         public async UniTask PlayAnimation(string stateName)
         {
             Animator.Play(stateName);
-            await UniTask.WaitUntil(() => Animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f);
+            await UniTask.WaitUntil(() => Animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f, cancellationToken: GlobalCancellation.GetCombinedToken(this));
         }
 
         public async UniTask PlayAnimation(int stateNameHash)
         {
             Animator.Play(stateNameHash);
-            await UniTask.WaitUntil(() => Animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f, cancellationToken: this.GetCancellationTokenOnDestroy());
+            await UniTask.WaitUntil(() => Animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f, cancellationToken: GlobalCancellation.GetCombinedToken(this));
         }
 
         public virtual void Face(Vector2 direction)

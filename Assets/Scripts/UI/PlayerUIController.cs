@@ -55,7 +55,7 @@ namespace Character
 
             if (_woodText == null)
             {
-                _woodText = transform.Find("Wood").GetComponent<TextMeshProUGUI>();
+                _woodText = transform.Find("Wood").GetComponentInChildren<TextMeshProUGUI>();
             }
         }
 

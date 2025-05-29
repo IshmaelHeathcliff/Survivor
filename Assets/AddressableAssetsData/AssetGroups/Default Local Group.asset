@@ -13,15 +13,65 @@ MonoBehaviour:
   m_Name: Default Local Group
   m_EditorClassIdentifier: 
   m_GroupName: Default Local Group
-  m_GUID: 4caebb8e5d9b6ff43a1de3145a4311ef
+  m_GUID: 7c1749500d6a42b458b62098db2e0195
   m_SerializeEntries:
+  - m_GUID: 142f85506d88f8047a0dc3e07cc5c15c
+    m_Address: Assets/Textures/weapon_skills.aseprite
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2a4e5b1401850e8439853b4d55a5adc0
+    m_Address: Assets/Prefabs/Enemy (1).prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 329e44c7fcde73f43be7052590fdcee5
+    m_Address: Assets/Textures/character/Enemies.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 495df071d8e533245a1904aea5ce931d
+    m_Address: Assets/Textures/UI/icons.aseprite
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 500b9ae4f70ef4447ba808c85366b190
     m_Address: Assets/Prefabs/wood.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6394c3fa8f99c5d459e42407e9bb9c51
+    m_Address: Assets/Prefabs/PlayerAttacker.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6495b54d235b3c347bd82a118ce07453
+    m_Address: Assets/Textures/UI/Coin.aseprite
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6685a8bb25c707b45a674b478f48d92f
+    m_Address: Assets/Textures/UI/Heart.aseprite
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7b3dfbcb94c8d514d8442a4edd1905fb
+    m_Address: Assets/Textures/character/character.aseprite
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: af92f5bc633516443ba564b2a2824e96
     m_Address: Assets/Prefabs/coin.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b1f0f5feb5d52ce498144de6dc606919
+    m_Address: Assets/Textures/Background
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fbf43e003b75cc34a936a90e9415e101
+    m_Address: Assets/Textures/Background/Grasslands.png
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

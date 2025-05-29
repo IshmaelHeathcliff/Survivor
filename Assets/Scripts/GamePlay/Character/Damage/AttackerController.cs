@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Character.Damage
 {
     public interface IAttackerController : ICharacterControlled
     {
-        IAttacker GetOrCreateAttacker();
+        UniTask<IAttacker> GetOrCreateAttackerAsync();
         void RemoveAttacker(IAttacker attacker);
         void ClearAttacker();
         bool CanAttack { get; set; }
@@ -25,9 +26,9 @@ namespace Character.Damage
         {
         }
 
-        public IAttacker GetOrCreateAttacker()
+        public async UniTask<IAttacker> GetOrCreateAttackerAsync()
         {
-            IAttacker attacker = GetOrCreateAttackerInternal();
+            IAttacker attacker = await GetOrCreateAttackerInternalAsync();
             attacker.AttackerController = this;
             if (!Attackers.Contains(attacker))
             {
@@ -42,7 +43,7 @@ namespace Character.Damage
             Attackers.Remove(attacker);
         }
 
-        protected abstract IAttacker GetOrCreateAttackerInternal();
+        protected abstract UniTask<IAttacker> GetOrCreateAttackerInternalAsync();
 
         public virtual void ClearAttacker()
         {

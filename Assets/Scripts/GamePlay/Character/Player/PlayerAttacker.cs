@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace Character.Damage
 {
@@ -52,13 +54,15 @@ namespace Character.Damage
         {
             transform.right = Direction;
             float leftTime = _animationTime;
+            CancellationToken ct = GlobalCancellation.GetCombinedToken(this);
+
             while (leftTime > 0)
             {
-                this.GetCancellationTokenOnDestroy().ThrowIfCancellationRequested();
+                ct.ThrowIfCancellationRequested();
                 transform.Translate((1 + _animationSpeed) * Time.fixedDeltaTime * Direction, Space.World);
                 transform.Rotate(0, 0, _animationRotationSpeed * 360 * Time.fixedDeltaTime);
                 leftTime -= Time.fixedDeltaTime;
-                await UniTask.WaitForFixedUpdate(this.GetCancellationTokenOnDestroy());
+                await UniTask.WaitForFixedUpdate(ct);
             }
         }
 
@@ -68,7 +72,7 @@ namespace Character.Damage
             {
                 await Play();
                 AttackerController.RemoveAttacker(this);
-                Destroy(gameObject);
+                Addressables.ReleaseInstance(gameObject);
             }
             catch (OperationCanceledException)
             {

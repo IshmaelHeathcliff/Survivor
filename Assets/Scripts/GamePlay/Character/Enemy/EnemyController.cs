@@ -2,7 +2,6 @@
 using Character.Modifier;
 using Character.Stat;
 using Core;
-using UnityEditor;
 
 namespace Character.Enemy
 {
@@ -30,8 +29,8 @@ namespace Character.Enemy
         protected override void OnInit()
         {
             base.OnInit();
-            ID ??= GUID.Generate().ToString();
-            Model = this.GetModel<EnemiesModel>().GetModel(ID);
+            ID = System.Guid.NewGuid().ToString();
+            Model = this.GetModel<EnemiesModel>().AddModel(ID, new EnemyModel());
         }
 
         protected override void OnDeinit()

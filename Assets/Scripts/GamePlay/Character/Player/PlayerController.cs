@@ -35,7 +35,7 @@ namespace Character
                 ID = "player";
             }
 
-            Model = this.GetModel<PlayersModel>().GetModel(ID);
+            Model = this.GetModel<PlayersModel>().AddModel(ID, new PlayerModel());
         }
 
         protected override void OnDeinit()

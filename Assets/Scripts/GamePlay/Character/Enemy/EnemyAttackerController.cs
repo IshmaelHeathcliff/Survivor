@@ -1,6 +1,7 @@
 ﻿using Character.Damage;
 using UnityEngine;
 using Core;
+using Cysharp.Threading.Tasks;
 
 namespace Character.Enemy
 {
@@ -15,16 +16,16 @@ namespace Character.Enemy
             _fsm = (CharacterController as IHasFSM<EnemyStateId>).FSM;
         }
 
-        protected override IAttacker GetOrCreateAttackerInternal()
+        protected override UniTask<IAttacker> GetOrCreateAttackerInternalAsync()
         {
             EnemyAttacker attacker = GetComponentInChildren<EnemyAttacker>();
             attacker.SetStats(CharacterController.Stats);
-            return attacker;
+            return UniTask.FromResult<IAttacker>(attacker);
         }
 
         void Start()
         {
-            GetOrCreateAttacker();
+            GetOrCreateAttackerAsync().Forget();
         }
     }
 }
