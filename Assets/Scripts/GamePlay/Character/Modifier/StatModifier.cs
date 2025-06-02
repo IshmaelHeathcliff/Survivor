@@ -5,15 +5,24 @@ using Sirenix.OdinInspector;
 
 namespace Character.Modifier
 {
-    public interface IStatModifier : IModifier
+    public interface IStatModifier : IModifier<StatModifierInfo>
     {
         IStat GetStat();
         void RandomizeLevel();
         void RandomizeValue();
     }
 
-    [Serializable]
-    public abstract class StatModifier<T> : Modifier<T>, IStatModifier
+    public interface IStatModifier<T> : IStatModifier
+    {
+        T Value { get; set; }
+    }
+
+    public interface IStatModifier<T1, T2> : IStatModifier<T1>
+    {
+        T2 Value2 { get; set; }
+    }
+
+    public abstract class StatModifier : Modifier<StatModifierInfo>, IStatModifier
     {
         protected static IStat GetStat(IStatModifier modifier)
         {
@@ -43,13 +52,35 @@ namespace Character.Modifier
         {
             return Stat;
         }
+    }
 
+
+    [Serializable]
+    public abstract class StatModifier<T> : StatModifier, IStatModifier<T>
+    {
+        public T Value { get; set; }
+
+
+        [JsonConstructor]
+        protected StatModifier()
+        {
+        }
+
+        protected StatModifier(StatModifierInfo modifierInfo, IStat stat) : base(modifierInfo, stat)
+        {
+        }
     }
 
     [Serializable]
-    public abstract class StatModifier<T1, T2> : StatModifier<T1>
+    public abstract class StatModifier<T1, T2> : StatModifier<T1>, IStatModifier<T1, T2>
     {
         public T2 Value2 { get; set; }
+
+        [JsonConstructor]
+        protected StatModifier()
+        {
+        }
+
         protected StatModifier(StatModifierInfo modifierInfo, IStat stat) : base(modifierInfo, stat)
         {
         }

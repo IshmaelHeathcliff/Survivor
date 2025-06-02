@@ -6,6 +6,8 @@ namespace Character.Stat
 {
     public class Stats : IStatModifierFactory
     {
+
+        #region Stat
         const string HealthName = "生命";
         const string ManaName = "魔力";
         const string StrengthName = "力量";
@@ -56,6 +58,7 @@ namespace Character.Stat
         public Stat LightningResistance { get; } = new Stat(LightningResistanceName);
         public Stat ColdResistance { get; } = new Stat(ColdResistanceName);
         public Stat ChaosResistance { get; } = new Stat(ChaosResistanceName);
+        #endregion
 
         public string FactoryID { get; set; }
 

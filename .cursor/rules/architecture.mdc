@@ -1,5 +1,5 @@
 ---
-description:
+description: 项目架构
 globs:
 alwaysApply: false
 ---
@@ -35,3 +35,4 @@ alwaysApply: false
 
 ## QFramework 工具
 - `SaveLoadUtility`
+

@@ -37,15 +37,21 @@ namespace Character.Modifier
             return modifierInfo;
         }
 
-        public StatModifierInfo GetStatModifierInfo(string id)
+        public T GetModifierInfo<T>(string id) where T : ModifierInfo
         {
-            if (GetModifierInfo(id) is not StatModifierInfo statModifierInfo)
+            ModifierInfo modifierInfo = GetModifierInfo(id);
+            if (modifierInfo == null)
             {
-                Debug.LogError($"modifierID {id} is not a stat modifier");
                 return null;
             }
 
-            return statModifierInfo;
+            if (modifierInfo is not T t)
+            {
+                Debug.LogError($"modifierID {id} is not a {typeof(T).Name}");
+                return null;
+            }
+
+            return t;
         }
 
         readonly Dictionary<string, IModifierFactory> _modifierFactories = new();
@@ -67,13 +73,13 @@ namespace Character.Modifier
 
         public IStat GetStat(IStatModifier modifier)
         {
-            var factory = GetStatModifierFactory(modifier.FactoryID);
+            var factory = GetModifierFactory<IStatModifierFactory>(modifier.FactoryID);
             if (factory == null)
             {
                 return null;
             }
 
-            return factory.GetStat(modifier.ModifierInfo as StatModifierInfo);
+            return factory.GetStat(modifier.ModifierInfo);
         }
 
         public IModifierFactory GetModifierFactory(string factoryID)
@@ -87,27 +93,27 @@ namespace Character.Modifier
             return factory;
         }
 
-        public IStatModifierFactory GetStatModifierFactory(string factoryID)
+        public T GetModifierFactory<T>(string factoryID) where T : IModifierFactory
         {
             IModifierFactory factory = GetModifierFactory(factoryID);
             if (factory == null)
             {
-                return null;
+                return default;
             }
 
-            if (factory is not IStatModifierFactory statFactory)
+            if (factory is not T t)
             {
-                Debug.LogError($"factoryID {factoryID} is not a stat modifier factory");
-                return null;
+                Debug.LogError($"factoryID {factoryID} is not a {typeof(T).Name}");
+                return default;
             }
 
-            return statFactory;
+            return t;
         }
 
 
         public IStatModifier CreateStatModifier(string modifierId, string factoryID)
         {
-            IStatModifierFactory factory = GetStatModifierFactory(factoryID);
+            IStatModifierFactory factory = GetModifierFactory<IStatModifierFactory>(factoryID);
             if (factory == null)
             {
                 return null;
@@ -118,7 +124,7 @@ namespace Character.Modifier
 
         public IStatModifier CreateStatModifier(string modifierId, IStatModifierFactory factory)
         {
-            StatModifierInfo modifierInfo = GetStatModifierInfo(modifierId);
+            StatModifierInfo modifierInfo = GetModifierInfo<StatModifierInfo>(modifierId);
             if (modifierInfo == null)
             {
                 return null;
@@ -130,13 +136,13 @@ namespace Character.Modifier
         public IStatModifier CreateStatModifier(string modifierId, string factoryID, int value)
         {
 
-            IStatModifierFactory factory = GetStatModifierFactory(factoryID);
+            IStatModifierFactory factory = GetModifierFactory<IStatModifierFactory>(factoryID);
             if (factory == null)
             {
                 return null;
             }
 
-            StatModifierInfo modifierInfo = GetStatModifierInfo(modifierId);
+            StatModifierInfo modifierInfo = GetModifierInfo<StatModifierInfo>(modifierId);
             if (modifierInfo == null)
             {
                 return null;

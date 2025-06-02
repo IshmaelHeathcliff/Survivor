@@ -41,7 +41,7 @@ namespace Character.Modifier
 
         public override void Register()
         {
-            switch (((StatModifierInfo)ModifierInfo).StatModifierType)
+            switch (ModifierInfo.StatModifierType)
             {
                 case StatModifierType.Base:
                     Stat.AddBaseValueModifier(InstanceID, this);
@@ -66,7 +66,7 @@ namespace Character.Modifier
 
         public override void Unregister()
         {
-            switch (((StatModifierInfo)ModifierInfo).StatModifierType)
+            switch (ModifierInfo.StatModifierType)
             {
                 case StatModifierType.Base:
                     Stat.RemoveBaseValueModifier(InstanceID);
@@ -92,7 +92,7 @@ namespace Character.Modifier
         public override void Load()
         {
             //TODO: 不使用全局静态调用？
-            ModifierInfo = GetModifierInfo(ModifierID);
+            ModifierInfo = GetModifierInfo(ModifierID) as StatModifierInfo;
             Stat = GetStat(this);
 
         }
@@ -118,9 +118,8 @@ namespace Character.Modifier
     }
 
     [Serializable]
-    public class StatDoubleIntModifier : StatSingleIntModifier
+    public class StatDoubleIntModifier : StatSingleIntModifier, IStatModifier<int, int>
     {
-        int Value2 { get; set; }
-
+        public int Value2 { get; set; }
     }
 }
