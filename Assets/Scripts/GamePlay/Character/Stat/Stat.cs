@@ -2,24 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using Character.Modifier;
+using UnityEngine;
 
 namespace Character.Stat
 {
     public interface IStat : IReadonlyBindableProperty<float>
     {
         string Name { get; }
-        int BaseValue { get; }
+        float BaseValue { get; set; }
         int AddedValue { get; }
         int FixedValue { get; }
         int Increase { get; }
         float More { get; }
         float GetValue();
-        void AddBaseValueModifier(string key, IStatModifier<int> mod);
         void AddAddedValueModifier(string key, IStatModifier<int> mod);
         void AddFixedValueModifier(string key, IStatModifier<int> mod);
         void AddIncreaseModifier(string key, IStatModifier<int> mod);
         void AddMoreModifier(string key, IStatModifier<int> mod);
-        void RemoveBaseValueModifier(string key);
         void RemoveAddedValueModifier(string key);
         void RemoveFixedValueModifier(string key);
         void RemoveIncreaseModifier(string key);
@@ -30,13 +29,12 @@ namespace Character.Stat
     {
         public string Name { get; private set; }
         public float Value => GetValue();
-        public int BaseValue { get; protected set; }
+        public float BaseValue { get; set; }
         public int AddedValue { get; protected set; }
         public int FixedValue { get; protected set; }
         public int Increase { get; protected set; }
         public float More { get; protected set; }
 
-        protected Dictionary<string, IStatModifier<int>> BaseValueModifiers = new();
         protected Dictionary<string, IStatModifier<int>> AddedValueModifiers = new();
         protected Dictionary<string, IStatModifier<int>> FixedValueModifiers = new();
         protected Dictionary<string, IStatModifier<int>> IncreaseModifiers = new();
@@ -54,11 +52,6 @@ namespace Character.Stat
             More = 1;
         }
 
-        public void AddBaseValueModifier(string key, IStatModifier<int> mod)
-        {
-            BaseValueModifiers[key] = mod;
-            _onValueChanged.Trigger(Value);
-        }
 
         public void AddAddedValueModifier(string key, IStatModifier<int> mod)
         {
@@ -84,11 +77,6 @@ namespace Character.Stat
             _onValueChanged.Trigger(Value);
         }
 
-        public void RemoveBaseValueModifier(string key)
-        {
-            BaseValueModifiers.Remove(key);
-            _onValueChanged.Trigger(Value);
-        }
 
         public void RemoveAddedValueModifier(string key)
         {
@@ -121,7 +109,6 @@ namespace Character.Stat
 
         void SetValues()
         {
-            BaseValue = BaseValueModifiers.Sum(x => x.Value.Value);
             AddedValue = AddedValueModifiers.Sum(x => x.Value.Value);
             FixedValue = FixedValueModifiers.Sum(x => x.Value.Value);
             Increase = IncreaseModifiers.Sum(x => x.Value.Value);
@@ -244,7 +231,7 @@ namespace Character.Stat
     public interface IKeywordStat : IStat
     {
         float GetValueByKeywords(IEnumerable<string> keywords);
-        float GetValueByKeywords(int baseValue, IEnumerable<string> keywords, float addedMultiplier = 1);
+        float GetValueByKeywords(float baseValue, IEnumerable<string> keywords, float addedMultiplier = 1);
     }
 
 
@@ -256,8 +243,6 @@ namespace Character.Stat
 
         void SetValuesByKeywords(IEnumerable<string> keywords)
         {
-            IEnumerable<IStatModifier<int>> effectiveBaseValueModifiers =
-                BaseValueModifiers.Values.Where(x => x.Keywords.All(keywords.Contains));
             IEnumerable<IStatModifier<int>> effectiveAddedValueModifiers =
                 AddedValueModifiers.Values.Where(x => x.Keywords.All(keywords.Contains));
             IEnumerable<IStatModifier<int>> effectiveFixedValueModifiers =
@@ -268,7 +253,6 @@ namespace Character.Stat
                 MoreModifiers.Values.Where(x => x.Keywords.All(keywords.Contains));
 
 
-            BaseValue = effectiveBaseValueModifiers.Sum(x => x.Value);
             AddedValue = effectiveAddedValueModifiers.Sum(x => x.Value);
             FixedValue = effectiveFixedValueModifiers.Sum(x => x.Value);
             Increase = effectiveIncreaseModifiers.Sum(x => x.Value);
@@ -287,7 +271,7 @@ namespace Character.Stat
             return Calculate();
         }
 
-        public float GetValueByKeywords(int baseValue, IEnumerable<string> keywords, float addedMultiplier = 1)
+        public float GetValueByKeywords(float baseValue, IEnumerable<string> keywords, float addedMultiplier = 1)
         {
             SetValuesByKeywords(keywords);
             BaseValue = baseValue;

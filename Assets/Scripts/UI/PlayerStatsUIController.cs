@@ -30,9 +30,9 @@ namespace Character.Stat
             _text.text = info.ToString();
         }
 
-        void OnEnable()
+        void Start()
         {
-            _playerModel = this.GetModel<PlayersModel>().Default();
+            _playerModel = this.GetModel<PlayersModel>().Current();
             foreach (IStat stat in _playerModel.Stats.GetAllStats())
             {
                 stat.Register(UpdateStatsInfo);

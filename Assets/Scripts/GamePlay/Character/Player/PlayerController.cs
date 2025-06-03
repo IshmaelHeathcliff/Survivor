@@ -9,38 +9,65 @@ namespace Character
     {
         [SerializeField] Vector3 _initialPosition;
 
-
         public void Respawn()
         {
-            transform.position = _initialPosition;
-            Model.Stats.Health.SetMaxValue();
-        }
-
-        protected override void SetStats()
-        {
-            IStatModifier healthModifier = ModifierSystem.CreateStatModifier("health_base", "player", 100);
-            IStatModifier manaModifier = ModifierSystem.CreateStatModifier("mana_base", "player", 100);
-            IStatModifier accuracyModifier = ModifierSystem.CreateStatModifier("accuracy_base", "player", 100);
-            healthModifier.Register();
-            manaModifier.Register();
-            accuracyModifier.Register();
+            Model.Position = _initialPosition;
             Stats.Health.SetMaxValue();
             Stats.Mana.SetMaxValue();
         }
 
-        protected override void OnInit()
+        protected override void SetStats()
         {
-            if (ID == null || ID == "")
+            Stats.Health.BaseValue = 100;
+            Stats.Mana.BaseValue = 100;
+            Stats.Accuracy.BaseValue = 100;
+
+            IStatModifier healthModifier = ModifierSystem.CreateStatModifier("health_increase", "player", 100);
+            IStatModifier manaModifier = ModifierSystem.CreateStatModifier("mana_increase", "player", 100);
+            IStatModifier accuracyModifier = ModifierSystem.CreateStatModifier("accuracy_increase", "player", 100);
+
+            healthModifier.Register();
+            manaModifier.Register();
+            accuracyModifier.Register();
+
+            Stats.Health.SetMaxValue();
+            Stats.Mana.SetMaxValue();
+        }
+
+        protected override void MakeSureModel()
+        {
+            if (string.IsNullOrEmpty(ID))
             {
                 ID = "player";
             }
 
-            Model = this.GetModel<PlayersModel>().AddModel(ID, new PlayerModel());
+            var playersModel = this.GetModel<PlayersModel>();
+            if (playersModel.TryGetModel(ID, out PlayerModel model))
+            {
+                Model = model;
+            }
+            else
+            {
+                model = new PlayerModel(MoveController.Transform);
+                playersModel.AddModel(ID, model);
+                Model = model;
+            }
+        }
+
+        protected override void OnInit()
+        {
         }
 
         protected override void OnDeinit()
         {
             base.OnDeinit();
         }
+
+        protected override void Awake()
+        {
+            base.Awake();
+        }
+
+
     }
 }

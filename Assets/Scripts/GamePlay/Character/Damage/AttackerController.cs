@@ -6,7 +6,7 @@ namespace Character.Damage
 {
     public interface IAttackerController : ICharacterControlled
     {
-        UniTask<IAttacker> GetOrCreateAttackerAsync();
+        UniTask<IAttacker> CreateAttacker(string address);
         void RemoveAttacker(IAttacker attacker);
         void ClearAttacker();
         bool CanAttack { get; set; }
@@ -26,9 +26,9 @@ namespace Character.Damage
         {
         }
 
-        public async UniTask<IAttacker> GetOrCreateAttackerAsync()
+        public async UniTask<IAttacker> CreateAttacker(string address = null)
         {
-            IAttacker attacker = await GetOrCreateAttackerInternalAsync();
+            IAttacker attacker = await GetOrCreateAttackerAsyncInternal(address);
             attacker.AttackerController = this;
             if (!Attackers.Contains(attacker))
             {
@@ -43,13 +43,12 @@ namespace Character.Damage
             Attackers.Remove(attacker);
         }
 
-        protected abstract UniTask<IAttacker> GetOrCreateAttackerInternalAsync();
+        protected abstract UniTask<IAttacker> GetOrCreateAttackerAsyncInternal(string address);
 
         public virtual void ClearAttacker()
         {
             Attackers.Clear();
         }
-
 
         public IArchitecture GetArchitecture()
         {

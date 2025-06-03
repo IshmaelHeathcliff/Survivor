@@ -23,7 +23,7 @@ namespace Scene
 
             await Addressables.LoadSceneAsync(sceneName);
 
-            this.GetModel<PlayersModel>().Default().Position = _model.GetEntrance(entranceTag).transform.position;
+            this.GetModel<PlayersModel>().Current().Position = _model.GetEntrance(entranceTag).transform.position;
         }
 
         void Awake()

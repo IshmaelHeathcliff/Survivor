@@ -7,6 +7,9 @@ namespace Character.Damage
     public interface IAttacker
     {
         IAttackerController AttackerController { get; set; }
+        int BaseDamage { get; set; }
+
+
         IKeywordStat Damage { get; }
         IStat CriticalChance { get; }
         IStat CriticalMultiplier { get; }
@@ -20,6 +23,7 @@ namespace Character.Damage
         IStat LightningResistancePenetrate { get; }
         IStat ChaosResistancePenetrate { get; }
         UniTaskVoid Attack();
+        void Cancel();
     }
 
 
@@ -27,6 +31,7 @@ namespace Character.Damage
     public abstract class Attacker : MonoBehaviour, IAttacker, IController
     {
         public IAttackerController AttackerController { get; set; }
+        public int BaseDamage { get; set; }
         public IKeywordStat Damage { get; protected set; }
         public IStat CriticalChance { get; protected set; }
         public IStat CriticalMultiplier { get; protected set; }
@@ -42,7 +47,7 @@ namespace Character.Damage
 
         public void SetStats(Stats stats)
         {
-            Damage = stats.Damage as IKeywordStat;
+            Damage = stats.Damage;
             CriticalChance = stats.CriticalChance;
             CriticalMultiplier = stats.CriticalMultiplier;
             Accuracy = stats.Accuracy;
@@ -62,5 +67,7 @@ namespace Character.Damage
         {
             return GameFrame.Interface;
         }
+
+        public abstract void Cancel();
     }
 }

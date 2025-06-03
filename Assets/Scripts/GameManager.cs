@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour, IController
 
     void Awake()
     {
-        _playerModel = this.GetModel<PlayersModel>().Default();
+        _playerModel = this.GetModel<PlayersModel>().Current();
         _modifierSystem = this.GetSystem<ModifierSystem>();
         _stateCreateSystem = this.GetSystem<StateCreateSystem>();
         _saveLoadUtility = this.GetUtility<SaveLoadUtility>();

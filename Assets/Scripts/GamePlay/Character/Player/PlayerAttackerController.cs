@@ -13,7 +13,7 @@ namespace Character.Player
         [SerializeField] AssetReferenceGameObject _playerAttackerReference;
         PlayerInput.PlayerActions _playerInput;
 
-        protected override async UniTask<IAttacker> GetOrCreateAttackerInternalAsync()
+        protected override async UniTask<IAttacker> GetOrCreateAttackerAsyncInternal(string address = null)
         {
             Vector2 playerPos = this.SendQuery(new PlayerPositionQuery());
             Vector2 direction = ((Vector2)Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()) - playerPos).normalized;
@@ -37,7 +37,7 @@ namespace Character.Player
             }
 
             CanAttack = false;
-            await GetOrCreateAttackerAsync();
+            await CreateAttacker(_playerAttackerReference.AssetGUID);
             await UniTask.Delay(TimeSpan.FromSeconds(_attackInterval));
             CanAttack = true;
         }

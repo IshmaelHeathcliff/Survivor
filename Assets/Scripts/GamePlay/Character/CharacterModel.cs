@@ -2,6 +2,7 @@
 using Character.State;
 using Character.Stat;
 using UnityEngine;
+using System;
 
 namespace Character
 {
@@ -12,22 +13,11 @@ namespace Character
         Vector2 Direction { get; set; }
         Stats Stats { get; }
         IStateContainer StateContainer { get; }
-        void BindTransform(Transform transform);
     }
 
     public abstract class CharacterModel : ICharacterModel
     {
         Transform _transform;
-
-        /// <summary>
-        /// 绑定Transform，需要在MoveController初始化后调用
-        /// </summary>
-        /// <param name="transform"></param>
-        public void BindTransform(Transform transform)
-        {
-            _transform = transform;
-        }
-
         public float Speed { get; set; }
 
         public Vector2 Position
@@ -39,39 +29,40 @@ namespace Character
         public Vector2 Direction { get; set; }
         public Stats Stats { get; } = new Stats();
         public IStateContainer StateContainer { get; } = new StateContainer();
+
+        public CharacterModel(Transform transform)
+        {
+            _transform = transform;
+        }
+
     }
 
     public abstract class CharactersModel<T> : AbstractModel where T : ICharacterModel
     {
-        readonly Dictionary<string, T> _models = new();
+        readonly protected Dictionary<string, T> Models = new();
 
-        public T GetModel(string id)
+
+        public bool TryGetModel(string id, out T model)
         {
-            if (!_models.ContainsKey(id))
+            if (Models.TryGetValue(id, out model))
             {
-                Debug.LogError($"Model {id} not found");
-                return Default();
+                return true;
             }
 
-            return _models[id];
+            return false;
         }
 
-        public T AddModel(string id, T model)
+        public void AddModel(string id, T model)
         {
-            if (_models.ContainsKey(id))
-            {
-                return _models[id];
-            }
-
-            _models.Add(id, model);
-            return model;
+            Models.Add(id, model);
         }
 
         public void RemoveModel(string id)
         {
-            _models.Remove(id);
+            Models.Remove(id);
         }
 
-        public abstract T Default();
+        // TODO: 获取当前Model
+        public abstract T Current();
     }
 }

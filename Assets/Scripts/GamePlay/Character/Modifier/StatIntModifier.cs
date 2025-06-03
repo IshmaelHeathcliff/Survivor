@@ -43,9 +43,6 @@ namespace Character.Modifier
         {
             switch (ModifierInfo.StatModifierType)
             {
-                case StatModifierType.Base:
-                    Stat.AddBaseValueModifier(InstanceID, this);
-                    break;
                 case StatModifierType.Added:
                     Stat.AddAddedValueModifier(InstanceID, this);
                     break;
@@ -68,9 +65,6 @@ namespace Character.Modifier
         {
             switch (ModifierInfo.StatModifierType)
             {
-                case StatModifierType.Base:
-                    Stat.RemoveBaseValueModifier(InstanceID);
-                    break;
                 case StatModifierType.Added:
                     Stat.RemoveAddedValueModifier(InstanceID);
                     break;

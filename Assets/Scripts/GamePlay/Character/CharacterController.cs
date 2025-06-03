@@ -19,52 +19,6 @@ namespace Character
 
 
 
-    public interface ICharacterControlled : ICanInit
-    {
-        ICharacterController CharacterController { get; set; }
-    }
-
-    public abstract class CharacterControlled : MonoBehaviour, ICharacterControlled
-    {
-        public bool Initialized { get; set; }
-        public ICharacterController CharacterController { get; set; }
-
-        public void Init()
-        {
-            if (CharacterController == null)
-            {
-                CharacterController = GetComponentInParent<ICharacterController>();
-            }
-
-            if (!CharacterController.Initialized)
-            {
-                CharacterController.Init();
-            }
-
-            OnInit();
-            Initialized = true;
-        }
-
-        public void Deinit()
-        {
-            OnDeinit();
-            CharacterController.Deinit();
-            Initialized = false;
-        }
-
-        protected abstract void OnInit();
-        protected abstract void OnDeinit();
-
-        protected virtual void Awake()
-        {
-            if (!Initialized)
-            {
-                Init();
-            }
-        }
-
-    }
-
     public abstract class MyCharacterController : MonoBehaviour, IController, ICharacterController
     {
         [SerializeField] string _characterId;
@@ -96,6 +50,8 @@ namespace Character
 
         protected abstract void SetStats();
 
+        protected abstract void MakeSureModel();
+
         public void DestroyController()
         {
             Addressables.ReleaseInstance(gameObject);
@@ -103,6 +59,11 @@ namespace Character
 
         public void Init()
         {
+            if (Initialized)
+            {
+                return;
+            }
+
             AttackerController = GetControlled<IAttackerController>();
             MoveController = GetControlled<IMoveController>();
             Damageable = GetControlled<IDamageable>();
@@ -110,8 +71,9 @@ namespace Character
             ModifierSystem = this.GetSystem<ModifierSystem>();
 
             // 初始化ID、Model、Stats
-            OnInit();
+            MakeSureModel();
 
+            OnInit();
             Stats.FactoryID = ID;
             ModifierSystem.RegisterFactory(Stats);
             SetStats();

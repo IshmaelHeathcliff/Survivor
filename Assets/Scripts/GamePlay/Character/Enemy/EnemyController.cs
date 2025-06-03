@@ -19,18 +19,34 @@ namespace Character.Enemy
 
         protected override void SetStats()
         {
-            IStatModifier healthModifier = ModifierSystem.CreateStatModifier("health_base", ID, 100);
-            IStatModifier accuracyModifier = ModifierSystem.CreateStatModifier("accuracy_base", ID, 100);
+            Model.Stats.Health.BaseValue = 100;
+            Model.Stats.Accuracy.BaseValue = 100;
+            IStatModifier healthModifier = ModifierSystem.CreateStatModifier("health_increase", ID, 100);
+            IStatModifier accuracyModifier = ModifierSystem.CreateStatModifier("accuracy_increase", ID, 100);
             healthModifier.Register();
             accuracyModifier.Register();
             Stats.Health.SetMaxValue();
         }
 
+        protected override void MakeSureModel()
+        {
+            ID = System.Guid.NewGuid().ToString();
+            EnemiesModel enemiesModel = this.GetModel<EnemiesModel>();
+            if (enemiesModel.TryGetModel(ID, out EnemyModel model))
+            {
+                Model = model;
+            }
+            else
+            {
+                model = new EnemyModel(MoveController.Transform);
+                enemiesModel.AddModel(ID, model);
+                Model = model;
+            }
+        }
+
         protected override void OnInit()
         {
             base.OnInit();
-            ID = System.Guid.NewGuid().ToString();
-            Model = this.GetModel<EnemiesModel>().AddModel(ID, new EnemyModel());
         }
 
         protected override void OnDeinit()
@@ -42,5 +58,7 @@ namespace Character.Enemy
         {
             FSM.StartState(EnemyStateId.Idle);
         }
+
+
     }
 }

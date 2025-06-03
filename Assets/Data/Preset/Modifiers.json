@@ -18,8 +18,8 @@
         "Max": 60
       }
     ],
-    "ModifierID": "health_base",
-    "Name": "生命基础值",
+    "ModifierID": "health_add",
+    "Name": "生命附加值",
     "PositiveDescription": "增加{0}基础值{1}点",
     "NegativeDescription": "减少{0}基础值{1}点",
     "Keywords": [
@@ -29,7 +29,7 @@
   {
     "$type": "Character.Modifier.StatModifierInfo, Assembly-CSharp",
     "StatName": "Health",
-    "StatModifierType": 2,
+    "StatModifierType": 1,
     "MaxLevel": 3,
     "LevelRanges": [
       {
@@ -56,7 +56,7 @@
   {
     "$type": "Character.Modifier.StatModifierInfo, Assembly-CSharp",
     "StatName": "Health",
-    "StatModifierType": 3,
+    "StatModifierType": 2,
     "MaxLevel": 3,
     "LevelRanges": [
       {
@@ -83,7 +83,7 @@
   {
     "$type": "Character.Modifier.StatModifierInfo, Assembly-CSharp",
     "StatName": "Mana",
-    "StatModifierType": 0,
+    "StatModifierType": 1,
     "MaxLevel": 3,
     "LevelRanges": [
       {
@@ -99,10 +99,10 @@
         "Max": 60
       }
     ],
-    "ModifierID": "mana_base",
-    "Name": "魔力基础值",
-    "PositiveDescription": "增加{0}基础值{1}点",
-    "NegativeDescription": "减少{0}基础值{1}点",
+    "ModifierID": "mana_increase",
+    "Name": "魔力值提高",
+    "PositiveDescription": "{0}提高{1}%",
+    "NegativeDescription": "{0}降低{1}%",
     "Keywords": [
       "Mana"
     ]
@@ -110,7 +110,7 @@
   {
     "$type": "Character.Modifier.StatModifierInfo, Assembly-CSharp",
     "StatName": "Accuracy",
-    "StatModifierType": 0,
+    "StatModifierType": 1,
     "MaxLevel": 3,
     "LevelRanges": [
       {
@@ -126,10 +126,10 @@
         "Max": 60
       }
     ],
-    "ModifierID": "accuracy_base",
-    "Name": "命中基础值",
-    "PositiveDescription": "增加{0}基础值{1}点",
-    "NegativeDescription": "减少{0}基础值{1}点",
+    "ModifierID": "accuracy_increase",
+    "Name": "命中值提高",
+    "PositiveDescription": "{0}提高{1}%",
+    "NegativeDescription": "{0}降低{1}%",
     "Keywords": [
       "Accuracy"
     ]
@@ -153,8 +153,8 @@
         "Max": 60
       }
     ],
-    "ModifierID": "critical_chance_base",
-    "Name": "暴击率基础值",
+    "ModifierID": "critical_chance_add",
+    "Name": "暴击率附加值",
     "PositiveDescription": "增加{0}基础值{1}点",
     "NegativeDescription": "减少{0}基础值{1}点",
     "Keywords": [

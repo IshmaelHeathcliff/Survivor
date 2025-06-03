@@ -16,7 +16,7 @@ namespace Character.Enemy
             _fsm = (CharacterController as IHasFSM<EnemyStateId>).FSM;
         }
 
-        protected override UniTask<IAttacker> GetOrCreateAttackerInternalAsync()
+        protected override UniTask<IAttacker> GetOrCreateAttackerAsyncInternal(string address = null)
         {
             EnemyAttacker attacker = GetComponentInChildren<EnemyAttacker>();
             attacker.SetStats(CharacterController.Stats);
@@ -25,7 +25,7 @@ namespace Character.Enemy
 
         void Start()
         {
-            GetOrCreateAttackerAsync().Forget();
+            CreateAttacker().Forget();
         }
     }
 }

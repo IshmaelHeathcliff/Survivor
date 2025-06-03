@@ -1,19 +1,23 @@
-﻿namespace Character.Enemy
+﻿using UnityEngine;
+
+namespace Character.Enemy
 {
-    public class EnemyModel: CharacterModel
+    public class EnemyModel : CharacterModel
     {
-        
-    }
-    
-    public class EnemiesModel : CharactersModel<EnemyModel>
-    {
-        protected override void OnInit()
+        public EnemyModel(Transform transform) : base(transform)
         {
         }
+    }
 
-        public override EnemyModel Default()
+    public class EnemiesModel : CharactersModel<EnemyModel>
+    {
+        public override EnemyModel Current()
         {
-            return null;
+            throw new System.NotImplementedException();
+        }
+
+        protected override void OnInit()
+        {
         }
     }
 }

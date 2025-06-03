@@ -6,7 +6,7 @@ namespace Character.State
     {
         protected override void Awake()
         {
-            StateContainer = this.GetModel<PlayersModel>().Default().StateContainer;
+            StateContainer = this.GetModel<PlayersModel>().Current().StateContainer;
             base.Awake();
         }
     }

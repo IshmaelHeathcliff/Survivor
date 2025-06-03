@@ -23,6 +23,8 @@ namespace Character.Damage
         {
             _collider = GetComponent<Collider2D>();
             _renderer = GetComponent<SpriteRenderer>();
+
+            BaseDamage = 100;
         }
 
 
@@ -46,7 +48,7 @@ namespace Character.Damage
             };
 
 
-            var damage = new AttackDamage(this, damageable, keywords, DamageType.Physical, 100, 1, 1);
+            var damage = new AttackDamage(this, damageable, keywords, DamageType.Physical, BaseDamage, 1, 1);
             damage.Apply();
         }
 
@@ -71,13 +73,19 @@ namespace Character.Damage
             try
             {
                 await Play();
-                AttackerController.RemoveAttacker(this);
-                Addressables.ReleaseInstance(gameObject);
+                Cancel();
             }
             catch (OperationCanceledException)
             {
 
             }
+
+        }
+
+        public override void Cancel()
+        {
+            AttackerController.RemoveAttacker(this);
+            Addressables.ReleaseInstance(gameObject);
         }
     }
 }

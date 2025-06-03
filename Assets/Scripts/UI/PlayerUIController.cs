@@ -16,8 +16,8 @@ namespace Character
 
         void OnHealthChanged(float health, float maxHealth)
         {
-            _healthSlider.value = health;
             _healthSlider.maxValue = maxHealth;
+            _healthSlider.value = health;
         }
 
         void OnMaxHealthChanged(float maxHealth)
@@ -27,8 +27,8 @@ namespace Character
 
         void OnManaChanged(float mana, float maxMana)
         {
-            _manaSlider.value = mana;
             _manaSlider.maxValue = maxMana;
+            _manaSlider.value = mana;
         }
 
         void OnMaxManaChanged(float maxMana)
@@ -61,17 +61,20 @@ namespace Character
 
         void Awake()
         {
-            _model = this.GetModel<PlayersModel>().Default();
         }
 
-        void OnEnable()
+        void Start()
         {
+            _model = this.GetModel<PlayersModel>().Current();
             Stat.ConsumableStat health = _model.Stats.Health;
             Stat.ConsumableStat mana = _model.Stats.Mana;
-            health.Register(OnMaxHealthChanged).UnRegisterWhenDisabled(this);
-            mana.Register(OnMaxManaChanged).UnRegisterWhenDisabled(this);
+
+            health.RegisterWithInitValue(OnMaxHealthChanged).UnRegisterWhenDisabled(this);
+            mana.RegisterWithInitValue(OnMaxManaChanged).UnRegisterWhenDisabled(this);
+
             health.RegisterWithInitValue(OnHealthChanged).UnRegisterWhenDisabled(this);
             mana.RegisterWithInitValue(OnManaChanged).UnRegisterWhenDisabled(this);
+
             _model.Coin.RegisterWithInitValue(OnCoinChanged).UnRegisterWhenDisabled(this);
             _model.Wood.RegisterWithInitValue(OnWoodChanged).UnRegisterWhenDisabled(this);
         }
@@ -84,10 +87,6 @@ namespace Character
         void OnWoodChanged(int wood)
         {
             _woodText.text = wood.ToString();
-        }
-
-        void Start()
-        {
         }
 
         public IArchitecture GetArchitecture()

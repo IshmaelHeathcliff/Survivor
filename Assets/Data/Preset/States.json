@@ -4,7 +4,7 @@
     "Name": "健实",
     "Description": "加强生命",
     "ModifierID": [
-      "health_base",
+      "health_add",
       "health_increase",
       "health_more"
     ],

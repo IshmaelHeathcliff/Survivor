@@ -6,6 +6,7 @@ namespace Character
     public interface IMoveController : ICharacterControlled
     {
         float Speed { get; set; }
+        Transform Transform { get; }
         Vector2 Direction { get; set; }
         Vector2 Position { get; set; }
         void Face(Vector2 direction);
@@ -29,6 +30,8 @@ namespace Character
             set => Model.Speed = value;
         }
 
+        public Transform Transform => transform;
+
         public virtual Vector2 Direction
         {
             get => Model.Direction;
@@ -46,7 +49,6 @@ namespace Character
         {
             Animator = GetComponentInChildren<Animator>();
             Rigidbody = GetComponent<Rigidbody2D>();
-            Model.BindTransform(transform);
         }
 
         protected override void OnDeinit()

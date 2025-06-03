@@ -95,7 +95,6 @@ namespace Character.Modifier
 
     public enum StatModifierType
     {
-        Base,
         Added,
         Increase,
         More,

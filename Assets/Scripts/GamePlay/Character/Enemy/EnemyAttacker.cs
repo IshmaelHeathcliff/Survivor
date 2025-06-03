@@ -15,6 +15,7 @@ namespace Character.Damage
         void Awake()
         {
             _collider = GetComponent<Collider2D>();
+            BaseDamage = 10;
         }
 
         void Start()
@@ -34,6 +35,13 @@ namespace Character.Damage
         {
             await Play();
         }
+
+
+        public override void Cancel()
+        {
+            return;
+        }
+
 
         void OnTriggerEnter2D(Collider2D other)
         {
@@ -55,8 +63,9 @@ namespace Character.Damage
             };
 
 
-            var damage = new AttackDamage(this, damageable, keywords, DamageType.Physical, 10, 1, 1);
+            var damage = new AttackDamage(this, damageable, keywords, DamageType.Physical, BaseDamage, 1, 1);
             damage.Apply();
         }
+
     }
 }
