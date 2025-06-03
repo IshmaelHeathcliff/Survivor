@@ -4,9 +4,9 @@ public class ModifierEffect : SkillEffect<ModifierEffectInfo>
 {
     readonly IStatModifier _modifier;
 
-    public ModifierEffect(ModifierEffectInfo skillEffectInfo, IStatModifier modifier) : base(skillEffectInfo)
+    public ModifierEffect(ModifierEffectInfo info, ModifierSystem modifierSystem, IStatModifierFactory factory) : base(info)
     {
-        _modifier = modifier;
+        _modifier = modifierSystem.CreateStatModifier(info.ModifierID, factory, info.Value);
     }
 
     public override void OnCancel()

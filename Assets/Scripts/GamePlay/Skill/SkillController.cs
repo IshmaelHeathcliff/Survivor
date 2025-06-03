@@ -57,7 +57,7 @@ public class SkillController : MonoBehaviour, IController
         _model = this.GetModel<PlayersModel>().Current();
         foreach (string skill in _skills)
         {
-            EffectCreateSystem.EffectCreateEnv env = new(_attackerController, _model);
+            SkillCreateSystem.EffectCreateEnv env = new(_attackerController, _model);
             ISkill s = _skillCreateSystem.CreateSkill(skill, env);
             if (s is ActiveSkill activeSkill)
             {

@@ -1,5 +1,8 @@
 using System;
 using System.Collections.Generic;
+using Character;
+using Character.Damage;
+using Character.Modifier;
 using SaveLoad;
 using UnityEngine;
 
@@ -9,7 +12,18 @@ public class SkillCreateSystem : AbstractSystem
     const string JsonPath = "Preset";
     const string JsonName = "Skills.json";
 
-    EffectCreateSystem _effectCreateSystem;
+
+    public class EffectCreateEnv
+    {
+        public IAttackerController AttackerController;
+        public CharacterModel Model;
+
+        public EffectCreateEnv(IAttackerController attackerController, CharacterModel model)
+        {
+            AttackerController = attackerController;
+            Model = model;
+        }
+    }
 
     void Load()
     {
@@ -32,7 +46,37 @@ public class SkillCreateSystem : AbstractSystem
         return null;
     }
 
-    public ISkill CreateSkill(string id, EffectCreateSystem.EffectCreateEnv env)
+    #region Effect
+    public IEffect CreateEffect(SkillEffectInfo skillInfo, EffectCreateEnv env)
+    {
+        return skillInfo switch
+        {
+            AttackEffectInfo attackEffectInfo => CreateAttackEffect(attackEffectInfo, env.AttackerController),
+            ModifierEffectInfo modifierEffectInfo => CreateModifierEffect(modifierEffectInfo, env.Model.Stats),
+            _ => null,
+        };
+    }
+
+    public AttackEffect CreateAttackEffect(AttackEffectInfo info, IAttackerController controller)
+    {
+        return new AttackEffect(info, controller);
+    }
+
+    public ModifierEffect CreateModifierEffect(ModifierEffectInfo info, IStatModifierFactory factory)
+    {
+        return new ModifierEffect(info, this.GetSystem<ModifierSystem>(), factory);
+    }
+
+    public SystemEffect CreateSystemEffect(SystemEffectInfo info, AbstractSystem system)
+    {
+        return new SystemEffect(info, system);
+    }
+    #endregion
+
+
+
+    #region Skill
+    public ISkill CreateSkill(string id, EffectCreateEnv env)
     {
         SkillInfo skillInfo = GetSkillInfo(id);
         if (skillInfo == null)
@@ -43,14 +87,14 @@ public class SkillCreateSystem : AbstractSystem
         List<IEffect> skillEffectsOnUpdate = new();
         List<IEffect> skillEffectsOnEnable = new();
 
-        foreach (string effectID in skillInfo.SkillEffectIDsOnUpdate)
+        foreach (SkillEffectInfo effectInfo in skillInfo.SkillEffectInfosOnUpdate)
         {
-            skillEffectsOnUpdate.Add(_effectCreateSystem.CreateEffect(effectID, env));
+            skillEffectsOnUpdate.Add(CreateEffect(effectInfo, env));
         }
 
-        foreach (string effectID in skillInfo.SkillEffectIDsOnEnable)
+        foreach (SkillEffectInfo effectInfo in skillInfo.SkillEffectInfosOnEnable)
         {
-            skillEffectsOnEnable.Add(_effectCreateSystem.CreateEffect(effectID, env));
+            skillEffectsOnEnable.Add(CreateEffect(effectInfo, env));
         }
 
         switch (skillInfo)
@@ -64,37 +108,10 @@ public class SkillCreateSystem : AbstractSystem
                 return default;
         }
     }
-
-    // 使用反射创建技能
-    // public ISkill CreateSkillReflection(string id)
-    // {
-    //     SkillInfo skillInfo = GetSkillInfo(id);
-    //     if (skillInfo == null)
-    //     {
-    //         return default;
-    //     }
-
-    //     List<IEffect> skillEffectsOnUpdate = new();
-    //     List<IEffect> skillEffectsOnEnable = new();
-
-    //     foreach (string effectID in skillInfo.SkillEffectIDsOnUpdate)
-    //     {
-    //         skillEffectsOnUpdate.Add(_effectCreateSystem.CreateEffect(effectID));
-    //     }
-
-    //     foreach (string effectID in skillInfo.SkillEffectIDsOnEnable)
-    //     {
-    //         skillEffectsOnEnable.Add(_effectCreateSystem.CreateEffect(effectID));
-    //     }
-
-    //     var skillType = Type.GetType(skillInfo.SkillType);
-
-    //     return (ISkill)Activator.CreateInstance(skillType, skillInfo, skillEffectsOnUpdate, skillEffectsOnEnable);
-    // }
+    #endregion
 
     protected override void OnInit()
     {
         Load();
-        _effectCreateSystem = this.GetSystem<EffectCreateSystem>();
     }
 }

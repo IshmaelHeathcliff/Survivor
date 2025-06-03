@@ -1725,6 +1725,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _skills:
   - dice
+  - axe
 --- !u!1 &768642907
 GameObject:
   m_ObjectHideFlags: 0

@@ -187,5 +187,32 @@
     "Keywords": [
       "Damage"
     ]
+  },
+  {
+    "$type": "Character.Modifier.StatModifierInfo, Assembly-CSharp",
+    "StatName": "Damage",
+    "StatModifierType": 1,
+    "MaxLevel": 3,
+    "LevelRanges": [
+      {
+        "Min": 1,
+        "Max": 20
+      },
+      {
+        "Min": 21,
+        "Max": 40
+      },
+      {
+        "Min": 41,
+        "Max": 60
+      }
+    ],
+    "ModifierID": "damage_increase",
+    "Name": "伤害提高",
+    "PositiveDescription": "{0}提高{1}%",
+    "NegativeDescription": "{0}降低{1}%",
+    "Keywords": [
+      "Damage"
+    ]
   }
 ]

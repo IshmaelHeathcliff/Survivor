@@ -5,8 +5,8 @@ public class SkillInfo
 {
     [ShowInInspector] public string ID { get; set; }
     [ShowInInspector] public string Name { get; set; }
-    [ShowInInspector] public List<string> SkillEffectIDsOnUpdate { get; set; }
-    [ShowInInspector] public List<string> SkillEffectIDsOnEnable { get; set; }
+    [ShowInInspector] public List<SkillEffectInfo> SkillEffectInfosOnUpdate { get; set; }
+    [ShowInInspector] public List<SkillEffectInfo> SkillEffectInfosOnEnable { get; set; }
 }
 
 public class ActiveSkillInfo : SkillInfo
