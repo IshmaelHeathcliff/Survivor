@@ -19,8 +19,7 @@ namespace Character.Enemy
 
         protected override void SetStats()
         {
-            Model.Stats.Health.BaseValue = 100;
-            Model.Stats.Accuracy.BaseValue = 100;
+            base.SetStats();
             IStatModifier healthModifier = ModifierSystem.CreateStatModifier("health_increase", ID, 100);
             IStatModifier accuracyModifier = ModifierSystem.CreateStatModifier("accuracy_increase", ID, 100);
             healthModifier.Register();

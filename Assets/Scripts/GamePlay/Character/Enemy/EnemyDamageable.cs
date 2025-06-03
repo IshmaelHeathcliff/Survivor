@@ -32,18 +32,6 @@ namespace Character.Damage
             OnDeath.Register(Dead).UnRegisterWhenDisabled(this);
         }
 
-        public override void TakeDamage(float damage)
-        {
-            if (!IsDamageable)
-            {
-                return;
-            }
-
-            Health.ChangeCurrentValue(-damage);
-            // Debug.Log("Left Health:" + Health.CurrentValue);
-            OnHurt.Trigger();
-        }
-
         async UniTaskVoid Hurt()
         {
             _fsm.ChangeState(EnemyStateId.Hurt);

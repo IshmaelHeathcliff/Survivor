@@ -1610,6 +1610,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterId: player
+  _baseHealth: 100
+  _baseMana: 100
+  _baseAccuracy: 100
   _initialPosition: {x: 0, y: 0, z: 0}
 --- !u!95 &703353475
 Animator:
@@ -1724,8 +1727,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _skills:
-  - dice
-  - axe
+  - dice1
 --- !u!1 &768642907
 GameObject:
   m_ObjectHideFlags: 0
@@ -8508,6 +8510,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d269f1cd31243e2af443bfa094b88a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _invincibleTime: 0.5
 --- !u!1 &1481471367
 GameObject:
   m_ObjectHideFlags: 0

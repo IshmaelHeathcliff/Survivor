@@ -4,6 +4,7 @@ using System;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
 
 namespace Character.Player
 {
@@ -21,7 +22,9 @@ namespace Character.Player
                                         .ToUniTask(cancellationToken: GlobalCancellation.GetCombinedToken(this));
             PlayerAttacker attacker = obj.GetComponent<PlayerAttacker>();
 
-            attacker.Direction = direction;
+            float angle = Random.Range(0, 2 * Mathf.PI);
+            var randomDirection = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+            attacker.Direction = (direction + randomDirection * direction.magnitude / 2).normalized;
             attacker.SetStats(CharacterController.Stats);
             transform.DetachChildren();
 

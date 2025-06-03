@@ -40,11 +40,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6394c3fa8f99c5d459e42407e9bb9c51
-    m_Address: Assets/Prefabs/Axe.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6495b54d235b3c347bd82a118ce07453
     m_Address: Assets/Textures/UI/Coin.aseprite
     m_ReadOnly: 0

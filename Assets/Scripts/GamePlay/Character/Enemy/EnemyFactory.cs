@@ -34,9 +34,13 @@ namespace Character
 
             try
             {
-                while (transform.childCount < _maxCount)
+                while (true)
                 {
-                    await CreateEnemy(GetRandomPosition(), ct);
+                    if (transform.childCount < _maxCount)
+                    {
+                        await CreateEnemy(GetRandomPosition(), ct);
+                    }
+
                     await UniTask.Delay((int)(_generateGap * 1000), cancellationToken: ct); // ms
                 }
             }
@@ -57,7 +61,6 @@ namespace Character
 
         void Start()
         {
-            // _enemyPrefab = await AddressablesManager.LoadAsset<GameObject>("Enemy101");
             ProduceEnemies().Forget();
         }
 

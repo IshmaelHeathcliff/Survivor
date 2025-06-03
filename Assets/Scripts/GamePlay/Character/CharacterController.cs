@@ -22,6 +22,9 @@ namespace Character
     public abstract class MyCharacterController : MonoBehaviour, IController, ICharacterController
     {
         [SerializeField] string _characterId;
+        [SerializeField] int _baseHealth;
+        [SerializeField] int _baseMana;
+        [SerializeField] int _baseAccuracy;
 
         protected ModifierSystem ModifierSystem;
 
@@ -48,7 +51,15 @@ namespace Character
             return controlled;
         }
 
-        protected abstract void SetStats();
+        protected virtual void SetStats()
+        {
+            Stats.Health.BaseValue = _baseHealth;
+            Stats.Mana.BaseValue = _baseMana;
+            Stats.Accuracy.BaseValue = _baseAccuracy;
+
+            Stats.Health.SetMaxValue();
+            Stats.Mana.SetMaxValue();
+        }
 
         protected abstract void MakeSureModel();
 

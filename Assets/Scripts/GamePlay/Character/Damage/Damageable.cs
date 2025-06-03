@@ -1,4 +1,6 @@
-﻿using Character.Stat;
+﻿using System;
+using Character.Stat;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Character.Damage
@@ -20,6 +22,7 @@ namespace Character.Damage
     }
     public abstract class Damageable : CharacterControlled, IDamageable, IController
     {
+        [SerializeField] float _invincibleTime;
 
         public EasyEvent OnHurt { get; protected set; }
         public EasyEvent OnDeath { get; protected set; }
@@ -58,6 +61,8 @@ namespace Character.Damage
                 return;
             }
 
+            IsDamageable = false;
+
             Health.ChangeCurrentValue(-damage);
             // Debug.Log("Left Health:" + Health.CurrentValue);
             OnHurt.Trigger();
@@ -66,7 +71,16 @@ namespace Character.Damage
             {
                 OnDeath.Trigger();
             }
+
+            Invincible().Forget();
         }
+
+        async UniTaskVoid Invincible()
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(_invincibleTime), cancellationToken: GlobalCancellation.GetCombinedToken(this));
+            IsDamageable = true;
+        }
+
 
         public IArchitecture GetArchitecture()
         {

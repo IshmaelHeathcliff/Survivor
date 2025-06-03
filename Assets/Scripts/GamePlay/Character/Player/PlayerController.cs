@@ -18,9 +18,7 @@ namespace Character
 
         protected override void SetStats()
         {
-            Stats.Health.BaseValue = 100;
-            Stats.Mana.BaseValue = 100;
-            Stats.Accuracy.BaseValue = 100;
+            base.SetStats();
 
             IStatModifier healthModifier = ModifierSystem.CreateStatModifier("health_increase", "player", 100);
             IStatModifier manaModifier = ModifierSystem.CreateStatModifier("mana_increase", "player", 100);

@@ -91,7 +91,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41b7e17aedd74612aef7a158f38709ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hurtTime: 0.2
+  _invincibleTime: 0.1
+  _hurtTime: 0.1
 --- !u!1 &7152041979365510245
 GameObject:
   m_ObjectHideFlags: 0
@@ -286,6 +287,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterId: 5511fa9c6177d214692bbbfabb853e5a
+  _baseHealth: 10
+  _baseMana: 10
+  _baseAccuracy: 10
 --- !u!114 &1009774605795107126
 MonoBehaviour:
   m_ObjectHideFlags: 0
