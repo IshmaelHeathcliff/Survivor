@@ -1,0 +1,26 @@
+[
+  {
+    "$type": "ActiveSkillInfo, Assembly-CSharp",
+    "Cooldown": 0.5,
+    "ID": "fly_axe",
+    "Name": "飞斧",
+    "SkillEffectIDsOnUpdate": [
+      "attack_axe"
+    ],
+    "SkillEffectIDsOnEnable": [
+      "mod_damage_add"
+    ]
+  },
+  {
+    "$type": "ActiveSkillInfo, Assembly-CSharp",
+    "Cooldown": 0.5,
+    "ID": "dice",
+    "Name": "骰子",
+    "SkillEffectIDsOnUpdate": [
+      "attack_dice"
+    ],
+    "SkillEffectIDsOnEnable": [
+      "mod_damage_add"
+    ]
+  }
+]

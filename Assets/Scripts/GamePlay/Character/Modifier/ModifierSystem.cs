@@ -142,6 +142,11 @@ namespace Character.Modifier
                 return null;
             }
 
+            return CreateStatModifier(modifierId, factory, value);
+        }
+
+        public IStatModifier CreateStatModifier(string modifierId, IStatModifierFactory factory, int value)
+        {
             StatModifierInfo modifierInfo = GetModifierInfo<StatModifierInfo>(modifierId);
             if (modifierInfo == null)
             {

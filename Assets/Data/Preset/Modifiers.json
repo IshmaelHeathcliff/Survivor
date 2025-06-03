@@ -155,10 +155,37 @@
     ],
     "ModifierID": "critical_chance_add",
     "Name": "暴击率附加值",
-    "PositiveDescription": "增加{0}基础值{1}点",
-    "NegativeDescription": "减少{0}基础值{1}点",
+    "PositiveDescription": "{0}附加{1}%",
+    "NegativeDescription": "{0}附加-{1}%",
     "Keywords": [
       "Critical"
+    ]
+  },
+  {
+    "$type": "Character.Modifier.StatModifierInfo, Assembly-CSharp",
+    "StatName": "Damage",
+    "StatModifierType": 0,
+    "MaxLevel": 3,
+    "LevelRanges": [
+      {
+        "Min": 1,
+        "Max": 20
+      },
+      {
+        "Min": 21,
+        "Max": 40
+      },
+      {
+        "Min": 41,
+        "Max": 60
+      }
+    ],
+    "ModifierID": "damage_add",
+    "Name": "伤害附加值",
+    "PositiveDescription": "{0}附加{1}点",
+    "NegativeDescription": "{0}附加-{1}点",
+    "Keywords": [
+      "Damage"
     ]
   }
 ]

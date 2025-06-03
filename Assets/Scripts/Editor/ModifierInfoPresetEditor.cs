@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using Character.Modifier;
-using Sirenix.OdinInspector;
-using Sirenix.Serialization;
+﻿using Character.Modifier;
 using UnityEngine;
 
 namespace Editor

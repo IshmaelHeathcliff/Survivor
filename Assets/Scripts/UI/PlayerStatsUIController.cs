@@ -17,17 +17,24 @@ namespace Character.Stat
         void UpdateStatsInfo()
         {
             var info = new StringBuilder();
-            foreach (IStat stat in _playerModel.Stats.GetAllStats())
-            {
-                info.Append($"{stat.Name}: {(int)stat.Value}\n");
-                info.Append($"  {stat.Name}基础值: {(int)stat.BaseValue}\n");
-                info.Append($"  {stat.Name}附加值: {(int)stat.AddedValue}\n");
-                info.Append($"  {stat.Name}固定值: {(int)stat.FixedValue}\n");
-                info.Append($"  {stat.Name}提高: {(int)stat.Increase}%\n");
-                info.Append($"  {stat.Name}总增: {(int)((stat.More - 1) * 100)}%\n");
-            }
+            info.Append(GenerateStatInfo(_playerModel.Stats.Health));
+            info.Append(GenerateStatInfo(_playerModel.Stats.Mana));
+            info.Append(GenerateStatInfo(_playerModel.Stats.Damage));
+            info.Append(GenerateStatInfo(_playerModel.Stats.Accuracy));
 
             _text.text = info.ToString();
+        }
+
+        StringBuilder GenerateStatInfo(IStat stat)
+        {
+            var info = new StringBuilder();
+            info.Append($"{stat.Name}: {(int)stat.Value}\n");
+            info.Append($"  {stat.Name}基础值: {(int)stat.BaseValue}\n");
+            info.Append($"  {stat.Name}附加值: {(int)stat.AddedValue}\n");
+            info.Append($"  {stat.Name}固定值: {(int)stat.FixedValue}\n");
+            info.Append($"  {stat.Name}提高: {(int)stat.Increase}%\n");
+            info.Append($"  {stat.Name}总增: {(int)((stat.More - 1) * 100)}%\n");
+            return info;
         }
 
         void Start()

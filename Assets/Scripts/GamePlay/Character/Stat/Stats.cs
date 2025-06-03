@@ -69,10 +69,10 @@ namespace Character.Stat
             {
                 Health,
                 Mana,
+                Damage,
                 Strength,
                 Dexterity,
                 Intelligence,
-                Damage,
                 CriticalChance,
                 CriticalMultiplier,
                 Accuracy,

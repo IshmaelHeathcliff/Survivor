@@ -10,7 +10,6 @@ namespace Character.Player
     public class PlayerAttackerController : AttackerController
     {
         [SerializeField] float _attackInterval;
-        [SerializeField] AssetReferenceGameObject _playerAttackerReference;
         PlayerInput.PlayerActions _playerInput;
 
         protected override async UniTask<IAttacker> GetOrCreateAttackerAsyncInternal(string address = null)
@@ -18,7 +17,7 @@ namespace Character.Player
             Vector2 playerPos = this.SendQuery(new PlayerPositionQuery());
             Vector2 direction = ((Vector2)Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()) - playerPos).normalized;
 
-            var obj = await Addressables.InstantiateAsync(_playerAttackerReference, transform)
+            var obj = await Addressables.InstantiateAsync(address, transform)
                                         .ToUniTask(cancellationToken: GlobalCancellation.GetCombinedToken(this));
             PlayerAttacker attacker = obj.GetComponent<PlayerAttacker>();
 
@@ -37,14 +36,14 @@ namespace Character.Player
             }
 
             CanAttack = false;
-            await CreateAttacker(_playerAttackerReference.AssetGUID);
+            await CreateAttacker("dice");
             await UniTask.Delay(TimeSpan.FromSeconds(_attackInterval));
             CanAttack = true;
         }
 
         void Update()
         {
-            Attack().Forget();
+            // Attack().Forget();
         }
 
         void AttackAction(InputAction.CallbackContext context)

@@ -41,7 +41,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6394c3fa8f99c5d459e42407e9bb9c51
-    m_Address: Assets/Prefabs/PlayerAttacker.prefab
+    m_Address: Assets/Prefabs/Axe.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -57,6 +57,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7b3dfbcb94c8d514d8442a4edd1905fb
     m_Address: Assets/Textures/character/character.aseprite
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 99a5b074583124c4887a43fa42071b3c
+    m_Address: Assets/Prefabs/Dice.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

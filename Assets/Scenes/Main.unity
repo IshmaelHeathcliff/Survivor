@@ -1516,6 +1516,7 @@ GameObject:
   - component: {fileID: 703353475}
   - component: {fileID: 703353474}
   - component: {fileID: 703353478}
+  - component: {fileID: 703353479}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1710,6 +1711,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 6
   _acceleration: 10
+--- !u!114 &703353479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 703353468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4979da59659f7fe44a793b215343f42c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _skills:
+  - dice
 --- !u!1 &768642907
 GameObject:
   m_ObjectHideFlags: 0
@@ -1845,12 +1860,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackInterval: 0.5
-  _playerAttackerReference:
-    m_AssetGUID: 6394c3fa8f99c5d459e42407e9bb9c51
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 1
 --- !u!1 &960632273
 GameObject:
   m_ObjectHideFlags: 0

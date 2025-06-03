@@ -25,6 +25,11 @@ namespace Editor
         [ShowInInspector]
         public virtual List<T> Data { get; set; }
 
+        protected virtual void OnEnable()
+        {
+            ReadJson();
+        }
+
         protected virtual void ReadJson()
         {
             Data = SaveLoadManager.Load<List<T>>(JsonName, JsonPath);

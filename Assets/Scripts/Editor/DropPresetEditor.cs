@@ -1,6 +1,4 @@
-using System.Collections.Generic;
 using GamePlay.Drop;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Editor
