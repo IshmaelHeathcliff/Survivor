@@ -214,5 +214,86 @@
     "Keywords": [
       "Damage"
     ]
+  },
+  {
+    "$type": "Character.Modifier.StatModifierInfo, Assembly-CSharp",
+    "StatName": "Damage",
+    "StatModifierType": 2,
+    "MaxLevel": 3,
+    "LevelRanges": [
+      {
+        "Min": 1,
+        "Max": 20
+      },
+      {
+        "Min": 21,
+        "Max": 40
+      },
+      {
+        "Min": 41,
+        "Max": 60
+      }
+    ],
+    "ModifierID": "damage_more",
+    "Name": "伤害总增",
+    "PositiveDescription": "{0}总增{1}%",
+    "NegativeDescription": "{0}总降{1}%",
+    "Keywords": [
+      "Damage"
+    ]
+  },
+  {
+    "$type": "Character.Modifier.StatModifierInfo, Assembly-CSharp",
+    "StatName": "Damage",
+    "StatModifierType": 3,
+    "MaxLevel": 3,
+    "LevelRanges": [
+      {
+        "Min": 1,
+        "Max": 20
+      },
+      {
+        "Min": 21,
+        "Max": 40
+      },
+      {
+        "Min": 41,
+        "Max": 60
+      }
+    ],
+    "ModifierID": "damage_fix",
+    "Name": "伤害固定",
+    "PositiveDescription": "{0}附加固定{1}点",
+    "NegativeDescription": "{0}附加固定-{1}%点",
+    "Keywords": [
+      "Damage"
+    ]
+  },
+  {
+    "$type": "Character.Modifier.StatModifierInfo, Assembly-CSharp",
+    "StatName": "Mana",
+    "StatModifierType": 0,
+    "MaxLevel": 3,
+    "LevelRanges": [
+      {
+        "Min": 1,
+        "Max": 20
+      },
+      {
+        "Min": 21,
+        "Max": 40
+      },
+      {
+        "Min": 41,
+        "Max": 60
+      }
+    ],
+    "ModifierID": "mana_add",
+    "Name": "魔力附加值",
+    "PositiveDescription": "{0}附加{1}点",
+    "NegativeDescription": "{0}附加-{1}%点",
+    "Keywords": [
+      "Mana"
+    ]
   }
 ]

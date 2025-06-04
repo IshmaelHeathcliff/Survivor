@@ -24,5 +24,151 @@
         "Description": "添加词条"
       }
     ]
+  },
+  {
+    "$type": "ActiveSkillInfo, Assembly-CSharp",
+    "Cooldown": 1.0,
+    "ID": "dice2",
+    "Name": "奇奥骰子-2点",
+    "SkillEffectInfosOnUpdate": [
+      {
+        "$type": "AttackEffectInfo, Assembly-CSharp",
+        "Damage": 6,
+        "AttackerAddress": "Assets/Prefabs/Dice.prefab",
+        "ID": "attack",
+        "Name": "攻击",
+        "Description": "施加攻击"
+      }
+    ],
+    "SkillEffectInfosOnEnable": [
+      {
+        "$type": "ModifierEffectInfo, Assembly-CSharp",
+        "ModifierID": "health_add",
+        "Value": 50,
+        "ID": "modifier",
+        "Name": "修饰器",
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "ActiveSkillInfo, Assembly-CSharp",
+    "Cooldown": 1.0,
+    "ID": "dice3",
+    "Name": "奇奥骰子-3点",
+    "SkillEffectInfosOnUpdate": [
+      {
+        "$type": "AttackEffectInfo, Assembly-CSharp",
+        "Damage": 6,
+        "AttackerAddress": "Assets/Prefabs/Dice.prefab",
+        "ID": "attack",
+        "Name": "攻击",
+        "Description": "施加攻击"
+      }
+    ],
+    "SkillEffectInfosOnEnable": [
+      {
+        "$type": "ModifierEffectInfo, Assembly-CSharp",
+        "ModifierID": "mana_add",
+        "Value": 50,
+        "ID": "modifier",
+        "Name": "修饰器",
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "ActiveSkillInfo, Assembly-CSharp",
+    "Cooldown": 1.0,
+    "ID": "dice4",
+    "Name": "奇奥骰子-4点",
+    "SkillEffectInfosOnUpdate": [
+      {
+        "$type": "AttackEffectInfo, Assembly-CSharp",
+        "Damage": 6,
+        "AttackerAddress": "Assets/Prefabs/Dice.prefab",
+        "ID": "attack",
+        "Name": "攻击",
+        "Description": "施加攻击"
+      }
+    ],
+    "SkillEffectInfosOnEnable": [
+      {
+        "$type": "ModifierEffectInfo, Assembly-CSharp",
+        "ModifierID": "damage_fix",
+        "Value": 10,
+        "ID": "modifier",
+        "Name": "修饰器",
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "ActiveSkillInfo, Assembly-CSharp",
+    "Cooldown": 1.0,
+    "ID": "dice5",
+    "Name": "奇奥骰子-5点",
+    "SkillEffectInfosOnUpdate": [
+      {
+        "$type": "AttackEffectInfo, Assembly-CSharp",
+        "Damage": 6,
+        "AttackerAddress": "Assets/Prefabs/Dice.prefab",
+        "ID": "attack",
+        "Name": "攻击",
+        "Description": "施加攻击"
+      }
+    ],
+    "SkillEffectInfosOnEnable": [
+      {
+        "$type": "ModifierEffectInfo, Assembly-CSharp",
+        "ModifierID": "damage_increase",
+        "Value": 20,
+        "ID": "modifier",
+        "Name": "修饰器",
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "ActiveSkillInfo, Assembly-CSharp",
+    "Cooldown": 1.0,
+    "ID": "dice6",
+    "Name": "奇奥骰子-6点",
+    "SkillEffectInfosOnUpdate": [
+      {
+        "$type": "AttackEffectInfo, Assembly-CSharp",
+        "Damage": 6,
+        "AttackerAddress": "Assets/Prefabs/Dice.prefab",
+        "ID": "attack",
+        "Name": "攻击",
+        "Description": "施加攻击"
+      }
+    ],
+    "SkillEffectInfosOnEnable": [
+      {
+        "$type": "ModifierEffectInfo, Assembly-CSharp",
+        "ModifierID": "damage_add",
+        "Value": 5,
+        "ID": "modifier",
+        "Name": "修饰器",
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "PassiveSkillInfo, Assembly-CSharp",
+    "ID": "loaded_dice",
+    "Name": "灌铅骰子",
+    "SkillEffectInfosOnUpdate": [],
+    "SkillEffectInfosOnEnable": [
+      {
+        "$type": "ModifierEffectInfo, Assembly-CSharp",
+        "ModifierID": "damage_more",
+        "Value": 100,
+        "ID": "modifier",
+        "Name": "修饰器",
+        "Description": "添加词条"
+      }
+    ]
   }
 ]

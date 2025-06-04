@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using Character;
 using Character.Damage;
 using Character.Player;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public class SkillController : MonoBehaviour, IController
@@ -52,7 +54,7 @@ public class SkillController : MonoBehaviour, IController
         _attackerController = GetComponentInChildren<IAttackerController>();
     }
 
-    void Start()
+    async void Start()
     {
         _model = this.GetModel<PlayersModel>().Current();
         foreach (string skill in _skills)
@@ -67,6 +69,8 @@ public class SkillController : MonoBehaviour, IController
             {
                 AddPassiveSkill(passiveSkill);
             }
+
+            await UniTask.Delay(TimeSpan.FromSeconds(0.1));
         }
     }
 

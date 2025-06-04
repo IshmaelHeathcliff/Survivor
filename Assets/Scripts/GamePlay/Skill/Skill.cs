@@ -67,7 +67,7 @@ public class ActiveSkill : Skill<ActiveSkillInfo>
 
     float _leftTime;
 
-    public ActiveSkill(ActiveSkillInfo skillInfo, IEnumerable<IEffect> skillEffectsOnUpdate, IEnumerable<IEffect> skillEffectsOnEnable = null) :
+    public ActiveSkill(ActiveSkillInfo skillInfo, IEnumerable<IEffect> skillEffectsOnUpdate, IEnumerable<IEffect> skillEffectsOnEnable) :
         base(skillInfo, skillEffectsOnUpdate, skillEffectsOnEnable)
     {
         _leftTime = 0;
@@ -95,7 +95,7 @@ public class ActiveSkill : Skill<ActiveSkillInfo>
 
 public class PassiveSkill : Skill<PassiveSkillInfo>
 {
-    public PassiveSkill(PassiveSkillInfo skillInfo, IEnumerable<IEffect> skillEffectsOnEnable, IEnumerable<IEffect> skillEffectsOnUpdate = null) :
+    public PassiveSkill(PassiveSkillInfo skillInfo, IEnumerable<IEffect> skillEffectsOnUpdate, IEnumerable<IEffect> skillEffectsOnEnable) :
         base(skillInfo, skillEffectsOnUpdate, skillEffectsOnEnable)
     {
     }
