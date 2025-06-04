@@ -84,13 +84,7 @@ public class SkillCreateSystem : AbstractSystem
             return default;
         }
 
-        List<IEffect> skillEffectsOnUpdate = new();
         List<IEffect> skillEffectsOnEnable = new();
-
-        foreach (SkillEffectInfo effectInfo in skillInfo.SkillEffectInfosOnUpdate)
-        {
-            skillEffectsOnUpdate.Add(CreateEffect(effectInfo, env));
-        }
 
         foreach (SkillEffectInfo effectInfo in skillInfo.SkillEffectInfosOnEnable)
         {
@@ -100,9 +94,14 @@ public class SkillCreateSystem : AbstractSystem
         switch (skillInfo)
         {
             case ActiveSkillInfo activeSkillInfo:
-                return new ActiveSkill(activeSkillInfo, skillEffectsOnUpdate, skillEffectsOnEnable);
+                List<IEffect> skillEffectsOnUpdate = new();
+                foreach (SkillEffectInfo effectInfo in activeSkillInfo.SkillEffectInfosOnUpdate)
+                {
+                    skillEffectsOnUpdate.Add(CreateEffect(effectInfo, env));
+                }
+                return new ActiveSkill(activeSkillInfo, skillEffectsOnEnable, skillEffectsOnUpdate);
             case PassiveSkillInfo passiveSkillInfo:
-                return new PassiveSkill(passiveSkillInfo, skillEffectsOnUpdate, skillEffectsOnEnable);
+                return new PassiveSkill(passiveSkillInfo, skillEffectsOnEnable);
             default:
                 Debug.LogError($"未知的技能类型: {skillInfo.GetType()}");
                 return default;

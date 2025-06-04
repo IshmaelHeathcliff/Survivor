@@ -1,9 +1,6 @@
 [
   {
     "$type": "ActiveSkillInfo, Assembly-CSharp",
-    "Cooldown": 1.0,
-    "ID": "dice1",
-    "Name": "奇奥骰子-1点",
     "SkillEffectInfosOnUpdate": [
       {
         "$type": "AttackEffectInfo, Assembly-CSharp",
@@ -14,6 +11,9 @@
         "Description": "施加攻击"
       }
     ],
+    "Cooldown": 1.0,
+    "ID": "dice1",
+    "Name": "奇奥骰子-1点",
     "SkillEffectInfosOnEnable": [
       {
         "$type": "ModifierEffectInfo, Assembly-CSharp",
@@ -27,9 +27,6 @@
   },
   {
     "$type": "ActiveSkillInfo, Assembly-CSharp",
-    "Cooldown": 1.0,
-    "ID": "dice2",
-    "Name": "奇奥骰子-2点",
     "SkillEffectInfosOnUpdate": [
       {
         "$type": "AttackEffectInfo, Assembly-CSharp",
@@ -40,6 +37,9 @@
         "Description": "施加攻击"
       }
     ],
+    "Cooldown": 1.0,
+    "ID": "dice2",
+    "Name": "奇奥骰子-2点",
     "SkillEffectInfosOnEnable": [
       {
         "$type": "ModifierEffectInfo, Assembly-CSharp",
@@ -53,9 +53,6 @@
   },
   {
     "$type": "ActiveSkillInfo, Assembly-CSharp",
-    "Cooldown": 1.0,
-    "ID": "dice3",
-    "Name": "奇奥骰子-3点",
     "SkillEffectInfosOnUpdate": [
       {
         "$type": "AttackEffectInfo, Assembly-CSharp",
@@ -66,6 +63,9 @@
         "Description": "施加攻击"
       }
     ],
+    "Cooldown": 1.0,
+    "ID": "dice3",
+    "Name": "奇奥骰子-3点",
     "SkillEffectInfosOnEnable": [
       {
         "$type": "ModifierEffectInfo, Assembly-CSharp",
@@ -79,9 +79,6 @@
   },
   {
     "$type": "ActiveSkillInfo, Assembly-CSharp",
-    "Cooldown": 1.0,
-    "ID": "dice4",
-    "Name": "奇奥骰子-4点",
     "SkillEffectInfosOnUpdate": [
       {
         "$type": "AttackEffectInfo, Assembly-CSharp",
@@ -92,6 +89,9 @@
         "Description": "施加攻击"
       }
     ],
+    "Cooldown": 1.0,
+    "ID": "dice4",
+    "Name": "奇奥骰子-4点",
     "SkillEffectInfosOnEnable": [
       {
         "$type": "ModifierEffectInfo, Assembly-CSharp",
@@ -105,9 +105,6 @@
   },
   {
     "$type": "ActiveSkillInfo, Assembly-CSharp",
-    "Cooldown": 1.0,
-    "ID": "dice5",
-    "Name": "奇奥骰子-5点",
     "SkillEffectInfosOnUpdate": [
       {
         "$type": "AttackEffectInfo, Assembly-CSharp",
@@ -118,6 +115,9 @@
         "Description": "施加攻击"
       }
     ],
+    "Cooldown": 1.0,
+    "ID": "dice5",
+    "Name": "奇奥骰子-5点",
     "SkillEffectInfosOnEnable": [
       {
         "$type": "ModifierEffectInfo, Assembly-CSharp",
@@ -131,9 +131,6 @@
   },
   {
     "$type": "ActiveSkillInfo, Assembly-CSharp",
-    "Cooldown": 1.0,
-    "ID": "dice6",
-    "Name": "奇奥骰子-6点",
     "SkillEffectInfosOnUpdate": [
       {
         "$type": "AttackEffectInfo, Assembly-CSharp",
@@ -144,6 +141,9 @@
         "Description": "施加攻击"
       }
     ],
+    "Cooldown": 1.0,
+    "ID": "dice6",
+    "Name": "奇奥骰子-6点",
     "SkillEffectInfosOnEnable": [
       {
         "$type": "ModifierEffectInfo, Assembly-CSharp",
@@ -159,7 +159,6 @@
     "$type": "PassiveSkillInfo, Assembly-CSharp",
     "ID": "loaded_dice",
     "Name": "灌铅骰子",
-    "SkillEffectInfosOnUpdate": [],
     "SkillEffectInfosOnEnable": [
       {
         "$type": "ModifierEffectInfo, Assembly-CSharp",

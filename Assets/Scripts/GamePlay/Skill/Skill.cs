@@ -17,13 +17,11 @@ public abstract class Skill<T> : ISkill<T> where T : SkillInfo
     public T SkillInfo { get; set; }
     public List<string> Keywords { get; set; }
 
-    readonly List<IEffect> _skillEffectsOnUpdate = new(); // 每次使用技能时生效的效果，比如攻击，一般不需要主动 Cancel
     readonly List<IEffect> _skillEffectsOnEnable = new(); // 技能启用时生效的效果，比如Buff，需要关闭技能时主动 Cancel
 
-    public Skill(T skillInfo, IEnumerable<IEffect> skillEffectsOnUpdate, IEnumerable<IEffect> skillEffectsOnEnable)
+    public Skill(T skillInfo, IEnumerable<IEffect> skillEffectsOnEnable)
     {
         SkillInfo = skillInfo;
-        _skillEffectsOnUpdate.AddRange(skillEffectsOnUpdate);
         _skillEffectsOnEnable.AddRange(skillEffectsOnEnable);
     }
 
@@ -37,11 +35,6 @@ public abstract class Skill<T> : ISkill<T> where T : SkillInfo
 
     public virtual void OnDisable()
     {
-        foreach (IEffect skillEffect in _skillEffectsOnUpdate)
-        {
-            skillEffect.Cancel();
-        }
-
         foreach (IEffect skillEffect in _skillEffectsOnEnable)
         {
             skillEffect.Cancel();
@@ -49,27 +42,25 @@ public abstract class Skill<T> : ISkill<T> where T : SkillInfo
 
     }
 
-    public virtual void Use()
-    {
-        foreach (IEffect skillEffect in _skillEffectsOnUpdate)
-        {
-            skillEffect.Apply();
-        }
-    }
+    public abstract void Use();
 
 
 }
 
 public class ActiveSkill : Skill<ActiveSkillInfo>
 {
+    readonly List<IEffect> _skillEffectsOnUpdate = new(); // 每次使用技能时生效的效果，比如攻击，一般不需要主动 Cancel
+
     public float Cooldown => SkillInfo.Cooldown;
     public bool IsReady => _leftTime <= 0;
 
     float _leftTime;
 
-    public ActiveSkill(ActiveSkillInfo skillInfo, IEnumerable<IEffect> skillEffectsOnUpdate, IEnumerable<IEffect> skillEffectsOnEnable) :
-        base(skillInfo, skillEffectsOnUpdate, skillEffectsOnEnable)
+    public ActiveSkill(ActiveSkillInfo skillInfo, IEnumerable<IEffect> skillEffectsOnEnable, IEnumerable<IEffect> skillEffectsOnUpdate) :
+        base(skillInfo, skillEffectsOnEnable)
     {
+        _skillEffectsOnUpdate.AddRange(skillEffectsOnUpdate);
+
         _leftTime = 0;
     }
 
@@ -89,14 +80,31 @@ public class ActiveSkill : Skill<ActiveSkillInfo>
         }
 
         _leftTime += Cooldown;
-        base.Use();
+
+        foreach (IEffect skillEffect in _skillEffectsOnUpdate)
+        {
+            skillEffect.Apply();
+        }
+    }
+
+    public override void OnDisable()
+    {
+        base.OnDisable();
+        foreach (IEffect skillEffect in _skillEffectsOnUpdate)
+        {
+            skillEffect.Cancel();
+        }
     }
 }
 
 public class PassiveSkill : Skill<PassiveSkillInfo>
 {
-    public PassiveSkill(PassiveSkillInfo skillInfo, IEnumerable<IEffect> skillEffectsOnUpdate, IEnumerable<IEffect> skillEffectsOnEnable) :
-        base(skillInfo, skillEffectsOnUpdate, skillEffectsOnEnable)
+    public PassiveSkill(PassiveSkillInfo skillInfo, IEnumerable<IEffect> skillEffectsOnEnable) :
+        base(skillInfo, skillEffectsOnEnable)
+    {
+    }
+
+    public override void Use()
     {
     }
 }
