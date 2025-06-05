@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Character.Player
 {
@@ -10,6 +11,7 @@ namespace Character.Player
 
         public BindableProperty<int> Coin { get; } = new BindableProperty<int>(0);
         public BindableProperty<int> Wood { get; } = new BindableProperty<int>(0);
+
     }
 
     public class PlayersModel : CharactersModel<PlayerModel>
@@ -18,8 +20,13 @@ namespace Character.Player
 
         public override PlayerModel Current()
         {
-            TryGetModel(CurrentID, out PlayerModel model);
-            return model;
+            if (TryGetModel(CurrentID, out PlayerModel model))
+            {
+                return model;
+            }
+
+            Debug.LogError("Current model does not exist;");
+            return null;
         }
 
         protected override void OnInit()

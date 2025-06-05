@@ -6,10 +6,10 @@ namespace Character.State
 {
     public interface IStateContainer
     {
-        event Action<IState> OnStateAdded;
-        event Action<string> OnStateRemoved;
-        event Action<IStateWithTime> OnStateTimeChanged;
-        event Action<IStateWithCount> OnStateCountChanged;
+        EasyEvent<IState> OnStateAdded { get; }
+        EasyEvent<string> OnStateRemoved { get; }
+        EasyEvent<IStateWithTime> OnStateTimeChanged { get; }
+        EasyEvent<IStateWithCount> OnStateCountChanged { get; }
         void AddState(IState state);
         void RemoveState(string id);
         void RemoveState(IState state);
@@ -23,10 +23,10 @@ namespace Character.State
     public class StateContainer : IStateContainer
     {
         readonly Dictionary<string, IState> _states = new();
-        public event Action<IState> OnStateAdded;
-        public event Action<string> OnStateRemoved;
-        public event Action<IStateWithTime> OnStateTimeChanged;
-        public event Action<IStateWithCount> OnStateCountChanged;
+        public EasyEvent<IState> OnStateAdded { get; } = new();
+        public EasyEvent<string> OnStateRemoved { get; } = new();
+        public EasyEvent<IStateWithTime> OnStateTimeChanged { get; } = new();
+        public EasyEvent<IStateWithCount> OnStateCountChanged { get; } = new();
 
         public void AddState(IState state)
         {
@@ -46,7 +46,7 @@ namespace Character.State
 
             _states.Add(state.GetID(), state);
             state.Enable();
-            OnStateAdded?.Invoke(state);
+            OnStateAdded?.Trigger(state);
 
         }
 
@@ -71,7 +71,7 @@ namespace Character.State
             {
                 _states[id].Disable();
                 _states.Remove(id);
-                OnStateRemoved?.Invoke(id);
+                OnStateRemoved?.Trigger(id);
             }
         }
 
@@ -82,7 +82,7 @@ namespace Character.State
                 if (state is IStateWithTime bt)
                 {
                     bt.ResetTime();
-                    OnStateTimeChanged?.Invoke(bt);
+                    OnStateTimeChanged?.Trigger(bt);
                 }
             }
         }
@@ -94,10 +94,13 @@ namespace Character.State
             _states.Values.ForEach(state => states.Add(state));
             foreach (IState state in states)
             {
-                if (state is not IStateWithTime st) continue;
+                if (state is not IStateWithTime st)
+                {
+                    continue;
+                }
 
                 st.DecreaseTime(time);
-                OnStateTimeChanged?.Invoke(st);
+                OnStateTimeChanged?.Trigger(st);
                 if (st.TimeLeft <= 0)
                 {
                     RemoveState(state);
@@ -112,7 +115,7 @@ namespace Character.State
                 if (state is IStateWithCount bc)
                 {
                     bc.Count = count;
-                    OnStateCountChanged?.Invoke(bc);
+                    OnStateCountChanged?.Trigger(bc);
                 }
             }
         }

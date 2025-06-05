@@ -1726,7 +1726,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4979da59659f7fe44a793b215343f42c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _skills:
+  _skillIDs:
   - dice1
   - dice2
   - dice3
@@ -1734,6 +1734,7 @@ MonoBehaviour:
   - dice5
   - dice6
   - loaded_dice
+  _skillSlotCount: 10
 --- !u!1 &768642907
 GameObject:
   m_ObjectHideFlags: 0

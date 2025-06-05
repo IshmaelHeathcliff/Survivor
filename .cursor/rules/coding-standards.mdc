@@ -1,7 +1,7 @@
 ---
-description:
+description: 编程规范
 globs:
-alwaysApply: true
+alwaysApply: false
 ---
 # 编码标准
 

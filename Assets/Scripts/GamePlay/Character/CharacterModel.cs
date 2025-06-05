@@ -13,6 +13,8 @@ namespace Character
         Vector2 Direction { get; set; }
         Stats Stats { get; }
         IStateContainer StateContainer { get; }
+        ISkillContainer Skills { get; }
+        ISkillContainer SkillsInSlot { get; }
     }
 
     public abstract class CharacterModel : ICharacterModel
@@ -29,6 +31,9 @@ namespace Character
         public Vector2 Direction { get; set; }
         public Stats Stats { get; } = new Stats();
         public IStateContainer StateContainer { get; } = new StateContainer();
+
+        public ISkillContainer Skills { get; } = new SkillContainer();
+        public ISkillContainer SkillsInSlot { get; } = new SkillContainer();
 
         public CharacterModel(Transform transform)
         {

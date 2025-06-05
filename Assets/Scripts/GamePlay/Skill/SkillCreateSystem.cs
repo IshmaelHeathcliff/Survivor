@@ -16,9 +16,9 @@ public class SkillCreateSystem : AbstractSystem
     public class EffectCreateEnv
     {
         public IAttackerController AttackerController;
-        public CharacterModel Model;
+        public ICharacterModel Model;
 
-        public EffectCreateEnv(IAttackerController attackerController, CharacterModel model)
+        public EffectCreateEnv(IAttackerController attackerController, ICharacterModel model)
         {
             AttackerController = attackerController;
             Model = model;

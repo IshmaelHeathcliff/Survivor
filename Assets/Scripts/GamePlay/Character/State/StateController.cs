@@ -20,24 +20,30 @@ namespace Character.State
 
     public abstract class StateController : MonoBehaviour, IController
     {
+        [SerializeField] StateUI _stateUI;
         protected IStateContainer StateContainer;
-        [SerializeField] protected StateUI _stateUI;
 
 
         void OnValidate()
         {
-            _stateUI = GetComponentInChildren<StateUI>();
+            if (_stateUI == null)
+            {
+                _stateUI = GetComponentInChildren<StateUI>();
+            }
         }
 
-        protected virtual void Awake()
+        protected abstract void SetStateContainer();
+
+        void Start()
         {
-            StateContainer.OnStateAdded += _stateUI.AddState;
-            StateContainer.OnStateRemoved += _stateUI.RemoveState;
-            StateContainer.OnStateTimeChanged += _stateUI.ChangeStateTime;
-            StateContainer.OnStateCountChanged += _stateUI.ChangeStateCount;
+            SetStateContainer();
+            StateContainer.OnStateAdded.Register(_stateUI.AddState);
+            StateContainer.OnStateRemoved.Register(_stateUI.RemoveState);
+            StateContainer.OnStateTimeChanged.Register(_stateUI.ChangeStateTime);
+            StateContainer.OnStateCountChanged.Register(_stateUI.ChangeStateCount);
         }
 
-        protected void FixedUpdate()
+        void FixedUpdate()
         {
             StateContainer.DecreaseStateTime(Time.fixedDeltaTime);
         }

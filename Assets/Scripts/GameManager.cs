@@ -47,7 +47,6 @@ public class GameManager : MonoBehaviour, IController
 
     void Awake()
     {
-        _playerModel = this.GetModel<PlayersModel>().Current();
         _modifierSystem = this.GetSystem<ModifierSystem>();
         _stateCreateSystem = this.GetSystem<StateCreateSystem>();
         _saveLoadUtility = this.GetUtility<SaveLoadUtility>();
@@ -55,6 +54,7 @@ public class GameManager : MonoBehaviour, IController
 
     void Start()
     {
+        _playerModel = this.GetModel<PlayersModel>().Current();
         // Debug.Log("Game Start");
     }
 

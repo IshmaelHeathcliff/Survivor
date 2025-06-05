@@ -2,9 +2,11 @@ using System.Collections.Generic;
 
 public interface ISkill
 {
+    string ID { get; set; }
     void OnEnable();
     void OnDisable();
     void Use();
+    void Cancel();
 }
 
 public interface ISkill<T> : ISkill where T : SkillInfo
@@ -16,11 +18,13 @@ public abstract class Skill<T> : ISkill<T> where T : SkillInfo
 {
     public T SkillInfo { get; set; }
     public List<string> Keywords { get; set; }
+    public string ID { get; set; }
 
     readonly List<IEffect> _skillEffectsOnEnable = new(); // 技能启用时生效的效果，比如Buff，需要关闭技能时主动 Cancel
 
     public Skill(T skillInfo, IEnumerable<IEffect> skillEffectsOnEnable)
     {
+        ID = skillInfo.ID;
         SkillInfo = skillInfo;
         _skillEffectsOnEnable.AddRange(skillEffectsOnEnable);
     }
@@ -44,7 +48,7 @@ public abstract class Skill<T> : ISkill<T> where T : SkillInfo
 
     public abstract void Use();
 
-
+    public abstract void Cancel();
 }
 
 public class ActiveSkill : Skill<ActiveSkillInfo>
@@ -90,6 +94,11 @@ public class ActiveSkill : Skill<ActiveSkillInfo>
     public override void OnDisable()
     {
         base.OnDisable();
+        Cancel();
+    }
+
+    public override void Cancel()
+    {
         foreach (IEffect skillEffect in _skillEffectsOnUpdate)
         {
             skillEffect.Cancel();
@@ -104,7 +113,13 @@ public class PassiveSkill : Skill<PassiveSkillInfo>
     {
     }
 
+    public override void Cancel()
+    {
+        OnDisable();
+    }
+
     public override void Use()
     {
+        OnEnable();
     }
 }

@@ -8,45 +8,87 @@ using UnityEngine;
 
 public class SkillController : MonoBehaviour, IController
 {
-    [SerializeField] string[] _skills;
+    [SerializeField] string[] _skillIDs;
+    [SerializeField] int _skillSlotCount;
     readonly Dictionary<string, ActiveSkill> _activeSkills = new();
-    readonly Dictionary<string, PassiveSkill> _passiveSkills = new();
 
     SkillCreateSystem _skillCreateSystem;
     IAttackerController _attackerController;
-    CharacterModel _model;
+    ICharacterModel _model;
 
-    public void AddActiveSkill(ActiveSkill skill)
+    bool AddSkillToSlot(ISkill skill)
     {
-        if (_activeSkills.TryAdd(skill.SkillInfo.ID, skill))
+        ISkillContainer skillsInSlot = _model.SkillsInSlot;
+        if (skillsInSlot.HasSkill(skill.ID))
         {
-            skill.OnEnable();
+            Debug.Log($"技能 {skill.ID} 已经在槽位中");
+            return false;
+        }
+
+        if (skillsInSlot.Count >= _skillSlotCount)
+        {
+            Debug.Log($"技能槽位已满，当前数量: {skillsInSlot.Count}，最大数量: {_skillSlotCount}");
+            return false;
+        }
+
+        skillsInSlot.AddSkill(skill);
+        return true;
+    }
+
+    bool RemoveSkillFromSlot(string id)
+    {
+        ISkillContainer skillsInSlot = _model.SkillsInSlot;
+        if (skillsInSlot.HasSkill(id))
+        {
+            skillsInSlot.RemoveSkill(id);
+            return true;
+        }
+
+        return false;
+    }
+
+    public void ReleaseSkill(string id)
+    {
+        RemoveSkillFromSlot(id);
+    }
+
+
+    public void AddSkill(ISkill skill)
+    {
+        if (!AddSkillToSlot(skill))
+        {
+            return;
+        }
+
+        if (!_model.Skills.AddSkill(skill))
+        {
+            RemoveSkillFromSlot(skill.ID);
+            return;
+        }
+
+        if (skill is ActiveSkill activeSkill)
+        {
+            _activeSkills.TryAdd(activeSkill.ID, activeSkill);
         }
     }
 
-    public void AddPassiveSkill(PassiveSkill skill)
+
+    public void RemoveSkill(ISkill skill)
     {
-        if (_passiveSkills.TryAdd(skill.SkillInfo.ID, skill))
+        if (!_model.Skills.RemoveSkill(skill.ID))
         {
-            skill.OnEnable();
+            return;
         }
+
+        RemoveSkillFromSlot(skill.ID);
+
+        if (skill is ActiveSkill activeSkill)
+        {
+            _activeSkills.Remove(activeSkill.ID);
+        }
+
     }
 
-    public void RemoveActiveSkill(ActiveSkill skill)
-    {
-        if (_activeSkills.Remove(skill.SkillInfo.ID))
-        {
-            skill.OnDisable();
-        }
-    }
-
-    public void RemovePassiveSkill(PassiveSkill skill)
-    {
-        if (_passiveSkills.Remove(skill.SkillInfo.ID))
-        {
-            skill.OnDisable();
-        }
-    }
 
     void Awake()
     {
@@ -57,18 +99,11 @@ public class SkillController : MonoBehaviour, IController
     async void Start()
     {
         _model = this.GetModel<PlayersModel>().Current();
-        foreach (string skill in _skills)
+        foreach (string skill in _skillIDs)
         {
             SkillCreateSystem.EffectCreateEnv env = new(_attackerController, _model);
             ISkill s = _skillCreateSystem.CreateSkill(skill, env);
-            if (s is ActiveSkill activeSkill)
-            {
-                AddActiveSkill(activeSkill);
-            }
-            else if (s is PassiveSkill passiveSkill)
-            {
-                AddPassiveSkill(passiveSkill);
-            }
+            AddSkill(s);
 
             await UniTask.Delay(TimeSpan.FromSeconds(0.1));
         }
