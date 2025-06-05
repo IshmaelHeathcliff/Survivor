@@ -1,10 +1,10 @@
 using Character.Modifier;
 
-public class SystemEffect : SkillEffect<SystemEffectInfo>
+public class SystemEffect : SkillEffect<SystemEffectConfig>
 {
     AbstractSystem _system;
 
-    public SystemEffect(SystemEffectInfo info, AbstractSystem system) : base(info)
+    public SystemEffect(SystemEffectConfig config, AbstractSystem system) : base(config)
     {
         _system = system;
     }

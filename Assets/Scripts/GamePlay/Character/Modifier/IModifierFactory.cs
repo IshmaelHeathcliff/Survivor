@@ -5,13 +5,13 @@ namespace Character.Modifier
     public interface IModifierFactory
     {
         string FactoryID { get; set; }
-        IModifier CreateModifier(ModifierInfo modifierInfo);
+        IModifier CreateModifier(ModifierConfig modifierConfig);
     }
 
     public interface IStatModifierFactory : IModifierFactory
     {
-        IStat GetStat(StatModifierInfo modifierInfo);
-        IStatModifier CreateModifier(StatModifierInfo modifierInfo, int value);
-        IStatModifier CreateModifier(StatModifierInfo modifierInfo);
+        IStat GetStat(StatModifierConfig modifierConfig);
+        IStatModifier CreateModifier(StatModifierConfig modifierConfig, int value);
+        IStatModifier CreateModifier(StatModifierConfig modifierConfig);
     }
 }

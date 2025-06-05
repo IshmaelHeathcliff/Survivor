@@ -1,12 +1,12 @@
 using Character.Modifier;
 
-public class ModifierEffect : SkillEffect<ModifierEffectInfo>
+public class ModifierEffect : SkillEffect<ModifierEffectConfig>
 {
     readonly IStatModifier _modifier;
 
-    public ModifierEffect(ModifierEffectInfo info, ModifierSystem modifierSystem, IStatModifierFactory factory) : base(info)
+    public ModifierEffect(ModifierEffectConfig config, ModifierSystem modifierSystem, IStatModifierFactory factory) : base(config)
     {
-        _modifier = modifierSystem.CreateStatModifier(info.ModifierID, factory, info.Value);
+        _modifier = modifierSystem.CreateStatModifier(config.ModifierID, factory, config.Value);
     }
 
     public override void OnCancel()

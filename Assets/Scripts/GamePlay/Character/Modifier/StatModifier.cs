@@ -5,7 +5,7 @@ using Sirenix.OdinInspector;
 
 namespace Character.Modifier
 {
-    public interface IStatModifier : IModifier<StatModifierInfo>
+    public interface IStatModifier : IModifier<StatModifierConfig>
     {
         IStat GetStat();
         void RandomizeLevel();
@@ -22,7 +22,7 @@ namespace Character.Modifier
         T2 Value2 { get; set; }
     }
 
-    public abstract class StatModifier : Modifier<StatModifierInfo>, IStatModifier
+    public abstract class StatModifier : Modifier<StatModifierConfig>, IStatModifier
     {
         protected static IStat GetStat(IStatModifier modifier)
         {
@@ -38,11 +38,11 @@ namespace Character.Modifier
         {
         }
 
-        protected StatModifier(StatModifierInfo modifierInfo, IStat stat)
+        protected StatModifier(StatModifierConfig modifierConfig, IStat stat)
         {
-            ModifierInfo = modifierInfo;
+            ModifierConfig = modifierConfig;
             Stat = stat;
-            ModifierID = modifierInfo.ModifierID;
+            ModifierID = modifierConfig.ModifierID;
         }
 
         public abstract void RandomizeLevel();
@@ -66,7 +66,7 @@ namespace Character.Modifier
         {
         }
 
-        protected StatModifier(StatModifierInfo modifierInfo, IStat stat) : base(modifierInfo, stat)
+        protected StatModifier(StatModifierConfig modifierConfig, IStat stat) : base(modifierConfig, stat)
         {
         }
     }
@@ -81,7 +81,7 @@ namespace Character.Modifier
         {
         }
 
-        protected StatModifier(StatModifierInfo modifierInfo, IStat stat) : base(modifierInfo, stat)
+        protected StatModifier(StatModifierConfig modifierConfig, IStat stat) : base(modifierConfig, stat)
         {
         }
     }
@@ -102,14 +102,7 @@ namespace Character.Modifier
     }
 
 
-    [Serializable]
-    public class StatModifierInfo : ModifierInfo
-    {
-        [ShowInInspector] public string StatName { get; set; }
-        [ShowInInspector] public StatModifierType StatModifierType { get; set; }
-        [ShowInInspector] public int MaxLevel { get; set; }
-        [ShowInInspector][TableList(ShowIndexLabels = true)] public LevelRange[] LevelRanges { get; set; }
-    }
+
 
 
 }

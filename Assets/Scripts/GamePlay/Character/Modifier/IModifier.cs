@@ -19,16 +19,16 @@ namespace Character.Modifier
         void Load();
     }
 
-    public interface IModifier<T> : IModifier where T : ModifierInfo
+    public interface IModifier<T> : IModifier where T : ModifierConfig
     {
-        T ModifierInfo { get; set; }
+        T ModifierConfig { get; set; }
     }
 
-    public abstract class Modifier<T> : IModifier<T> where T : ModifierInfo
+    public abstract class Modifier<T> : IModifier<T> where T : ModifierConfig
     {
-        protected static T GetModifierInfo(string modifierId)
+        protected static T GetModifierConfig(string modifierId)
         {
-            return GameFrame.Interface.GetSystem<ModifierSystem>().GetModifierInfo<T>(modifierId);
+            return GameFrame.Interface.GetSystem<ModifierSystem>().GetModifierConfig<T>(modifierId);
         }
 
         public string FactoryID { get; set; }
@@ -42,23 +42,11 @@ namespace Character.Modifier
 
         public string ModifierID { get; set; }
 
-        [JsonIgnore] public List<string> Keywords => ModifierInfo.Keywords;
+        [JsonIgnore] public List<string> Keywords => ModifierConfig.Keywords;
 
-        [JsonIgnore] public T ModifierInfo { get; set; }
+        [JsonIgnore] public T ModifierConfig { get; set; }
 
         public string InstanceID { get; set; } = System.Guid.NewGuid().ToString();
     }
 
-    /// <summary>
-    /// Modifier的生成信息
-    /// </summary>
-    [Serializable]
-    public abstract class ModifierInfo
-    {
-        [ShowInInspector] public string ModifierID { get; set; }
-        [ShowInInspector] public string Name { get; set; }
-        [ShowInInspector] public string PositiveDescription { get; set; }
-        [ShowInInspector] public string NegativeDescription { get; set; }
-        [ShowInInspector] public List<string> Keywords { get; set; }
-    }
 }

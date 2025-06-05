@@ -3,7 +3,7 @@ using UnityEngine.AddressableAssets;
 
 namespace GamePlay.Drop
 {
-    public class DropInfo
+    public class DropConfig
     {
         [ShowInInspector] public string DropID { get; set; }
         [ShowInInspector] public string Name { get; set; }

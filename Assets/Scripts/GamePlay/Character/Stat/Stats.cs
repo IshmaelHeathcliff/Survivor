@@ -126,28 +126,28 @@ namespace Character.Stat
             };
         }
 
-        public IStat GetStat(StatModifierInfo modifierInfo)
+        public IStat GetStat(StatModifierConfig modifierConfig)
         {
-            return GetStat(modifierInfo.StatName);
+            return GetStat(modifierConfig.StatName);
         }
 
-        public IModifier CreateModifier(ModifierInfo modifierInfo)
+        public IModifier CreateModifier(ModifierConfig modifierConfig)
         {
-            if (modifierInfo is not StatModifierInfo info)
+            if (modifierConfig is not StatModifierConfig config)
             {
-                Debug.LogError($"modifierInfo {modifierInfo.ModifierID} is not a stat modifier");
+                Debug.LogError($"modifierConfig {modifierConfig.ModifierID} is not a stat modifier");
                 return null;
             }
 
-            return CreateModifier(info);
+            return CreateModifier(config);
         }
 
-        public IStatModifier CreateModifier(StatModifierInfo modifierInfo, int value)
+        public IStatModifier CreateModifier(StatModifierConfig modifierConfig, int value)
         {
-            IStat stat = GetStat(modifierInfo.StatName);
+            IStat stat = GetStat(modifierConfig.StatName);
             if (stat != null)
             {
-                var modifier = new StatSingleIntModifier(modifierInfo, stat, value)
+                var modifier = new StatSingleIntModifier(modifierConfig, stat, value)
                 {
                     FactoryID = FactoryID
                 };
@@ -155,17 +155,17 @@ namespace Character.Stat
             }
             else
             {
-                Debug.LogError("modifier stat name is not valid: " + modifierInfo.StatName);
+                Debug.LogError("modifier stat name is not valid: " + modifierConfig.StatName);
                 return null;
             }
         }
 
-        public IStatModifier CreateModifier(StatModifierInfo modifierInfo)
+        public IStatModifier CreateModifier(StatModifierConfig modifierConfig)
         {
-            IStat stat = GetStat(modifierInfo.StatName);
+            IStat stat = GetStat(modifierConfig.StatName);
             if (stat != null)
             {
-                var modifier = new StatSingleIntModifier(modifierInfo, stat)
+                var modifier = new StatSingleIntModifier(modifierConfig, stat)
                 {
                     FactoryID = FactoryID
                 };
@@ -179,7 +179,7 @@ namespace Character.Stat
             }
             else
             {
-                Debug.LogError("modifier stat name is not valid: " + modifierInfo.StatName);
+                Debug.LogError("modifier stat name is not valid: " + modifierConfig.StatName);
                 return null;
             }
 

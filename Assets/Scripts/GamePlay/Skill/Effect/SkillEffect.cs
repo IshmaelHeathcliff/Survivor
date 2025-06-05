@@ -12,18 +12,18 @@ public interface IEffect
     void Cancel();
 }
 
-public interface ISkillEffect<T> : IEffect where T : SkillEffectInfo
+public interface ISkillEffect<T> : IEffect where T : SkillEffectConfig
 {
-    T SkillEffectInfo { get; set; }
+    T SkillEffectConfig { get; set; }
 }
 
-public abstract class SkillEffect<T> : ISkillEffect<T> where T : SkillEffectInfo
+public abstract class SkillEffect<T> : ISkillEffect<T> where T : SkillEffectConfig
 {
-    public T SkillEffectInfo { get; set; }
+    public T SkillEffectConfig { get; set; }
 
-    public SkillEffect(T skillEffectInfo)
+    public SkillEffect(T skillEffectConfig)
     {
-        SkillEffectInfo = skillEffectInfo;
+        SkillEffectConfig = skillEffectConfig;
     }
 
     public void Apply() => OnApply();

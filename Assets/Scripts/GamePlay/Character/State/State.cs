@@ -32,35 +32,35 @@ namespace Character.State
     [Serializable]
     public class State : IState
     {
-        StateInfo _info;
+        StateConfig _config;
 
         List<IModifier> _modifiers;
 
-        public State(StateInfo info, IEnumerable<IModifier> entries)
+        public State(StateConfig config, IEnumerable<IModifier> entries)
         {
-            _info = info;
+            _config = config;
             _modifiers = entries.ToList();
             Enable();
         }
 
         public string GetName()
         {
-            return _info.Name;
+            return _config.Name;
         }
 
         public string GetID()
         {
-            return _info.ID;
+            return _config.ID;
         }
 
         public string GetDescription()
         {
-            return _info.Description;
+            return _config.Description;
         }
 
         public string GetIconPath()
         {
-            return _info.Icon;
+            return _config.Icon;
         }
 
         public void Enable()
@@ -84,7 +84,7 @@ namespace Character.State
     {
         public float Duration { get; set; }
         public float TimeLeft { get; private set; }
-        public StateWithTime(StateInfo info, IEnumerable<IModifier> entries, float time) : base(info, entries)
+        public StateWithTime(StateConfig config, IEnumerable<IModifier> entries, float time) : base(config, entries)
         {
             Duration = time;
             TimeLeft = time;
@@ -110,7 +110,7 @@ namespace Character.State
     {
         public int Count { get; set; }
         public int MaxCount { get; set; }
-        public StateWithCount(StateInfo info, IEnumerable<IModifier> entries, int maxCount) : base(info, entries)
+        public StateWithCount(StateConfig config, IEnumerable<IModifier> entries, int maxCount) : base(config, entries)
         {
             Count = 1;
             MaxCount = maxCount;
@@ -122,7 +122,7 @@ namespace Character.State
     {
         public int Count { get; set; }
         public int MaxCount { get; set; }
-        public StateWithTimeAndCount(StateInfo info, IEnumerable<IModifier> entries, float time, int maxCount) : base(info, entries, time)
+        public StateWithTimeAndCount(StateConfig config, IEnumerable<IModifier> entries, float time, int maxCount) : base(config, entries, time)
         {
             Count = 1;
             MaxCount = maxCount;

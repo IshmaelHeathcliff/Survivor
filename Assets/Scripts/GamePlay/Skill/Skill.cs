@@ -9,23 +9,23 @@ public interface ISkill
     void Cancel();
 }
 
-public interface ISkill<T> : ISkill where T : SkillInfo
+public interface ISkill<T> : ISkill where T : SkillConfig
 {
-    T SkillInfo { get; set; }
+    T SkillConfig { get; set; }
 }
 
-public abstract class Skill<T> : ISkill<T> where T : SkillInfo
+public abstract class Skill<T> : ISkill<T> where T : SkillConfig
 {
-    public T SkillInfo { get; set; }
+    public T SkillConfig { get; set; }
     public List<string> Keywords { get; set; }
     public string ID { get; set; }
 
     readonly List<IEffect> _skillEffectsOnEnable = new(); // 技能启用时生效的效果，比如Buff，需要关闭技能时主动 Cancel
 
-    public Skill(T skillInfo, IEnumerable<IEffect> skillEffectsOnEnable)
+    public Skill(T skillConfig, IEnumerable<IEffect> skillEffectsOnEnable)
     {
-        ID = skillInfo.ID;
-        SkillInfo = skillInfo;
+        ID = skillConfig.ID;
+        SkillConfig = skillConfig;
         _skillEffectsOnEnable.AddRange(skillEffectsOnEnable);
     }
 
@@ -51,17 +51,17 @@ public abstract class Skill<T> : ISkill<T> where T : SkillInfo
     public abstract void Cancel();
 }
 
-public class ActiveSkill : Skill<ActiveSkillInfo>
+public class ActiveSkill : Skill<ActiveSkillConfig>
 {
     readonly List<IEffect> _skillEffectsOnUpdate = new(); // 每次使用技能时生效的效果，比如攻击，一般不需要主动 Cancel
 
-    public float Cooldown => SkillInfo.Cooldown;
+    public float Cooldown => SkillConfig.Cooldown;
     public bool IsReady => _leftTime <= 0;
 
     float _leftTime;
 
-    public ActiveSkill(ActiveSkillInfo skillInfo, IEnumerable<IEffect> skillEffectsOnEnable, IEnumerable<IEffect> skillEffectsOnUpdate) :
-        base(skillInfo, skillEffectsOnEnable)
+    public ActiveSkill(ActiveSkillConfig skillConfig, IEnumerable<IEffect> skillEffectsOnEnable, IEnumerable<IEffect> skillEffectsOnUpdate) :
+        base(skillConfig, skillEffectsOnEnable)
     {
         _skillEffectsOnUpdate.AddRange(skillEffectsOnUpdate);
 
@@ -106,10 +106,10 @@ public class ActiveSkill : Skill<ActiveSkillInfo>
     }
 }
 
-public class PassiveSkill : Skill<PassiveSkillInfo>
+public class PassiveSkill : Skill<PassiveSkillConfig>
 {
-    public PassiveSkill(PassiveSkillInfo skillInfo, IEnumerable<IEffect> skillEffectsOnEnable) :
-        base(skillInfo, skillEffectsOnEnable)
+    public PassiveSkill(PassiveSkillConfig skillConfig, IEnumerable<IEffect> skillEffectsOnEnable) :
+        base(skillConfig, skillEffectsOnEnable)
     {
     }
 

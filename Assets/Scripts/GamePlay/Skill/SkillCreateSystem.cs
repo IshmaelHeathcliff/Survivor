@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class SkillCreateSystem : AbstractSystem
 {
-    readonly Dictionary<string, SkillInfo> _skillInfoCache = new();
+    readonly Dictionary<string, SkillConfig> _skillConfigCache = new();
     const string JsonPath = "Preset";
     const string JsonName = "Skills.json";
 
@@ -27,49 +27,49 @@ public class SkillCreateSystem : AbstractSystem
 
     void Load()
     {
-        _skillInfoCache.Clear();
-        List<SkillInfo> skillInfoList = this.GetUtility<SaveLoadUtility>().Load<List<SkillInfo>>(JsonName, JsonPath);
-        foreach (SkillInfo skillInfo in skillInfoList)
+        _skillConfigCache.Clear();
+        List<SkillConfig> skillConfigList = this.GetUtility<SaveLoadUtility>().Load<List<SkillConfig>>(JsonName, JsonPath);
+        foreach (SkillConfig skillConfig in skillConfigList)
         {
-            _skillInfoCache.Add(skillInfo.ID, skillInfo);
+            _skillConfigCache.Add(skillConfig.ID, skillConfig);
         }
     }
 
-    public SkillInfo GetSkillInfo(string id)
+    public SkillConfig GetSkillConfig(string id)
     {
-        if (_skillInfoCache.TryGetValue(id, out SkillInfo skillInfo))
+        if (_skillConfigCache.TryGetValue(id, out SkillConfig skillConfig))
         {
-            return skillInfo;
+            return skillConfig;
         }
 
-        Debug.LogError($"SkillInfo not found: {id}");
+        Debug.LogError($"SkillConfig not found: {id}");
         return null;
     }
 
     #region Effect
-    public IEffect CreateEffect(SkillEffectInfo skillInfo, EffectCreateEnv env)
+    public IEffect CreateEffect(SkillEffectConfig skillConfig, EffectCreateEnv env)
     {
-        return skillInfo switch
+        return skillConfig switch
         {
-            AttackEffectInfo attackEffectInfo => CreateAttackEffect(attackEffectInfo, env.AttackerController),
-            ModifierEffectInfo modifierEffectInfo => CreateModifierEffect(modifierEffectInfo, env.Model.Stats),
+            AttackEffectConfig attackEffectConfig => CreateAttackEffect(attackEffectConfig, env.AttackerController),
+            ModifierEffectConfig modifierEffectConfig => CreateModifierEffect(modifierEffectConfig, env.Model.Stats),
             _ => null,
         };
     }
 
-    public AttackEffect CreateAttackEffect(AttackEffectInfo info, IAttackerController controller)
+    public AttackEffect CreateAttackEffect(AttackEffectConfig config, IAttackerController controller)
     {
-        return new AttackEffect(info, controller);
+        return new AttackEffect(config, controller);
     }
 
-    public ModifierEffect CreateModifierEffect(ModifierEffectInfo info, IStatModifierFactory factory)
+    public ModifierEffect CreateModifierEffect(ModifierEffectConfig config, IStatModifierFactory factory)
     {
-        return new ModifierEffect(info, this.GetSystem<ModifierSystem>(), factory);
+        return new ModifierEffect(config, this.GetSystem<ModifierSystem>(), factory);
     }
 
-    public SystemEffect CreateSystemEffect(SystemEffectInfo info, AbstractSystem system)
+    public SystemEffect CreateSystemEffect(SystemEffectConfig config, AbstractSystem system)
     {
-        return new SystemEffect(info, system);
+        return new SystemEffect(config, system);
     }
     #endregion
 
@@ -78,32 +78,32 @@ public class SkillCreateSystem : AbstractSystem
     #region Skill
     public ISkill CreateSkill(string id, EffectCreateEnv env)
     {
-        SkillInfo skillInfo = GetSkillInfo(id);
-        if (skillInfo == null)
+        SkillConfig skillConfig = GetSkillConfig(id);
+        if (skillConfig == null)
         {
             return default;
         }
 
         List<IEffect> skillEffectsOnEnable = new();
 
-        foreach (SkillEffectInfo effectInfo in skillInfo.SkillEffectInfosOnEnable)
+        foreach (SkillEffectConfig effectConfig in skillConfig.SkillEffectConfigsOnEnable)
         {
-            skillEffectsOnEnable.Add(CreateEffect(effectInfo, env));
+            skillEffectsOnEnable.Add(CreateEffect(effectConfig, env));
         }
 
-        switch (skillInfo)
+        switch (skillConfig)
         {
-            case ActiveSkillInfo activeSkillInfo:
+            case ActiveSkillConfig activeSkillConfig:
                 List<IEffect> skillEffectsOnUpdate = new();
-                foreach (SkillEffectInfo effectInfo in activeSkillInfo.SkillEffectInfosOnUpdate)
+                foreach (SkillEffectConfig effectConfig in activeSkillConfig.SkillEffectConfigsOnUpdate)
                 {
-                    skillEffectsOnUpdate.Add(CreateEffect(effectInfo, env));
+                    skillEffectsOnUpdate.Add(CreateEffect(effectConfig, env));
                 }
-                return new ActiveSkill(activeSkillInfo, skillEffectsOnEnable, skillEffectsOnUpdate);
-            case PassiveSkillInfo passiveSkillInfo:
-                return new PassiveSkill(passiveSkillInfo, skillEffectsOnEnable);
+                return new ActiveSkill(activeSkillConfig, skillEffectsOnEnable, skillEffectsOnUpdate);
+            case PassiveSkillConfig passiveSkillConfig:
+                return new PassiveSkill(passiveSkillConfig, skillEffectsOnEnable);
             default:
-                Debug.LogError($"未知的技能类型: {skillInfo.GetType()}");
+                Debug.LogError($"未知的技能类型: {skillConfig.GetType()}");
                 return default;
         }
     }

@@ -6,7 +6,7 @@ using Sirenix.OdinInspector;
 namespace Character.State
 {
     [Serializable]
-    public class StateInfo
+    public class StateConfig
     {
         [ShowInInspector] public string ID { get; set; }
         [ShowInInspector] public string Name { get; set; }

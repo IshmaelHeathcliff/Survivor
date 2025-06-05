@@ -8,66 +8,66 @@ namespace Character.State
 {
     public class StateCreateSystem : AbstractSystem
     {
-        Dictionary<string, StateInfo> _stateInfoCache;
+        Dictionary<string, StateConfig> _stateConfigCache;
         const string JsonPath = "Preset";
         const string JsonName = "States.json";
 
         void Load()
         {
-            _stateInfoCache = new Dictionary<string, StateInfo>();
-            List<StateInfo> stateInfoList = this.GetUtility<SaveLoadUtility>().Load<List<StateInfo>>(JsonName, JsonPath);
-            foreach (StateInfo stateInfo in stateInfoList)
+            _stateConfigCache = new Dictionary<string, StateConfig>();
+            List<StateConfig> stateConfigList = this.GetUtility<SaveLoadUtility>().Load<List<StateConfig>>(JsonName, JsonPath);
+            foreach (StateConfig stateConfig in stateConfigList)
             {
-                _stateInfoCache.Add(stateInfo.ID, stateInfo);
+                _stateConfigCache.Add(stateConfig.ID, stateConfig);
             }
         }
 
-        public StateInfo GetStateInfo(string id)
+        public StateConfig GetStateConfig(string id)
         {
-            if (_stateInfoCache == null)
+            if (_stateConfigCache == null)
             {
                 Load();
             }
 
-            return _stateInfoCache.GetValueOrDefault(id);
+            return _stateConfigCache.GetValueOrDefault(id);
         }
 
         public IState CreateState(string id, string factoryID, int[] values)
         {
-            StateInfo stateInfo = GetStateInfo(id);
+            StateConfig stateConfig = GetStateConfig(id);
             ModifierSystem entrySystem = this.GetSystem<ModifierSystem>();
-            IEnumerable<IStatModifier> entries = stateInfo.ModifierID.Select(
+            IEnumerable<IStatModifier> entries = stateConfig.ModifierID.Select(
                     (entryId, i) => entrySystem.CreateStatModifier(entryId, factoryID, values[i]));
 
-            return new State(stateInfo, entries);
+            return new State(stateConfig, entries);
         }
 
         public IStateWithTime CreateState(string id, string factoryID, int[] values, int time)
         {
-            StateInfo stateInfo = GetStateInfo(id);
+            StateConfig stateConfig = GetStateConfig(id);
             ModifierSystem entrySystem = this.GetSystem<ModifierSystem>();
 
-            if (stateInfo.ModifierID.Count != values.Length)
+            if (stateConfig.ModifierID.Count != values.Length)
             {
-                Debug.LogError("values.Length != stateInfo.EntryID.Count");
+                Debug.LogError("values.Length != stateConfig.EntryID.Count");
                 return null;
             }
 
             var entries = new List<IModifier>();
 
-            for (int i = 0; i < stateInfo.ModifierID.Count; i++)
+            for (int i = 0; i < stateConfig.ModifierID.Count; i++)
             {
-                entries.Add(entrySystem.CreateStatModifier(stateInfo.ModifierID[i], factoryID, values[i]));
+                entries.Add(entrySystem.CreateStatModifier(stateConfig.ModifierID[i], factoryID, values[i]));
             }
 
-            return new StateWithTime(stateInfo, entries, time);
+            return new StateWithTime(stateConfig, entries, time);
         }
 
 
 
         protected override void OnInit()
         {
-            _stateInfoCache = new Dictionary<string, StateInfo>();
+            _stateConfigCache = new Dictionary<string, StateConfig>();
             Load();
         }
     }

@@ -1,9 +1,9 @@
 [
   {
-    "$type": "ActiveSkillInfo, Assembly-CSharp",
-    "SkillEffectInfosOnUpdate": [
+    "$type": "ActiveSkillConfig, Assembly-CSharp",
+    "SkillEffectConfigsOnUpdate": [
       {
-        "$type": "AttackEffectInfo, Assembly-CSharp",
+        "$type": "AttackEffectConfig, Assembly-CSharp",
         "Damage": 6,
         "AttackerAddress": "Assets/Prefabs/Dice.prefab",
         "ID": "attack",
@@ -14,9 +14,9 @@
     "Cooldown": 1.0,
     "ID": "dice1",
     "Name": "奇奥骰子-1点",
-    "SkillEffectInfosOnEnable": [
+    "SkillEffectConfigsOnEnable": [
       {
-        "$type": "ModifierEffectInfo, Assembly-CSharp",
+        "$type": "ModifierEffectConfig, Assembly-CSharp",
         "ModifierID": "damage_add",
         "Value": 5,
         "ID": "modifier",
@@ -26,10 +26,10 @@
     ]
   },
   {
-    "$type": "ActiveSkillInfo, Assembly-CSharp",
-    "SkillEffectInfosOnUpdate": [
+    "$type": "ActiveSkillConfig, Assembly-CSharp",
+    "SkillEffectConfigsOnUpdate": [
       {
-        "$type": "AttackEffectInfo, Assembly-CSharp",
+        "$type": "AttackEffectConfig, Assembly-CSharp",
         "Damage": 6,
         "AttackerAddress": "Assets/Prefabs/Dice.prefab",
         "ID": "attack",
@@ -40,9 +40,9 @@
     "Cooldown": 1.0,
     "ID": "dice2",
     "Name": "奇奥骰子-2点",
-    "SkillEffectInfosOnEnable": [
+    "SkillEffectConfigsOnEnable": [
       {
-        "$type": "ModifierEffectInfo, Assembly-CSharp",
+        "$type": "ModifierEffectConfig, Assembly-CSharp",
         "ModifierID": "health_add",
         "Value": 50,
         "ID": "modifier",
@@ -52,10 +52,10 @@
     ]
   },
   {
-    "$type": "ActiveSkillInfo, Assembly-CSharp",
-    "SkillEffectInfosOnUpdate": [
+    "$type": "ActiveSkillConfig, Assembly-CSharp",
+    "SkillEffectConfigsOnUpdate": [
       {
-        "$type": "AttackEffectInfo, Assembly-CSharp",
+        "$type": "AttackEffectConfig, Assembly-CSharp",
         "Damage": 6,
         "AttackerAddress": "Assets/Prefabs/Dice.prefab",
         "ID": "attack",
@@ -66,9 +66,9 @@
     "Cooldown": 1.0,
     "ID": "dice3",
     "Name": "奇奥骰子-3点",
-    "SkillEffectInfosOnEnable": [
+    "SkillEffectConfigsOnEnable": [
       {
-        "$type": "ModifierEffectInfo, Assembly-CSharp",
+        "$type": "ModifierEffectConfig, Assembly-CSharp",
         "ModifierID": "mana_add",
         "Value": 50,
         "ID": "modifier",
@@ -78,10 +78,10 @@
     ]
   },
   {
-    "$type": "ActiveSkillInfo, Assembly-CSharp",
-    "SkillEffectInfosOnUpdate": [
+    "$type": "ActiveSkillConfig, Assembly-CSharp",
+    "SkillEffectConfigsOnUpdate": [
       {
-        "$type": "AttackEffectInfo, Assembly-CSharp",
+        "$type": "AttackEffectConfig, Assembly-CSharp",
         "Damage": 6,
         "AttackerAddress": "Assets/Prefabs/Dice.prefab",
         "ID": "attack",
@@ -92,9 +92,9 @@
     "Cooldown": 1.0,
     "ID": "dice4",
     "Name": "奇奥骰子-4点",
-    "SkillEffectInfosOnEnable": [
+    "SkillEffectConfigsOnEnable": [
       {
-        "$type": "ModifierEffectInfo, Assembly-CSharp",
+        "$type": "ModifierEffectConfig, Assembly-CSharp",
         "ModifierID": "damage_fix",
         "Value": 10,
         "ID": "modifier",
@@ -104,10 +104,10 @@
     ]
   },
   {
-    "$type": "ActiveSkillInfo, Assembly-CSharp",
-    "SkillEffectInfosOnUpdate": [
+    "$type": "ActiveSkillConfig, Assembly-CSharp",
+    "SkillEffectConfigsOnUpdate": [
       {
-        "$type": "AttackEffectInfo, Assembly-CSharp",
+        "$type": "AttackEffectConfig, Assembly-CSharp",
         "Damage": 6,
         "AttackerAddress": "Assets/Prefabs/Dice.prefab",
         "ID": "attack",
@@ -118,9 +118,9 @@
     "Cooldown": 1.0,
     "ID": "dice5",
     "Name": "奇奥骰子-5点",
-    "SkillEffectInfosOnEnable": [
+    "SkillEffectConfigsOnEnable": [
       {
-        "$type": "ModifierEffectInfo, Assembly-CSharp",
+        "$type": "ModifierEffectConfig, Assembly-CSharp",
         "ModifierID": "damage_increase",
         "Value": 20,
         "ID": "modifier",
@@ -130,10 +130,10 @@
     ]
   },
   {
-    "$type": "ActiveSkillInfo, Assembly-CSharp",
-    "SkillEffectInfosOnUpdate": [
+    "$type": "ActiveSkillConfig, Assembly-CSharp",
+    "SkillEffectConfigsOnUpdate": [
       {
-        "$type": "AttackEffectInfo, Assembly-CSharp",
+        "$type": "AttackEffectConfig, Assembly-CSharp",
         "Damage": 6,
         "AttackerAddress": "Assets/Prefabs/Dice.prefab",
         "ID": "attack",
@@ -144,9 +144,9 @@
     "Cooldown": 1.0,
     "ID": "dice6",
     "Name": "奇奥骰子-6点",
-    "SkillEffectInfosOnEnable": [
+    "SkillEffectConfigsOnEnable": [
       {
-        "$type": "ModifierEffectInfo, Assembly-CSharp",
+        "$type": "ModifierEffectConfig, Assembly-CSharp",
         "ModifierID": "damage_add",
         "Value": 5,
         "ID": "modifier",
@@ -156,12 +156,12 @@
     ]
   },
   {
-    "$type": "PassiveSkillInfo, Assembly-CSharp",
+    "$type": "PassiveSkillConfig, Assembly-CSharp",
     "ID": "loaded_dice",
     "Name": "灌铅骰子",
-    "SkillEffectInfosOnEnable": [
+    "SkillEffectConfigsOnEnable": [
       {
-        "$type": "ModifierEffectInfo, Assembly-CSharp",
+        "$type": "ModifierEffectConfig, Assembly-CSharp",
         "ModifierID": "damage_more",
         "Value": 100,
         "ID": "modifier",

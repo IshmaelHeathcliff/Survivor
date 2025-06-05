@@ -1,6 +1,6 @@
 [
   {
-    "$type": "Character.Modifier.StatModifierInfo, Assembly-CSharp",
+    "$type": "Character.Modifier.StatModifierConfig, Assembly-CSharp",
     "StatName": "Health",
     "StatModifierType": 0,
     "MaxLevel": 3,
@@ -27,7 +27,7 @@
     ]
   },
   {
-    "$type": "Character.Modifier.StatModifierInfo, Assembly-CSharp",
+    "$type": "Character.Modifier.StatModifierConfig, Assembly-CSharp",
     "StatName": "Health",
     "StatModifierType": 1,
     "MaxLevel": 3,
@@ -54,7 +54,7 @@
     ]
   },
   {
-    "$type": "Character.Modifier.StatModifierInfo, Assembly-CSharp",
+    "$type": "Character.Modifier.StatModifierConfig, Assembly-CSharp",
     "StatName": "Health",
     "StatModifierType": 2,
     "MaxLevel": 3,
@@ -81,7 +81,7 @@
     ]
   },
   {
-    "$type": "Character.Modifier.StatModifierInfo, Assembly-CSharp",
+    "$type": "Character.Modifier.StatModifierConfig, Assembly-CSharp",
     "StatName": "Mana",
     "StatModifierType": 1,
     "MaxLevel": 3,
@@ -108,7 +108,7 @@
     ]
   },
   {
-    "$type": "Character.Modifier.StatModifierInfo, Assembly-CSharp",
+    "$type": "Character.Modifier.StatModifierConfig, Assembly-CSharp",
     "StatName": "Accuracy",
     "StatModifierType": 1,
     "MaxLevel": 3,
@@ -135,7 +135,7 @@
     ]
   },
   {
-    "$type": "Character.Modifier.StatModifierInfo, Assembly-CSharp",
+    "$type": "Character.Modifier.StatModifierConfig, Assembly-CSharp",
     "StatName": "CriticalChance",
     "StatModifierType": 0,
     "MaxLevel": 3,
@@ -162,7 +162,7 @@
     ]
   },
   {
-    "$type": "Character.Modifier.StatModifierInfo, Assembly-CSharp",
+    "$type": "Character.Modifier.StatModifierConfig, Assembly-CSharp",
     "StatName": "Damage",
     "StatModifierType": 0,
     "MaxLevel": 3,
@@ -189,7 +189,7 @@
     ]
   },
   {
-    "$type": "Character.Modifier.StatModifierInfo, Assembly-CSharp",
+    "$type": "Character.Modifier.StatModifierConfig, Assembly-CSharp",
     "StatName": "Damage",
     "StatModifierType": 1,
     "MaxLevel": 3,
@@ -216,7 +216,7 @@
     ]
   },
   {
-    "$type": "Character.Modifier.StatModifierInfo, Assembly-CSharp",
+    "$type": "Character.Modifier.StatModifierConfig, Assembly-CSharp",
     "StatName": "Damage",
     "StatModifierType": 2,
     "MaxLevel": 3,
@@ -243,7 +243,7 @@
     ]
   },
   {
-    "$type": "Character.Modifier.StatModifierInfo, Assembly-CSharp",
+    "$type": "Character.Modifier.StatModifierConfig, Assembly-CSharp",
     "StatName": "Damage",
     "StatModifierType": 3,
     "MaxLevel": 3,
@@ -270,7 +270,7 @@
     ]
   },
   {
-    "$type": "Character.Modifier.StatModifierInfo, Assembly-CSharp",
+    "$type": "Character.Modifier.StatModifierConfig, Assembly-CSharp",
     "StatName": "Mana",
     "StatModifierType": 0,
     "MaxLevel": 3,

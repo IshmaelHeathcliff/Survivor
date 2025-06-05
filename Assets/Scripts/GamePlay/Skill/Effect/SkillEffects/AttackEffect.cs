@@ -1,12 +1,12 @@
 using Character.Damage;
 using System;
 
-public class AttackEffect : SkillEffect<AttackEffectInfo>
+public class AttackEffect : SkillEffect<AttackEffectConfig>
 {
     readonly IAttackerController _attackerController;
     IAttacker _attacker;
 
-    public AttackEffect(AttackEffectInfo skillEffectInfo, IAttackerController attackerController) : base(skillEffectInfo)
+    public AttackEffect(AttackEffectConfig skillEffectConfig, IAttackerController attackerController) : base(skillEffectConfig)
     {
         _attackerController = attackerController;
     }
@@ -15,8 +15,8 @@ public class AttackEffect : SkillEffect<AttackEffectInfo>
     {
         try
         {
-            _attacker = await _attackerController.CreateAttacker(SkillEffectInfo.AttackerAddress);
-            _attacker.BaseDamage = SkillEffectInfo.Damage;
+            _attacker = await _attackerController.CreateAttacker(SkillEffectConfig.AttackerAddress);
+            _attacker.BaseDamage = SkillEffectConfig.Damage;
         }
         catch (OperationCanceledException)
         {

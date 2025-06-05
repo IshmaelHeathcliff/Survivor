@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Editor
 {
     [CreateAssetMenu(menuName = "Tools/ModifierInfo Preset Editor", fileName = "ModifierInfoPresetEditor")]
-    public class ModifierInfoPresetEditor : DataPresetEditor<ModifierInfo>
+    public class ModifierPresetEditor : DataPresetEditor<ModifierConfig>
     {
     }
 }

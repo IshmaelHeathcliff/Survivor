@@ -15,11 +15,11 @@ namespace Character.Modifier
 
         }
 
-        public StatSingleIntModifier(StatModifierInfo modifierInfo, IStat stat) : base(modifierInfo, stat)
+        public StatSingleIntModifier(StatModifierConfig modifierConfig, IStat stat) : base(modifierConfig, stat)
         {
         }
 
-        public StatSingleIntModifier(StatModifierInfo modifierInfo, IStat stat, int value) : base(modifierInfo,
+        public StatSingleIntModifier(StatModifierConfig modifierConfig, IStat stat, int value) : base(modifierConfig,
             stat)
         {
             Level = 1;
@@ -29,8 +29,8 @@ namespace Character.Modifier
         public override string GetDescription()
         {
             return Value >= 0 ?
-                string.Format(ModifierInfo.PositiveDescription, Stat.Name, Value) :
-                string.Format(ModifierInfo.NegativeDescription, Stat.Name, -Value);
+                string.Format(ModifierConfig.PositiveDescription, Stat.Name, Value) :
+                string.Format(ModifierConfig.NegativeDescription, Stat.Name, -Value);
         }
 
         public override void Check()
@@ -41,7 +41,7 @@ namespace Character.Modifier
 
         public override void Register()
         {
-            switch (ModifierInfo.StatModifierType)
+            switch (ModifierConfig.StatModifierType)
             {
                 case StatModifierType.Added:
                     Stat.AddAddedValueModifier(InstanceID, this);
@@ -63,7 +63,7 @@ namespace Character.Modifier
 
         public override void Unregister()
         {
-            switch (ModifierInfo.StatModifierType)
+            switch (ModifierConfig.StatModifierType)
             {
                 case StatModifierType.Added:
                     Stat.RemoveAddedValueModifier(InstanceID);
@@ -86,25 +86,25 @@ namespace Character.Modifier
         public override void Load()
         {
             //TODO: 不使用全局静态调用？
-            ModifierInfo = GetModifierInfo(ModifierID) as StatModifierInfo;
+            ModifierConfig = GetModifierConfig(ModifierID) as StatModifierConfig;
             Stat = GetStat(this);
 
         }
 
         public override void RandomizeLevel()
         {
-            if (ModifierInfo is StatModifierInfo info)
+            if (ModifierConfig is StatModifierConfig config)
             {
-                Level = Random.Range(0, info.MaxLevel);
+                Level = Random.Range(0, config.MaxLevel);
             }
 
         }
 
         public override void RandomizeValue()
         {
-            if (ModifierInfo is StatModifierInfo info)
+            if (ModifierConfig is StatModifierConfig config)
             {
-                LevelRange levelRange = info.LevelRanges[Level];
+                LevelRange levelRange = config.LevelRanges[Level];
                 Value = Random.Range(levelRange.Min, levelRange.Max + 1);
             }
 

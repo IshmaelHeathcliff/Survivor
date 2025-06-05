@@ -1,19 +1,19 @@
 using System;
 using Sirenix.OdinInspector;
 
-public abstract class SkillEffectInfo
+public abstract class SkillEffectConfig
 {
     [ShowInInspector] public string ID { get; set; }
     [ShowInInspector] public string Name { get; set; }
     [ShowInInspector] public string Description { get; set; }
 }
 
-public class AttackEffectInfo : SkillEffectInfo
+public class AttackEffectConfig : SkillEffectConfig
 {
     [ShowInInspector] public int Damage { get; set; }
     [ShowInInspector] public string AttackerAddress { get; set; }
 
-    public AttackEffectInfo()
+    public AttackEffectConfig()
     {
         ID = "attack";
         Name = "攻击";
@@ -22,12 +22,12 @@ public class AttackEffectInfo : SkillEffectInfo
 
 }
 
-public class ModifierEffectInfo : SkillEffectInfo
+public class ModifierEffectConfig : SkillEffectConfig
 {
     [ShowInInspector] public string ModifierID { get; set; }
     [ShowInInspector] public int Value { get; set; }
 
-    public ModifierEffectInfo()
+    public ModifierEffectConfig()
     {
         ID = "modifier";
         Name = "修饰器";
@@ -35,9 +35,9 @@ public class ModifierEffectInfo : SkillEffectInfo
     }
 }
 
-public class SystemEffectInfo : SkillEffectInfo
+public class SystemEffectConfig : SkillEffectConfig
 {
-    public SystemEffectInfo()
+    public SystemEffectConfig()
     {
         ID = "system";
         Name = "系统";
