@@ -37,7 +37,7 @@ namespace Character.Enemy
             }
             else
             {
-                model = new EnemyModel(MoveController.Transform);
+                model = new EnemyModel(ID, MoveController.Transform);
                 enemiesModel.AddModel(ID, model);
                 Model = model;
             }

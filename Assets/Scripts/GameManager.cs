@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour, IController
 
     void Start()
     {
-        _playerModel = this.GetModel<PlayersModel>().Current();
+        _playerModel = this.GetModel<PlayersModel>().Current;
         // Debug.Log("Game Start");
     }
 

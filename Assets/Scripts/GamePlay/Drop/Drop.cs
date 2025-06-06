@@ -15,7 +15,7 @@ public class Drop : MonoBehaviour, IController
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            this.GetModel<PlayersModel>().Current().Coin.Value += 1;
+            this.GetModel<PlayersModel>().Current.Coin.Value += 1;
             Addressables.ReleaseInstance(gameObject);
         }
     }

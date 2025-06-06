@@ -1731,9 +1731,6 @@ MonoBehaviour:
   - dice2
   - dice3
   - dice4
-  - dice5
-  - dice6
-  - loaded_dice
   _skillSlotCount: 10
 --- !u!1 &768642907
 GameObject:

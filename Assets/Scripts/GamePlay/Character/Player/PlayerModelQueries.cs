@@ -7,7 +7,7 @@ namespace Character
     {
         protected override Vector3 OnDo()
         {
-            return this.GetModel<PlayersModel>().Current().Position;
+            return this.GetModel<PlayersModel>().Current.Position;
         }
     }
 
@@ -15,7 +15,7 @@ namespace Character
     {
         protected override Vector2 OnDo()
         {
-            return this.GetModel<PlayersModel>().Current().Direction;
+            return this.GetModel<PlayersModel>().Current.Direction;
         }
     }
 }

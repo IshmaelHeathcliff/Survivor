@@ -5,6 +5,7 @@ using Character.Damage;
 using Character.Modifier;
 using Character.Player;
 using Cysharp.Threading.Tasks;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class SkillController : MonoBehaviour, IController
@@ -13,24 +14,8 @@ public class SkillController : MonoBehaviour, IController
     [SerializeField] int _skillSlotCount;
     readonly Dictionary<string, ActiveSkill> _activeSkills = new();
 
-    SkillCreateSystem _skillCreateSystem;
     IAttackerController _attackerController;
     ICharacterModel _model;
-
-    public void AcquireSkill(ISkill skill)
-    {
-        this.SendCommand(new AcquireSkillCommand(skill));
-    }
-
-    public void ReleaseSkill(ISkill skill)
-    {
-        this.SendCommand(new ReleaseSkillCommand(skill));
-    }
-
-    public void RemoveSkill(string id)
-    {
-        this.SendCommand(new RemoveSkillCommand(id));
-    }
 
     void OnSkillAcquired(SkillAcquiredEvent e)
     {
@@ -51,16 +36,35 @@ public class SkillController : MonoBehaviour, IController
         _activeSkills.Remove(e.SkillID);
     }
 
+    [Button]
+    void CreateSkill(string skillID)
+    {
+        this.SendCommand(new AcquireSkillCommand(skillID));
+    }
+
+
+    async UniTaskVoid CreateInitSkills()
+    {
+        foreach (string skillID in _skillIDs)
+        {
+            this.SendCommand(new AcquireSkillCommand(skillID));
+            await UniTask.Delay(TimeSpan.FromSeconds(0.1));
+        }
+    }
+
     void Awake()
     {
-        _skillCreateSystem = this.GetSystem<SkillCreateSystem>();
         _attackerController = GetComponentInChildren<IAttackerController>();
     }
 
     void Start()
     {
-        _model = this.GetModel<PlayersModel>().Current();
+        _model = this.GetModel<PlayersModel>().Current;
+
+        // ! 初始化技能系统
+        this.SendCommand(new SetSkillEnvCommand(_attackerController, _model));
         this.SendCommand(new SetSkillSlotCountCommand(_skillSlotCount));
+
         this.RegisterEvent<SkillAcquiredEvent>(OnSkillAcquired);
         this.RegisterEvent<SkillReleasedEvent>(OnSkillReleased);
         this.RegisterEvent<SkillRemovedEvent>(OnSkillRemoved);
@@ -68,17 +72,6 @@ public class SkillController : MonoBehaviour, IController
         CreateInitSkills().Forget();
     }
 
-    async UniTaskVoid CreateInitSkills()
-    {
-        foreach (string skillID in _skillIDs)
-        {
-            SkillCreateEnv env = new(_attackerController, _model, this.GetSystem<ModifierSystem>());
-            ISkill s = _skillCreateSystem.CreateSkill(skillID, env);
-            AcquireSkill(s);
-
-            await UniTask.Delay(TimeSpan.FromSeconds(0.1));
-        }
-    }
 
     void Update()
     {

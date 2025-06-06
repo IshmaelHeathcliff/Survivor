@@ -65,7 +65,7 @@ namespace Character
 
         void Start()
         {
-            _model = this.GetModel<PlayersModel>().Current();
+            _model = this.GetModel<PlayersModel>().Current;
             Stat.ConsumableStat health = _model.Stats.Health;
             Stat.ConsumableStat mana = _model.Stats.Mana;
 

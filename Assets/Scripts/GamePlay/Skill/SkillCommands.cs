@@ -1,24 +1,25 @@
-using Character.Player;
+using Character;
+using Character.Damage;
 using UnityEngine;
 
-public abstract class PlayerSkillCommand : AbstractCommand
+public class SetSkillEnvCommand : AbstractCommand
 {
-    protected ISkillContainer SkillsInSlot { get; private set; }
-    protected ISkillContainer SkillsReleased { get; private set; }
+    readonly IAttackerController _attackerController;
+    readonly ICharacterModel _model;
+
+    public SetSkillEnvCommand(IAttackerController attackerController, ICharacterModel model) : base()
+    {
+        _attackerController = attackerController;
+        _model = model;
+    }
 
     protected override void OnExecute()
     {
-        PlayerModel model = this.GetModel<PlayersModel>().Current();
-        SkillsInSlot = model.SkillsInSlot;
-        SkillsReleased = model.SkillsReleased;
-
-        ExecuteSkillCommand();
+        this.GetSystem<SkillSystem>().SetEnv(_attackerController, _model);
     }
-
-    protected abstract void ExecuteSkillCommand();
 }
 
-public class SetSkillSlotCountCommand : PlayerSkillCommand
+public class SetSkillSlotCountCommand : AbstractCommand
 {
     readonly int _count;
 
@@ -27,74 +28,43 @@ public class SetSkillSlotCountCommand : PlayerSkillCommand
         _count = count;
     }
 
-    protected override void ExecuteSkillCommand()
+    protected override void OnExecute()
     {
-        SkillsInSlot.MaxCount = _count;
-        this.SendEvent(new SkillSlotCountChangedEvent()
-        {
-            Count = _count,
-        });
+        this.GetSystem<SkillSystem>().SetSkillSlotCount(_count);
     }
 }
 
-public class AcquireSkillCommand : PlayerSkillCommand
+public class AcquireSkillCommand : AbstractCommand
 {
-    readonly ISkill _skill;
+    readonly string _skillID;
 
-    public AcquireSkillCommand(ISkill skill) : base()
+    public AcquireSkillCommand(string skillID) : base()
     {
-        _skill = skill;
+        _skillID = skillID;
     }
 
-    protected override void ExecuteSkillCommand()
+    protected override void OnExecute()
     {
-        if (SkillsInSlot.Count >= SkillsInSlot.MaxCount)
-        {
-            Debug.Log($"技能槽位已满，最大数量: {SkillsInSlot.MaxCount}");
-            return;
-        }
-
-        if (!SkillsInSlot.AddSkill(_skill))
-        {
-            return;
-        }
-
-        this.SendEvent(new SkillAcquiredEvent()
-        {
-            Skill = _skill,
-        });
+        this.GetSystem<SkillSystem>().AcquireSkill(_skillID);
     }
 }
 
-public class ReleaseSkillCommand : PlayerSkillCommand
+public class ReleaseSkillCommand : AbstractCommand
 {
-    readonly ISkill _skill;
+    readonly string _skillID;
 
-    public ReleaseSkillCommand(ISkill skill) : base()
+    public ReleaseSkillCommand(string skillID) : base()
     {
-        _skill = skill;
+        _skillID = skillID;
     }
 
-    protected override void ExecuteSkillCommand()
+    protected override void OnExecute()
     {
-        if (!SkillsInSlot.RemoveSkill(_skill.ID))
-        {
-            return;
-        }
-
-        if (!SkillsReleased.AddSkill(_skill))
-        {
-            return;
-        }
-
-        this.SendEvent(new SkillReleasedEvent()
-        {
-            Skill = _skill,
-        });
+        this.GetSystem<SkillSystem>().ReleaseSkill(_skillID);
     }
 }
 
-public class RemoveSkillCommand : PlayerSkillCommand
+public class RemoveSkillCommand : AbstractCommand
 {
     readonly string _skillID;
 
@@ -103,16 +73,8 @@ public class RemoveSkillCommand : PlayerSkillCommand
         _skillID = skillID;
     }
 
-    protected override void ExecuteSkillCommand()
+    protected override void OnExecute()
     {
-        if (!SkillsReleased.RemoveSkill(_skillID))
-        {
-            return;
-        }
-
-        this.SendEvent(new SkillRemovedEvent()
-        {
-            SkillID = _skillID,
-        });
+        this.GetSystem<SkillSystem>().RemoveSkill(_skillID);
     }
 }

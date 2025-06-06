@@ -5,7 +5,7 @@ namespace Character.Player
 {
     public class PlayerModel : CharacterModel
     {
-        public PlayerModel(Transform transform) : base(transform)
+        public PlayerModel(string id, Transform transform) : base(id, transform)
         {
         }
 
@@ -16,19 +16,6 @@ namespace Character.Player
 
     public class PlayersModel : CharactersModel<PlayerModel>
     {
-        public string CurrentID = "player";
-
-        public override PlayerModel Current()
-        {
-            if (TryGetModel(CurrentID, out PlayerModel model))
-            {
-                return model;
-            }
-
-            Debug.LogError("Current model does not exist;");
-            return null;
-        }
-
         protected override void OnInit()
         {
         }

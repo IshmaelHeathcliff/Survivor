@@ -6,7 +6,7 @@ namespace Character.State
     {
         protected override void SetStateContainer()
         {
-            StateContainer = this.GetModel<PlayersModel>().Current().StateContainer;
+            StateContainer = this.GetModel<PlayersModel>().Current.StateContainer;
         }
     }
 }

@@ -4,19 +4,6 @@ using Character.Damage;
 using Character.Modifier;
 using UnityEngine;
 
-public class SkillCreateEnv
-{
-    public IAttackerController AttackerController;
-    public ICharacterModel Model;
-    public ModifierSystem ModifierSystem;
-
-    public SkillCreateEnv(IAttackerController attackerController, ICharacterModel model, ModifierSystem modifierSystem)
-    {
-        AttackerController = attackerController;
-        Model = model;
-        ModifierSystem = modifierSystem;
-    }
-}
 
 
 public static class SkillConfigLoader

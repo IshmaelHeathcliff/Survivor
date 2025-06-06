@@ -39,7 +39,7 @@ namespace Character.Stat
 
         void Start()
         {
-            _playerModel = this.GetModel<PlayersModel>().Current();
+            _playerModel = this.GetModel<PlayersModel>().Current;
             foreach (IStat stat in _playerModel.Stats.GetAllStats())
             {
                 stat.Register(UpdateStatsInfo);

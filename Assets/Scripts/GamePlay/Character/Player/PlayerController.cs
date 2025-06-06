@@ -39,16 +39,18 @@ namespace Character
                 ID = "player";
             }
 
-            var playersModel = this.GetModel<PlayersModel>();
+            PlayersModel playersModel = this.GetModel<PlayersModel>();
             if (playersModel.TryGetModel(ID, out PlayerModel model))
             {
                 Model = model;
+                playersModel.Current = model;
             }
             else
             {
-                model = new PlayerModel(MoveController.Transform);
+                model = new PlayerModel(ID, MoveController.Transform);
                 playersModel.AddModel(ID, model);
                 Model = model;
+                playersModel.Current = model;
             }
         }
 
