@@ -13,7 +13,7 @@ namespace Character
         Vector2 Direction { get; set; }
         Stats Stats { get; }
         IStateContainer StateContainer { get; }
-        ISkillContainer Skills { get; }
+        ISkillContainer SkillsReleased { get; }
         ISkillContainer SkillsInSlot { get; }
     }
 
@@ -32,8 +32,9 @@ namespace Character
         public Stats Stats { get; } = new Stats();
         public IStateContainer StateContainer { get; } = new StateContainer();
 
-        public ISkillContainer Skills { get; } = new SkillContainer();
-        public ISkillContainer SkillsInSlot { get; } = new SkillContainer();
+        public int SkillSlotCount { get; set; } = 7;
+        public ISkillContainer SkillsReleased { get; } = new SkillContainer();
+        public ISkillContainer SkillsInSlot { get; } = new SkillContainer(7);
 
         public CharacterModel(Transform transform)
         {

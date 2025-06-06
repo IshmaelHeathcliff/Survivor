@@ -3,8 +3,8 @@ using System.Collections.Generic;
 public interface ISkill
 {
     string ID { get; set; }
-    void OnEnable();
-    void OnDisable();
+    void Enable();
+    void Disable();
     void Use();
     void Cancel();
     string GetDescription();
@@ -31,7 +31,7 @@ public abstract class Skill<T> : ISkill<T> where T : SkillConfig
         _skillEffectsOnEnable.AddRange(skillEffectsOnEnable);
     }
 
-    public virtual void OnEnable()
+    public virtual void Enable()
     {
         foreach (IEffect skillEffect in _skillEffectsOnEnable)
         {
@@ -39,7 +39,7 @@ public abstract class Skill<T> : ISkill<T> where T : SkillConfig
         }
     }
 
-    public virtual void OnDisable()
+    public virtual void Disable()
     {
         foreach (IEffect skillEffect in _skillEffectsOnEnable)
         {
@@ -97,9 +97,9 @@ public class ActiveSkill : Skill<ActiveSkillConfig>
         }
     }
 
-    public override void OnDisable()
+    public override void Disable()
     {
-        base.OnDisable();
+        base.Disable();
         Cancel();
     }
 
@@ -131,12 +131,12 @@ public class PassiveSkill : Skill<PassiveSkillConfig>
 
     public override void Cancel()
     {
-        OnDisable();
+        Disable();
     }
 
     public override void Use()
     {
-        OnEnable();
+        Enable();
     }
 
     public override List<string> GetKeywords()

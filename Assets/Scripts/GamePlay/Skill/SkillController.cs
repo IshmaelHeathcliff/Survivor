@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Character;
 using Character.Damage;
+using Character.Modifier;
 using Character.Player;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -16,79 +17,39 @@ public class SkillController : MonoBehaviour, IController
     IAttackerController _attackerController;
     ICharacterModel _model;
 
-    bool AddSkillToSlot(ISkill skill)
+    public void AcquireSkill(ISkill skill)
     {
-        ISkillContainer skillsInSlot = _model.SkillsInSlot;
-        if (skillsInSlot.HasSkill(skill.ID))
-        {
-            Debug.Log($"技能 {skill.ID} 已经在槽位中");
-            return false;
-        }
-
-        if (skillsInSlot.Count >= _skillSlotCount)
-        {
-            Debug.Log($"技能槽位已满，当前数量: {skillsInSlot.Count}，最大数量: {_skillSlotCount}");
-            return false;
-        }
-
-        skillsInSlot.AddSkill(skill);
-        return true;
+        this.SendCommand(new AcquireSkillCommand(skill));
     }
 
-    bool RemoveSkillFromSlot(string id)
+    public void ReleaseSkill(ISkill skill)
     {
-        ISkillContainer skillsInSlot = _model.SkillsInSlot;
-        if (skillsInSlot.HasSkill(id))
-        {
-            skillsInSlot.RemoveSkill(id);
-            return true;
-        }
-
-        return false;
+        this.SendCommand(new ReleaseSkillCommand(skill));
     }
 
-    public void ReleaseSkill(string id)
+    public void RemoveSkill(string id)
     {
-        RemoveSkillFromSlot(id);
+        this.SendCommand(new RemoveSkillCommand(id));
     }
 
-
-    public void AddSkill(ISkill skill)
+    void OnSkillAcquired(SkillAcquiredEvent e)
     {
-        if (!AddSkillToSlot(skill))
+        if (e.Skill is not ActiveSkill activeSkill)
         {
             return;
         }
 
-        if (!_model.Skills.AddSkill(skill))
-        {
-            RemoveSkillFromSlot(skill.ID);
-            return;
-        }
-
-        if (skill is ActiveSkill activeSkill)
-        {
-            _activeSkills.TryAdd(activeSkill.ID, activeSkill);
-        }
+        _activeSkills.TryAdd(activeSkill.ID, activeSkill);
     }
 
-
-    public void RemoveSkill(ISkill skill)
+    void OnSkillReleased(SkillReleasedEvent e)
     {
-        if (!_model.Skills.RemoveSkill(skill.ID))
-        {
-            return;
-        }
-
-        RemoveSkillFromSlot(skill.ID);
-
-        if (skill is ActiveSkill activeSkill)
-        {
-            _activeSkills.Remove(activeSkill.ID);
-        }
-
     }
 
+    void OnSkillRemoved(SkillRemovedEvent e)
+    {
+        _activeSkills.Remove(e.SkillID);
+    }
 
     void Awake()
     {
@@ -99,16 +60,21 @@ public class SkillController : MonoBehaviour, IController
     void Start()
     {
         _model = this.GetModel<PlayersModel>().Current();
+        this.SendCommand(new SetSkillSlotCountCommand(_skillSlotCount));
+        this.RegisterEvent<SkillAcquiredEvent>(OnSkillAcquired);
+        this.RegisterEvent<SkillReleasedEvent>(OnSkillReleased);
+        this.RegisterEvent<SkillRemovedEvent>(OnSkillRemoved);
+
         CreateInitSkills().Forget();
     }
 
     async UniTaskVoid CreateInitSkills()
     {
-        foreach (string skill in _skillIDs)
+        foreach (string skillID in _skillIDs)
         {
-            SkillCreateSystem.EffectCreateEnv env = new(_attackerController, _model);
-            ISkill s = _skillCreateSystem.CreateSkill(skill, env);
-            AddSkill(s);
+            SkillCreateEnv env = new(_attackerController, _model, this.GetSystem<ModifierSystem>());
+            ISkill s = _skillCreateSystem.CreateSkill(skillID, env);
+            AcquireSkill(s);
 
             await UniTask.Delay(TimeSpan.FromSeconds(0.1));
         }

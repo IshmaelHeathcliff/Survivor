@@ -4,26 +4,26 @@ using System.Linq;
 
 public interface ISkillContainer
 {
-    EasyEvent<ISkill> OnSkillAdded { get; }
-    EasyEvent<string> OnSkillRemoved { get; }
     ISkill GetSkill(string ID);
     bool AddSkill(ISkill skill);
     bool RemoveSkill(string ID);
     bool HasSkill(string ID);
     bool HasSkills(IEnumerable<string> IDs);
     int HasCount(IEnumerable<string> IDs);
+    int MaxCount { get; set; }
     int Count { get; }
 }
 
 public class SkillContainer : ISkillContainer
 {
     readonly Dictionary<string, ISkill> _skills = new();
-
-    public EasyEvent<ISkill> OnSkillAdded { get; } = new();
-
-    public EasyEvent<string> OnSkillRemoved { get; } = new();
-
+    public int MaxCount { get; set; }
     public int Count => _skills.Count;
+
+    public SkillContainer(int maxCount = 0)
+    {
+        MaxCount = maxCount;
+    }
 
     public ISkill GetSkill(string ID)
     {
@@ -39,8 +39,7 @@ public class SkillContainer : ISkillContainer
     {
         if (_skills.TryAdd(skill.ID, skill))
         {
-            skill.OnEnable();
-            OnSkillAdded?.Trigger(skill);
+            skill.Enable();
             return true;
         }
 
@@ -75,9 +74,8 @@ public class SkillContainer : ISkillContainer
     {
         if (_skills.ContainsKey(ID))
         {
-            _skills[ID].OnDisable();
+            _skills[ID].Disable();
             _skills.Remove(ID);
-            OnSkillRemoved?.Trigger(ID);
             return true;
         }
 
