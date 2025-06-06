@@ -96,9 +96,14 @@ public class SkillController : MonoBehaviour, IController
         _attackerController = GetComponentInChildren<IAttackerController>();
     }
 
-    async void Start()
+    void Start()
     {
         _model = this.GetModel<PlayersModel>().Current();
+        CreateInitSkills().Forget();
+    }
+
+    async UniTaskVoid CreateInitSkills()
+    {
         foreach (string skill in _skillIDs)
         {
             SkillCreateSystem.EffectCreateEnv env = new(_attackerController, _model);

@@ -18,7 +18,7 @@ public class DropSystem : AbstractSystem
 
     protected override void OnInit()
     {
-        LoadDrops();
+        LoadDrops().Forget();
     }
 
     protected override void OnDeinit()
@@ -29,7 +29,7 @@ public class DropSystem : AbstractSystem
         }
     }
 
-    async void LoadDrops()
+    async UniTaskVoid LoadDrops()
     {
         var dropConfigs = this.GetUtility<SaveLoadUtility>().Load<List<DropConfig>>(JsonName, JsonPath);
         foreach (DropConfig dropConfig in dropConfigs)

@@ -7,6 +7,8 @@ public interface ISkill
     void OnDisable();
     void Use();
     void Cancel();
+    string GetDescription();
+    List<string> GetKeywords();
 }
 
 public interface ISkill<T> : ISkill where T : SkillConfig
@@ -49,6 +51,10 @@ public abstract class Skill<T> : ISkill<T> where T : SkillConfig
     public abstract void Use();
 
     public abstract void Cancel();
+
+    public abstract List<string> GetKeywords();
+
+    public abstract string GetDescription();
 }
 
 public class ActiveSkill : Skill<ActiveSkillConfig>
@@ -104,6 +110,16 @@ public class ActiveSkill : Skill<ActiveSkillConfig>
             skillEffect.Cancel();
         }
     }
+
+    public override List<string> GetKeywords()
+    {
+        return SkillConfig.Keywords;
+    }
+
+    public override string GetDescription()
+    {
+        return SkillConfig.Description;
+    }
 }
 
 public class PassiveSkill : Skill<PassiveSkillConfig>
@@ -121,5 +137,15 @@ public class PassiveSkill : Skill<PassiveSkillConfig>
     public override void Use()
     {
         OnEnable();
+    }
+
+    public override List<string> GetKeywords()
+    {
+        return SkillConfig.Keywords;
+    }
+
+    public override string GetDescription()
+    {
+        return SkillConfig.Description;
     }
 }

@@ -23,49 +23,50 @@ MonoBehaviour:
     SerializationNodes:
     - Name: Data
       Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[SkillInfo, Assembly-CSharp]], mscorlib
+      Data: 0|System.Collections.Generic.List`1[[SkillConfig, Assembly-CSharp]],
+        mscorlib
     - Name: 
       Entry: 12
       Data: 7
     - Name: 
       Entry: 7
-      Data: 1|ActiveSkillInfo, Assembly-CSharp
+      Data: 1|ActiveSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 2|ActiveSkillInfo, Assembly-CSharp
+      Data: 2|ActiveSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 3|ActiveSkillInfo, Assembly-CSharp
+      Data: 3|ActiveSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 4|ActiveSkillInfo, Assembly-CSharp
+      Data: 4|ActiveSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 5|ActiveSkillInfo, Assembly-CSharp
+      Data: 5|ActiveSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 6|ActiveSkillInfo, Assembly-CSharp
+      Data: 6|ActiveSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 7|PassiveSkillInfo, Assembly-CSharp
+      Data: 7|PassiveSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 

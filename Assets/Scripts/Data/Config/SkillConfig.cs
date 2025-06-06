@@ -5,6 +5,8 @@ public class SkillConfig
 {
     [ShowInInspector] public string ID { get; set; }
     [ShowInInspector] public string Name { get; set; }
+    [ShowInInspector] public List<string> Keywords { get; set; }
+    [ShowInInspector] public string Description { get; set; }
     [ShowInInspector] public List<SkillEffectConfig> SkillEffectConfigsOnEnable { get; set; }
 }
 

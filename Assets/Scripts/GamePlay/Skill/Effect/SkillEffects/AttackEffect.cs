@@ -1,5 +1,6 @@
 using Character.Damage;
 using System;
+using Cysharp.Threading.Tasks;
 
 public class AttackEffect : SkillEffect<AttackEffectConfig>
 {
@@ -11,17 +12,15 @@ public class AttackEffect : SkillEffect<AttackEffectConfig>
         _attackerController = attackerController;
     }
 
-    protected override async void OnApply()
+    async UniTaskVoid CreateAttacker()
     {
-        try
-        {
-            _attacker = await _attackerController.CreateAttacker(SkillEffectConfig.AttackerAddress);
-            _attacker.BaseDamage = SkillEffectConfig.Damage;
-        }
-        catch (OperationCanceledException)
-        {
-            _attacker.Cancel();
-        }
+        _attacker = await _attackerController.CreateAttacker(SkillEffectConfig.AttackerAddress);
+        _attacker.BaseDamage = SkillEffectConfig.Damage;
+    }
+
+    protected override void OnApply()
+    {
+        CreateAttacker().Forget();
     }
 
     public override void OnCancel()
