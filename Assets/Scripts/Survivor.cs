@@ -18,6 +18,7 @@ public class GameFrame : Architecture<GameFrame>
         RegisterSystem(new StateCreateSystem());
         RegisterSystem(new DropSystem());
         RegisterSystem(new SkillSystem());
+        RegisterSystem(new SkillReleaseSystem());
 
         RegisterUtility(new SaveLoadUtility());
     }
