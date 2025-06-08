@@ -6,21 +6,19 @@
         "$type": "AttackEffectConfig, Assembly-CSharp",
         "Damage": 6,
         "AttackerAddress": "Assets/Prefabs/Dice.prefab",
-        "ID": "attack",
-        "Name": "攻击",
         "Description": "施加攻击"
       }
     ],
     "Cooldown": 1.0,
     "ID": "dice1",
     "Name": "奇奥骰子-1点",
+    "Keywords": null,
+    "Description": null,
     "SkillEffectConfigsOnEnable": [
       {
         "$type": "ModifierEffectConfig, Assembly-CSharp",
         "ModifierID": "damage_add",
         "Value": 5,
-        "ID": "modifier",
-        "Name": "修饰器",
         "Description": "添加词条"
       }
     ]
@@ -32,21 +30,19 @@
         "$type": "AttackEffectConfig, Assembly-CSharp",
         "Damage": 6,
         "AttackerAddress": "Assets/Prefabs/Dice.prefab",
-        "ID": "attack",
-        "Name": "攻击",
         "Description": "施加攻击"
       }
     ],
     "Cooldown": 1.0,
     "ID": "dice2",
     "Name": "奇奥骰子-2点",
+    "Keywords": null,
+    "Description": null,
     "SkillEffectConfigsOnEnable": [
       {
         "$type": "ModifierEffectConfig, Assembly-CSharp",
         "ModifierID": "health_add",
         "Value": 50,
-        "ID": "modifier",
-        "Name": "修饰器",
         "Description": "添加词条"
       }
     ]
@@ -58,21 +54,19 @@
         "$type": "AttackEffectConfig, Assembly-CSharp",
         "Damage": 6,
         "AttackerAddress": "Assets/Prefabs/Dice.prefab",
-        "ID": "attack",
-        "Name": "攻击",
         "Description": "施加攻击"
       }
     ],
     "Cooldown": 1.0,
     "ID": "dice3",
     "Name": "奇奥骰子-3点",
+    "Keywords": null,
+    "Description": null,
     "SkillEffectConfigsOnEnable": [
       {
         "$type": "ModifierEffectConfig, Assembly-CSharp",
         "ModifierID": "mana_add",
         "Value": 50,
-        "ID": "modifier",
-        "Name": "修饰器",
         "Description": "添加词条"
       }
     ]
@@ -84,21 +78,19 @@
         "$type": "AttackEffectConfig, Assembly-CSharp",
         "Damage": 6,
         "AttackerAddress": "Assets/Prefabs/Dice.prefab",
-        "ID": "attack",
-        "Name": "攻击",
         "Description": "施加攻击"
       }
     ],
     "Cooldown": 1.0,
     "ID": "dice4",
     "Name": "奇奥骰子-4点",
+    "Keywords": null,
+    "Description": null,
     "SkillEffectConfigsOnEnable": [
       {
         "$type": "ModifierEffectConfig, Assembly-CSharp",
         "ModifierID": "damage_fix",
         "Value": 10,
-        "ID": "modifier",
-        "Name": "修饰器",
         "Description": "添加词条"
       }
     ]
@@ -110,48 +102,49 @@
         "$type": "AttackEffectConfig, Assembly-CSharp",
         "Damage": 6,
         "AttackerAddress": "Assets/Prefabs/Dice.prefab",
-        "ID": "attack",
-        "Name": "攻击",
         "Description": "施加攻击"
       }
     ],
     "Cooldown": 1.0,
     "ID": "dice5",
     "Name": "奇奥骰子-5点",
+    "Keywords": null,
+    "Description": null,
     "SkillEffectConfigsOnEnable": [
       {
         "$type": "ModifierEffectConfig, Assembly-CSharp",
         "ModifierID": "damage_increase",
         "Value": 20,
-        "ID": "modifier",
-        "Name": "修饰器",
         "Description": "添加词条"
       }
     ]
   },
   {
-    "$type": "ActiveSkillConfig, Assembly-CSharp",
-    "SkillEffectConfigsOnUpdate": [
-      {
-        "$type": "AttackEffectConfig, Assembly-CSharp",
-        "Damage": 6,
-        "AttackerAddress": "Assets/Prefabs/Dice.prefab",
-        "ID": "attack",
-        "Name": "攻击",
-        "Description": "施加攻击"
-      }
-    ],
-    "Cooldown": 1.0,
+    "$type": "PassiveSkillConfig, Assembly-CSharp",
     "ID": "dice6",
     "Name": "奇奥骰子-6点",
+    "Keywords": [],
+    "Description": null,
     "SkillEffectConfigsOnEnable": [
       {
-        "$type": "ModifierEffectConfig, Assembly-CSharp",
-        "ModifierID": "damage_add",
-        "Value": 5,
-        "ID": "modifier",
-        "Name": "修饰器",
-        "Description": "添加词条"
+        "$type": "CountIncrementEffectConfig, Assembly-CSharp",
+        "CountValueID": "KillCount",
+        "Increment": 50,
+        "ChildEffects": [
+          {
+            "$type": "RollDiceEffectConfig, Assembly-CSharp",
+            "ChildEffects": [
+              {
+                "$type": "AcquireResourceConfig, Assembly-CSharp",
+                "ResourceID": "Wood",
+                "Amount": 0,
+                "Description": "获取资源"
+              }
+            ],
+            "Description": "掷骰子"
+          }
+        ],
+        "Description": "计数"
       }
     ]
   },
@@ -159,13 +152,13 @@
     "$type": "PassiveSkillConfig, Assembly-CSharp",
     "ID": "loaded_dice",
     "Name": "灌铅骰子",
+    "Keywords": null,
+    "Description": null,
     "SkillEffectConfigsOnEnable": [
       {
         "$type": "ModifierEffectConfig, Assembly-CSharp",
         "ModifierID": "damage_more",
         "Value": 100,
-        "ID": "modifier",
-        "Name": "修饰器",
         "Description": "添加词条"
       }
     ]

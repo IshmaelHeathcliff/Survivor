@@ -52,6 +52,11 @@ namespace Character
                 Model = model;
                 playersModel.Current = model;
             }
+
+            ResourceSystem resourceSystem = this.GetSystem<ResourceSystem>();
+
+            resourceSystem.RegisterResource("Coin", model.Coin);
+            resourceSystem.RegisterResource("Wood", model.Wood);
         }
 
         protected override void OnInit()

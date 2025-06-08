@@ -19,6 +19,8 @@ public class GameFrame : Architecture<GameFrame>
         RegisterSystem(new DropSystem());
         RegisterSystem(new SkillSystem());
         RegisterSystem(new SkillReleaseSystem());
+        RegisterSystem(new ResourceSystem());
+        RegisterSystem(new CountSystem());
 
         RegisterUtility(new SaveLoadUtility());
     }

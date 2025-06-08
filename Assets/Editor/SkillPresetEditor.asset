@@ -60,7 +60,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 6|ActiveSkillConfig, Assembly-CSharp
+      Data: 6|PassiveSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 

@@ -23,7 +23,7 @@ public class AttackEffect : SkillEffect<AttackEffectConfig>
         CreateAttacker().Forget();
     }
 
-    public override void OnCancel()
+    protected override void OnCancel()
     {
         _attacker.Cancel();
     }

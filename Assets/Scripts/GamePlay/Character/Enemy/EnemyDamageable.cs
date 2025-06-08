@@ -20,7 +20,7 @@ namespace Character.Damage
             OnHurt = new EasyEvent();
             OnDeath = new EasyEvent();
             _fsm = (CharacterController as IHasFSM<EnemyStateId>).FSM;
-            _dropSystem = GameFrame.Interface.GetSystem<DropSystem>();
+            _dropSystem = this.GetSystem<DropSystem>();
         }
 
 
@@ -49,9 +49,14 @@ namespace Character.Damage
 
         void Dead()
         {
-            _fsm.ChangeState(EnemyStateId.Dead);
+            this.GetSystem<CountSystem>().IncrementKillCount(1);
+
             string dropAddress = _dropSystem.GetDropAddress("coin");
             Addressables.InstantiateAsync(dropAddress, transform.position, Quaternion.identity);
+
+            _fsm.ChangeState(EnemyStateId.Dead);
+
+
         }
     }
 }

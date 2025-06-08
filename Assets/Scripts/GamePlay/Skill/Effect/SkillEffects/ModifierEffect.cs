@@ -9,7 +9,7 @@ public class ModifierEffect : SkillEffect<ModifierEffectConfig>
         _modifier = modifierSystem.CreateStatModifier(config.ModifierID, factory, config.Value);
     }
 
-    public override void OnCancel()
+    protected override void OnCancel()
     {
         _modifier.Unregister();
     }

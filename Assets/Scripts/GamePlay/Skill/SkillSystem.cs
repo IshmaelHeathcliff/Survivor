@@ -12,6 +12,9 @@ public class SkillCreateEnv
     public IAttackerController AttackerController;
     public ICharacterModel Model;
     public ModifierSystem ModifierSystem;
+    public ResourceSystem ResourceSystem;
+    public CountSystem CountSystem;
+    public SkillSystem SkillSystem;
 }
 
 public class SkillSystem : AbstractSystem
@@ -153,7 +156,10 @@ public class SkillSystem : AbstractSystem
         Load();
         SkillCreateEnv = new()
         {
-            ModifierSystem = this.GetSystem<ModifierSystem>()
+            ModifierSystem = this.GetSystem<ModifierSystem>(),
+            ResourceSystem = this.GetSystem<ResourceSystem>(),
+            CountSystem = this.GetSystem<CountSystem>(),
+            SkillSystem = this
         };
     }
 }

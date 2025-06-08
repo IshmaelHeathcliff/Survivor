@@ -1,11 +1,16 @@
 using System;
+using System.Collections.Generic;
 using Sirenix.OdinInspector;
 
 public abstract class SkillEffectConfig
 {
-    // [ShowInInspector] public string ID { get; set; }
-    // [ShowInInspector] public string Name { get; set; }
-    [ShowInInspector] public string Description { get; set; }
+    [ShowInInspector][ReadOnly] public string Description { get; set; }
+}
+
+
+public class NestedEffectConfig : SkillEffectConfig
+{
+    [ShowInInspector, PropertyOrder(int.MaxValue)] public List<SkillEffectConfig> ChildEffects { get; set; }
 }
 
 public class AttackEffectConfig : SkillEffectConfig
@@ -15,8 +20,6 @@ public class AttackEffectConfig : SkillEffectConfig
 
     public AttackEffectConfig()
     {
-        // ID = "attack";
-        // Name = "攻击";
         Description = "施加攻击";
     }
 
@@ -29,18 +32,37 @@ public class ModifierEffectConfig : SkillEffectConfig
 
     public ModifierEffectConfig()
     {
-        // ID = "modifier";
-        // Name = "修饰器";
         Description = "添加词条";
     }
 }
 
-public class SystemEffectConfig : SkillEffectConfig
+
+public class CountIncrementEffectConfig : NestedEffectConfig
 {
-    public SystemEffectConfig()
+    [ShowInInspector] public string CountValueID { get; set; }
+    [ShowInInspector] public int Increment { get; set; }
+
+    public CountIncrementEffectConfig()
     {
-        // ID = "system";
-        // Name = "系统";
-        Description = "系统联动";
+        Description = "计数";
+    }
+}
+
+public class RollDiceEffectConfig : NestedEffectConfig
+{
+    public RollDiceEffectConfig()
+    {
+        Description = "掷骰子";
+    }
+}
+
+public class AcquireResourceConfig : SkillEffectConfig
+{
+    [ShowInInspector] public string ResourceID { get; set; }
+    [ShowInInspector] public int Amount { get; set; }
+
+    public AcquireResourceConfig()
+    {
+        Description = "获取资源";
     }
 }

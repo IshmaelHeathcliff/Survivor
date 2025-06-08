@@ -42,36 +42,27 @@ public static class SkillEffectConfigLoader
     {
         return skillConfig switch
         {
-            AttackEffectConfig attackEffectConfig => CreateAttackEffect(attackEffectConfig, env.AttackerController),
-            ModifierEffectConfig modifierEffectConfig => CreateModifierEffect(modifierEffectConfig, env.ModifierSystem, env.Model.Stats),
+            AttackEffectConfig attackEffectConfig => new AttackEffect(attackEffectConfig, env.AttackerController),
+            ModifierEffectConfig modifierEffectConfig => new ModifierEffect(modifierEffectConfig, env.ModifierSystem, env.Model.Stats),
+            AcquireResourceConfig acquireResourceEffectConfig => new AcquireResourceEffect(acquireResourceEffectConfig, env.ResourceSystem),
+            NestedEffectConfig nestedEffectConfig => CreateNestedEffect(nestedEffectConfig, env),
             _ => null,
         };
     }
 
-    public static AttackEffect CreateAttackEffect(AttackEffectConfig config, IAttackerController controller)
+    public static IEffect CreateNestedEffect(NestedEffectConfig skillConfig, SkillCreateEnv env)
     {
-        if (controller == null)
+        List<IEffect> childEffects = new();
+        foreach (SkillEffectConfig effectConfig in skillConfig.ChildEffects)
         {
-            Debug.LogError($"Create AttackEffect failed, AttackerController is null");
-            return null;
+            childEffects.Add(CreateEffect(effectConfig, env));
         }
 
-        return new AttackEffect(config, controller);
-    }
-
-    public static ModifierEffect CreateModifierEffect(ModifierEffectConfig config, ModifierSystem modifierSystem, IStatModifierFactory factory)
-    {
-        if (factory == null)
+        return skillConfig switch
         {
-            Debug.LogError($"Create ModifierEffect failed, IStatModifierFactory is null");
-            return null;
-        }
-
-        return new ModifierEffect(config, modifierSystem, factory);
-    }
-
-    public static SystemEffect CreateSystemEffect(SystemEffectConfig config, AbstractSystem system)
-    {
-        return new SystemEffect(config, system);
+            RollDiceEffectConfig rollDiceEffectConfig => new RollDiceEffect(rollDiceEffectConfig, childEffects, env.CountSystem),
+            CountIncrementEffectConfig countIncrementEffectConfig => new CountIncrementEffect(countIncrementEffectConfig, childEffects, env.CountSystem),
+            _ => null,
+        };
     }
 }
