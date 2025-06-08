@@ -7,13 +7,13 @@ namespace Character.Enemy
     public class EnemyPatrolState : EnemyState
     {
         bool _quitting;
-        public EnemyPatrolState(FSM<EnemyStateId> fsm, EnemyController target) : base(fsm, target)
+        public EnemyPatrolState(FSM<EnemyStateID> fsm, EnemyController target) : base(fsm, target)
         {
         }
 
         protected override bool OnCondition()
         {
-            return FSM.CurrentStateId is EnemyStateId.Idle;
+            return FSM.CurrentStateId is EnemyStateID.Idle;
         }
 
         protected override void OnEnter()
@@ -31,7 +31,7 @@ namespace Character.Enemy
         {
             if (MoveController.FindPlayer())
             {
-                FSM.ChangeState(EnemyStateId.Chase);
+                FSM.ChangeState(EnemyStateID.Chase);
                 return;
             }
 

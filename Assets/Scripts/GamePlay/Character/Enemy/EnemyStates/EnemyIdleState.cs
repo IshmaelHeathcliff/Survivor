@@ -7,13 +7,13 @@ namespace Character.Enemy
     public class EnemyIdleState : EnemyState
     {
         float _idleTime;
-        public EnemyIdleState(FSM<EnemyStateId> fsm, EnemyController target) : base(fsm, target)
+        public EnemyIdleState(FSM<EnemyStateID> fsm, EnemyController target) : base(fsm, target)
         {
         }
 
         protected override bool OnCondition()
         {
-            return FSM.CurrentStateId is not EnemyStateId.Dead;
+            return FSM.CurrentStateId is not EnemyStateID.Dead;
         }
 
         protected override void OnFixedUpdate()
@@ -24,7 +24,7 @@ namespace Character.Enemy
             }
             else
             {
-                FSM.ChangeState(EnemyStateId.Patrol);
+                FSM.ChangeState(EnemyStateID.Patrol);
             }
         }
 

@@ -2,15 +2,15 @@
 
 namespace Character.Enemy
 {
-    public enum EnemyStateId
+    public enum EnemyStateID
     {
         Idle, Patrol, Chase, Attack, Hurt, Dead
     }
-    
-    public class EnemyState : AbstractState<EnemyStateId, EnemyController>
+
+    public class EnemyState : AbstractState<EnemyStateID, EnemyController>
     {
         protected EnemyMoveController MoveController;
-        public EnemyState(FSM<EnemyStateId> fsm, EnemyController target) : base(fsm, target)
+        public EnemyState(FSM<EnemyStateID> fsm, EnemyController target) : base(fsm, target)
         {
             if (target.MoveController is EnemyMoveController enemyMoveController)
             {

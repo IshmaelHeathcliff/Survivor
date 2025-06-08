@@ -4,9 +4,7 @@ namespace Character.Enemy
 {
     public class EnemyModel : CharacterModel
     {
-        public EnemyModel(string id, Transform transform) : base(id, transform)
-        {
-        }
+
     }
 
     public class EnemiesModel : CharactersModel<EnemyModel>

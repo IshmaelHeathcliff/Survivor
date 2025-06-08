@@ -7,7 +7,7 @@ namespace Character.Enemy
 {
     public class EnemyAttackState : EnemyState
     {
-        public EnemyAttackState(FSM<EnemyStateId> fsm, EnemyController target) : base(fsm, target)
+        public EnemyAttackState(FSM<EnemyStateID> fsm, EnemyController target) : base(fsm, target)
         {
         }
 
@@ -16,7 +16,7 @@ namespace Character.Enemy
         CancellationTokenSource _cts = new();
         protected override bool OnCondition()
         {
-            return FSM.CurrentStateId is EnemyStateId.Chase;
+            return FSM.CurrentStateId is EnemyStateID.Chase;
         }
 
         protected async override void OnEnter()
@@ -31,7 +31,7 @@ namespace Character.Enemy
                 UniTask moveTask = MoveController.AttackPlayer(_cts.Token);
                 UniTask animationTask = MoveController.PlayAnimation(EnemyMoveController.Attack);
                 await UniTask.WhenAll(moveTask, animationTask);
-                FSM.ChangeState(EnemyStateId.Idle);
+                FSM.ChangeState(EnemyStateID.Idle);
             }
             catch (OperationCanceledException)
             {

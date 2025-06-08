@@ -5,12 +5,11 @@ namespace Character.Player
 {
     public class PlayerModel : CharacterModel
     {
-        public PlayerModel(string id, Transform transform) : base(id, transform)
+        public Dictionary<string, BindableProperty<int>> Resources { get; } = new()
         {
-        }
-
-        public BindableProperty<int> Coin { get; } = new BindableProperty<int>(0);
-        public BindableProperty<int> Wood { get; } = new BindableProperty<int>(0);
+            { "Coin", new BindableProperty<int>(0) },
+            { "Wood", new BindableProperty<int>(0) },
+        };
 
     }
 
@@ -18,6 +17,7 @@ namespace Character.Player
     {
         protected override void OnInit()
         {
+            Current = AddModel("player");
         }
     }
 }

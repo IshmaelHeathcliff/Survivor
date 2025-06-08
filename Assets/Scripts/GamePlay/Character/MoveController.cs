@@ -19,7 +19,7 @@ namespace Character
     {
         protected Animator Animator;
         protected Rigidbody2D Rigidbody;
-        protected ICharacterModel Model => CharacterController.Model;
+        protected ICharacterModel Model => CharacterController.CharacterModel;
 
         static readonly int Y = Animator.StringToHash("Y");
         static readonly int X = Animator.StringToHash("X");

@@ -3,6 +3,7 @@ using Character.State;
 using Character.Stat;
 using UnityEngine;
 using System;
+using Unity.VisualScripting;
 
 namespace Character
 {
@@ -13,9 +14,12 @@ namespace Character
         Vector2 Position { get; set; }
         Vector2 Direction { get; set; }
         Stats Stats { get; }
+        int SkillSlotCount { get; set; }
         IStateContainer StateContainer { get; }
         ISkillContainer SkillsReleased { get; }
         ISkillContainer SkillsInSlot { get; }
+
+        void BindTransform(Transform transform);
     }
 
     public abstract class CharacterModel : ICharacterModel
@@ -26,35 +30,55 @@ namespace Character
 
         public Vector2 Position
         {
-            get => _transform.position;
-            set => _transform.position = value;
+            get
+            {
+                if (_transform == null)
+                {
+                    return Vector2.zero;
+                }
+
+                return _transform.position;
+            }
+            set
+            {
+                if (_transform == null)
+                {
+                    return;
+                }
+
+                _transform.position = value;
+            }
         }
 
         public Vector2 Direction { get; set; }
         public Stats Stats { get; } = new Stats();
         public IStateContainer StateContainer { get; } = new StateContainer();
 
-        public int SkillSlotCount { get; set; } = 7;
+        public int SkillSlotCount
+        {
+            get => SkillsInSlot.MaxCount;
+            set => SkillsInSlot.MaxCount = value;
+        }
+
         public ISkillContainer SkillsReleased { get; } = new SkillContainer();
         public ISkillContainer SkillsInSlot { get; } = new SkillContainer(7);
 
-        public CharacterModel(string id, Transform transform)
+        public void BindTransform(Transform transform)
         {
-            ID = id;
             _transform = transform;
         }
-
     }
 
-    public abstract class CharactersModel<T> : AbstractModel where T : ICharacterModel
+    public abstract class CharactersModel<TModel> : AbstractModel where TModel : ICharacterModel, new()
     {
         string _currentID;
 
-        public T Current
+        //* 实时调用Current是更安全的
+        public TModel Current
         {
             get
             {
-                if (TryGetModel(_currentID, out T model))
+                if (TryGetModel(_currentID, out TModel model))
                 {
                     return model;
                 }
@@ -66,8 +90,8 @@ namespace Character
             set => _currentID = value.ID;
         }
 
-        readonly protected Dictionary<string, T> Models = new();
-        public bool TryGetModel(string id, out T model)
+        readonly protected Dictionary<string, TModel> Models = new();
+        public bool TryGetModel(string id, out TModel model)
         {
             if (Models.TryGetValue(id, out model))
             {
@@ -77,9 +101,19 @@ namespace Character
             return false;
         }
 
-        public void AddModel(string id, T model)
+        public TModel AddModel(string id)
         {
-            Models.Add(id, model);
+            if (!Models.TryGetValue(id, out TModel model))
+            {
+                model = new TModel
+                {
+                    ID = id
+                };
+
+                Models.Add(id, model);
+            }
+
+            return model;
         }
 
         public void RemoveModel(string id)

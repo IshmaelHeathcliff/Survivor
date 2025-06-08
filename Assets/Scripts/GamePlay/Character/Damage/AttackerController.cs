@@ -14,7 +14,7 @@ namespace Character.Damage
 
     public abstract class AttackerController : CharacterControlled, IController, IAttackerController
     {
-        protected ICharacterModel Model => CharacterController.Model;
+        protected ICharacterModel Model => CharacterController.CharacterModel;
         public bool CanAttack { get; set; } = true;
         protected List<IAttacker> Attackers = new();
 

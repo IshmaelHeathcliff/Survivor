@@ -130,7 +130,7 @@ public class SkillSystem : AbstractSystem
             return;
         }
 
-        SkillCreateEnv.Model.SkillsInSlot.MaxCount = count;
+        SkillCreateEnv.Model.SkillSlotCount = count;
         this.SendEvent(new SkillSlotCountChangedEvent(count, SkillCreateEnv.Model.SkillsInSlot, SkillCreateEnv.Model.SkillsReleased));
     }
 

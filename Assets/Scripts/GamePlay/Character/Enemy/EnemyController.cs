@@ -5,16 +5,16 @@ using Core;
 
 namespace Character.Enemy
 {
-    public class EnemyController : CharacterControllerWithFSM<EnemyStateId>
+    public class EnemyController : CharacterControllerWithFSM<EnemyModel, EnemiesModel, EnemyStateID>
     {
         protected override void AddStates()
         {
-            FSM.AddState(EnemyStateId.Idle, new EnemyIdleState(FSM, this));
-            FSM.AddState(EnemyStateId.Patrol, new EnemyPatrolState(FSM, this));
-            FSM.AddState(EnemyStateId.Attack, new EnemyAttackState(FSM, this));
-            FSM.AddState(EnemyStateId.Chase, new EnemyChaseState(FSM, this));
-            FSM.AddState(EnemyStateId.Hurt, new EnemyHurtState(FSM, this));
-            FSM.AddState(EnemyStateId.Dead, new EnemyDeadState(FSM, this));
+            FSM.AddState(EnemyStateID.Idle, new EnemyIdleState(FSM, this));
+            FSM.AddState(EnemyStateID.Patrol, new EnemyPatrolState(FSM, this));
+            FSM.AddState(EnemyStateID.Attack, new EnemyAttackState(FSM, this));
+            FSM.AddState(EnemyStateID.Chase, new EnemyChaseState(FSM, this));
+            FSM.AddState(EnemyStateID.Hurt, new EnemyHurtState(FSM, this));
+            FSM.AddState(EnemyStateID.Dead, new EnemyDeadState(FSM, this));
         }
 
         protected override void SetStats()
@@ -27,20 +27,9 @@ namespace Character.Enemy
             Stats.Health.SetMaxValue();
         }
 
-        protected override void MakeSureModel()
+        protected override void MakeSureID()
         {
             ID = System.Guid.NewGuid().ToString();
-            EnemiesModel enemiesModel = this.GetModel<EnemiesModel>();
-            if (enemiesModel.TryGetModel(ID, out EnemyModel model))
-            {
-                Model = model;
-            }
-            else
-            {
-                model = new EnemyModel(ID, MoveController.Transform);
-                enemiesModel.AddModel(ID, model);
-                Model = model;
-            }
         }
 
         protected override void OnInit()
@@ -55,7 +44,7 @@ namespace Character.Enemy
 
         void Start()
         {
-            FSM.StartState(EnemyStateId.Idle);
+            FSM.StartState(EnemyStateID.Idle);
         }
 
 

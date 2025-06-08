@@ -5,7 +5,7 @@ namespace Character.Enemy
 {
     public class EnemyChaseState : EnemyState
     {
-        public EnemyChaseState(FSM<EnemyStateId> fsm, EnemyController target) : base(fsm, target)
+        public EnemyChaseState(FSM<EnemyStateID> fsm, EnemyController target) : base(fsm, target)
         {
         }
 
@@ -17,13 +17,13 @@ namespace Character.Enemy
         {
             if (MoveController.SqrDistanceToPlayer() < _attackRadius * _attackRadius)
             {
-                FSM.ChangeState(EnemyStateId.Attack);
+                FSM.ChangeState(EnemyStateID.Attack);
             }
         }
 
         protected override bool OnCondition()
         {
-            return FSM.CurrentStateId is EnemyStateId.Idle or EnemyStateId.Patrol;
+            return FSM.CurrentStateId is EnemyStateID.Idle or EnemyStateID.Patrol;
         }
 
         protected override void OnEnter()
@@ -40,7 +40,7 @@ namespace Character.Enemy
         {
             if (MoveController.LosePlayer())
             {
-                FSM.ChangeState(EnemyStateId.Idle);
+                FSM.ChangeState(EnemyStateID.Idle);
                 return;
             }
 

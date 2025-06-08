@@ -4,13 +4,13 @@ namespace Character.Enemy
 {
     public class EnemyHurtState : EnemyState
     {
-        public EnemyHurtState(FSM<EnemyStateId> fsm, EnemyController target) : base(fsm, target)
+        public EnemyHurtState(FSM<EnemyStateID> fsm, EnemyController target) : base(fsm, target)
         {
         }
 
         protected override bool OnCondition()
         {
-            return FSM.CurrentStateId is not EnemyStateId.Dead;
+            return FSM.CurrentStateId is not EnemyStateID.Dead;
         }
 
         protected override void OnEnter()

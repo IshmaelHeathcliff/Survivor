@@ -12,14 +12,24 @@ namespace Character
         IAttackerController AttackerController { get; }
         IDamageable Damageable { get; }
         IMoveController MoveController { get; }
-        ICharacterModel Model { get; }
+        ICharacterModel CharacterModel { get; }
         Stats Stats { get; }
+
         void DestroyController();
+    }
+
+    // 修复泛型约束，TModel 需要有无参构造函数
+    public interface ICharacterController<TModel> : ICharacterController
+        where TModel : ICharacterModel, new()
+    {
+        TModel Model { get; }
     }
 
 
 
-    public abstract class MyCharacterController : MonoBehaviour, IController, ICharacterController
+    public abstract class MyCharacterController<TModel, TModels> : MonoBehaviour, IController, ICharacterController<TModel>
+        where TModel : ICharacterModel, new()
+        where TModels : CharactersModel<TModel>
     {
         [SerializeField] string _characterId;
         [SerializeField] int _baseHealth;
@@ -31,7 +41,9 @@ namespace Character
         public IAttackerController AttackerController { get; protected set; }
         public IDamageable Damageable { get; protected set; }
         public IMoveController MoveController { get; protected set; }
-        public ICharacterModel Model { get; protected set; }
+        public ICharacterModel CharacterModel => Model;
+
+        public TModel Model { get; protected set; }
 
         public bool Initialized { get; set; }
 
@@ -44,9 +56,10 @@ namespace Character
             set => _characterId = value;
         }
 
-        protected T GetControlled<T>() where T : ICharacterControlled
+
+        protected TControlled GetControlled<TControlled>() where TControlled : ICharacterControlled
         {
-            T controlled = GetComponentInChildren<T>();
+            TControlled controlled = GetComponentInChildren<TControlled>();
             controlled.CharacterController = this;
             return controlled;
         }
@@ -61,7 +74,17 @@ namespace Character
             Stats.Mana.SetMaxValue();
         }
 
-        protected abstract void MakeSureModel();
+        protected abstract void MakeSureID();
+
+        void MakeSureModel()
+        {
+            MakeSureID();
+            TModels models = this.GetModel<TModels>();
+            TModel model = models.AddModel(ID);
+            model.BindTransform(MoveController.Transform);
+            models.Current = model;
+            Model = model;
+        }
 
         public void DestroyController()
         {
@@ -106,6 +129,7 @@ namespace Character
         protected virtual void OnDeinit()
         {
             ModifierSystem.UnregisterFactory(ID);
+            this.GetModel<TModels>().RemoveModel(ID);
         }
 
         protected virtual void Awake()
@@ -130,9 +154,12 @@ namespace Character
         }
     }
 
-    public abstract class CharacterControllerWithFSM<T> : MyCharacterController, IHasFSM<T> where T : struct, System.Enum
+    public abstract class CharacterControllerWithFSM<TModel, TModels, TFSMID> : MyCharacterController<TModel, TModels>, IHasFSM<TFSMID>
+        where TFSMID : struct, System.Enum
+        where TModel : ICharacterModel, new()
+        where TModels : CharactersModel<TModel>
     {
-        public FSM<T> FSM { get; private set; } = new();
+        public FSM<TFSMID> FSM { get; private set; } = new();
 
         protected abstract void AddStates();
 

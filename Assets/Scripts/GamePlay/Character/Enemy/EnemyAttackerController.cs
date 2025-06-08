@@ -7,13 +7,13 @@ namespace Character.Enemy
 {
     public class EnemyAttackerController : AttackerController
     {
-        FSM<EnemyStateId> _fsm;
-        public FSM<EnemyStateId> FSM => _fsm;
+        FSM<EnemyStateID> _fsm;
+        public FSM<EnemyStateID> FSM => _fsm;
 
         protected override void OnInit()
         {
             base.OnInit();
-            _fsm = (CharacterController as IHasFSM<EnemyStateId>).FSM;
+            _fsm = (CharacterController as IHasFSM<EnemyStateID>).FSM;
         }
 
         protected override UniTask<IAttacker> GetOrCreateAttackerAsyncInternal(string address = null)

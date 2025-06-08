@@ -75,8 +75,8 @@ namespace Character
             health.RegisterWithInitValue(OnHealthChanged).UnRegisterWhenDisabled(this);
             mana.RegisterWithInitValue(OnManaChanged).UnRegisterWhenDisabled(this);
 
-            _model.Coin.RegisterWithInitValue(OnCoinChanged).UnRegisterWhenDisabled(this);
-            _model.Wood.RegisterWithInitValue(OnWoodChanged).UnRegisterWhenDisabled(this);
+            _model.Resources["Coin"].RegisterWithInitValue(OnCoinChanged).UnRegisterWhenDisabled(this);
+            _model.Resources["Wood"].RegisterWithInitValue(OnWoodChanged).UnRegisterWhenDisabled(this);
         }
 
         void OnCoinChanged(int coin)

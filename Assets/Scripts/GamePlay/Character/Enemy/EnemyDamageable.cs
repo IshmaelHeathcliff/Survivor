@@ -11,7 +11,7 @@ namespace Character.Damage
     {
         [SerializeField] float _hurtTime = 1f;
 
-        FSM<EnemyStateId> _fsm;
+        FSM<EnemyStateID> _fsm;
         DropSystem _dropSystem;
 
         protected override void OnInit()
@@ -19,7 +19,7 @@ namespace Character.Damage
             base.OnInit();
             OnHurt = new EasyEvent();
             OnDeath = new EasyEvent();
-            _fsm = (CharacterController as IHasFSM<EnemyStateId>).FSM;
+            _fsm = (CharacterController as IHasFSM<EnemyStateID>).FSM;
             _dropSystem = this.GetSystem<DropSystem>();
         }
 
@@ -34,7 +34,7 @@ namespace Character.Damage
 
         async UniTaskVoid Hurt()
         {
-            _fsm.ChangeState(EnemyStateId.Hurt);
+            _fsm.ChangeState(EnemyStateID.Hurt);
             await UniTask.Delay(TimeSpan.FromSeconds(_hurtTime));
 
             if (Health.CurrentValue <= 0)
@@ -43,7 +43,7 @@ namespace Character.Damage
                 return;
             }
 
-            _fsm.ChangeState(EnemyStateId.Idle);
+            _fsm.ChangeState(EnemyStateID.Idle);
         }
 
 
@@ -54,7 +54,7 @@ namespace Character.Damage
             string dropAddress = _dropSystem.GetDropAddress("coin");
             Addressables.InstantiateAsync(dropAddress, transform.position, Quaternion.identity);
 
-            _fsm.ChangeState(EnemyStateId.Dead);
+            _fsm.ChangeState(EnemyStateID.Dead);
 
 
         }

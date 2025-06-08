@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Character
 {
-    public class PlayerController : MyCharacterController
+    public class PlayerController : MyCharacterController<PlayerModel, PlayersModel>
     {
         [SerializeField] Vector3 _initialPosition;
 
@@ -32,31 +32,12 @@ namespace Character
             Stats.Mana.SetMaxValue();
         }
 
-        protected override void MakeSureModel()
+        protected override void MakeSureID()
         {
             if (string.IsNullOrEmpty(ID))
             {
                 ID = "player";
             }
-
-            PlayersModel playersModel = this.GetModel<PlayersModel>();
-            if (playersModel.TryGetModel(ID, out PlayerModel model))
-            {
-                Model = model;
-                playersModel.Current = model;
-            }
-            else
-            {
-                model = new PlayerModel(ID, MoveController.Transform);
-                playersModel.AddModel(ID, model);
-                Model = model;
-                playersModel.Current = model;
-            }
-
-            ResourceSystem resourceSystem = this.GetSystem<ResourceSystem>();
-
-            resourceSystem.RegisterResource("Coin", model.Coin);
-            resourceSystem.RegisterResource("Wood", model.Wood);
         }
 
         protected override void OnInit()
