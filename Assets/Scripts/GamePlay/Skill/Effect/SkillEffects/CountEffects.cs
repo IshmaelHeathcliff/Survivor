@@ -34,17 +34,17 @@ public class CountIncrementEffect : NestedSkillEffect<CountIncrementEffectConfig
 
     }
 
-    void OnCountValueChanged(int count)
+    void OnCountValueChanged(CountChangedEvent e)
     {
         // 检查计数是否达到或超过阈值
-        if (count - _lastTriggerValue >= _countConfig.Increment)
+        if (e.Value - _lastTriggerValue >= _countConfig.Increment)
         {
             foreach (IEffect childEffect in ChildEffects)
             {
                 childEffect.Apply();
             }
 
-            _lastTriggerValue = count; // 更新上一次触发时的计数
+            _lastTriggerValue = e.Value; // 更新上一次触发时的计数
         }
     }
 }

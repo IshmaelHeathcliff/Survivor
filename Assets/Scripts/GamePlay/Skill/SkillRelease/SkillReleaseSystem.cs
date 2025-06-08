@@ -16,6 +16,8 @@ public class SkillReleaseSystem : AbstractSystem
 
     SkillSystem _skillSystem;
 
+    List<IUnRegister> _unRegisters = new();
+
     protected override void OnInit()
     {
         _skillSystem = this.GetSystem<SkillSystem>();
@@ -42,9 +44,14 @@ public class SkillReleaseSystem : AbstractSystem
     {
         foreach (SkillReleaseRule rule in _releaseRules.Values)
         {
-            if (rule.Condition is ReleaseOnSkillAcquiredCondition skillReleaseCondition)
+            switch (rule.Condition)
             {
-                this.RegisterEvent<SkillAcquiredEvent>(skillReleaseCondition.CheckCondition);
+                case ReleaseOnSkillAcquiredCondition skillReleaseCondition:
+                    _unRegisters.Add(this.RegisterEvent<SkillAcquiredEvent>(skillReleaseCondition.CheckCondition));
+                    break;
+                case ValueCountCondition valueCountCondition:
+                    _unRegisters.Add(this.GetSystem<CountSystem>().Register(valueCountCondition.ValueID, e => valueCountCondition.CheckCondition(e)));
+                    break;
             }
         }
     }
@@ -53,25 +60,35 @@ public class SkillReleaseSystem : AbstractSystem
     {
         foreach (SkillReleaseRule rule in _releaseRules.Values)
         {
-            rule.Condition.OnCondition.Register(() =>
+            _unRegisters.Add(rule.Condition.OnCondition.Register(() =>
                 {
                     rule.HasTriggered = true;
                     _releaseRules.Remove(rule.ID);
                     _triggeredRules.Add(rule.ID);
-                });
+                }));
 
             if (rule.Reward is SpecificSkillsReleaseReward skillReleaseReward)
             {
-                rule.Condition.OnCondition.Register(() =>
+                _unRegisters.Add(rule.Condition.OnCondition.Register(() =>
                 {
                     foreach (string skillID in skillReleaseReward.NewSkillIDs)
                     {
                         _skillSystem.AcquireSkill(skillID);
                     }
-                });
+                }));
             }
 
 
         }
+    }
+
+    protected override void OnDeinit()
+    {
+        foreach (IUnRegister unRegister in _unRegisters)
+        {
+            unRegister.UnRegister();
+        }
+
+        _unRegisters.Clear();
     }
 }

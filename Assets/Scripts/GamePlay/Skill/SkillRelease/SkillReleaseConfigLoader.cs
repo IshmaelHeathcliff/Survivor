@@ -19,7 +19,8 @@ public static class SkillReleaseConditionConfigLoader
                 return new AnySkillsCountReleaseCondition(anySkillCountConfig.RequiredSkillIDs, anySkillCountConfig.SkillsToRelease, anySkillCountConfig.RequiredCount, anySkillCountConfig.Description);
             case SpecificSkillsReleaseConditionConfig specificSkillsConfig:
                 return new SpecificSkillsReleaseCondition(specificSkillsConfig.RequiredSkillIDs, specificSkillsConfig.SkillsToRelease, specificSkillsConfig.Description);
-
+            case ValueCountConditionConfig valueCountConfig:
+                return new ValueCountCondition(valueCountConfig.ValueID, valueCountConfig.Value, valueCountConfig.Description);
             default:
                 throw new Exception($"Unknown skill release condition type: {config.GetType().Name}");
         }

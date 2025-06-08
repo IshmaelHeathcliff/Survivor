@@ -5,7 +5,7 @@ public class ValueCounter
 {
     public string ID { get; set; }
     public int Value { get; set; } = 0;
-    public EasyEvent<int> ValueChanged { get; set; } = new();
+    public EasyEvent<CountChangedEvent> ValueChanged { get; set; } = new();
 
     public ValueCounter(string id)
     {
@@ -15,15 +15,27 @@ public class ValueCounter
     public void IncrementCount(int amount)
     {
         Value += amount;
-        ValueChanged?.Trigger(Value);
+        ValueChanged?.Trigger(new CountChangedEvent(ID, Value));
     }
 
     public void DecrementCount(int amount)
     {
         Value -= amount;
-        ValueChanged?.Trigger(Value);
+        ValueChanged?.Trigger(new CountChangedEvent(ID, Value));
     }
 
+}
+
+public struct CountChangedEvent : ISkillReleaseEvent
+{
+    public string ID { get; set; }
+    public int Value { get; set; }
+
+    public CountChangedEvent(string id, int value)
+    {
+        ID = id;
+        Value = value;
+    }
 }
 
 public class CountSystem : AbstractSystem
@@ -40,7 +52,7 @@ public class CountSystem : AbstractSystem
         return _countValues[ID].Value;
     }
 
-    public IUnRegister Register(string ID, Action<int> onValueChanged)
+    public IUnRegister Register(string ID, Action<CountChangedEvent> onValueChanged)
     {
         if (!_countValues.ContainsKey(ID))
         {
@@ -50,7 +62,7 @@ public class CountSystem : AbstractSystem
         return _countValues[ID].ValueChanged.Register(onValueChanged);
     }
 
-    public void Unregister(string ID, Action<int> onValueChanged)
+    public void Unregister(string ID, Action<CountChangedEvent> onValueChanged)
     {
         if (_countValues.ContainsKey(ID))
         {

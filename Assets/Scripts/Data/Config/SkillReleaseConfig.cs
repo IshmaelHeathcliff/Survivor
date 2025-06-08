@@ -11,6 +11,17 @@ public class SkillReleaseRuleConfig
     [ShowInInspector] public SkillReleaseRewardConfig Reward { get; set; }
 }
 
+#region Reward
+public class SpecificSkillsReleaseRewardConfig : SkillReleaseRewardConfig
+{
+    [ShowInInspector] public List<string> NewSkillIDs { get; set; } = new();
+}
+
+#endregion
+
+
+#region Condition
+
 public class SkillReleaseConditionConfig
 {
     [ShowInInspector] public string Description { get; set; }
@@ -20,6 +31,7 @@ public class SkillReleaseRewardConfig
 {
     [ShowInInspector] public string Description { get; set; }
 }
+
 
 public class SpecificSkillsReleaseConditionConfig : SkillReleaseConditionConfig
 {
@@ -32,7 +44,11 @@ public class AnySkillsCountReleaseConditionConfig : SpecificSkillsReleaseConditi
     [ShowInInspector] public int RequiredCount { get; set; }
 }
 
-public class SpecificSkillsReleaseRewardConfig : SkillReleaseRewardConfig
+
+public class ValueCountConditionConfig : SkillReleaseConditionConfig
 {
-    [ShowInInspector] public List<string> NewSkillIDs { get; set; } = new();
+    [ShowInInspector] public string ValueID { get; set; }
+    [ShowInInspector] public int Value { get; set; }
 }
+
+#endregion

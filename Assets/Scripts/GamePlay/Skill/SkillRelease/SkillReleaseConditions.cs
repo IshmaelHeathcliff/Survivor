@@ -4,13 +4,19 @@ using System.Linq;
 using Character;
 using UnityEngine;
 
+public interface ISkillReleaseEvent
+{
+
+}
+
 /// <summary>
 /// 技能释放条件接口
 /// </summary>
 public interface ISkillReleaseCondition
 {
     EasyEvent OnCondition { get; set; }
-    void CheckCondition(ISkillEvent e);
+    void CheckCondition(ISkillReleaseEvent e);
+    string Description { get; }
     string GetDescription();
 }
 
@@ -19,7 +25,7 @@ public abstract class ReleaseOnSkillAcquiredCondition : ISkillReleaseCondition
     public List<string> RequiredSkillIDs { get; set; }
     public List<string> SkillsToRelease { get; set; }
     public EasyEvent OnCondition { get; set; }
-    public string Description { get; set; }
+    public string Description { get; protected set; }
     public ReleaseOnSkillAcquiredCondition(List<string> requiredSkillIDs, List<string> skillsToRelease, string description)
     {
         OnCondition = new EasyEvent();
@@ -28,7 +34,7 @@ public abstract class ReleaseOnSkillAcquiredCondition : ISkillReleaseCondition
         Description = description;
     }
 
-    public virtual void CheckCondition(ISkillEvent e)
+    public virtual void CheckCondition(ISkillReleaseEvent e)
     {
         if (e is not SkillAcquiredEvent skillAcquiredEvent)
         {
@@ -58,11 +64,16 @@ public class SpecificSkillsReleaseCondition : ReleaseOnSkillAcquiredCondition
         OnCondition = new EasyEvent();
     }
 
-    public override void CheckCondition(ISkillEvent e)
+    public override void CheckCondition(ISkillReleaseEvent e)
     {
         base.CheckCondition(e);
 
-        if (e.SkillsInSlot.HasSkills(RequiredSkillIDs))
+        if (e is not SkillAcquiredEvent skillAcquiredEvent)
+        {
+            return;
+        }
+
+        if (skillAcquiredEvent.SkillsInSlot.HasSkills(RequiredSkillIDs))
         {
             OnCondition.Trigger();
         }
@@ -86,17 +97,57 @@ public class AnySkillsCountReleaseCondition : ReleaseOnSkillAcquiredCondition
         OnCondition = new EasyEvent();
     }
 
-    public override void CheckCondition(ISkillEvent e)
+    public override void CheckCondition(ISkillReleaseEvent e)
     {
         base.CheckCondition(e);
 
-        if (e.SkillsInSlot.HasCount(RequiredSkillIDs) >= RequiredCount)
+        if (e is not SkillAcquiredEvent skillAcquiredEvent)
+        {
+            return;
+        }
+
+        if (skillAcquiredEvent.SkillsInSlot.HasCount(RequiredSkillIDs) >= RequiredCount)
         {
             OnCondition.Trigger();
         }
     }
 
     public override string GetDescription()
+    {
+        return Description;
+    }
+}
+
+public class ValueCountCondition : ISkillReleaseCondition
+{
+    public string ValueID { get; set; }
+    public int Value { get; set; }
+    public EasyEvent OnCondition { get; set; }
+    public string Description { get; protected set; }
+
+
+    public ValueCountCondition(string valueID, int value, string description)
+    {
+        ValueID = valueID;
+        Value = value;
+        Description = description;
+        OnCondition = new EasyEvent();
+    }
+
+    public void CheckCondition(ISkillReleaseEvent e)
+    {
+        if (e is not CountChangedEvent countChangedEvent)
+        {
+            return;
+        }
+
+        if (countChangedEvent.ID == ValueID && countChangedEvent.Value >= Value)
+        {
+            OnCondition.Trigger();
+        }
+    }
+
+    public string GetDescription()
     {
         return Description;
     }
@@ -136,7 +187,7 @@ public class CompositeAndReleaseCondition : ISkillReleaseCondition
         }
     }
 
-    public void CheckCondition(ISkillEvent e)
+    public void CheckCondition(ISkillReleaseEvent e)
     {
         foreach (ISkillReleaseCondition condition in Conditions)
         {
@@ -172,7 +223,7 @@ public class CompositeOrReleaseCondition : ISkillReleaseCondition
         }
     }
 
-    public void CheckCondition(ISkillEvent e)
+    public void CheckCondition(ISkillReleaseEvent e)
     {
         foreach (ISkillReleaseCondition condition in Conditions)
         {

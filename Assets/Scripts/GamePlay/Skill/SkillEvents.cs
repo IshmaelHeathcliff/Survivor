@@ -39,7 +39,7 @@ public class SkillReleasedEvent : SkillEvent
     }
 }
 
-public class SkillAcquiredEvent : SkillEvent
+public class SkillAcquiredEvent : SkillEvent, ISkillReleaseEvent
 {
     public ISkill Skill { get; set; }
 

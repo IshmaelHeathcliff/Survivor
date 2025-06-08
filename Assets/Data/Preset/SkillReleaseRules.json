@@ -1,6 +1,6 @@
 [
   {
-    "ID": "dice6",
+    "ID": "dice1-5",
     "Name": "骰子1~5吞噬规则",
     "Description": null,
     "IsOnce": true,
@@ -26,6 +26,25 @@
       "$type": "SpecificSkillsReleaseRewardConfig, Assembly-CSharp",
       "NewSkillIDs": [
         "dice6"
+      ],
+      "Description": null
+    }
+  },
+  {
+    "ID": "dice6",
+    "Name": "骰子6吞噬规则",
+    "Description": null,
+    "IsOnce": true,
+    "Condition": {
+      "$type": "ValueCountConditionConfig, Assembly-CSharp",
+      "ValueID": "RollDice",
+      "Value": 36,
+      "Description": null
+    },
+    "Reward": {
+      "$type": "SpecificSkillsReleaseRewardConfig, Assembly-CSharp",
+      "NewSkillIDs": [
+        "loaded_dice"
       ],
       "Description": null
     }
