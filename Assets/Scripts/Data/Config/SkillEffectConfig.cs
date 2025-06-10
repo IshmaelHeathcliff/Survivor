@@ -16,13 +16,17 @@ public class NestedEffectConfig : SkillEffectConfig
 public class AttackEffectConfig : SkillEffectConfig
 {
     [ShowInInspector] public int Damage { get; set; }
+    [ShowInInspector] public int CriticalChance { get; set; }
+    [ShowInInspector] public int CriticalMultiplier { get; set; }
+    [ShowInInspector] public int Area { get; set; }
+    [ShowInInspector] public int Duration { get; set; }
+
     [ShowInInspector] public string AttackerAddress { get; set; }
 
     public AttackEffectConfig()
     {
         Description = "施加攻击";
     }
-
 }
 
 public class ModifierEffectConfig : SkillEffectConfig

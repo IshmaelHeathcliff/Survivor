@@ -1,6 +1,7 @@
 ﻿using Character.Damage;
 using Character.Modifier;
 using Character.Player;
+using Character.Stat;
 using UnityEngine;
 
 namespace Character
@@ -12,8 +13,7 @@ namespace Character
         public void Respawn()
         {
             Model.Position = _initialPosition;
-            Stats.Health.SetMaxValue();
-            Stats.Mana.SetMaxValue();
+            (Stats.GetStat("Health") as IConsumableStat).SetMaxValue();
         }
 
         protected override void SetStats()
@@ -21,15 +21,8 @@ namespace Character
             base.SetStats();
 
             IStatModifier healthModifier = ModifierSystem.CreateStatModifier("health_increase", "player", 100);
-            IStatModifier manaModifier = ModifierSystem.CreateStatModifier("mana_increase", "player", 100);
-            IStatModifier accuracyModifier = ModifierSystem.CreateStatModifier("accuracy_increase", "player", 100);
-
             healthModifier.Register();
-            manaModifier.Register();
-            accuracyModifier.Register();
-
-            Stats.Health.SetMaxValue();
-            Stats.Mana.SetMaxValue();
+            (Stats.GetStat("Health") as IConsumableStat).SetMaxValue();
         }
 
         protected override void MakeSureID()

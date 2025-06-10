@@ -82,87 +82,6 @@
   },
   {
     "$type": "Character.Modifier.StatModifierConfig, Assembly-CSharp",
-    "StatName": "Mana",
-    "StatModifierType": 1,
-    "MaxLevel": 3,
-    "LevelRanges": [
-      {
-        "Min": 1,
-        "Max": 20
-      },
-      {
-        "Min": 21,
-        "Max": 40
-      },
-      {
-        "Min": 41,
-        "Max": 60
-      }
-    ],
-    "ModifierID": "mana_increase",
-    "Name": "魔力值提高",
-    "PositiveDescription": "{0}提高{1}%",
-    "NegativeDescription": "{0}降低{1}%",
-    "Keywords": [
-      "Mana"
-    ]
-  },
-  {
-    "$type": "Character.Modifier.StatModifierConfig, Assembly-CSharp",
-    "StatName": "Accuracy",
-    "StatModifierType": 1,
-    "MaxLevel": 3,
-    "LevelRanges": [
-      {
-        "Min": 1,
-        "Max": 20
-      },
-      {
-        "Min": 21,
-        "Max": 40
-      },
-      {
-        "Min": 41,
-        "Max": 60
-      }
-    ],
-    "ModifierID": "accuracy_increase",
-    "Name": "命中值提高",
-    "PositiveDescription": "{0}提高{1}%",
-    "NegativeDescription": "{0}降低{1}%",
-    "Keywords": [
-      "Accuracy"
-    ]
-  },
-  {
-    "$type": "Character.Modifier.StatModifierConfig, Assembly-CSharp",
-    "StatName": "CriticalChance",
-    "StatModifierType": 0,
-    "MaxLevel": 3,
-    "LevelRanges": [
-      {
-        "Min": 1,
-        "Max": 20
-      },
-      {
-        "Min": 21,
-        "Max": 40
-      },
-      {
-        "Min": 41,
-        "Max": 60
-      }
-    ],
-    "ModifierID": "critical_chance_add",
-    "Name": "暴击率附加值",
-    "PositiveDescription": "{0}附加{1}%",
-    "NegativeDescription": "{0}附加-{1}%",
-    "Keywords": [
-      "Critical"
-    ]
-  },
-  {
-    "$type": "Character.Modifier.StatModifierConfig, Assembly-CSharp",
     "StatName": "Damage",
     "StatModifierType": 0,
     "MaxLevel": 3,
@@ -267,33 +186,6 @@
     "NegativeDescription": "{0}附加固定-{1}%点",
     "Keywords": [
       "Damage"
-    ]
-  },
-  {
-    "$type": "Character.Modifier.StatModifierConfig, Assembly-CSharp",
-    "StatName": "Mana",
-    "StatModifierType": 0,
-    "MaxLevel": 3,
-    "LevelRanges": [
-      {
-        "Min": 1,
-        "Max": 20
-      },
-      {
-        "Min": 21,
-        "Max": 40
-      },
-      {
-        "Min": 41,
-        "Max": 60
-      }
-    ],
-    "ModifierID": "mana_add",
-    "Name": "魔力附加值",
-    "PositiveDescription": "{0}附加{1}点",
-    "NegativeDescription": "{0}附加-{1}%点",
-    "Keywords": [
-      "Mana"
     ]
   }
 ]

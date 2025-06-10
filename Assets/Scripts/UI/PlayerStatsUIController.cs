@@ -17,10 +17,8 @@ namespace Character.Stat
         void UpdateStatsInfo()
         {
             var info = new StringBuilder();
-            info.Append(GenerateStatInfo(_playerModel.Stats.Health));
-            info.Append(GenerateStatInfo(_playerModel.Stats.Mana));
-            info.Append(GenerateStatInfo(_playerModel.Stats.Damage));
-            info.Append(GenerateStatInfo(_playerModel.Stats.Accuracy));
+            info.Append(GenerateStatInfo(_playerModel.Stats.GetStat("Health")));
+            info.Append(GenerateStatInfo(_playerModel.Stats.GetStat("Damage")));
 
             _text.text = info.ToString();
         }

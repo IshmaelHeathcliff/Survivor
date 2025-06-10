@@ -15,6 +15,7 @@ namespace Character.Stat
         int Increase { get; }
         float More { get; }
         float GetValue();
+        float GetValue(float baseValue);
         void AddAddedValueModifier(string key, IStatModifier<int> mod);
         void AddFixedValueModifier(string key, IStatModifier<int> mod);
         void AddIncreaseModifier(string key, IStatModifier<int> mod);
@@ -125,6 +126,12 @@ namespace Character.Stat
         {
             SetValues();
             return Calculate();
+        }
+
+        public float GetValue(float baseValue)
+        {
+            BaseValue = baseValue;
+            return GetValue();
         }
 
         public IUnRegister Register(Action onValueChanged)

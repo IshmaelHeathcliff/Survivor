@@ -4,6 +4,7 @@ using Character.Player;
 using SaveLoad;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Character.Stat;
 
 public class GameManager : MonoBehaviour, IController
 {
@@ -32,17 +33,17 @@ public class GameManager : MonoBehaviour, IController
     }
 
     [Button]
-    public void LoseHealthAndMana()
+    public void LoseHealth()
     {
-        _playerModel.Stats.Health.ChangeCurrentValue(-10);
-        _playerModel.Stats.Mana.ChangeCurrentValue(-10);
+        var health = _playerModel.Stats.GetStat("Health") as IConsumableStat;
+        health.ChangeCurrentValue(-10);
     }
 
     [Button]
-    public void GainHealthAndMana()
+    public void GainHealth()
     {
-        _playerModel.Stats.Health.ChangeCurrentValue(10);
-        _playerModel.Stats.Mana.ChangeCurrentValue(10);
+        var health = _playerModel.Stats.GetStat("Health") as IConsumableStat;
+        health.ChangeCurrentValue(10);
     }
 
     void Awake()

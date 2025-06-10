@@ -33,9 +33,6 @@ namespace Character
     {
         [SerializeField] string _characterId;
         [SerializeField] int _baseHealth;
-        [SerializeField] int _baseMana;
-        [SerializeField] int _baseAccuracy;
-
         protected ModifierSystem ModifierSystem;
 
         public IAttackerController AttackerController { get; protected set; }
@@ -66,12 +63,8 @@ namespace Character
 
         protected virtual void SetStats()
         {
-            Stats.Health.BaseValue = _baseHealth;
-            Stats.Mana.BaseValue = _baseMana;
-            Stats.Accuracy.BaseValue = _baseAccuracy;
-
-            Stats.Health.SetMaxValue();
-            Stats.Mana.SetMaxValue();
+            Stats.GetStat("Health").BaseValue = _baseHealth;
+            (Stats.GetStat("Health") as IConsumableStat).SetMaxValue();
         }
 
         protected abstract void MakeSureID();

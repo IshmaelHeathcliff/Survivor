@@ -63,7 +63,7 @@ namespace Character.Damage
             };
 
 
-            var damage = new AttackDamage(this, damageable, keywords, DamageType.Physical, BaseDamage, 1, 1);
+            var damage = new AttackDamage(this, damageable, keywords, DamageType.Simple, BaseDamage, 1, 1);
             damage.Apply();
         }
 
