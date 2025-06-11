@@ -35,8 +35,12 @@ namespace Character
 
         public void Deinit()
         {
+            if (!Initialized)
+            {
+                return;
+            }
+
             OnDeinit();
-            CharacterController.Deinit();
             Initialized = false;
         }
 

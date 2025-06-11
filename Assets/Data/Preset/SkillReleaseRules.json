@@ -13,14 +13,14 @@
         "dice4",
         "dice5"
       ],
+      "Description": null,
       "SkillsToRelease": [
         "dice1",
         "dice2",
         "dice3",
         "dice4",
         "dice5"
-      ],
-      "Description": null
+      ]
     },
     "Reward": {
       "$type": "SpecificSkillsReleaseRewardConfig, Assembly-CSharp",
@@ -38,8 +38,11 @@
     "Condition": {
       "$type": "ValueCountConditionConfig, Assembly-CSharp",
       "ValueID": "RollDice",
-      "Value": 36,
-      "Description": null
+      "Value": 6,
+      "Description": null,
+      "SkillsToRelease": [
+        "dice6"
+      ]
     },
     "Reward": {
       "$type": "SpecificSkillsReleaseRewardConfig, Assembly-CSharp",

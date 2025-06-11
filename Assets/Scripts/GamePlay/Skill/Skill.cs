@@ -1,14 +1,19 @@
 using System.Collections.Generic;
+using Character.Stat;
+using UnityEngine;
 
 public interface ISkill
 {
     string ID { get; set; }
+    string Name { get; }
+    SkillStats SkillStats { get; }
     void Enable();
     void Disable();
     void Use();
     void Cancel();
-    string GetDescription();
-    List<string> GetKeywords();
+    void SetEffects(IEnumerable<IEffect> effectsOnEnable, IEnumerable<IEffect> effectsOnUpdate);
+    string Description { get; }
+    List<string> Keywords { get; }
 }
 
 public interface ISkill<T> : ISkill where T : SkillConfig
@@ -19,21 +24,40 @@ public interface ISkill<T> : ISkill where T : SkillConfig
 public abstract class Skill<T> : ISkill<T> where T : SkillConfig
 {
     public T SkillConfig { get; set; }
-    public List<string> Keywords { get; set; }
+    public SkillStats SkillStats { get; }
     public string ID { get; set; }
+    public string Name => SkillConfig.Name;
+    public virtual List<string> Keywords => SkillConfig.Keywords;
+    public virtual string Description => SkillConfig.Description;
 
-    readonly List<IEffect> _skillEffectsOnEnable = new(); // 技能启用时生效的效果，比如Buff，需要关闭技能时主动 Cancel
+    // 技能启用时生效的效果，比如Buff，需要关闭技能时主动 Cancel
+    protected readonly List<IEffect> SkillEffectsOnEnable = new();
+    // 每次使用技能时生效的效果，比如攻击，一般不需要主动 Cancel
+    protected readonly List<IEffect> SkillEffectsOnUpdate = new();
 
-    public Skill(T skillConfig, IEnumerable<IEffect> skillEffectsOnEnable)
+    public Skill(T skillConfig, CharacterStats characterStats)
     {
         ID = skillConfig.ID;
         SkillConfig = skillConfig;
-        _skillEffectsOnEnable.AddRange(skillEffectsOnEnable);
+        SkillStats = new SkillStats(skillConfig.Keywords, characterStats);
+    }
+
+    public virtual void SetEffects(IEnumerable<IEffect> effectsOnEnable, IEnumerable<IEffect> effectsOnUpdate)
+    {
+        if (effectsOnEnable != null)
+        {
+            SkillEffectsOnEnable.AddRange(effectsOnEnable);
+        }
+
+        if (effectsOnUpdate != null)
+        {
+            SkillEffectsOnUpdate.AddRange(effectsOnUpdate);
+        }
     }
 
     public virtual void Enable()
     {
-        foreach (IEffect skillEffect in _skillEffectsOnEnable)
+        foreach (IEffect skillEffect in SkillEffectsOnEnable)
         {
             skillEffect.Apply();
         }
@@ -41,7 +65,7 @@ public abstract class Skill<T> : ISkill<T> where T : SkillConfig
 
     public virtual void Disable()
     {
-        foreach (IEffect skillEffect in _skillEffectsOnEnable)
+        foreach (IEffect skillEffect in SkillEffectsOnEnable)
         {
             skillEffect.Cancel();
         }
@@ -51,26 +75,21 @@ public abstract class Skill<T> : ISkill<T> where T : SkillConfig
     public abstract void Use();
 
     public abstract void Cancel();
-
-    public abstract List<string> GetKeywords();
-
-    public abstract string GetDescription();
 }
 
-public class ActiveSkill : Skill<ActiveSkillConfig>
+public class RepetitiveSkill : Skill<RepetitiveSkillConfig>
 {
-    readonly List<IEffect> _skillEffectsOnUpdate = new(); // 每次使用技能时生效的效果，比如攻击，一般不需要主动 Cancel
-
-    public float Cooldown => SkillConfig.Cooldown;
+    public IStat CooldownInverse => SkillStats.GetStat("CooldownInverse");
+    public float Cooldown => 1f / CooldownInverse.Value;
     public bool IsReady => _leftTime <= 0;
 
     float _leftTime;
 
-    public ActiveSkill(ActiveSkillConfig skillConfig, IEnumerable<IEffect> skillEffectsOnEnable, IEnumerable<IEffect> skillEffectsOnUpdate) :
-        base(skillConfig, skillEffectsOnEnable)
+    public RepetitiveSkill(RepetitiveSkillConfig skillConfig, CharacterStats characterStats, IEnumerable<IEffect> skillEffectsOnEnable = null, IEnumerable<IEffect> skillEffectsOnUpdate = null) :
+        base(skillConfig, characterStats)
     {
-        _skillEffectsOnUpdate.AddRange(skillEffectsOnUpdate);
-
+        SetEffects(skillEffectsOnEnable, skillEffectsOnUpdate);
+        CooldownInverse.BaseValue = 1f / skillConfig.Cooldown;
         _leftTime = 0;
     }
 
@@ -91,7 +110,7 @@ public class ActiveSkill : Skill<ActiveSkillConfig>
 
         _leftTime += Cooldown;
 
-        foreach (IEffect skillEffect in _skillEffectsOnUpdate)
+        foreach (IEffect skillEffect in SkillEffectsOnUpdate)
         {
             skillEffect.Apply();
         }
@@ -105,28 +124,19 @@ public class ActiveSkill : Skill<ActiveSkillConfig>
 
     public override void Cancel()
     {
-        foreach (IEffect skillEffect in _skillEffectsOnUpdate)
+        foreach (IEffect skillEffect in SkillEffectsOnUpdate)
         {
             skillEffect.Cancel();
         }
     }
-
-    public override List<string> GetKeywords()
-    {
-        return SkillConfig.Keywords;
-    }
-
-    public override string GetDescription()
-    {
-        return SkillConfig.Description;
-    }
 }
 
-public class PassiveSkill : Skill<PassiveSkillConfig>
+public class OneTimeSkill : Skill<OneTimeSkillConfig>
 {
-    public PassiveSkill(PassiveSkillConfig skillConfig, IEnumerable<IEffect> skillEffectsOnEnable) :
-        base(skillConfig, skillEffectsOnEnable)
+    public OneTimeSkill(OneTimeSkillConfig skillConfig, CharacterStats characterStats, IEnumerable<IEffect> skillEffectsOnEnable = null) :
+        base(skillConfig, characterStats)
     {
+        SetEffects(skillEffectsOnEnable, null);
     }
 
     public override void Cancel()
@@ -138,14 +148,25 @@ public class PassiveSkill : Skill<PassiveSkillConfig>
     {
         Enable();
     }
+}
 
-    public override List<string> GetKeywords()
-    {
-        return SkillConfig.Keywords;
-    }
 
-    public override string GetDescription()
+// 可以创建Attacker的Skill
+public class AttackSkill : RepetitiveSkill
+{
+    public IStat Damage => SkillStats.GetStat("Damage");
+    public IStat CriticalChance => SkillStats.GetStat("CriticalChance");
+    public IStat CriticalMultiplier => SkillStats.GetStat("CriticalMultiplier");
+    public IStat AttackArea => SkillStats.GetStat("AttackArea");
+    public IStat Duration => SkillStats.GetStat("Duration");
+
+    public AttackSkill(AttackSkillConfig skillConfig, CharacterStats characterStats, IEnumerable<IEffect> skillEffectsOnEnable = null, IEnumerable<IEffect> skillEffectsOnUpdate = null)
+        : base(skillConfig, characterStats, skillEffectsOnEnable, skillEffectsOnUpdate)
     {
-        return SkillConfig.Description;
+        Damage.BaseValue = skillConfig.Damage;
+        CriticalChance.BaseValue = skillConfig.CriticalChance;
+        CriticalMultiplier.BaseValue = skillConfig.CriticalMultiplier;
+        AttackArea.BaseValue = skillConfig.AttackArea;
+        Duration.BaseValue = skillConfig.Duration;
     }
 }

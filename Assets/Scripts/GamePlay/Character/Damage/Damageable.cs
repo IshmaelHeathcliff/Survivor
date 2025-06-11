@@ -46,7 +46,7 @@ namespace Character.Damage
             IsDamageable = false;
 
             Health.ChangeCurrentValue(-damage);
-            // Debug.Log("Left Health:" + Health.CurrentValue);
+            // Debug.Log($"TakeDamage: {damage}, Left Health: {Health.CurrentValue}");
             OnHurt.Trigger();
 
             if (Health.CurrentValue <= 0)

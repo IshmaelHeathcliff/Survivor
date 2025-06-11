@@ -9,7 +9,6 @@ using UnityEngine;
 
 public class SkillCreateEnv
 {
-    public IAttackerController AttackerController;
     public ICharacterModel Model;
     public ModifierSystem ModifierSystem;
     public ResourceSystem ResourceSystem;
@@ -46,33 +45,31 @@ public class SkillSystem : AbstractSystem
         return null;
     }
 
-    public void SetEnv(IAttackerController attackerController, ICharacterModel model)
+    public void SetEnv(ICharacterModel model)
     {
-        SkillCreateEnv.AttackerController = attackerController;
-        SkillCreateEnv.Model = model;
-    }
+        if (model != null)
+        {
+            SkillCreateEnv.Model = model;
+        }
 
-    public ISkill CreateSkill(string id)
-    {
         if (!CheckEnv())
         {
-            return null;
+            Debug.LogError("SkillCreateEnv is not set correctly");
         }
+    }
+
+    public ISkill CreateSkill(string id, ICharacterModel model = null)
+    {
+        SetEnv(model);
 
         return SkillConfigLoader.CreateSkill(GetSkillConfig(id), SkillCreateEnv);
     }
 
-    public void AcquireSkill(string id)
+    public void AcquireSkill(string id, ICharacterModel model = null)
     {
-        if (!CheckEnv())
-        {
-            return;
-        }
-
-        ISkill skill = CreateSkill(id);
+        ISkill skill = CreateSkill(id, model);
 
         ISkillContainer SkillsInSlot = SkillCreateEnv.Model.SkillsInSlot;
-        ISkillContainer SkillsReleased = SkillCreateEnv.Model.SkillsReleased;
 
         if (SkillsInSlot.Count >= SkillsInSlot.MaxCount)
         {
@@ -85,19 +82,14 @@ public class SkillSystem : AbstractSystem
             return;
         }
 
-        this.SendEvent(new SkillAcquiredEvent(skill, SkillsInSlot, SkillsReleased));
+        this.SendEvent(new SkillAcquiredEvent(skill, SkillCreateEnv.Model));
     }
 
-    public void ReleaseSkill(string id)
+    public void ReleaseSkill(string id, ICharacterModel model = null)
     {
-        if (!CheckEnv())
-        {
-            return;
-        }
+        SetEnv(model);
 
-        ISkill skill = CreateSkill(id);
-
-        if (!SkillCreateEnv.Model.SkillsInSlot.RemoveSkill(skill.ID))
+        if (!SkillCreateEnv.Model.SkillsInSlot.ReleaseSkill(id, out ISkill skill))
         {
             return;
         }
@@ -107,41 +99,39 @@ public class SkillSystem : AbstractSystem
             return;
         }
 
-        this.SendEvent(new SkillReleasedEvent(skill, SkillCreateEnv.Model.SkillsInSlot, SkillCreateEnv.Model.SkillsReleased));
+        this.SendEvent(new SkillReleasedEvent(skill, SkillCreateEnv.Model));
     }
 
-    public void RemoveSkill(string id)
+    public void RemoveSkill(string id, ICharacterModel model = null)
     {
-        if (!CheckEnv())
-        {
-            return;
-        }
+        SetEnv(model);
 
         if (SkillCreateEnv.Model.SkillsInSlot.RemoveSkill(id) || SkillCreateEnv.Model.SkillsReleased.RemoveSkill(id))
         {
-            this.SendEvent(new SkillRemovedEvent(id, SkillCreateEnv.Model.SkillsInSlot, SkillCreateEnv.Model.SkillsReleased));
+            this.SendEvent(new SkillRemovedEvent(id, SkillCreateEnv.Model));
         }
     }
 
-    public void SetSkillSlotCount(int count)
+    public void ClearSkill(ICharacterModel model)
     {
-        if (!CheckEnv())
+        foreach (ISkill skill in model.GetAllSkills())
         {
-            return;
+            this.SendEvent(new SkillRemovedEvent(skill.ID, model));
         }
 
+        model.SkillsInSlot.Clear();
+        model.SkillsReleased.Clear();
+    }
+
+    public void SetSkillSlotCount(int count, ICharacterModel model = null)
+    {
+        SetEnv(model);
         SkillCreateEnv.Model.SkillSlotCount = count;
-        this.SendEvent(new SkillSlotCountChangedEvent(count, SkillCreateEnv.Model.SkillsInSlot, SkillCreateEnv.Model.SkillsReleased));
+        this.SendEvent(new SkillSlotCountChangedEvent(count, SkillCreateEnv.Model));
     }
 
     public bool CheckEnv()
     {
-        if (SkillCreateEnv.AttackerController == null)
-        {
-            Debug.LogError("AttackerController is null");
-            return false;
-        }
-
         if (SkillCreateEnv.Model == null)
         {
             Debug.LogError("Model is null");

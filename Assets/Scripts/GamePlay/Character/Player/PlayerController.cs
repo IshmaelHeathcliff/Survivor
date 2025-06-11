@@ -13,7 +13,7 @@ namespace Character
         public void Respawn()
         {
             Model.Position = _initialPosition;
-            (Stats.GetStat("Health") as IConsumableStat).SetMaxValue();
+            (CharaterStats.GetStat("Health") as IConsumableStat).SetMaxValue();
         }
 
         protected override void SetStats()
@@ -22,7 +22,7 @@ namespace Character
 
             IStatModifier healthModifier = ModifierSystem.CreateStatModifier("health_increase", "player", 100);
             healthModifier.Register();
-            (Stats.GetStat("Health") as IConsumableStat).SetMaxValue();
+            (CharaterStats.GetStat("Health") as IConsumableStat).SetMaxValue();
         }
 
         protected override void MakeSureID()
@@ -35,6 +35,9 @@ namespace Character
 
         protected override void OnInit()
         {
+            SkillReleaseSystem skillReleaseSystem = this.GetSystem<SkillReleaseSystem>();
+            skillReleaseSystem.RegisterConditions(Model);
+            skillReleaseSystem.RegisterRewards(Model);
         }
 
         protected override void OnDeinit()

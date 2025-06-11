@@ -8,38 +8,53 @@ using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
+[RequireComponent(typeof(ICharacterController))]
 public class SkillController : MonoBehaviour, IController
 {
     [SerializeField] string[] _skillIDs;
     [SerializeField] int _skillSlotCount;
-    readonly Dictionary<string, ActiveSkill> _activeSkills = new();
+    readonly Dictionary<string, RepetitiveSkill> _repetitiveSkills = new();
 
-    IAttackerController _attackerController;
+    ICharacterController _characterController;
     ICharacterModel _model;
 
     void OnSkillAcquired(SkillAcquiredEvent e)
     {
-        if (e.Skill is not ActiveSkill activeSkill)
+        if (e.Model != _model)
         {
             return;
         }
 
-        _activeSkills.TryAdd(activeSkill.ID, activeSkill);
+        if (e.Skill is not RepetitiveSkill repetitiveSkill)
+        {
+            return;
+        }
+
+        _repetitiveSkills.TryAdd(repetitiveSkill.ID, repetitiveSkill);
     }
 
     void OnSkillReleased(SkillReleasedEvent e)
     {
+        if (e.Model != _model)
+        {
+            return;
+        }
     }
 
     void OnSkillRemoved(SkillRemovedEvent e)
     {
-        _activeSkills.Remove(e.SkillID);
+        if (e.Model != _model)
+        {
+            return;
+        }
+
+        _repetitiveSkills.Remove(e.SkillID);
     }
 
     [Button]
     void CreateSkill(string skillID)
     {
-        this.SendCommand(new AcquireSkillCommand(skillID));
+        this.SendCommand(new AcquireSkillCommand(skillID, _model));
     }
 
 
@@ -47,27 +62,26 @@ public class SkillController : MonoBehaviour, IController
     {
         foreach (string skillID in _skillIDs)
         {
-            this.SendCommand(new AcquireSkillCommand(skillID));
+            this.SendCommand(new AcquireSkillCommand(skillID, _model));
             await UniTask.Delay(TimeSpan.FromSeconds(0.1));
         }
     }
 
     void Awake()
     {
-        _attackerController = GetComponentInChildren<IAttackerController>();
+        _characterController = GetComponent<ICharacterController>();
     }
 
     void Start()
     {
-        _model = this.GetModel<PlayersModel>().Current;
+        _model = _characterController.CharacterModel;
 
         // ! 初始化技能系统
-        this.SendCommand(new SetSkillEnvCommand(_attackerController, _model));
-        this.SendCommand(new SetSkillSlotCountCommand(_skillSlotCount));
+        this.SendCommand(new SetSkillSlotCountCommand(_skillSlotCount, _model));
 
-        this.RegisterEvent<SkillAcquiredEvent>(OnSkillAcquired);
-        this.RegisterEvent<SkillReleasedEvent>(OnSkillReleased);
-        this.RegisterEvent<SkillRemovedEvent>(OnSkillRemoved);
+        this.RegisterEvent<SkillAcquiredEvent>(OnSkillAcquired).UnRegisterWhenGameObjectDestroyed(gameObject);
+        this.RegisterEvent<SkillReleasedEvent>(OnSkillReleased).UnRegisterWhenGameObjectDestroyed(gameObject);
+        this.RegisterEvent<SkillRemovedEvent>(OnSkillRemoved).UnRegisterWhenGameObjectDestroyed(gameObject);
 
         CreateInitSkills().Forget();
     }
@@ -75,7 +89,7 @@ public class SkillController : MonoBehaviour, IController
 
     void Update()
     {
-        foreach (ActiveSkill skill in _activeSkills.Values)
+        foreach (RepetitiveSkill skill in _repetitiveSkills.Values)
         {
             skill.Update(Time.deltaTime);
 

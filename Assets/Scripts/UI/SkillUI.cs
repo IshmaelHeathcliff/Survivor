@@ -1,4 +1,5 @@
 using System.Text;
+using Character.Player;
 using TMPro;
 using UnityEngine;
 
@@ -12,9 +13,25 @@ public class SkillUI : MonoBehaviour, IController
     {
         this.RegisterEvent<SkillAcquiredEvent>(e =>
         {
-            _skillsDescriptionBuilder.AppendLine(e.Skill.ID);
-            _skillsDescription.text = _skillsDescriptionBuilder.ToString();
-        });
+            if (e.Model is PlayerModel playerModel)
+            {
+                _skillsDescriptionBuilder.Clear();
+                _skillsDescriptionBuilder.AppendLine("已装备技能：");
+                foreach (ISkill skill in playerModel.SkillsInSlot.GetAllSkills())
+                {
+                    _skillsDescriptionBuilder.AppendLine($"  {skill.Name}");
+                }
+
+                _skillsDescriptionBuilder.AppendLine("已吞噬技能：");
+                foreach (ISkill skill in playerModel.SkillsReleased.GetAllSkills())
+                {
+                    _skillsDescriptionBuilder.AppendLine($"  {skill.Name}");
+                }
+
+                _skillsDescription.text = _skillsDescriptionBuilder.ToString();
+
+            }
+        }).UnRegisterWhenGameObjectDestroyed(gameObject);
     }
 
     public IArchitecture GetArchitecture()

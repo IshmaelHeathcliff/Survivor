@@ -1,4 +1,5 @@
-﻿using Character.Stat;
+﻿using System.Collections.Generic;
+using Character.Stat;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -6,19 +7,18 @@ namespace Character.Damage
 {
     public interface IAttacker
     {
+        string ID { get; }
+        IEnumerable<string> Keywords { get; }
         IAttackerController AttackerController { get; set; }
-        int BaseDamage { get; set; }
-        int BaseCriticalChance { get; set; }
-        int BaseCriticalMultiplier { get; set; }
-        int BaseArea { get; set; }
-        int BaseDuration { get; set; }
+        Vector2 Direction { get; set; }
 
-        IKeywordStat Damage { get; }
+        IStat Damage { get; }
         IStat CriticalChance { get; }
         IStat CriticalMultiplier { get; }
         IStat AttackArea { get; }
         IStat Duration { get; }
 
+        void SetSkill(AttackSkill skill);
         UniTaskVoid Attack();
         void Cancel();
     }
@@ -28,27 +28,22 @@ namespace Character.Damage
     public abstract class Attacker : MonoBehaviour, IAttacker, IController
     {
         public IAttackerController AttackerController { get; set; }
+        AttackSkill _attackSkill;
 
-        public int BaseDamage { get; set; }
-        public int BaseCriticalChance { get; set; }
-        public int BaseCriticalMultiplier { get; set; }
-        public int BaseArea { get; set; }
-        public int BaseDuration { get; set; }
+        public string ID => _attackSkill.ID;
+        public IEnumerable<string> Keywords => _attackSkill.Keywords;
+        public Vector2 Direction { get; set; }
 
-        public IKeywordStat Damage { get; protected set; }
-        public IStat CriticalChance { get; protected set; }
-        public IStat CriticalMultiplier { get; protected set; }
-        public IStat AttackArea { get; protected set; }
-        public IStat Duration { get; protected set; }
 
-        public void SetStats(Stats stats)
+        public IStat Damage => _attackSkill.Damage;
+        public IStat CriticalChance => _attackSkill.CriticalChance;
+        public IStat CriticalMultiplier => _attackSkill.CriticalMultiplier;
+        public IStat AttackArea => _attackSkill.AttackArea;
+        public IStat Duration => _attackSkill.Duration;
+
+        public void SetSkill(AttackSkill skill)
         {
-            Damage = stats.GetStat("Damage") as IKeywordStat;
-            CriticalChance = stats.GetStat("CriticalChance");
-            CriticalMultiplier = stats.GetStat("CriticalMultiplier");
-            AttackArea = stats.GetStat("AttackArea");
-            Duration = stats.GetStat("Duration");
-
+            _attackSkill = skill;
         }
 
         protected abstract UniTask Play();

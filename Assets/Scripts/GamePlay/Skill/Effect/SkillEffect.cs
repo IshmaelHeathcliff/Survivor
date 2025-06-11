@@ -11,24 +11,27 @@ public interface IEffect
 {
     void Apply();
     void Cancel();
+    ISkill Owner { get; set; }
 }
 
 public interface IEffect<T>
 {
     void Apply(T value);
     void Cancel(T value);
+    ISkill Owner { get; set; }
 }
 
 public interface ISkillEffect<T> : IEffect where T : SkillEffectConfig
 {
-    T SkillEffectConfig { get; set; }
+    T SkillEffectConfig { get; }
 }
 
 public abstract class SkillEffect<T> : ISkillEffect<T> where T : SkillEffectConfig
 {
-    public T SkillEffectConfig { get; set; }
+    public T SkillEffectConfig { get; }
+    public ISkill Owner { get; set; }
 
-    public SkillEffect(T skillEffectConfig)
+    protected SkillEffect(T skillEffectConfig)
     {
         SkillEffectConfig = skillEffectConfig;
     }
@@ -41,11 +44,11 @@ public abstract class SkillEffect<T> : ISkillEffect<T> where T : SkillEffectConf
     protected abstract void OnCancel();
 }
 
-public abstract class NestedSkillEffect<T> : SkillEffect<T> where T : NestedEffectConfig
+public class NestedSkillEffect<T> : SkillEffect<T> where T : NestedEffectConfig
 {
     public List<IEffect> ChildEffects { get; set; } = new();
 
-    protected NestedSkillEffect(T skillEffectConfig, IEnumerable<IEffect> childEffects) : base(skillEffectConfig)
+    public NestedSkillEffect(T skillEffectConfig, IEnumerable<IEffect> childEffects) : base(skillEffectConfig)
     {
         ChildEffects.AddRange(childEffects);
     }

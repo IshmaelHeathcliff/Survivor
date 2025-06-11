@@ -47,7 +47,7 @@ public class GlobalCancellation : MonoBehaviour
     }
 
 #if UNITY_EDITOR
-    private void OnPlayModeStateChanged(UnityEditor.PlayModeStateChange state)
+    void OnPlayModeStateChanged(UnityEditor.PlayModeStateChange state)
     {
         if (state == UnityEditor.PlayModeStateChange.ExitingPlayMode)
         {

@@ -21,7 +21,7 @@ namespace Character.Enemy
             Target.Damageable.IsDamageable = false;
             Target.AttackerController.CanAttack = false;
             await MoveController.PlayAnimation(EnemyMoveController.Dead).SuppressCancellationThrow();
-            Target.DestroyController();
+            Target.Destroy();
         }
     }
 }

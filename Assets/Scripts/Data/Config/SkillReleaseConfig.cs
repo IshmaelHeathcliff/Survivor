@@ -22,12 +22,14 @@ public class SpecificSkillsReleaseRewardConfig : SkillReleaseRewardConfig
 
 #region Condition
 
-public class SkillReleaseConditionConfig
+public abstract class SkillReleaseConditionConfig
 {
     [ShowInInspector] public string Description { get; set; }
+    [ShowInInspector] public List<string> SkillsToRelease { get; set; } = new();
+
 }
 
-public class SkillReleaseRewardConfig
+public abstract class SkillReleaseRewardConfig
 {
     [ShowInInspector] public string Description { get; set; }
 }
@@ -36,7 +38,6 @@ public class SkillReleaseRewardConfig
 public class SpecificSkillsReleaseConditionConfig : SkillReleaseConditionConfig
 {
     [ShowInInspector] public List<string> RequiredSkillIDs { get; set; } = new();
-    [ShowInInspector] public List<string> SkillsToRelease { get; set; } = new();
 }
 
 public class AnySkillsCountReleaseConditionConfig : SpecificSkillsReleaseConditionConfig

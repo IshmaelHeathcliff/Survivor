@@ -1,3 +1,4 @@
+using Character;
 using Character.Modifier;
 using System;
 using System.Collections.Generic;
@@ -7,11 +8,12 @@ public class CountIncrementEffect : NestedSkillEffect<CountIncrementEffectConfig
     CountSystem _countSystem;
     int _lastTriggerValue;
     CountIncrementEffectConfig _countConfig;
-
-    public CountIncrementEffect(CountIncrementEffectConfig config, IEnumerable<IEffect> childEffects, CountSystem system) : base(config, childEffects)
+    ICharacterModel _model;
+    public CountIncrementEffect(CountIncrementEffectConfig config, IEnumerable<IEffect> childEffects, CountSystem system, ICharacterModel model) : base(config, childEffects)
     {
         _countSystem = system;
         _countConfig = config;
+        _model = model;
     }
 
     protected override void OnApply()
@@ -21,15 +23,15 @@ public class CountIncrementEffect : NestedSkillEffect<CountIncrementEffectConfig
             return;
         }
 
-        _countSystem.Register(_countConfig.CountValueID, OnCountValueChanged);
-        _lastTriggerValue = _countSystem.GetCount(_countConfig.CountValueID); // 初始化上一次触发时的计数
+        _countSystem.Register(_countConfig.CountValueID, _model, OnCountValueChanged);
+        _lastTriggerValue = _countSystem.GetCount(_countConfig.CountValueID, _model); // 初始化上一次触发时的计数
     }
 
     protected override void OnCancel()
     {
         if (_countSystem != null)
         {
-            _countSystem.Unregister(_countConfig.CountValueID, OnCountValueChanged);
+            _countSystem.Unregister(_countConfig.CountValueID, _model, OnCountValueChanged);
         }
 
     }

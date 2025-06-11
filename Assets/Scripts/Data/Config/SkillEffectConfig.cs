@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Character.Damage;
 using Sirenix.OdinInspector;
 
 public abstract class SkillEffectConfig
@@ -15,13 +16,7 @@ public class NestedEffectConfig : SkillEffectConfig
 
 public class AttackEffectConfig : SkillEffectConfig
 {
-    [ShowInInspector] public int Damage { get; set; }
-    [ShowInInspector] public int CriticalChance { get; set; }
-    [ShowInInspector] public int CriticalMultiplier { get; set; }
-    [ShowInInspector] public int Area { get; set; }
-    [ShowInInspector] public int Duration { get; set; }
-
-    [ShowInInspector] public string AttackerAddress { get; set; }
+    [ShowInInspector] public string AttackerID { get; set; }
 
     public AttackEffectConfig()
     {
@@ -40,6 +35,14 @@ public class ModifierEffectConfig : SkillEffectConfig
     }
 }
 
+public class LocalModifierEffectConfig : ModifierEffectConfig
+{
+    [ShowInInspector] public string AttackSkillID { get; set; }
+    public LocalModifierEffectConfig()
+    {
+        Description = "添加局部词条";
+    }
+}
 
 public class CountIncrementEffectConfig : NestedEffectConfig
 {
@@ -57,6 +60,16 @@ public class RollDiceEffectConfig : NestedEffectConfig
     public RollDiceEffectConfig()
     {
         Description = "掷骰子";
+    }
+}
+
+public class DiceOnValueEffectConfig : NestedEffectConfig
+{
+    [ShowInInspector] public int Value { get; set; }
+
+    public DiceOnValueEffectConfig()
+    {
+        Description = "当骰子数满足时触发";
     }
 }
 

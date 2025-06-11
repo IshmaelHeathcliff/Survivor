@@ -63,7 +63,7 @@ namespace Editor
             ShowPaging = true,
             ShowIndexLabels = true,
             AddCopiesLastElement = true,
-            NumberOfItemsPerPage = 10,
+            NumberOfItemsPerPage = 20,
             DefaultExpandedState = true,
             OnTitleBarGUI = "DrawRefreshButton",
             ListElementLabelName = "Name"

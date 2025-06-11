@@ -12,10 +12,10 @@ public class SkillReleaseSystem : AbstractSystem
 
     const string JsonPath = "Preset";
     const string JsonName = "SkillReleaseRules.json";
-    readonly List<string> _triggeredRules = new(); // 记录已触发的一次性规则
 
     SkillSystem _skillSystem;
 
+    // 保存注册的事件，用于在OnDeinit时取消注册
     List<IUnRegister> _unRegisters = new();
 
     protected override void OnInit()
@@ -23,8 +23,6 @@ public class SkillReleaseSystem : AbstractSystem
         _skillSystem = this.GetSystem<SkillSystem>();
 
         LoadRules();
-        RegisterConditions();
-        RegisterRewards();
     }
 
     void LoadRules()
@@ -40,7 +38,7 @@ public class SkillReleaseSystem : AbstractSystem
         }
     }
 
-    void RegisterConditions()
+    public void RegisterConditions(ICharacterModel model)
     {
         foreach (SkillReleaseRule rule in _releaseRules.Values)
         {
@@ -50,35 +48,35 @@ public class SkillReleaseSystem : AbstractSystem
                     _unRegisters.Add(this.RegisterEvent<SkillAcquiredEvent>(skillReleaseCondition.CheckCondition));
                     break;
                 case ValueCountCondition valueCountCondition:
-                    _unRegisters.Add(this.GetSystem<CountSystem>().Register(valueCountCondition.ValueID, e => valueCountCondition.CheckCondition(e)));
+                    _unRegisters.Add(this.GetSystem<CountSystem>().Register(valueCountCondition.ValueID, model, e => valueCountCondition.CheckCondition(e)));
                     break;
             }
         }
     }
 
-    void RegisterRewards()
+    public void RegisterRewards(ICharacterModel model)
     {
         foreach (SkillReleaseRule rule in _releaseRules.Values)
         {
-            _unRegisters.Add(rule.Condition.OnCondition.Register(() =>
+            _unRegisters.Add(rule.Condition.OnRelease.Register((e) =>
                 {
+                    foreach (string skillID in rule.Condition.SkillsToRelease)
+                    {
+                        _skillSystem.ReleaseSkill(skillID, e.Model);
+                    }
                     rule.HasTriggered = true;
-                    _releaseRules.Remove(rule.ID);
-                    _triggeredRules.Add(rule.ID);
                 }));
 
             if (rule.Reward is SpecificSkillsReleaseReward skillReleaseReward)
             {
-                _unRegisters.Add(rule.Condition.OnCondition.Register(() =>
+                _unRegisters.Add(rule.Condition.OnRelease.Register((e) =>
                 {
                     foreach (string skillID in skillReleaseReward.NewSkillIDs)
                     {
-                        _skillSystem.AcquireSkill(skillID);
+                        _skillSystem.AcquireSkill(skillID, e.Model);
                     }
                 }));
             }
-
-
         }
     }
 

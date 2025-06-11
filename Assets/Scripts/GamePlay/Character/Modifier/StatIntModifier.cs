@@ -7,19 +7,19 @@ using Random = UnityEngine.Random;
 namespace Character.Modifier
 {
     [Serializable]
-    public class StatSingleIntModifier : StatModifier<int>
+    public class StatSingleFloatModifier : StatModifier<float>
     {
         [JsonConstructor]
-        public StatSingleIntModifier()
+        public StatSingleFloatModifier()
         {
 
         }
 
-        public StatSingleIntModifier(StatModifierConfig modifierConfig, IStat stat) : base(modifierConfig, stat)
+        public StatSingleFloatModifier(StatModifierConfig modifierConfig, IStat stat) : base(modifierConfig, stat)
         {
         }
 
-        public StatSingleIntModifier(StatModifierConfig modifierConfig, IStat stat, int value) : base(modifierConfig,
+        public StatSingleFloatModifier(StatModifierConfig modifierConfig, IStat stat, float value) : base(modifierConfig,
             stat)
         {
             Level = 1;
@@ -112,8 +112,8 @@ namespace Character.Modifier
     }
 
     [Serializable]
-    public class StatDoubleIntModifier : StatSingleIntModifier, IStatModifier<int, int>
+    public class StatDoubleFloatModifier : StatSingleFloatModifier, IStatModifier<float, float>
     {
-        public int Value2 { get; set; }
+        public float Value2 { get; set; }
     }
 }

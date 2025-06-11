@@ -1,5 +1,6 @@
 ﻿using System;
 using Character.Enemy;
+using Character.Player;
 using Core;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -26,7 +27,7 @@ namespace Character.Damage
 
         void Start()
         {
-            SetStats(CharacterController.Stats);
+            SetStats(CharacterController.CharaterStats);
 
             OnHurt.Register(() => Hurt().Forget()).UnRegisterWhenDisabled(this);
             OnDeath.Register(Dead).UnRegisterWhenDisabled(this);
@@ -49,14 +50,12 @@ namespace Character.Damage
 
         void Dead()
         {
-            this.GetSystem<CountSystem>().IncrementKillCount(1);
+            this.GetSystem<CountSystem>().IncrementKillCount(this.GetModel<PlayersModel>().Current, 1);
 
             string dropAddress = _dropSystem.GetDropAddress("coin");
             Addressables.InstantiateAsync(dropAddress, transform.position, Quaternion.identity);
 
             _fsm.ChangeState(EnemyStateID.Dead);
-
-
         }
     }
 }

@@ -187,5 +187,138 @@
     "Keywords": [
       "Damage"
     ]
+  },
+  {
+    "$type": "Character.Modifier.StatModifierConfig, Assembly-CSharp",
+    "StatName": "CooldownInverse",
+    "StatModifierType": 1,
+    "MaxLevel": 3,
+    "LevelRanges": [
+      {
+        "Min": 1,
+        "Max": 20
+      },
+      {
+        "Min": 21,
+        "Max": 40
+      },
+      {
+        "Min": 41,
+        "Max": 60
+      }
+    ],
+    "ModifierID": "cdi_increase",
+    "Name": "CD降低",
+    "PositiveDescription": "{0}提高{1}%",
+    "NegativeDescription": "{0}降低{1}%",
+    "Keywords": []
+  },
+  {
+    "$type": "Character.Modifier.StatModifierConfig, Assembly-CSharp",
+    "StatName": "CriticalChance",
+    "StatModifierType": 0,
+    "MaxLevel": 3,
+    "LevelRanges": [
+      {
+        "Min": 1,
+        "Max": 20
+      },
+      {
+        "Min": 21,
+        "Max": 40
+      },
+      {
+        "Min": 41,
+        "Max": 60
+      }
+    ],
+    "ModifierID": "critical_add",
+    "Name": "暴击率增加",
+    "PositiveDescription": "{0}增加{1}%",
+    "NegativeDescription": "{0}减少{1}%",
+    "Keywords": [
+      "Critical"
+    ]
+  },
+  {
+    "$type": "Character.Modifier.StatModifierConfig, Assembly-CSharp",
+    "StatName": "CoinGain",
+    "StatModifierType": 0,
+    "MaxLevel": 3,
+    "LevelRanges": [
+      {
+        "Min": 1,
+        "Max": 20
+      },
+      {
+        "Min": 21,
+        "Max": 40
+      },
+      {
+        "Min": 41,
+        "Max": 60
+      }
+    ],
+    "ModifierID": "coin_add",
+    "Name": "金币收入增加",
+    "PositiveDescription": "{0}增加{1}点",
+    "NegativeDescription": "{0}减少{1}点",
+    "Keywords": [
+      "Coin"
+    ]
+  },
+  {
+    "$type": "Character.Modifier.StatModifierConfig, Assembly-CSharp",
+    "StatName": "ProjectileCount",
+    "StatModifierType": 0,
+    "MaxLevel": 3,
+    "LevelRanges": [
+      {
+        "Min": 1,
+        "Max": 20
+      },
+      {
+        "Min": 21,
+        "Max": 40
+      },
+      {
+        "Min": 41,
+        "Max": 60
+      }
+    ],
+    "ModifierID": "projectileCount_add",
+    "Name": "投射物数量增加",
+    "PositiveDescription": "{0}增加{1}点",
+    "NegativeDescription": "{0}减少{1}点",
+    "Keywords": [
+      "Projectile"
+    ]
+  },
+  {
+    "$type": "Character.Modifier.StatModifierConfig, Assembly-CSharp",
+    "StatName": "WoodGain",
+    "StatModifierType": 0,
+    "MaxLevel": 3,
+    "LevelRanges": [
+      {
+        "Min": 1,
+        "Max": 20
+      },
+      {
+        "Min": 21,
+        "Max": 40
+      },
+      {
+        "Min": 41,
+        "Max": 60
+      }
+    ],
+    "ModifierID": "wood_add",
+    "Name": "木头收入增加",
+    "PositiveDescription": "{0}增加{1}点",
+    "NegativeDescription": "{0}减少{1}点",
+    "Keywords": [
+      "Wood"
+    ]
   }
 ]

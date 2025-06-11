@@ -1,18 +1,21 @@
 using System.Collections.Generic;
+using Character;
 using UnityEngine;
 
 public class RollDiceEffect : NestedSkillEffect<RollDiceEffectConfig>
 {
     readonly CountSystem _countSystem;
-    public RollDiceEffect(RollDiceEffectConfig skillEffectConfig, IEnumerable<IEffect> childEffects, CountSystem countSystem) : base(skillEffectConfig, childEffects)
+    readonly ICharacterModel _model;
+    public RollDiceEffect(RollDiceEffectConfig skillEffectConfig, IEnumerable<IEffect> childEffects, CountSystem countSystem, ICharacterModel model) : base(skillEffectConfig, childEffects)
     {
         _countSystem = countSystem;
+        _model = model;
     }
 
     protected override void OnApply()
     {
         int value = Random.Range(1, 6);
-        _countSystem.IncrementCount("RollDice", value);
+        _countSystem.IncrementCount("RollDice", _model, value);
 
         foreach (IEffect childEffect in ChildEffects)
         {
@@ -23,6 +26,54 @@ public class RollDiceEffect : NestedSkillEffect<RollDiceEffectConfig>
             else
             {
                 childEffect.Apply();
+            }
+        }
+    }
+}
+
+public class DiceOnValueEffect : NestedSkillEffect<DiceOnValueEffectConfig>, IEffect<int>
+{
+    public int Roll { get; set; }
+
+    public DiceOnValueEffect(DiceOnValueEffectConfig skillEffectConfig, IEnumerable<IEffect> childEffects) : base(skillEffectConfig, childEffects)
+    {
+        Roll = skillEffectConfig.Value;
+    }
+
+    protected override void OnApply()
+    {
+        foreach (IEffect childEffect in ChildEffects)
+        {
+            childEffect.Apply();
+        }
+    }
+
+    protected override void OnCancel()
+    {
+        foreach (IEffect childEffect in ChildEffects)
+        {
+            childEffect.Cancel();
+        }
+    }
+
+    public void Apply(int value)
+    {
+        if (value == Roll)
+        {
+            foreach (IEffect childEffect in ChildEffects)
+            {
+                childEffect.Apply();
+            }
+        }
+    }
+
+    public void Cancel(int value)
+    {
+        if (value == Roll)
+        {
+            foreach (IEffect childEffect in ChildEffects)
+            {
+                childEffect.Cancel();
             }
         }
     }

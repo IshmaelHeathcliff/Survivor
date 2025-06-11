@@ -20,9 +20,6 @@ namespace Character.Enemy
         protected override void SetStats()
         {
             base.SetStats();
-            IStatModifier healthModifier = ModifierSystem.CreateStatModifier("health_increase", ID, 100);
-            healthModifier.Register();
-            (Stats.GetStat("Health") as IConsumableStat).SetMaxValue();
         }
 
         protected override void MakeSureID()

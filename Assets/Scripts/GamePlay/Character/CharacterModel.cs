@@ -1,10 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Character.State;
-using Character.Stat;
 using UnityEngine;
-using System;
-using Unity.VisualScripting;
-
 namespace Character
 {
     public interface ICharacterModel
@@ -13,13 +10,19 @@ namespace Character
         float Speed { get; set; }
         Vector2 Position { get; set; }
         Vector2 Direction { get; set; }
-        Stats Stats { get; }
+        CharacterStats Stats { get; }
         int SkillSlotCount { get; set; }
         IStateContainer StateContainer { get; }
         ISkillContainer SkillsReleased { get; }
         ISkillContainer SkillsInSlot { get; }
+        Dictionary<string, ValueCounter> CountValues { get; }
+
+        ICharacterController Controller { get; set; }
 
         void BindTransform(Transform transform);
+        ISkill GetSkill(string id);
+        bool TryGetSkill(string id, out ISkill skill);
+        IEnumerable<ISkill> GetAllSkills();
     }
 
     public abstract class CharacterModel : ICharacterModel
@@ -51,7 +54,7 @@ namespace Character
         }
 
         public Vector2 Direction { get; set; }
-        public Stats Stats { get; } = new Stats();
+        public CharacterStats Stats { get; } = new CharacterStats();
         public IStateContainer StateContainer { get; } = new StateContainer();
 
         public int SkillSlotCount
@@ -63,9 +66,38 @@ namespace Character
         public ISkillContainer SkillsReleased { get; } = new SkillContainer();
         public ISkillContainer SkillsInSlot { get; } = new SkillContainer(7);
 
+        public ICharacterController Controller { get; set; }
+
+        public Dictionary<string, ValueCounter> CountValues { get; } = new();
+
         public void BindTransform(Transform transform)
         {
             _transform = transform;
+        }
+
+        public ISkill GetSkill(string id)
+        {
+            if (SkillsInSlot.TryGetSkill(id, out ISkill skill))
+            {
+                return skill;
+            }
+
+            if (SkillsReleased.TryGetSkill(id, out skill))
+            {
+                return skill;
+            }
+
+            return null;
+        }
+
+        public bool TryGetSkill(string id, out ISkill skill)
+        {
+            return SkillsInSlot.TryGetSkill(id, out skill) || SkillsReleased.TryGetSkill(id, out skill);
+        }
+
+        public IEnumerable<ISkill> GetAllSkills()
+        {
+            return SkillsInSlot.GetAllSkills().Concat(SkillsReleased.GetAllSkills());
         }
     }
 
@@ -118,7 +150,14 @@ namespace Character
 
         public void RemoveModel(string id)
         {
-            Models.Remove(id);
+            if (TryGetModel(id, out TModel model))
+            {
+                model.SkillsInSlot.Clear();
+                model.SkillsReleased.Clear();
+                model.StateContainer.Clear();
+                model.Controller = null;
+                Models.Remove(id);
+            }
         }
     }
 }

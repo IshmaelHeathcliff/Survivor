@@ -13,9 +13,9 @@ namespace Character
         IDamageable Damageable { get; }
         IMoveController MoveController { get; }
         ICharacterModel CharacterModel { get; }
-        Stats Stats { get; }
+        CharacterStats CharaterStats { get; }
 
-        void DestroyController();
+        void Destroy();
     }
 
     // 修复泛型约束，TModel 需要有无参构造函数
@@ -45,7 +45,7 @@ namespace Character
         public bool Initialized { get; set; }
 
         // ! Model、ID、Stats都需要在初始化后再调用
-        public Stats Stats => Model.Stats;
+        public CharacterStats CharaterStats => Model.Stats;
 
         public string ID
         {
@@ -63,8 +63,8 @@ namespace Character
 
         protected virtual void SetStats()
         {
-            Stats.GetStat("Health").BaseValue = _baseHealth;
-            (Stats.GetStat("Health") as IConsumableStat).SetMaxValue();
+            CharaterStats.GetStat("Health").BaseValue = _baseHealth;
+            (CharaterStats.GetStat("Health") as IConsumableStat).SetMaxValue();
         }
 
         protected abstract void MakeSureID();
@@ -79,7 +79,7 @@ namespace Character
             Model = model;
         }
 
-        public void DestroyController()
+        public void Destroy()
         {
             Addressables.ReleaseInstance(gameObject);
         }
@@ -100,9 +100,11 @@ namespace Character
             // 初始化ID、Model、Stats
             MakeSureModel();
 
+            Model.Controller = this;
+
             OnInit();
-            Stats.FactoryID = ID;
-            ModifierSystem.RegisterFactory(Stats);
+            CharaterStats.FactoryID = ID;
+            ModifierSystem.RegisterFactory(CharaterStats);
             SetStats();
 
             Initialized = true;
@@ -110,6 +112,14 @@ namespace Character
 
         public void Deinit()
         {
+            if (!Initialized)
+            {
+                return;
+            }
+            AttackerController.Deinit();
+            MoveController.Deinit();
+            Damageable.Deinit();
+
             OnDeinit();
             Initialized = false;
         }
@@ -122,6 +132,7 @@ namespace Character
         protected virtual void OnDeinit()
         {
             ModifierSystem.UnregisterFactory(ID);
+            this.GetSystem<SkillSystem>().ClearSkill(Model);
             this.GetModel<TModels>().RemoveModel(ID);
         }
 

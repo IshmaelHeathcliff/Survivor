@@ -4,16 +4,21 @@ using System.Linq;
 
 public interface ISkillContainer
 {
+    bool TryGetSkill(string ID, out ISkill skill);
     ISkill GetSkill(string ID);
     bool AddSkill(ISkill skill);
     bool RemoveSkill(string ID);
+    bool ReleaseSkill(string ID, out ISkill skill);
     bool HasSkill(string ID);
     bool HasSkills(IEnumerable<string> IDs);
     int HasCount(IEnumerable<string> IDs);
     int MaxCount { get; set; }
     int Count { get; }
+    IEnumerable<ISkill> GetAllSkills();
+    void Clear();
 }
 
+// ! 一个角色同一ID的技能只能拥有一个
 public class SkillContainer : ISkillContainer
 {
     readonly Dictionary<string, ISkill> _skills = new();
@@ -23,6 +28,16 @@ public class SkillContainer : ISkillContainer
     public SkillContainer(int maxCount = 0)
     {
         MaxCount = maxCount;
+    }
+
+    public IEnumerable<ISkill> GetAllSkills()
+    {
+        return _skills.Values;
+    }
+
+    public bool TryGetSkill(string ID, out ISkill skill)
+    {
+        return _skills.TryGetValue(ID, out skill);
     }
 
     public ISkill GetSkill(string ID)
@@ -80,5 +95,26 @@ public class SkillContainer : ISkillContainer
         }
 
         return false;
+    }
+
+    public bool ReleaseSkill(string ID, out ISkill skill)
+    {
+        if (_skills.TryGetValue(ID, out skill))
+        {
+            skill.Disable();
+            _skills.Remove(ID);
+            return true;
+        }
+
+        return false;
+    }
+
+    public void Clear()
+    {
+        string[] skillIDs = _skills.Keys.ToArray();
+        foreach (string id in skillIDs)
+        {
+            RemoveSkill(id);
+        }
     }
 }

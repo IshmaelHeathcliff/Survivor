@@ -17,14 +17,11 @@ namespace Character.Damage
         Collider2D _collider;
         SpriteRenderer _renderer;
 
-        public Vector2 Direction { get; set; }
 
         void Awake()
         {
             _collider = GetComponent<Collider2D>();
             _renderer = GetComponent<SpriteRenderer>();
-
-            BaseDamage = 100;
         }
 
 
@@ -48,7 +45,7 @@ namespace Character.Damage
             };
 
 
-            var damage = new AttackDamage(this, damageable, keywords, DamageType.Simple, BaseDamage, 1, 1);
+            var damage = new AttackDamage(this, damageable, keywords, DamageType.Simple, Damage.BaseValue, 1, 1);
             damage.Apply();
         }
 
@@ -84,8 +81,11 @@ namespace Character.Damage
 
         public override void Cancel()
         {
-            AttackerController.RemoveAttacker(this);
-            Addressables.ReleaseInstance(gameObject);
+            AttackerController?.RemoveAttacker(this);
+            if (this != null)
+            {
+                Addressables.ReleaseInstance(gameObject);
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 using Character.Damage;
 using System;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 public class AttackEffect : SkillEffect<AttackEffectConfig>
 {
@@ -14,9 +15,15 @@ public class AttackEffect : SkillEffect<AttackEffectConfig>
 
     async UniTaskVoid CreateAttacker()
     {
-        _attacker = await _attackerController.CreateAttacker(SkillEffectConfig.AttackerAddress);
-        _attacker.BaseDamage = SkillEffectConfig.Damage;
+        _attacker = await _attackerController.CreateAttacker(Owner.ID, SkillEffectConfig.AttackerID);
+        if (Owner is not AttackSkill attackSkill)
+        {
+            Debug.LogError("AttackEffect is not owned by an AttackSkill");
+            return;
+        }
+        _attacker.SetSkill(attackSkill);
     }
+
 
     protected override void OnApply()
     {
@@ -25,6 +32,9 @@ public class AttackEffect : SkillEffect<AttackEffectConfig>
 
     protected override void OnCancel()
     {
-        _attacker.Cancel();
+        if (_attacker != null)
+        {
+            _attacker.Cancel();
+        }
     }
 }

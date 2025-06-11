@@ -1,0 +1,10 @@
+[
+  {
+    "AttackerID": "dice",
+    "Name": "奇奥骰子",
+    "Address": "Assets/Prefabs/Dice.prefab",
+    "Keywords": [
+      "Damage"
+    ]
+  }
+]

@@ -110,6 +110,7 @@ GameObject:
   - component: {fileID: 1009774605795107126}
   - component: {fileID: 8392287563744253542}
   - component: {fileID: 4516161229600512672}
+  - component: {fileID: 7504329890447957612}
   m_Layer: 6
   m_Name: Enemy (1)
   m_TagString: Untagged
@@ -288,8 +289,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterId: 5511fa9c6177d214692bbbfabb853e5a
   _baseHealth: 10
-  _baseMana: 10
-  _baseAccuracy: 10
 --- !u!114 &1009774605795107126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -331,3 +330,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bcb2888a042441ea131d7b19993507b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7504329890447957612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7152041979365510245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4979da59659f7fe44a793b215343f42c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _skillIDs:
+  - dash
+  _skillSlotCount: 1

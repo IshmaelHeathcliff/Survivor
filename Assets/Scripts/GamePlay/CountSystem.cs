@@ -1,93 +1,96 @@
 using System;
 using System.Collections.Generic;
+using Character;
+using Character.Player;
 
 public class ValueCounter
 {
     public string ID { get; set; }
+    public ICharacterModel Model { get; set; }
     public int Value { get; set; } = 0;
     public EasyEvent<CountChangedEvent> ValueChanged { get; set; } = new();
 
-    public ValueCounter(string id)
+    public ValueCounter(string id, ICharacterModel model)
     {
         ID = id;
+        Model = model;
     }
 
     public void IncrementCount(int amount)
     {
         Value += amount;
-        ValueChanged?.Trigger(new CountChangedEvent(ID, Value));
+        ValueChanged?.Trigger(new CountChangedEvent(ID, Value, Model));
     }
 
     public void DecrementCount(int amount)
     {
         Value -= amount;
-        ValueChanged?.Trigger(new CountChangedEvent(ID, Value));
+        ValueChanged?.Trigger(new CountChangedEvent(ID, Value, Model));
     }
 
 }
 
-public struct CountChangedEvent : ISkillReleaseEvent
+public struct CountChangedEvent : IReleaseEvent
 {
     public string ID { get; set; }
     public int Value { get; set; }
+    public ICharacterModel Model { get; set; }
 
-    public CountChangedEvent(string id, int value)
+    public CountChangedEvent(string id, int value, ICharacterModel model)
     {
         ID = id;
         Value = value;
+        Model = model;
     }
 }
 
 public class CountSystem : AbstractSystem
 {
-    Dictionary<string, ValueCounter> _countValues = new();
-
-    public int GetCount(string ID)
+    public int GetCount(string ID, ICharacterModel model)
     {
-        if (!_countValues.ContainsKey(ID))
+        if (!model.CountValues.ContainsKey(ID))
         {
-            _countValues.Add(ID, new ValueCounter(ID));
+            model.CountValues.Add(ID, new ValueCounter(ID, model));
         }
 
-        return _countValues[ID].Value;
+        return model.CountValues[ID].Value;
     }
 
-    public IUnRegister Register(string ID, Action<CountChangedEvent> onValueChanged)
+    public IUnRegister Register(string ID, ICharacterModel model, Action<CountChangedEvent> onValueChanged)
     {
-        if (!_countValues.ContainsKey(ID))
+        if (!model.CountValues.ContainsKey(ID))
         {
-            _countValues.Add(ID, new ValueCounter(ID));
+            model.CountValues.Add(ID, new ValueCounter(ID, model));
         }
 
-        return _countValues[ID].ValueChanged.Register(onValueChanged);
+        return model.CountValues[ID].ValueChanged.Register(onValueChanged);
     }
 
-    public void Unregister(string ID, Action<CountChangedEvent> onValueChanged)
+    public void Unregister(string ID, ICharacterModel model, Action<CountChangedEvent> onValueChanged)
     {
-        if (_countValues.ContainsKey(ID))
+        if (model.CountValues.ContainsKey(ID))
         {
-            _countValues[ID].ValueChanged.UnRegister(onValueChanged);
+            model.CountValues[ID].ValueChanged.UnRegister(onValueChanged);
         }
     }
 
-    public void IncrementKillCount(int amount)
+    public void IncrementKillCount(ICharacterModel model, int amount)
     {
-        IncrementCount("KillCount", amount);
+        IncrementCount("KillCount", model, amount);
     }
 
-    public void IncrementCount(string ID, int amount)
+    public void IncrementCount(string ID, ICharacterModel model, int amount)
     {
-        if (!_countValues.ContainsKey(ID))
+        if (!model.CountValues.ContainsKey(ID))
         {
-            _countValues.Add(ID, new ValueCounter(ID));
+            model.CountValues.Add(ID, new ValueCounter(ID, model));
         }
 
-        _countValues[ID].IncrementCount(amount);
+        model.CountValues[ID].IncrementCount(amount);
     }
 
     protected override void OnInit()
     {
-        _countValues.Add("KillCount", new ValueCounter("KillCount"));
     }
 
 }

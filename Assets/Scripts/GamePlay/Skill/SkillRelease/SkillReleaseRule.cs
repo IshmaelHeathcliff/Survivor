@@ -17,6 +17,6 @@ public class SkillReleaseRule
 
     public string GetDescription()
     {
-        return $"{ID} {Condition.GetDescription()} {Reward.Description}";
+        return $"{ID} {Condition.Description} {Reward.Description}";
     }
 }

@@ -27,46 +27,58 @@ MonoBehaviour:
         mscorlib
     - Name: 
       Entry: 12
-      Data: 7
+      Data: 9
     - Name: 
       Entry: 7
-      Data: 1|ActiveSkillConfig, Assembly-CSharp
+      Data: 1|AttackSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 2|ActiveSkillConfig, Assembly-CSharp
+      Data: 2|OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 3|ActiveSkillConfig, Assembly-CSharp
+      Data: 3|OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 4|ActiveSkillConfig, Assembly-CSharp
+      Data: 4|OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 5|ActiveSkillConfig, Assembly-CSharp
+      Data: 5|OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 6|PassiveSkillConfig, Assembly-CSharp
+      Data: 6|OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 7|PassiveSkillConfig, Assembly-CSharp
+      Data: 7|OneTimeSkillConfig, Assembly-CSharp
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 8|OneTimeSkillConfig, Assembly-CSharp
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 9|AttackSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 

@@ -6,27 +6,14 @@ namespace Character.Stat
 {
     public class Stats : IStatModifierFactory
     {
-        protected Dictionary<string, IStat> InternalStats = new()
-        {
-            { "Health", new ConsumableStat("Health") },
-            { "HealthRegen", new Stat("HealthRegen") },
-            { "MoveSpeed", new Stat("MoveSpeed") },
-
-            { "CoinGain", new Stat("CoinGain") },
-            { "WoodGain", new Stat("WoodGain") },
-            { "CoinInterest", new Stat("CoinInterest") },
-            { "WoodInterest", new Stat("WoodInterest") },
-
-            { "Damage", new KeywordStat("Damage") },
-            { "CriticalChance", new Stat("CriticalChance") },
-            { "CriticalMultiplier", new Stat("CriticalMultiplier") },
-            { "Duration", new Stat("Duration")},
-            { "Cooldown", new Stat("Cooldown")},
-            { "AttackSpeed", new Stat("AttackSpeed") },
-            { "AttackArea", new Stat("AttackArea") },
-        };
+        protected Dictionary<string, IStat> InternalStats = new();
 
         public string FactoryID { get; set; }
+
+        public void AddStat(IStat stat)
+        {
+            InternalStats[stat.Name] = stat;
+        }
 
 
         public IEnumerable<IStat> GetAllStats()
@@ -42,6 +29,7 @@ namespace Character.Stat
             }
             else
             {
+                Debug.LogError("未找到Stat: " + statName);
                 return null;
             }
         }
@@ -69,7 +57,7 @@ namespace Character.Stat
             IStat stat = GetStat(modifierConfig.StatName);
             if (stat != null)
             {
-                var modifier = new StatSingleIntModifier(modifierConfig, stat, value)
+                var modifier = new StatSingleFloatModifier(modifierConfig, stat, value)
                 {
                     FactoryID = FactoryID
                 };
@@ -87,7 +75,7 @@ namespace Character.Stat
             IStat stat = GetStat(modifierConfig.StatName);
             if (stat != null)
             {
-                var modifier = new StatSingleIntModifier(modifierConfig, stat)
+                var modifier = new StatSingleFloatModifier(modifierConfig, stat)
                 {
                     FactoryID = FactoryID
                 };

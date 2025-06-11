@@ -1,146 +1,104 @@
 [
   {
-    "$type": "ActiveSkillConfig, Assembly-CSharp",
-    "SkillEffectConfigsOnUpdate": [
+    "$type": "AttackSkillConfig, Assembly-CSharp",
+    "AttackEffectConfigs": [
       {
-        "$type": "AttackEffectConfig, Assembly-CSharp",
-        "Damage": 6,
-        "CriticalChance": 0,
-        "CriticalMultiplier": 0,
-        "Area": 0,
-        "Duration": 0,
-        "AttackerAddress": "Assets/Prefabs/Dice.prefab",
+        "AttackerID": "dice",
         "Description": "施加攻击"
       }
     ],
-    "Cooldown": 1.0,
+    "Damage": 6.0,
+    "CriticalChance": 5.0,
+    "CriticalMultiplier": 50.0,
+    "AttackArea": 1.0,
+    "Duration": 1.0,
+    "SkillEffectConfigsOnUpdate": null,
+    "Cooldown": 2.0,
+    "ID": "dice0",
+    "Name": "奇奥骰子",
+    "Keywords": [],
+    "Description": null,
+    "SkillEffectConfigsOnEnable": null
+  },
+  {
+    "$type": "OneTimeSkillConfig, Assembly-CSharp",
     "ID": "dice1",
     "Name": "奇奥骰子-1点",
-    "Keywords": null,
+    "Keywords": [],
     "Description": null,
     "SkillEffectConfigsOnEnable": [
       {
-        "$type": "ModifierEffectConfig, Assembly-CSharp",
+        "$type": "LocalModifierEffectConfig, Assembly-CSharp",
+        "AttackSkillID": "dice0",
         "ModifierID": "damage_add",
         "Value": 5,
-        "Description": "添加词条"
+        "Description": "添加局部词条"
       }
     ]
   },
   {
-    "$type": "ActiveSkillConfig, Assembly-CSharp",
-    "SkillEffectConfigsOnUpdate": [
-      {
-        "$type": "AttackEffectConfig, Assembly-CSharp",
-        "Damage": 6,
-        "CriticalChance": 0,
-        "CriticalMultiplier": 0,
-        "Area": 0,
-        "Duration": 0,
-        "AttackerAddress": "Assets/Prefabs/Dice.prefab",
-        "Description": "施加攻击"
-      }
-    ],
-    "Cooldown": 1.0,
+    "$type": "OneTimeSkillConfig, Assembly-CSharp",
     "ID": "dice2",
     "Name": "奇奥骰子-2点",
-    "Keywords": null,
+    "Keywords": [],
     "Description": null,
     "SkillEffectConfigsOnEnable": [
       {
         "$type": "ModifierEffectConfig, Assembly-CSharp",
-        "ModifierID": "health_add",
-        "Value": 50,
+        "ModifierID": "cdi_increase",
+        "Value": 30,
         "Description": "添加词条"
       }
     ]
   },
   {
-    "$type": "ActiveSkillConfig, Assembly-CSharp",
-    "SkillEffectConfigsOnUpdate": [
-      {
-        "$type": "AttackEffectConfig, Assembly-CSharp",
-        "Damage": 6,
-        "CriticalChance": 0,
-        "CriticalMultiplier": 0,
-        "Area": 0,
-        "Duration": 0,
-        "AttackerAddress": "Assets/Prefabs/Dice.prefab",
-        "Description": "施加攻击"
-      }
-    ],
-    "Cooldown": 1.0,
+    "$type": "OneTimeSkillConfig, Assembly-CSharp",
     "ID": "dice3",
     "Name": "奇奥骰子-3点",
-    "Keywords": null,
+    "Keywords": [],
     "Description": null,
     "SkillEffectConfigsOnEnable": [
       {
-        "$type": "ModifierEffectConfig, Assembly-CSharp",
-        "ModifierID": "health_increase",
-        "Value": 50,
-        "Description": "添加词条"
+        "$type": "LocalModifierEffectConfig, Assembly-CSharp",
+        "AttackSkillID": "dice0",
+        "ModifierID": "critical_add",
+        "Value": 5,
+        "Description": "添加局部词条"
       }
     ]
   },
   {
-    "$type": "ActiveSkillConfig, Assembly-CSharp",
-    "SkillEffectConfigsOnUpdate": [
-      {
-        "$type": "AttackEffectConfig, Assembly-CSharp",
-        "Damage": 6,
-        "CriticalChance": 0,
-        "CriticalMultiplier": 0,
-        "Area": 0,
-        "Duration": 0,
-        "AttackerAddress": "Assets/Prefabs/Dice.prefab",
-        "Description": "施加攻击"
-      }
-    ],
-    "Cooldown": 1.0,
+    "$type": "OneTimeSkillConfig, Assembly-CSharp",
     "ID": "dice4",
     "Name": "奇奥骰子-4点",
-    "Keywords": null,
+    "Keywords": [],
     "Description": null,
     "SkillEffectConfigsOnEnable": [
       {
         "$type": "ModifierEffectConfig, Assembly-CSharp",
-        "ModifierID": "damage_fix",
-        "Value": 10,
+        "ModifierID": "coin_add",
+        "Value": 1,
         "Description": "添加词条"
       }
     ]
   },
   {
-    "$type": "ActiveSkillConfig, Assembly-CSharp",
-    "SkillEffectConfigsOnUpdate": [
-      {
-        "$type": "AttackEffectConfig, Assembly-CSharp",
-        "Damage": 6,
-        "CriticalChance": 0,
-        "CriticalMultiplier": 0,
-        "Area": 0,
-        "Duration": 0,
-        "AttackerAddress": "Assets/Prefabs/Dice.prefab",
-        "Description": "施加攻击"
-      }
-    ],
-    "Cooldown": 1.0,
+    "$type": "OneTimeSkillConfig, Assembly-CSharp",
     "ID": "dice5",
     "Name": "奇奥骰子-5点",
-    "Keywords": null,
+    "Keywords": [],
     "Description": null,
     "SkillEffectConfigsOnEnable": [
       {
         "$type": "ModifierEffectConfig, Assembly-CSharp",
-        "ModifierID": "damage_increase",
-        "Value": 20,
+        "ModifierID": "projectileCount_add",
+        "Value": 1,
         "Description": "添加词条"
       }
     ]
   },
   {
-    "$type": "PassiveSkillConfig, Assembly-CSharp",
+    "$type": "OneTimeSkillConfig, Assembly-CSharp",
     "ID": "dice6",
     "Name": "奇奥骰子-6点",
     "Keywords": [],
@@ -149,7 +107,7 @@
       {
         "$type": "CountIncrementEffectConfig, Assembly-CSharp",
         "CountValueID": "KillCount",
-        "Increment": 50,
+        "Increment": 5,
         "ChildEffects": [
           {
             "$type": "RollDiceEffectConfig, Assembly-CSharp",
@@ -157,7 +115,7 @@
               {
                 "$type": "AcquireResourceConfig, Assembly-CSharp",
                 "ResourceID": "Wood",
-                "Amount": 0,
+                "Amount": 1,
                 "Description": "获取资源"
               }
             ],
@@ -169,18 +127,159 @@
     ]
   },
   {
-    "$type": "PassiveSkillConfig, Assembly-CSharp",
+    "$type": "OneTimeSkillConfig, Assembly-CSharp",
     "ID": "loaded_dice",
     "Name": "灌铅骰子",
-    "Keywords": null,
+    "Keywords": [],
     "Description": null,
     "SkillEffectConfigsOnEnable": [
       {
-        "$type": "ModifierEffectConfig, Assembly-CSharp",
-        "ModifierID": "damage_more",
-        "Value": 100,
-        "Description": "添加词条"
+        "$type": "CountIncrementEffectConfig, Assembly-CSharp",
+        "CountValueID": "KillCount",
+        "Increment": 5,
+        "ChildEffects": [
+          {
+            "$type": "RollDiceEffectConfig, Assembly-CSharp",
+            "ChildEffects": [
+              {
+                "$type": "DiceOnValueEffectConfig, Assembly-CSharp",
+                "Value": 1,
+                "ChildEffects": [
+                  {
+                    "$type": "LocalModifierEffectConfig, Assembly-CSharp",
+                    "AttackSkillID": "dice0",
+                    "ModifierID": "damage_add",
+                    "Value": 5,
+                    "Description": "添加局部词条"
+                  }
+                ],
+                "Description": "当骰子数满足时触发"
+              },
+              {
+                "$type": "DiceOnValueEffectConfig, Assembly-CSharp",
+                "Value": 2,
+                "ChildEffects": [
+                  {
+                    "$type": "ModifierEffectConfig, Assembly-CSharp",
+                    "ModifierID": "cdi_increase",
+                    "Value": 30,
+                    "Description": "添加词条"
+                  }
+                ],
+                "Description": "当骰子数满足时触发"
+              },
+              {
+                "$type": "DiceOnValueEffectConfig, Assembly-CSharp",
+                "Value": 3,
+                "ChildEffects": [
+                  {
+                    "$type": "LocalModifierEffectConfig, Assembly-CSharp",
+                    "AttackSkillID": "dice0",
+                    "ModifierID": "critical_add",
+                    "Value": 5,
+                    "Description": "添加局部词条"
+                  }
+                ],
+                "Description": "当骰子数满足时触发"
+              },
+              {
+                "$type": "DiceOnValueEffectConfig, Assembly-CSharp",
+                "Value": 4,
+                "ChildEffects": [
+                  {
+                    "$type": "AcquireResourceConfig, Assembly-CSharp",
+                    "ResourceID": "Coin",
+                    "Amount": 10,
+                    "Description": "获取资源"
+                  }
+                ],
+                "Description": "当骰子数满足时触发"
+              },
+              {
+                "$type": "DiceOnValueEffectConfig, Assembly-CSharp",
+                "Value": 5,
+                "ChildEffects": [
+                  {
+                    "$type": "AcquireResourceConfig, Assembly-CSharp",
+                    "ResourceID": "Wood",
+                    "Amount": 5,
+                    "Description": "获取资源"
+                  }
+                ],
+                "Description": "当骰子数满足时触发"
+              },
+              {
+                "$type": "DiceOnValueEffectConfig, Assembly-CSharp",
+                "Value": 6,
+                "ChildEffects": [
+                  {
+                    "$type": "NestedEffectConfig, Assembly-CSharp",
+                    "ChildEffects": [
+                      {
+                        "$type": "LocalModifierEffectConfig, Assembly-CSharp",
+                        "AttackSkillID": "dice0",
+                        "ModifierID": "damage_add",
+                        "Value": 5,
+                        "Description": "添加局部词条"
+                      },
+                      {
+                        "$type": "ModifierEffectConfig, Assembly-CSharp",
+                        "ModifierID": "cdi_increase",
+                        "Value": 30,
+                        "Description": "添加词条"
+                      },
+                      {
+                        "$type": "LocalModifierEffectConfig, Assembly-CSharp",
+                        "AttackSkillID": "dice0",
+                        "ModifierID": "critical_add",
+                        "Value": 5,
+                        "Description": "添加局部词条"
+                      },
+                      {
+                        "$type": "AcquireResourceConfig, Assembly-CSharp",
+                        "ResourceID": "Coin",
+                        "Amount": 10,
+                        "Description": "获取资源"
+                      },
+                      {
+                        "$type": "AcquireResourceConfig, Assembly-CSharp",
+                        "ResourceID": "Wood",
+                        "Amount": 5,
+                        "Description": "获取资源"
+                      }
+                    ],
+                    "Description": null
+                  }
+                ],
+                "Description": "当骰子数满足时触发"
+              }
+            ],
+            "Description": "掷骰子"
+          }
+        ],
+        "Description": "计数"
       }
     ]
+  },
+  {
+    "$type": "AttackSkillConfig, Assembly-CSharp",
+    "AttackEffectConfigs": [
+      {
+        "AttackerID": "self",
+        "Description": "施加攻击"
+      }
+    ],
+    "Damage": 5.0,
+    "CriticalChance": 0.0,
+    "CriticalMultiplier": 0.0,
+    "AttackArea": 0.0,
+    "Duration": 0.0,
+    "SkillEffectConfigsOnUpdate": null,
+    "Cooldown": 0.0,
+    "ID": "dash",
+    "Name": "冲刺",
+    "Keywords": [],
+    "Description": null,
+    "SkillEffectConfigsOnEnable": null
   }
 ]

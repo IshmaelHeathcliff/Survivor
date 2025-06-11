@@ -17,6 +17,7 @@ namespace Character.State
         bool HasState(IState state);
         void ResetStateTime(float time);
         void DecreaseStateTime(float time);
+        void Clear();
     }
 
 
@@ -118,6 +119,15 @@ namespace Character.State
                     OnStateCountChanged?.Trigger(bc);
                 }
             }
+        }
+
+        public void Clear()
+        {
+            foreach (IState state in _states.Values)
+            {
+                state.Disable();
+            }
+            _states.Clear();
         }
 
     }

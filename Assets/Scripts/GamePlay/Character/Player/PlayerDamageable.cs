@@ -17,7 +17,7 @@ namespace Character.Damage
 
         void Start()
         {
-            SetStats(CharacterController.Stats);
+            SetStats(CharacterController.CharaterStats);
 
             OnHurt.Register(() => { }).UnRegisterWhenDisabled(this);
             OnDeath.Register(() => Dead().Forget()).UnRegisterWhenDisabled(this);

@@ -12,41 +12,21 @@ namespace Character.Player
     {
         [SerializeField] float _attackInterval;
         PlayerInput.PlayerActions _playerInput;
+        AttackerCreateSystem _attackerCreateSystem;
 
-        protected override async UniTask<IAttacker> GetOrCreateAttackerAsyncInternal(string address = null)
+        protected override async UniTask<IAttacker> CreateAttackerInternal(string skillID, string attackerID)
         {
             Vector2 playerPos = this.SendQuery(new PlayerPositionQuery());
             Vector2 direction = ((Vector2)Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()) - playerPos).normalized;
 
-            var obj = await Addressables.InstantiateAsync(address, transform)
-                                        .ToUniTask(cancellationToken: GlobalCancellation.GetCombinedToken(this));
-            PlayerAttacker attacker = obj.GetComponent<PlayerAttacker>();
+            IAttacker attacker = await GetOrCreateAttacker(skillID, attackerID);
 
             float angle = Random.Range(0, 2 * Mathf.PI);
             var randomDirection = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
             attacker.Direction = (direction + randomDirection * direction.magnitude / 2).normalized;
-            attacker.SetStats(CharacterController.Stats);
             transform.DetachChildren();
 
             return attacker;
-        }
-
-        async UniTaskVoid Attack()
-        {
-            if (!CanAttack)
-            {
-                return;
-            }
-
-            CanAttack = false;
-            await CreateAttacker("dice");
-            await UniTask.Delay(TimeSpan.FromSeconds(_attackInterval));
-            CanAttack = true;
-        }
-
-        void Update()
-        {
-            // Attack().Forget();
         }
 
         void AttackAction(InputAction.CallbackContext context)

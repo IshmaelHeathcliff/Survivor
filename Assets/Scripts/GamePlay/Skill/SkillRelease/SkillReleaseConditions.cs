@@ -2,39 +2,51 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Character;
+using Character.Damage;
 using UnityEngine;
 
-public interface ISkillReleaseEvent
+public interface IReleaseEvent
 {
-
+    ICharacterModel Model { get; set; }
 }
+
 
 /// <summary>
 /// 技能释放条件接口
 /// </summary>
 public interface ISkillReleaseCondition
 {
-    EasyEvent OnCondition { get; set; }
-    void CheckCondition(ISkillReleaseEvent e);
+    EasyEvent<IReleaseEvent> OnRelease { get; }
+    List<string> SkillsToRelease { get; }
+    void CheckCondition(IReleaseEvent e);
     string Description { get; }
-    string GetDescription();
 }
 
-public abstract class ReleaseOnSkillAcquiredCondition : ISkillReleaseCondition
+public abstract class SkillReleaseCondition : ISkillReleaseCondition
 {
-    public List<string> RequiredSkillIDs { get; set; }
-    public List<string> SkillsToRelease { get; set; }
-    public EasyEvent OnCondition { get; set; }
+    public EasyEvent<IReleaseEvent> OnRelease { get; set; } = new();
     public string Description { get; protected set; }
-    public ReleaseOnSkillAcquiredCondition(List<string> requiredSkillIDs, List<string> skillsToRelease, string description)
+    public List<string> SkillsToRelease { get; set; }
+
+    public SkillReleaseCondition(List<string> skillsToRelease, string description)
     {
-        OnCondition = new EasyEvent();
-        RequiredSkillIDs = requiredSkillIDs ?? new List<string>();
-        SkillsToRelease = skillsToRelease ?? new List<string>();
         Description = description;
+        SkillsToRelease = skillsToRelease ?? new List<string>();
     }
 
-    public virtual void CheckCondition(ISkillReleaseEvent e)
+    public abstract void CheckCondition(IReleaseEvent e);
+}
+
+
+public abstract class ReleaseOnSkillAcquiredCondition : SkillReleaseCondition
+{
+    public List<string> RequiredSkillIDs { get; set; }
+    public ReleaseOnSkillAcquiredCondition(List<string> requiredSkillIDs, List<string> skillsToRelease, string description) : base(skillsToRelease, description)
+    {
+        RequiredSkillIDs = requiredSkillIDs ?? new List<string>();
+    }
+
+    public override void CheckCondition(IReleaseEvent e)
     {
         if (e is not SkillAcquiredEvent skillAcquiredEvent)
         {
@@ -46,8 +58,6 @@ public abstract class ReleaseOnSkillAcquiredCondition : ISkillReleaseCondition
             return;
         }
     }
-
-    public abstract string GetDescription();
 }
 
 /// <summary>
@@ -55,16 +65,12 @@ public abstract class ReleaseOnSkillAcquiredCondition : ISkillReleaseCondition
 /// </summary>
 public class SpecificSkillsReleaseCondition : ReleaseOnSkillAcquiredCondition
 {
-
     public SpecificSkillsReleaseCondition(List<string> requiredSkillIDs, List<string> skillsToRelease, string description) : base(requiredSkillIDs, skillsToRelease, description)
     {
-        RequiredSkillIDs = requiredSkillIDs ?? new List<string>();
-        SkillsToRelease = skillsToRelease ?? new List<string>();
         Description = string.IsNullOrEmpty(description) ? $"凑齐技能: {string.Join(", ", RequiredSkillIDs)}" : description;
-        OnCondition = new EasyEvent();
     }
 
-    public override void CheckCondition(ISkillReleaseEvent e)
+    public override void CheckCondition(IReleaseEvent e)
     {
         base.CheckCondition(e);
 
@@ -75,13 +81,8 @@ public class SpecificSkillsReleaseCondition : ReleaseOnSkillAcquiredCondition
 
         if (skillAcquiredEvent.SkillsInSlot.HasSkills(RequiredSkillIDs))
         {
-            OnCondition.Trigger();
+            OnRelease.Trigger(e);
         }
-    }
-
-    public override string GetDescription()
-    {
-        return Description;
     }
 }
 
@@ -90,14 +91,11 @@ public class AnySkillsCountReleaseCondition : ReleaseOnSkillAcquiredCondition
     public int RequiredCount { get; set; }
     public AnySkillsCountReleaseCondition(List<string> requiredSkillIDs, List<string> skillsToRelease, int requiredCount, string description) : base(requiredSkillIDs, skillsToRelease, description)
     {
-        RequiredSkillIDs = requiredSkillIDs ?? new List<string>();
-        SkillsToRelease = skillsToRelease ?? new List<string>();
         RequiredCount = requiredCount;
         Description = string.IsNullOrEmpty(description) ? $"凑齐技能 {string.Join(", ", RequiredSkillIDs)} 至少 {RequiredCount} 个" : description;
-        OnCondition = new EasyEvent();
     }
 
-    public override void CheckCondition(ISkillReleaseEvent e)
+    public override void CheckCondition(IReleaseEvent e)
     {
         base.CheckCondition(e);
 
@@ -108,33 +106,23 @@ public class AnySkillsCountReleaseCondition : ReleaseOnSkillAcquiredCondition
 
         if (skillAcquiredEvent.SkillsInSlot.HasCount(RequiredSkillIDs) >= RequiredCount)
         {
-            OnCondition.Trigger();
+            OnRelease.Trigger(e);
         }
-    }
-
-    public override string GetDescription()
-    {
-        return Description;
     }
 }
 
-public class ValueCountCondition : ISkillReleaseCondition
+public class ValueCountCondition : SkillReleaseCondition
 {
     public string ValueID { get; set; }
     public int Value { get; set; }
-    public EasyEvent OnCondition { get; set; }
-    public string Description { get; protected set; }
 
-
-    public ValueCountCondition(string valueID, int value, string description)
+    public ValueCountCondition(string valueID, int value, List<string> skillsToRelease, string description) : base(skillsToRelease, description)
     {
         ValueID = valueID;
         Value = value;
-        Description = description;
-        OnCondition = new EasyEvent();
     }
 
-    public void CheckCondition(ISkillReleaseEvent e)
+    public override void CheckCondition(IReleaseEvent e)
     {
         if (e is not CountChangedEvent countChangedEvent)
         {
@@ -143,31 +131,23 @@ public class ValueCountCondition : ISkillReleaseCondition
 
         if (countChangedEvent.ID == ValueID && countChangedEvent.Value >= Value)
         {
-            OnCondition.Trigger();
+            OnRelease.Trigger(e);
         }
-    }
-
-    public string GetDescription()
-    {
-        return Description;
     }
 }
 
 /// <summary>
 /// 复合释放条件（AND逻辑）
 /// </summary>
-public class CompositeAndReleaseCondition : ISkillReleaseCondition
+public class CompositeAndReleaseCondition : SkillReleaseCondition
 {
     public List<ISkillReleaseCondition> Conditions { get; set; }
-    public string Description { get; set; }
-    public EasyEvent OnCondition { get; set; }
-    public CompositeAndReleaseCondition(List<ISkillReleaseCondition> conditions, string description = "")
+    public CompositeAndReleaseCondition(List<ISkillReleaseCondition> conditions, string description = "") : base(conditions.SelectMany(c => c.SkillsToRelease).ToList(), description)
     {
         Conditions = conditions ?? new List<ISkillReleaseCondition>();
         Description = string.IsNullOrEmpty(description)
-            ? $"满足所有条件: {string.Join(" 且 ", Conditions.Select(c => c.GetDescription()))}"
+            ? $"满足所有条件: {string.Join(" 且 ", Conditions.Select(c => c.Description))}"
             : description;
-        OnCondition = new EasyEvent();
 
         // 用于记录每个子条件是否已触发
         bool[] triggeredFlags = new bool[Conditions.Count];
@@ -175,64 +155,51 @@ public class CompositeAndReleaseCondition : ISkillReleaseCondition
         for (int i = 0; i < Conditions.Count; i++)
         {
             int index = i; // 捕获当前索引
-            Conditions[i].OnCondition.Register(() =>
+            Conditions[i].OnRelease.Register((e) =>
             {
                 triggeredFlags[index] = true;
                 // 检查所有子条件是否都已触发
                 if (triggeredFlags.All(flag => flag))
                 {
-                    OnCondition.Trigger();
+                    OnRelease.Trigger(e);
                 }
             });
         }
     }
 
-    public void CheckCondition(ISkillReleaseEvent e)
+    public override void CheckCondition(IReleaseEvent e)
     {
         foreach (ISkillReleaseCondition condition in Conditions)
         {
             condition.CheckCondition(e);
         }
-    }
-
-    public string GetDescription()
-    {
-        return Description;
     }
 }
 
 /// <summary>
 /// 复合释放条件（OR逻辑）
 /// </summary>
-public class CompositeOrReleaseCondition : ISkillReleaseCondition
+public class CompositeOrReleaseCondition : SkillReleaseCondition
 {
     public List<ISkillReleaseCondition> Conditions { get; set; }
-    public string Description { get; set; }
-    public EasyEvent OnCondition { get; set; }
-    public CompositeOrReleaseCondition(List<ISkillReleaseCondition> conditions, string description = "")
+    public CompositeOrReleaseCondition(List<ISkillReleaseCondition> conditions, string description = "") : base(conditions.SelectMany(c => c.SkillsToRelease).ToList(), description)
     {
         Conditions = conditions ?? new List<ISkillReleaseCondition>();
         Description = string.IsNullOrEmpty(description)
-            ? $"满足任一条件: {string.Join(" 或 ", Conditions.Select(c => c.GetDescription()))}"
+            ? $"满足任一条件: {string.Join(" 或 ", Conditions.Select(c => c.Description))}"
             : description;
-        OnCondition = new EasyEvent();
 
         foreach (ISkillReleaseCondition condition in Conditions)
         {
-            condition.OnCondition.Register(OnCondition.Trigger);
+            condition.OnRelease.Register(e => OnRelease.Trigger(e));
         }
     }
 
-    public void CheckCondition(ISkillReleaseEvent e)
+    public override void CheckCondition(IReleaseEvent e)
     {
         foreach (ISkillReleaseCondition condition in Conditions)
         {
             condition.CheckCondition(e);
         }
-    }
-
-    public string GetDescription()
-    {
-        return Description;
     }
 }

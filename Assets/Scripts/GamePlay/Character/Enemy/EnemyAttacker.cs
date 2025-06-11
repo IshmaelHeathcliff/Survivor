@@ -15,7 +15,6 @@ namespace Character.Damage
         void Awake()
         {
             _collider = GetComponent<Collider2D>();
-            BaseDamage = 10;
         }
 
         void Start()
@@ -59,11 +58,11 @@ namespace Character.Damage
 
             var keywords = new List<string>()
             {
-                "Damage", "Attack", "Physical",
+                "Damage", "Attack",
             };
 
 
-            var damage = new AttackDamage(this, damageable, keywords, DamageType.Simple, BaseDamage, 1, 1);
+            var damage = new AttackDamage(this, damageable, keywords, DamageType.Simple, Damage.BaseValue, 1, 1);
             damage.Apply();
         }
 
