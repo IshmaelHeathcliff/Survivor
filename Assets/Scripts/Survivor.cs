@@ -2,9 +2,10 @@
 using Character.State;
 using Character.Modifier;
 using Character.Player;
+using Character.Damage;
 using SaveLoad;
 using Scene;
-using Character.Damage;
+using Skill;
 
 public class GameFrame : Architecture<GameFrame>
 {

@@ -1,9 +1,7 @@
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
 using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
-using System.Threading.Tasks;
 
 public class Test : MonoBehaviour
 {

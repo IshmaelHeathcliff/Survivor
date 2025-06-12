@@ -1,7 +1,6 @@
 using System;
-using System.Collections.Generic;
 using Character;
-using Character.Player;
+using Skill;
 
 public class ValueCounter
 {

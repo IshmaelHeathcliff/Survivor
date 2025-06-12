@@ -1,7 +1,4 @@
-﻿using System;
-using Core;
-using Cysharp.Threading.Tasks;
-using Cysharp.Threading.Tasks.Triggers;
+﻿using Core;
 
 namespace Character.Enemy
 {

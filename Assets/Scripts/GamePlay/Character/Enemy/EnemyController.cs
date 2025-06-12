@@ -1,9 +1,4 @@
-﻿using Character.Damage;
-using Character.Modifier;
-using Character.Stat;
-using Core;
-
-namespace Character.Enemy
+﻿namespace Character.Enemy
 {
     public class EnemyController : CharacterControllerWithFSM<EnemyModel, EnemiesModel, EnemyStateID>
     {

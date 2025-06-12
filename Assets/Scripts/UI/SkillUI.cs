@@ -1,41 +1,45 @@
 using System.Text;
 using Character.Player;
+using Skill;
 using TMPro;
 using UnityEngine;
 
-public class SkillUI : MonoBehaviour, IController
+namespace UI
 {
-    [SerializeField] TextMeshProUGUI _skillsDescription;
-
-    StringBuilder _skillsDescriptionBuilder = new();
-
-    void Awake()
+    public class SkillUI : MonoBehaviour, IController
     {
-        this.RegisterEvent<SkillAcquiredEvent>(e =>
+        [SerializeField] TextMeshProUGUI _skillsDescription;
+
+        StringBuilder _skillsDescriptionBuilder = new();
+
+        void Awake()
         {
-            if (e.Model is PlayerModel playerModel)
+            this.RegisterEvent<SkillAcquiredEvent>(e =>
             {
-                _skillsDescriptionBuilder.Clear();
-                _skillsDescriptionBuilder.AppendLine("已装备技能：");
-                foreach (ISkill skill in playerModel.SkillsInSlot.GetAllSkills())
+                if (e.Model is PlayerModel playerModel)
                 {
-                    _skillsDescriptionBuilder.AppendLine($"  {skill.Name}");
+                    _skillsDescriptionBuilder.Clear();
+                    _skillsDescriptionBuilder.AppendLine("已装备技能：");
+                    foreach (ISkill skill in playerModel.SkillsInSlot.GetAllSkills())
+                    {
+                        _skillsDescriptionBuilder.AppendLine($"  {skill.Name}");
+                    }
+
+                    _skillsDescriptionBuilder.AppendLine("已吞噬技能：");
+                    foreach (ISkill skill in playerModel.SkillsReleased.GetAllSkills())
+                    {
+                        _skillsDescriptionBuilder.AppendLine($"  {skill.Name}");
+                    }
+
+                    _skillsDescription.text = _skillsDescriptionBuilder.ToString();
+
                 }
+            }).UnRegisterWhenGameObjectDestroyed(gameObject);
+        }
 
-                _skillsDescriptionBuilder.AppendLine("已吞噬技能：");
-                foreach (ISkill skill in playerModel.SkillsReleased.GetAllSkills())
-                {
-                    _skillsDescriptionBuilder.AppendLine($"  {skill.Name}");
-                }
-
-                _skillsDescription.text = _skillsDescriptionBuilder.ToString();
-
-            }
-        }).UnRegisterWhenGameObjectDestroyed(gameObject);
-    }
-
-    public IArchitecture GetArchitecture()
-    {
-        return GameFrame.Interface;
+        public IArchitecture GetArchitecture()
+        {
+            return GameFrame.Interface;
+        }
     }
 }

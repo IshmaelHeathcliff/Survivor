@@ -1,10 +1,12 @@
 ﻿using System.Text;
+using Character.Stat;
 using Character.Player;
 using Sirenix.OdinInspector;
+using Skill;
 using TMPro;
 using UnityEngine;
 
-namespace Character.Stat
+namespace UI
 {
     public class PlayerStatsUIController : MonoBehaviour, IController
     {

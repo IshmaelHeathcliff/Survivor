@@ -1,8 +1,6 @@
 ﻿using Character.Damage;
 using Cysharp.Threading.Tasks;
-using System;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
 

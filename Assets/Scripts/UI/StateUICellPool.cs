@@ -4,9 +4,8 @@ using Cysharp.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
 
-namespace Character.State
+namespace UI
 {
     public class StateUICellPool : MonoBehaviour, IAsyncObjectPool<StateUICell>
     {

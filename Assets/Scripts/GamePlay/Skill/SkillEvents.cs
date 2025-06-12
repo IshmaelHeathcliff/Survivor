@@ -1,63 +1,64 @@
-using System.Collections.Generic;
 using Character;
-using Character.Damage;
 
-public interface ISkillEvent
+namespace Skill
 {
-    ISkillContainer SkillsInSlot { get; set; }
-    ISkillContainer SkillsInRelease { get; set; }
-}
-
-public abstract class SkillEvent : ISkillEvent
-{
-    public ICharacterModel Model { get; set; }
-    public ISkillContainer SkillsInSlot { get; set; }
-    public ISkillContainer SkillsInRelease { get; set; }
-
-    public SkillEvent(ICharacterModel model)
+    public interface ISkillEvent
     {
-        Model = model;
-        SkillsInSlot = model.SkillsInSlot;
-        SkillsInRelease = model.SkillsReleased;
+        ISkillContainer SkillsInSlot { get; set; }
+        ISkillContainer SkillsInRelease { get; set; }
     }
-}
 
-public class SkillSlotCountChangedEvent : SkillEvent
-{
-    public int Count { get; set; }
-
-    public SkillSlotCountChangedEvent(int count, ICharacterModel model) : base(model)
+    public abstract class SkillEvent : ISkillEvent
     {
-        Count = count;
+        public ICharacterModel Model { get; set; }
+        public ISkillContainer SkillsInSlot { get; set; }
+        public ISkillContainer SkillsInRelease { get; set; }
+
+        public SkillEvent(ICharacterModel model)
+        {
+            Model = model;
+            SkillsInSlot = model.SkillsInSlot;
+            SkillsInRelease = model.SkillsReleased;
+        }
     }
-}
 
-public class SkillReleasedEvent : SkillEvent
-{
-    public ISkill Skill { get; set; }
-
-    public SkillReleasedEvent(ISkill skill, ICharacterModel model) : base(model)
+    public class SkillSlotCountChangedEvent : SkillEvent
     {
-        Skill = skill;
+        public int Count { get; set; }
+
+        public SkillSlotCountChangedEvent(int count, ICharacterModel model) : base(model)
+        {
+            Count = count;
+        }
     }
-}
 
-public class SkillAcquiredEvent : SkillEvent, IReleaseEvent
-{
-    public ISkill Skill { get; set; }
-
-    public SkillAcquiredEvent(ISkill skill, ICharacterModel model) : base(model)
+    public class SkillReleasedEvent : SkillEvent
     {
-        Skill = skill;
+        public ISkill Skill { get; set; }
+
+        public SkillReleasedEvent(ISkill skill, ICharacterModel model) : base(model)
+        {
+            Skill = skill;
+        }
     }
-}
 
-public class SkillRemovedEvent : SkillEvent
-{
-    public string SkillID { get; set; }
-
-    public SkillRemovedEvent(string skillID, ICharacterModel model) : base(model)
+    public class SkillAcquiredEvent : SkillEvent, IReleaseEvent
     {
-        SkillID = skillID;
+        public ISkill Skill { get; set; }
+
+        public SkillAcquiredEvent(ISkill skill, ICharacterModel model) : base(model)
+        {
+            Skill = skill;
+        }
+    }
+
+    public class SkillRemovedEvent : SkillEvent
+    {
+        public string SkillID { get; set; }
+
+        public SkillRemovedEvent(string skillID, ICharacterModel model) : base(model)
+        {
+            SkillID = skillID;
+        }
     }
 }

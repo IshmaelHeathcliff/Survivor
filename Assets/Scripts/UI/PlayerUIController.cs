@@ -1,9 +1,10 @@
 ﻿using Character.Player;
+using Character.Stat;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Character
+namespace UI
 {
     public class PlayerUIController : MonoBehaviour, IController
     {
@@ -50,11 +51,11 @@ namespace Character
         void Start()
         {
             _model = this.GetModel<PlayersModel>().Current;
-            var health = _model.Stats.GetStat("Health") as Stat.ConsumableStat;
+            var health = _model.Stats.GetStat("Health") as ConsumableStat;
 
-            health.RegisterWithInitValue(OnMaxHealthChanged).UnRegisterWhenDisabled(this);
+            health?.RegisterWithInitValue(OnMaxHealthChanged).UnRegisterWhenDisabled(this);
 
-            health.RegisterWithInitValue(OnHealthChanged).UnRegisterWhenDisabled(this);
+            health?.RegisterWithInitValue(OnHealthChanged).UnRegisterWhenDisabled(this);
 
             _model.Resources["Coin"].RegisterWithInitValue(OnCoinChanged).UnRegisterWhenDisabled(this);
             _model.Resources["Wood"].RegisterWithInitValue(OnWoodChanged).UnRegisterWhenDisabled(this);

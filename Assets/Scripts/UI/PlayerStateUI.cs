@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using Character.State;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace Character.State
+
+namespace UI
 {
     [RequireComponent(typeof(StateUICellPool))]
     public class PlayerStateUI : StateUI

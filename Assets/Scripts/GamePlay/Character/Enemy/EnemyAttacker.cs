@@ -1,7 +1,4 @@
 ﻿using System.Collections.Generic;
-using Character.Enemy;
-using Character.Stat;
-using Core;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 

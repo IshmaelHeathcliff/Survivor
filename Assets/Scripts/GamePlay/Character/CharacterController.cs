@@ -4,6 +4,7 @@ using Character.Stat;
 using UnityEngine;
 using Core;
 using UnityEngine.AddressableAssets;
+using Skill;
 
 namespace Character
 {
@@ -19,8 +20,8 @@ namespace Character
     }
 
     // 修复泛型约束，TModel 需要有无参构造函数
-    public interface ICharacterController<TModel> : ICharacterController
-        where TModel : ICharacterModel, new()
+    public interface ICharacterController<out TModel> : ICharacterController
+        where TModel : class, ICharacterModel, new()
     {
         TModel Model { get; }
     }
@@ -28,11 +29,11 @@ namespace Character
 
 
     public abstract class MyCharacterController<TModel, TModels> : MonoBehaviour, IController, ICharacterController<TModel>
-        where TModel : ICharacterModel, new()
+        where TModel : class, ICharacterModel, new()
         where TModels : CharactersModel<TModel>
     {
         [SerializeField] string _characterId;
-        [SerializeField] int _baseHealth;
+        [SerializeField] float _baseHealth = 100;
         protected ModifierSystem ModifierSystem;
 
         public IAttackerController AttackerController { get; protected set; }
@@ -64,7 +65,7 @@ namespace Character
         protected virtual void SetStats()
         {
             CharaterStats.GetStat("Health").BaseValue = _baseHealth;
-            (CharaterStats.GetStat("Health") as IConsumableStat).SetMaxValue();
+            (CharaterStats.GetStat("Health") as IConsumableStat)?.SetMaxValue();
         }
 
         protected abstract void MakeSureID();
@@ -160,10 +161,10 @@ namespace Character
 
     public abstract class CharacterControllerWithFSM<TModel, TModels, TFSMID> : MyCharacterController<TModel, TModels>, IHasFSM<TFSMID>
         where TFSMID : struct, System.Enum
-        where TModel : ICharacterModel, new()
+        where TModel : class, ICharacterModel, new()
         where TModels : CharactersModel<TModel>
     {
-        public FSM<TFSMID> FSM { get; private set; } = new();
+        public FSM<TFSMID> FSM { get; } = new();
 
         protected abstract void AddStates();
 
