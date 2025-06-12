@@ -1,8 +1,9 @@
 using System.Collections.Generic;
-using Character;
+using Data.Config;
+using GamePlay.Character;
 using UnityEngine;
 
-namespace Skill.Effect
+namespace GamePlay.Skill.Effect
 {
     public class RollDiceEffect : NestedSkillEffect<RollDiceEffectConfig>
     {

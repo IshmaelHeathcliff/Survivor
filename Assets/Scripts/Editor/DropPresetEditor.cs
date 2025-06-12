@@ -1,4 +1,4 @@
-using GamePlay.Drop;
+using Data.Config;
 using UnityEngine;
 
 namespace Editor

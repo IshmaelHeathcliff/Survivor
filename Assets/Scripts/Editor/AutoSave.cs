@@ -1,27 +1,27 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
-[InitializeOnLoad]
-public class AutoSave
+namespace Editor
 {
-    static AutoSave()
+    [InitializeOnLoad]
+    public class AutoSave
     {
-        EditorApplication.playModeStateChanged += SaveOnPlay;
-    }
-
-    private static void SaveOnPlay(PlayModeStateChange state)
-    {
-        if(state==PlayModeStateChange.ExitingEditMode)
+        static AutoSave()
         {
-            Debug.Log("Auto-saving ...");
+            EditorApplication.playModeStateChanged += SaveOnPlay;
+        }
 
-            EditorSceneManager.SaveOpenScenes();
+        private static void SaveOnPlay(PlayModeStateChange state)
+        {
+            if(state==PlayModeStateChange.ExitingEditMode)
+            {
+                Debug.Log("Auto-saving ...");
 
-            AssetDatabase.SaveAssets();
+                EditorSceneManager.SaveOpenScenes();
+
+                AssetDatabase.SaveAssets();
+            }
         }
     }
 }

@@ -1,13 +1,12 @@
 ﻿using System;
+using System.ComponentModel;
 using System.IO;
 using System.Text;
-using System.ComponentModel;
 using Newtonsoft.Json;
-
 using UnityEngine;
-using Tool;
+using Utilities;
 
-namespace SaveLoad
+namespace Data.SaveLoad
 {
     public class SaveLoadMethodNewtonJson : ISaveLoadMethod
     {

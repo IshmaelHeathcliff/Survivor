@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using Character.Modifier;
+using GamePlay.Character.Modifier;
 
-namespace Character.Stat
+namespace GamePlay.Character.Stat
 {
 
     public class LocalStat : IStat

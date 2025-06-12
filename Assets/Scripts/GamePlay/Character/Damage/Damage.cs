@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Character.Damage
+namespace GamePlay.Character.Damage
 {
     public enum DamageType
     {

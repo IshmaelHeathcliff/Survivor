@@ -2,7 +2,7 @@
 using System.Linq;
 using Random = System.Random;
 
-namespace Tool
+namespace Utilities
 {
     public static class WeightRandom<T>
     {

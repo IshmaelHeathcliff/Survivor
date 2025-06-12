@@ -1,6 +1,6 @@
-﻿using Character.Player;
+﻿using GamePlay.Character.State;
 
-namespace Character.State
+namespace GamePlay.Character.Player
 {
     public class PlayerStateController : StateController
     {

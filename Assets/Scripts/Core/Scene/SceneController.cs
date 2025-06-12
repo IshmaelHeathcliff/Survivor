@@ -1,10 +1,10 @@
-﻿using Character.Modifier;
-using Character.Player;
-using Cysharp.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
+using GamePlay.Character.Modifier;
+using GamePlay.Character.Player;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace Scene
+namespace Core.Scene
 {
     public class SceneController : MonoBehaviour, IController
     {

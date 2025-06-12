@@ -5,7 +5,7 @@
     "Description": null,
     "IsOnce": true,
     "Condition": {
-      "$type": "SpecificSkillsReleaseConditionConfig, Assembly-CSharp",
+      "$type": "Data.Config.SpecificSkillsReleaseConditionConfig, Assembly-CSharp",
       "RequiredSkillIDs": [
         "dice1",
         "dice2",
@@ -23,7 +23,7 @@
       ]
     },
     "Reward": {
-      "$type": "SpecificSkillsReleaseRewardConfig, Assembly-CSharp",
+      "$type": "Data.Config.SpecificSkillsReleaseRewardConfig, Assembly-CSharp",
       "NewSkillIDs": [
         "dice6"
       ],
@@ -36,7 +36,7 @@
     "Description": null,
     "IsOnce": true,
     "Condition": {
-      "$type": "ValueCountConditionConfig, Assembly-CSharp",
+      "$type": "Data.Config.ValueCountConditionConfig, Assembly-CSharp",
       "ValueID": "RollDice",
       "Value": 6,
       "Description": null,
@@ -45,7 +45,7 @@
       ]
     },
     "Reward": {
-      "$type": "SpecificSkillsReleaseRewardConfig, Assembly-CSharp",
+      "$type": "Data.Config.SpecificSkillsReleaseRewardConfig, Assembly-CSharp",
       "NewSkillIDs": [
         "loaded_dice"
       ],

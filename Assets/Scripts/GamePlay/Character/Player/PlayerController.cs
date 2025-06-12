@@ -1,9 +1,9 @@
-﻿using Character.Modifier;
-using Character.Stat;
-using Skill;
+﻿using GamePlay.Character.Modifier;
+using GamePlay.Character.Stat;
+using GamePlay.Skill;
 using UnityEngine;
 
-namespace Character.Player
+namespace GamePlay.Character.Player
 {
     public class PlayerController : MyCharacterController<PlayerModel, PlayersModel>
     {

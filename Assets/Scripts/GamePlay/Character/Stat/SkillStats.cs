@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Character.Stat
+namespace GamePlay.Character.Stat
 {
     public class SkillStats : Stats
     {

@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Character.Stat;
-using Character.State;
-using Skill;
+using GamePlay.Character.Stat;
+using GamePlay.Character.State;
+using GamePlay.Skill;
 using UnityEngine;
 
 
-namespace Character
+namespace GamePlay.Character
 {
     public interface ICharacterModel
     {

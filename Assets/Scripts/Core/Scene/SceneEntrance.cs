@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Scene
+namespace Core.Scene
 {
     public class SceneEntrance : MonoBehaviour, IController
     {

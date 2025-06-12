@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Character.Modifier;
+using Data.Config;
+using GamePlay.Character.Modifier;
 
-namespace Character.State
+namespace GamePlay.Character.State
 {
     public interface IState
     {

@@ -1,10 +1,11 @@
-﻿using Character.Damage;
-using Cysharp.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
+using GamePlay.Character.Damage;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using InputSystem = Core.InputSystem;
 using Random = UnityEngine.Random;
 
-namespace Character.Player
+namespace GamePlay.Character.Player
 {
     public class PlayerAttackerController : AttackerController
     {

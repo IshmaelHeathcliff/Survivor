@@ -1,8 +1,8 @@
-﻿using Character.Damage;
-using Cysharp.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
+using GamePlay.Character.Damage;
 using UnityEngine;
 
-namespace Character.Player
+namespace GamePlay.Character.Player
 {
     [RequireComponent(typeof(Collider2D))]
     public class PlayerDamageable : Damageable

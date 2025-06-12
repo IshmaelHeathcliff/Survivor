@@ -1,3 +1,4 @@
+using Data.Config;
 using UnityEngine;
 
 namespace Editor

@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using Character.Stat;
 using Cysharp.Threading.Tasks;
-using Skill;
+using GamePlay.Character.Stat;
+using GamePlay.Skill;
 using UnityEngine;
 
-namespace Character.Damage
+namespace GamePlay.Character.Damage
 {
     public interface IAttacker
     {

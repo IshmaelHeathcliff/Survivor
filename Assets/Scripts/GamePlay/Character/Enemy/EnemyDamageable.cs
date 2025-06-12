@@ -1,12 +1,13 @@
 ﻿using System;
-using Character.Enemy;
-using Character.Player;
 using Core;
 using Cysharp.Threading.Tasks;
+using GamePlay.Character.Damage;
+using GamePlay.Character.Player;
+using GamePlay.Item;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace Character.Damage
+namespace GamePlay.Character.Enemy
 {
     public class EnemyDamageable : Damageable
     {
@@ -20,7 +21,7 @@ namespace Character.Damage
             base.OnInit();
             OnHurt = new EasyEvent();
             OnDeath = new EasyEvent();
-            _fsm = (CharacterController as IHasFSM<EnemyStateID>).FSM;
+            _fsm = (CharacterController as IHasFSM<EnemyStateID>)?.FSM;
             _dropSystem = this.GetSystem<DropSystem>();
         }
 

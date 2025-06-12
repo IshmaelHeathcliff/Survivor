@@ -1,11 +1,13 @@
 using System;
 using System.Threading;
+using Core;
 using Cysharp.Threading.Tasks;
+using GamePlay.Character.Player;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Random = UnityEngine.Random;
 
-namespace Character
+namespace GamePlay.Character.Enemy
 {
     public class EnemyFactory : MonoBehaviour, IController
     {

@@ -1,8 +1,9 @@
 using System.Collections.Generic;
-using Character;
-using Character.Modifier;
+using Data.Config;
+using GamePlay.Character;
+using GamePlay.Character.Modifier;
 
-namespace Skill.Effect
+namespace GamePlay.Skill.Effect
 {
     public class ModifierEffect : SkillEffect<ModifierEffectConfig>
     {

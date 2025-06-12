@@ -1,4 +1,4 @@
-﻿namespace SaveLoad
+﻿namespace Data.SaveLoad
 {
     /// <summary>
     /// Classes that implement this interface should have an serialized instance of DataSettings to register through.

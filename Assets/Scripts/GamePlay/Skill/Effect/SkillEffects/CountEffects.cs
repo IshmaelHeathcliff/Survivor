@@ -1,7 +1,8 @@
-using Character;
+using GamePlay.Character;
 using System.Collections.Generic;
+using Data.Config;
 
-namespace Skill.Effect
+namespace GamePlay.Skill.Effect
 {
     public class CountIncrementEffect : NestedSkillEffect<CountIncrementEffectConfig>
     {

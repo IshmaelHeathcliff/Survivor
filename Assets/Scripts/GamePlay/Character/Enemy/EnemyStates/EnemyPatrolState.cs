@@ -2,7 +2,7 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace Character.Enemy
+namespace GamePlay.Character.Enemy
 {
     public class EnemyPatrolState : EnemyState
     {

@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 
-namespace SaveLoad
+namespace Data.SaveLoad
 {
     public class SaveLoadUtility : IUtility
     {
         readonly HashSet<ISaveData> _dataPersisters = new HashSet<ISaveData>();
-        readonly Dictionary<string, Data> _store = new Dictionary<string, Data>();
+        readonly Dictionary<string, global::Data.SaveLoad.Data> _store = new Dictionary<string, global::Data.SaveLoad.Data>();
 
         public void RegisterPersister(ISaveData persister)
         {
@@ -66,7 +66,7 @@ namespace SaveLoad
             {
                 if (!string.IsNullOrEmpty(dp.DataTag))
                 {
-                    if (_store.TryGetValue(dp.DataTag, out Data data))
+                    if (_store.TryGetValue(dp.DataTag, out global::Data.SaveLoad.Data data))
                     {
                         dp.LoadData(data);
                     }
@@ -77,12 +77,12 @@ namespace SaveLoad
         public void SaveAllDataToFile()
         {
             SaveAllData();
-            var dataToSave = new Dictionary<string, Data>();
+            var dataToSave = new Dictionary<string, global::Data.SaveLoad.Data>();
             foreach (ISaveData dp in _dataPersisters)
             {
                 if (!string.IsNullOrEmpty(dp.DataTag))
                 {
-                    if (_store.TryGetValue(dp.DataTag, out Data data))
+                    if (_store.TryGetValue(dp.DataTag, out global::Data.SaveLoad.Data data))
                     {
                         dataToSave[dp.DataTag] = data;
                     }
@@ -94,8 +94,8 @@ namespace SaveLoad
 
         public void LoadAllDataFromFile()
         {
-            Dictionary<string, Data> data = SaveLoadManager.Load<Dictionary<string, Data>>("save.json");
-            foreach ((string k, Data d) in data)
+            Dictionary<string, global::Data.SaveLoad.Data> data = SaveLoadManager.Load<Dictionary<string, global::Data.SaveLoad.Data>>("save.json");
+            foreach ((string k, global::Data.SaveLoad.Data d) in data)
             {
                 _store[k] = d;
             }

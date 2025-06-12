@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using Data.Config;
 
-namespace Skill.Effect
+namespace GamePlay.Skill.Effect
 {
     public enum SkillEffectType
     {

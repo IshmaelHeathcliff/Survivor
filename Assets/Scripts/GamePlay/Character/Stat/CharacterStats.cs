@@ -1,4 +1,4 @@
-namespace Character.Stat
+namespace GamePlay.Character.Stat
 {
     public class CharacterStats : Stats
     {

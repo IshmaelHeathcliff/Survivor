@@ -1,9 +1,10 @@
 ﻿using System;
-using Character.Stat;
+using Data.Config;
+using GamePlay.Character.Stat;
 using Newtonsoft.Json;
 using Random = UnityEngine.Random;
 
-namespace Character.Modifier
+namespace GamePlay.Character.Modifier
 {
     [Serializable]
     public class StatSingleFloatModifier : StatModifier<float>

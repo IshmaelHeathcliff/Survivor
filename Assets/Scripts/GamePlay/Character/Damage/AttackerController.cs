@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using Skill;
+using GamePlay.Skill;
 using UnityEngine;
 
-namespace Character.Damage
+namespace GamePlay.Character.Damage
 {
     public interface IAttackerController : ICharacterControlled
     {

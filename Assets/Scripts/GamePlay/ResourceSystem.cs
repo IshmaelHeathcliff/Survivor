@@ -1,78 +1,81 @@
 using System;
 using System.Collections.Generic;
-using Character.Player;
+using GamePlay.Character.Player;
 using UnityEngine;
 
-public class ResourceSystem : AbstractSystem
+namespace GamePlay
 {
-    Dictionary<string, BindableProperty<int>> Resources => this.GetModel<PlayersModel>().Current.Resources;
-
-    public void RegisterResource(string id, BindableProperty<int> resource, int initialValue = 0)
+    public class ResourceSystem : AbstractSystem
     {
-        Resources.Add(id, resource);
-        resource.Value = initialValue;
-    }
+        Dictionary<string, BindableProperty<int>> Resources => this.GetModel<PlayersModel>().Current.Resources;
 
-    public void UnregisterResource(string id)
-    {
-        Resources.Remove(id);
-    }
-
-    public BindableProperty<int> GetResource(string id)
-    {
-        if (!Resources.ContainsKey(id))
+        public void RegisterResource(string id, BindableProperty<int> resource, int initialValue = 0)
         {
-            Debug.LogError($"Resource {id} not found");
-            return null;
+            Resources.Add(id, resource);
+            resource.Value = initialValue;
         }
 
-        return Resources[id];
-    }
-
-    public IUnRegister Register(string id, Action<int> onValueChanged)
-    {
-        if (!Resources.ContainsKey(id))
+        public void UnregisterResource(string id)
         {
-            Debug.LogError($"Resource {id} not found");
-            return null;
+            Resources.Remove(id);
         }
 
-        return Resources[id].Register(onValueChanged);
-    }
-
-    public void Unregister(string id, Action<int> onValueChanged)
-    {
-        if (!Resources.ContainsKey(id))
+        public BindableProperty<int> GetResource(string id)
         {
-            Debug.LogError($"Resource {id} not found");
-            return;
+            if (!Resources.ContainsKey(id))
+            {
+                Debug.LogError($"Resource {id} not found");
+                return null;
+            }
+
+            return Resources[id];
         }
 
-        Resources[id].UnRegister(onValueChanged);
-    }
-
-
-    public void AcquireResource(string id, int amount)
-    {
-        if (!Resources.ContainsKey(id))
+        public IUnRegister Register(string id, Action<int> onValueChanged)
         {
-            Debug.LogError($"Resource {id} not found");
-            return;
-        }
-        Resources[id].Value += amount;
-    }
+            if (!Resources.ContainsKey(id))
+            {
+                Debug.LogError($"Resource {id} not found");
+                return null;
+            }
 
-    public void ConsumeResource(string id, int amount)
-    {
-        if (!Resources.ContainsKey(id))
+            return Resources[id].Register(onValueChanged);
+        }
+
+        public void Unregister(string id, Action<int> onValueChanged)
         {
-            Debug.LogError($"Resource {id} not found");
-            return;
-        }
-        Resources[id].Value -= amount;
-    }
+            if (!Resources.ContainsKey(id))
+            {
+                Debug.LogError($"Resource {id} not found");
+                return;
+            }
 
-    protected override void OnInit()
-    {
+            Resources[id].UnRegister(onValueChanged);
+        }
+
+
+        public void AcquireResource(string id, int amount)
+        {
+            if (!Resources.ContainsKey(id))
+            {
+                Debug.LogError($"Resource {id} not found");
+                return;
+            }
+            Resources[id].Value += amount;
+        }
+
+        public void ConsumeResource(string id, int amount)
+        {
+            if (!Resources.ContainsKey(id))
+            {
+                Debug.LogError($"Resource {id} not found");
+                return;
+            }
+            Resources[id].Value -= amount;
+        }
+
+        protected override void OnInit()
+        {
+        }
     }
 }

@@ -1,6 +1,6 @@
 [
   {
-    "$type": "Character.Modifier.StatModifierConfig, Assembly-CSharp",
+    "$type": "Data.Config.StatModifierConfig, Assembly-CSharp",
     "StatName": "Health",
     "StatModifierType": 0,
     "MaxLevel": 3,
@@ -27,7 +27,7 @@
     ]
   },
   {
-    "$type": "Character.Modifier.StatModifierConfig, Assembly-CSharp",
+    "$type": "Data.Config.StatModifierConfig, Assembly-CSharp",
     "StatName": "Health",
     "StatModifierType": 1,
     "MaxLevel": 3,
@@ -54,7 +54,7 @@
     ]
   },
   {
-    "$type": "Character.Modifier.StatModifierConfig, Assembly-CSharp",
+    "$type": "Data.Config.StatModifierConfig, Assembly-CSharp",
     "StatName": "Health",
     "StatModifierType": 2,
     "MaxLevel": 3,
@@ -81,7 +81,7 @@
     ]
   },
   {
-    "$type": "Character.Modifier.StatModifierConfig, Assembly-CSharp",
+    "$type": "Data.Config.StatModifierConfig, Assembly-CSharp",
     "StatName": "Damage",
     "StatModifierType": 0,
     "MaxLevel": 3,
@@ -108,7 +108,7 @@
     ]
   },
   {
-    "$type": "Character.Modifier.StatModifierConfig, Assembly-CSharp",
+    "$type": "Data.Config.StatModifierConfig, Assembly-CSharp",
     "StatName": "Damage",
     "StatModifierType": 1,
     "MaxLevel": 3,
@@ -135,7 +135,7 @@
     ]
   },
   {
-    "$type": "Character.Modifier.StatModifierConfig, Assembly-CSharp",
+    "$type": "Data.Config.StatModifierConfig, Assembly-CSharp",
     "StatName": "Damage",
     "StatModifierType": 2,
     "MaxLevel": 3,
@@ -162,7 +162,7 @@
     ]
   },
   {
-    "$type": "Character.Modifier.StatModifierConfig, Assembly-CSharp",
+    "$type": "Data.Config.StatModifierConfig, Assembly-CSharp",
     "StatName": "Damage",
     "StatModifierType": 3,
     "MaxLevel": 3,
@@ -189,7 +189,7 @@
     ]
   },
   {
-    "$type": "Character.Modifier.StatModifierConfig, Assembly-CSharp",
+    "$type": "Data.Config.StatModifierConfig, Assembly-CSharp",
     "StatName": "CooldownInverse",
     "StatModifierType": 1,
     "MaxLevel": 3,
@@ -214,7 +214,7 @@
     "Keywords": []
   },
   {
-    "$type": "Character.Modifier.StatModifierConfig, Assembly-CSharp",
+    "$type": "Data.Config.StatModifierConfig, Assembly-CSharp",
     "StatName": "CriticalChance",
     "StatModifierType": 0,
     "MaxLevel": 3,
@@ -241,7 +241,7 @@
     ]
   },
   {
-    "$type": "Character.Modifier.StatModifierConfig, Assembly-CSharp",
+    "$type": "Data.Config.StatModifierConfig, Assembly-CSharp",
     "StatName": "CoinGain",
     "StatModifierType": 0,
     "MaxLevel": 3,
@@ -268,7 +268,7 @@
     ]
   },
   {
-    "$type": "Character.Modifier.StatModifierConfig, Assembly-CSharp",
+    "$type": "Data.Config.StatModifierConfig, Assembly-CSharp",
     "StatName": "ProjectileCount",
     "StatModifierType": 0,
     "MaxLevel": 3,
@@ -295,7 +295,7 @@
     ]
   },
   {
-    "$type": "Character.Modifier.StatModifierConfig, Assembly-CSharp",
+    "$type": "Data.Config.StatModifierConfig, Assembly-CSharp",
     "StatName": "WoodGain",
     "StatModifierType": 0,
     "MaxLevel": 3,

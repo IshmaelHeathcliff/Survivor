@@ -1,6 +1,7 @@
-using Character;
+using Data.Config;
+using GamePlay.Character;
 
-namespace Skill.Effect
+namespace GamePlay.Skill.Effect
 {
     public class AcquireSkillEffect : SkillEffect<AcquireSkillEffectConfig>
     {

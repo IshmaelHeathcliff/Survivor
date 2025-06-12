@@ -1,4 +1,5 @@
-﻿using Character.Modifier;
+﻿using Data.Config;
+using GamePlay.Character.Modifier;
 using UnityEngine;
 
 namespace Editor

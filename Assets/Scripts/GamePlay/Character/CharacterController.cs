@@ -1,12 +1,12 @@
-using Character.Damage;
-using Character.Modifier;
-using Character.Stat;
 using UnityEngine;
 using Core;
+using GamePlay.Character.Damage;
+using GamePlay.Character.Modifier;
+using GamePlay.Character.Stat;
 using UnityEngine.AddressableAssets;
-using Skill;
+using GamePlay.Skill;
 
-namespace Character
+namespace GamePlay.Character
 {
     public interface ICharacterController : ICanInit
     {

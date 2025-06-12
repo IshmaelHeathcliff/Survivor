@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
-using Character.Modifier;
+using Data.Config;
+using GamePlay.Character.Modifier;
 using UnityEngine;
 
-namespace Character.Stat
+namespace GamePlay.Character.Stat
 {
     public class Stats : IStatModifierFactory
     {

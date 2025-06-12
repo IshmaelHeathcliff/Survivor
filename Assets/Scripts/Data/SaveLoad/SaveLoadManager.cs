@@ -1,7 +1,7 @@
 using System.IO;
 using UnityEngine;
 
-namespace SaveLoad
+namespace Data.SaveLoad
 {
     public static class SaveLoadManager
     {

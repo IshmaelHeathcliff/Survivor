@@ -1,10 +1,11 @@
 using System.Collections.Generic;
-using Character;
-using Character.Modifier;
-using SaveLoad;
+using Data.Config;
+using GamePlay.Character;
+using GamePlay.Character.Modifier;
+using Data.SaveLoad;
 using UnityEngine;
 
-namespace Skill
+namespace GamePlay.Skill
 {
     public class SkillCreateEnv
     {

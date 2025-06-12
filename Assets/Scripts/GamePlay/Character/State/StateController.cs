@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Character.State
+namespace GamePlay.Character.State
 {
     public interface IStateUI
     {

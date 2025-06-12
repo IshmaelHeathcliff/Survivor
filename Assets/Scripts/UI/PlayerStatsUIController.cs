@@ -1,8 +1,8 @@
 ﻿using System.Text;
-using Character.Stat;
-using Character.Player;
+using GamePlay.Character.Stat;
+using GamePlay.Character.Player;
 using Sirenix.OdinInspector;
-using Skill;
+using GamePlay.Skill;
 using TMPro;
 using UnityEngine;
 

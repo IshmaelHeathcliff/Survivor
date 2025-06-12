@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
+using GamePlay.Character.Modifier;
 using Sirenix.OdinInspector;
 
-
-namespace Character.Modifier
+namespace Data.Config
 {
     [Serializable]
     public abstract class ModifierConfig

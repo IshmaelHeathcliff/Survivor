@@ -1,6 +1,7 @@
+using GamePlay.Character.Player;
 using UnityEngine;
 
-namespace Character
+namespace Core
 {
     public class CameraFollow : MonoBehaviour, IController
     {

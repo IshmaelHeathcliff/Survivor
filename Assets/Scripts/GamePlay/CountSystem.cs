@@ -1,6 +1,6 @@
 using System;
-using Character;
-using Skill;
+using GamePlay.Character;
+using GamePlay.Skill;
 
 public class ValueCounter
 {

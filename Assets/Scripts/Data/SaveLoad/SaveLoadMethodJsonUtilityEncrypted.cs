@@ -3,7 +3,7 @@ using System.Security.Cryptography;
 using Newtonsoft.Json;
 using UnityEngine;
 
-namespace SaveLoad
+namespace Data.SaveLoad
 {
     public class SaveLoadMethodJsonUtilityEncrypted : SaveLoadEncryptor, ISaveLoadMethod
     {

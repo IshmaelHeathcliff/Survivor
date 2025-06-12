@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using Core;
 using Cysharp.Threading.Tasks;
-using Character.Damage;
+using GamePlay.Character.Damage;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace Character.Player
+namespace GamePlay.Character.Player
 {
     [RequireComponent(typeof(Collider2D), typeof(SpriteRenderer))]
     public class PlayerAttacker : Attacker

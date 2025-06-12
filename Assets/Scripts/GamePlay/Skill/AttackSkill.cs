@@ -1,6 +1,7 @@
-using Character.Stat;
+using Data.Config;
+using GamePlay.Character.Stat;
 
-namespace Skill
+namespace GamePlay.Skill
 {
     // 可以创建Attacker的Skill
 

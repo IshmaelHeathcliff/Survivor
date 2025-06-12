@@ -1,6 +1,6 @@
 using Sirenix.OdinInspector;
 
-namespace GamePlay.Drop
+namespace Data.Config
 {
     public class DropConfig
     {

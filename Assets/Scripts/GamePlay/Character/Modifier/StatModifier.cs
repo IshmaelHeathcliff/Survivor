@@ -1,9 +1,10 @@
 ﻿using System;
-using Character.Stat;
+using Data.Config;
+using GamePlay.Character.Stat;
 using Newtonsoft.Json;
 using Sirenix.OdinInspector;
 
-namespace Character.Modifier
+namespace GamePlay.Character.Modifier
 {
     public interface IStatModifier : IModifier<StatModifierConfig>
     {
