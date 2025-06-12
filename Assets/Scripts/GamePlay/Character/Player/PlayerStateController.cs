@@ -4,10 +4,9 @@ namespace Character.State
 {
     public class PlayerStateController : StateController
     {
-        protected override void Awake()
+        protected override void SetStateContainer()
         {
-            StateContainer = this.GetModel<PlayersModel>().Default().StateContainer;
-            base.Awake();
+            StateContainer = this.GetModel<PlayersModel>().Current.StateContainer;
         }
     }
 }

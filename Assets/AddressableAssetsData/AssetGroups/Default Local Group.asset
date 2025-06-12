@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_GUID: 7c1749500d6a42b458b62098db2e0195
+  m_SerializeEntries:
+  - m_GUID: 142f85506d88f8047a0dc3e07cc5c15c
+    m_Address: Assets/Textures/weapon_skills.aseprite
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2a4e5b1401850e8439853b4d55a5adc0
+    m_Address: Assets/Prefabs/Enemy (1).prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 329e44c7fcde73f43be7052590fdcee5
+    m_Address: Assets/Textures/character/Enemies.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 495df071d8e533245a1904aea5ce931d
+    m_Address: Assets/Textures/UI/icons.aseprite
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 500b9ae4f70ef4447ba808c85366b190
+    m_Address: Assets/Prefabs/wood.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6495b54d235b3c347bd82a118ce07453
+    m_Address: Assets/Textures/UI/Coin.aseprite
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6685a8bb25c707b45a674b478f48d92f
+    m_Address: Assets/Textures/UI/Heart.aseprite
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7b3dfbcb94c8d514d8442a4edd1905fb
+    m_Address: Assets/Textures/character/character.aseprite
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 99a5b074583124c4887a43fa42071b3c
+    m_Address: Assets/Prefabs/Dice.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: af92f5bc633516443ba564b2a2824e96
+    m_Address: Assets/Prefabs/coin.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b1f0f5feb5d52ce498144de6dc606919
+    m_Address: Assets/Textures/Background
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fbf43e003b75cc34a936a90e9415e101
+    m_Address: Assets/Textures/Background/Grasslands.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 127a522adc718c547a47963cc0c5a587, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 03663b0da99b5d74293440e6db591884, type: 2}
+    - {fileID: 11400000, guid: 0fe6c7ba70ff0b14481fc4e57c213471, type: 2}

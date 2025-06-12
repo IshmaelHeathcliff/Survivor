@@ -35,6 +35,13 @@ namespace Character.Damage
             await Play();
         }
 
+
+        public override void Cancel()
+        {
+            return;
+        }
+
+
         void OnTriggerEnter2D(Collider2D other)
         {
             if (!AttackerController.CanAttack)
@@ -51,12 +58,13 @@ namespace Character.Damage
 
             var keywords = new List<string>()
             {
-                "Damage", "Attack", "Physical",
+                "Damage", "Attack",
             };
 
 
-            var damage = new AttackDamage(this, damageable, keywords, DamageType.Physical, 10, 1, 1);
+            var damage = new AttackDamage(this, damageable, keywords, DamageType.Simple, Damage.BaseValue, 1, 1);
             damage.Apply();
         }
+
     }
 }

@@ -23,14 +23,14 @@ MonoBehaviour:
     SerializationNodes:
     - Name: Data
       Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[Character.State.StateInfo, Assembly-CSharp]],
+      Data: 0|System.Collections.Generic.List`1[[Character.State.StateConfig, Assembly-CSharp]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 1|Character.State.StateInfo, Assembly-CSharp
+      Data: 1|Character.State.StateConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 

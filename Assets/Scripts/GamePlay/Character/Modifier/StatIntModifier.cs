@@ -7,19 +7,19 @@ using Random = UnityEngine.Random;
 namespace Character.Modifier
 {
     [Serializable]
-    public class StatSingleIntModifier : StatModifier<int>
+    public class StatSingleFloatModifier : StatModifier<float>
     {
         [JsonConstructor]
-        public StatSingleIntModifier()
+        public StatSingleFloatModifier()
         {
 
         }
 
-        public StatSingleIntModifier(StatModifierInfo modifierInfo, IStat stat) : base(modifierInfo, stat)
+        public StatSingleFloatModifier(StatModifierConfig modifierConfig, IStat stat) : base(modifierConfig, stat)
         {
         }
 
-        public StatSingleIntModifier(StatModifierInfo modifierInfo, IStat stat, int value) : base(modifierInfo,
+        public StatSingleFloatModifier(StatModifierConfig modifierConfig, IStat stat, float value) : base(modifierConfig,
             stat)
         {
             Level = 1;
@@ -29,8 +29,8 @@ namespace Character.Modifier
         public override string GetDescription()
         {
             return Value >= 0 ?
-                string.Format(ModifierInfo.PositiveDescription, Stat.Name, Value) :
-                string.Format(ModifierInfo.NegativeDescription, Stat.Name, -Value);
+                string.Format(ModifierConfig.PositiveDescription, Stat.Name, Value) :
+                string.Format(ModifierConfig.NegativeDescription, Stat.Name, -Value);
         }
 
         public override void Check()
@@ -41,11 +41,8 @@ namespace Character.Modifier
 
         public override void Register()
         {
-            switch (((StatModifierInfo)ModifierInfo).StatModifierType)
+            switch (ModifierConfig.StatModifierType)
             {
-                case StatModifierType.Base:
-                    Stat.AddBaseValueModifier(InstanceID, this);
-                    break;
                 case StatModifierType.Added:
                     Stat.AddAddedValueModifier(InstanceID, this);
                     break;
@@ -66,11 +63,8 @@ namespace Character.Modifier
 
         public override void Unregister()
         {
-            switch (((StatModifierInfo)ModifierInfo).StatModifierType)
+            switch (ModifierConfig.StatModifierType)
             {
-                case StatModifierType.Base:
-                    Stat.RemoveBaseValueModifier(InstanceID);
-                    break;
                 case StatModifierType.Added:
                     Stat.RemoveAddedValueModifier(InstanceID);
                     break;
@@ -92,25 +86,25 @@ namespace Character.Modifier
         public override void Load()
         {
             //TODO: 不使用全局静态调用？
-            ModifierInfo = GetModifierInfo(ModifierID);
+            ModifierConfig = GetModifierConfig(ModifierID) as StatModifierConfig;
             Stat = GetStat(this);
 
         }
 
         public override void RandomizeLevel()
         {
-            if (ModifierInfo is StatModifierInfo info)
+            if (ModifierConfig is StatModifierConfig config)
             {
-                Level = Random.Range(0, info.MaxLevel);
+                Level = Random.Range(0, config.MaxLevel);
             }
 
         }
 
         public override void RandomizeValue()
         {
-            if (ModifierInfo is StatModifierInfo info)
+            if (ModifierConfig is StatModifierConfig config)
             {
-                LevelRange levelRange = info.LevelRanges[Level];
+                LevelRange levelRange = config.LevelRanges[Level];
                 Value = Random.Range(levelRange.Min, levelRange.Max + 1);
             }
 
@@ -118,9 +112,8 @@ namespace Character.Modifier
     }
 
     [Serializable]
-    public class StatDoubleIntModifier : StatSingleIntModifier
+    public class StatDoubleFloatModifier : StatSingleFloatModifier, IStatModifier<float, float>
     {
-        int Value2 { get; set; }
-
+        public float Value2 { get; set; }
     }
 }

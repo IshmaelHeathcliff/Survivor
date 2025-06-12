@@ -1,30 +1,30 @@
 ﻿using Character.Damage;
 using UnityEngine;
 using Core;
+using Cysharp.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace Character.Enemy
 {
     public class EnemyAttackerController : AttackerController
     {
-        FSM<EnemyStateId> _fsm;
-        public FSM<EnemyStateId> FSM => _fsm;
+        FSM<EnemyStateID> _fsm;
+        public FSM<EnemyStateID> FSM => _fsm;
+
+        AttackerCreateSystem _attackerCreateSystem;
 
         protected override void OnInit()
         {
             base.OnInit();
-            _fsm = (CharacterController as IHasFSM<EnemyStateId>).FSM;
+            _fsm = (CharacterController as IHasFSM<EnemyStateID>).FSM;
+            _attackerCreateSystem = this.GetSystem<AttackerCreateSystem>();
         }
 
-        protected override IAttacker GetOrCreateAttackerInternal()
+        protected override async UniTask<IAttacker> CreateAttackerInternal(string skillID, string attackerID)
         {
-            EnemyAttacker attacker = GetComponentInChildren<EnemyAttacker>();
-            attacker.SetStats(CharacterController.Stats);
+            var attacker = await GetOrCreateAttacker(skillID, attackerID);
+
             return attacker;
-        }
-
-        void Start()
-        {
-            GetOrCreateAttacker();
         }
     }
 }

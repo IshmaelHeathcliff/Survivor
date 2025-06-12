@@ -23,44 +23,80 @@ MonoBehaviour:
     SerializationNodes:
     - Name: Data
       Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[Character.Modifier.ModifierInfo,
+      Data: 0|System.Collections.Generic.List`1[[Character.Modifier.ModifierConfig,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
-      Data: 6
+      Data: 12
     - Name: 
       Entry: 7
-      Data: 1|Character.Modifier.StatModifierInfo, Assembly-CSharp
+      Data: 1|Character.Modifier.StatModifierConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 2|Character.Modifier.StatModifierInfo, Assembly-CSharp
+      Data: 2|Character.Modifier.StatModifierConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 3|Character.Modifier.StatModifierInfo, Assembly-CSharp
+      Data: 3|Character.Modifier.StatModifierConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 4|Character.Modifier.StatModifierInfo, Assembly-CSharp
+      Data: 4|Character.Modifier.StatModifierConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 5|Character.Modifier.StatModifierInfo, Assembly-CSharp
+      Data: 5|Character.Modifier.StatModifierConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 6|Character.Modifier.StatModifierInfo, Assembly-CSharp
+      Data: 6|Character.Modifier.StatModifierConfig, Assembly-CSharp
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 7|Character.Modifier.StatModifierConfig, Assembly-CSharp
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 8|Character.Modifier.StatModifierConfig, Assembly-CSharp
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 9|Character.Modifier.StatModifierConfig, Assembly-CSharp
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 10|Character.Modifier.StatModifierConfig, Assembly-CSharp
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 11|Character.Modifier.StatModifierConfig, Assembly-CSharp
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 12|Character.Modifier.StatModifierConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 

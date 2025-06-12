@@ -1,4 +1,5 @@
-﻿using Character.Stat;
+﻿using System.Collections.Generic;
+using Character.Stat;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -6,20 +7,20 @@ namespace Character.Damage
 {
     public interface IAttacker
     {
+        string ID { get; }
+        IEnumerable<string> Keywords { get; }
         IAttackerController AttackerController { get; set; }
-        IKeywordStat Damage { get; }
+        Vector2 Direction { get; set; }
+
+        IStat Damage { get; }
         IStat CriticalChance { get; }
         IStat CriticalMultiplier { get; }
-        IStat Accuracy { get; }
-        IStat FireResistanceDecrease { get; }
-        IStat ColdResistanceDecrease { get; }
-        IStat LightningResistanceDecrease { get; }
-        IStat ChaosResistanceDecrease { get; }
-        IStat FireResistancePenetrate { get; }
-        IStat ColdResistancePenetrate { get; }
-        IStat LightningResistancePenetrate { get; }
-        IStat ChaosResistancePenetrate { get; }
+        IStat AttackArea { get; }
+        IStat Duration { get; }
+
+        void SetSkill(AttackSkill skill);
         UniTaskVoid Attack();
+        void Cancel();
     }
 
 
@@ -27,37 +28,28 @@ namespace Character.Damage
     public abstract class Attacker : MonoBehaviour, IAttacker, IController
     {
         public IAttackerController AttackerController { get; set; }
-        public IKeywordStat Damage { get; protected set; }
-        public IStat CriticalChance { get; protected set; }
-        public IStat CriticalMultiplier { get; protected set; }
-        public IStat Accuracy { get; protected set; }
-        public IStat FireResistanceDecrease { get; protected set; }
-        public IStat ColdResistanceDecrease { get; protected set; }
-        public IStat LightningResistanceDecrease { get; protected set; }
-        public IStat ChaosResistanceDecrease { get; protected set; }
-        public IStat FireResistancePenetrate { get; protected set; }
-        public IStat ColdResistancePenetrate { get; protected set; }
-        public IStat LightningResistancePenetrate { get; protected set; }
-        public IStat ChaosResistancePenetrate { get; protected set; }
+        AttackSkill _attackSkill;
 
-        public void SetStats(Stats stats)
+        public string ID => _attackSkill.ID;
+        public IEnumerable<string> Keywords => _attackSkill.Keywords;
+        public Vector2 Direction { get; set; }
+
+
+        public IStat Damage => _attackSkill.Damage;
+        public IStat CriticalChance => _attackSkill.CriticalChance;
+        public IStat CriticalMultiplier => _attackSkill.CriticalMultiplier;
+        public IStat AttackArea => _attackSkill.AttackArea;
+        public IStat Duration => _attackSkill.Duration;
+
+        public void SetSkill(AttackSkill skill)
         {
-            Damage = stats.Damage as IKeywordStat;
-            CriticalChance = stats.CriticalChance;
-            CriticalMultiplier = stats.CriticalMultiplier;
-            Accuracy = stats.Accuracy;
-            FireResistanceDecrease = stats.FireResistanceDecrease;
-            ColdResistanceDecrease = stats.ColdResistanceDecrease;
-            LightningResistanceDecrease = stats.LightningResistanceDecrease;
-            ChaosResistanceDecrease = stats.ChaosResistanceDecrease;
-            FireResistancePenetrate = stats.FireResistancePenetrate;
-            ColdResistancePenetrate = stats.ColdResistancePenetrate;
-            LightningResistancePenetrate = stats.LightningResistancePenetrate;
-            ChaosResistancePenetrate = stats.ChaosResistancePenetrate;
+            _attackSkill = skill;
         }
 
         protected abstract UniTask Play();
         public abstract UniTaskVoid Attack();
+        public abstract void Cancel();
+
         public IArchitecture GetArchitecture()
         {
             return GameFrame.Interface;

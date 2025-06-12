@@ -1,46 +1,55 @@
 ﻿using Character.Damage;
 using Character.Modifier;
 using Character.Player;
+using Character.Stat;
 using UnityEngine;
 
 namespace Character
 {
-    public class PlayerController : MyCharacterController
+    public class PlayerController : MyCharacterController<PlayerModel, PlayersModel>
     {
         [SerializeField] Vector3 _initialPosition;
 
-
         public void Respawn()
         {
-            transform.position = _initialPosition;
-            Model.Stats.Health.SetMaxValue();
+            Model.Position = _initialPosition;
+            (CharaterStats.GetStat("Health") as IConsumableStat).SetMaxValue();
         }
 
         protected override void SetStats()
         {
-            IStatModifier healthModifier = ModifierSystem.CreateStatModifier("health_base", "player", 100);
-            IStatModifier manaModifier = ModifierSystem.CreateStatModifier("mana_base", "player", 100);
-            IStatModifier accuracyModifier = ModifierSystem.CreateStatModifier("accuracy_base", "player", 100);
+            base.SetStats();
+
+            IStatModifier healthModifier = ModifierSystem.CreateStatModifier("health_increase", "player", 100);
             healthModifier.Register();
-            manaModifier.Register();
-            accuracyModifier.Register();
-            Stats.Health.SetMaxValue();
-            Stats.Mana.SetMaxValue();
+            (CharaterStats.GetStat("Health") as IConsumableStat).SetMaxValue();
+        }
+
+        protected override void MakeSureID()
+        {
+            if (string.IsNullOrEmpty(ID))
+            {
+                ID = "player";
+            }
         }
 
         protected override void OnInit()
         {
-            if (ID == null || ID == "")
-            {
-                ID = "player";
-            }
-
-            Model = this.GetModel<PlayersModel>().GetModel(ID);
+            SkillReleaseSystem skillReleaseSystem = this.GetSystem<SkillReleaseSystem>();
+            skillReleaseSystem.RegisterConditions(Model);
+            skillReleaseSystem.RegisterRewards(Model);
         }
 
         protected override void OnDeinit()
         {
             base.OnDeinit();
         }
+
+        protected override void Awake()
+        {
+            base.Awake();
+        }
+
+
     }
 }

@@ -1,6 +1,6 @@
 [
   {
-    "$type": "Character.Modifier.StatModifierInfo, Assembly-CSharp",
+    "$type": "Character.Modifier.StatModifierConfig, Assembly-CSharp",
     "StatName": "Health",
     "StatModifierType": 0,
     "MaxLevel": 3,
@@ -18,8 +18,8 @@
         "Max": 60
       }
     ],
-    "ModifierID": "health_base",
-    "Name": "生命基础值",
+    "ModifierID": "health_add",
+    "Name": "生命附加值",
     "PositiveDescription": "增加{0}基础值{1}点",
     "NegativeDescription": "减少{0}基础值{1}点",
     "Keywords": [
@@ -27,9 +27,9 @@
     ]
   },
   {
-    "$type": "Character.Modifier.StatModifierInfo, Assembly-CSharp",
+    "$type": "Character.Modifier.StatModifierConfig, Assembly-CSharp",
     "StatName": "Health",
-    "StatModifierType": 2,
+    "StatModifierType": 1,
     "MaxLevel": 3,
     "LevelRanges": [
       {
@@ -54,9 +54,9 @@
     ]
   },
   {
-    "$type": "Character.Modifier.StatModifierInfo, Assembly-CSharp",
+    "$type": "Character.Modifier.StatModifierConfig, Assembly-CSharp",
     "StatName": "Health",
-    "StatModifierType": 3,
+    "StatModifierType": 2,
     "MaxLevel": 3,
     "LevelRanges": [
       {
@@ -81,8 +81,8 @@
     ]
   },
   {
-    "$type": "Character.Modifier.StatModifierInfo, Assembly-CSharp",
-    "StatName": "Mana",
+    "$type": "Character.Modifier.StatModifierConfig, Assembly-CSharp",
+    "StatName": "Damage",
     "StatModifierType": 0,
     "MaxLevel": 3,
     "LevelRanges": [
@@ -99,18 +99,18 @@
         "Max": 60
       }
     ],
-    "ModifierID": "mana_base",
-    "Name": "魔力基础值",
-    "PositiveDescription": "增加{0}基础值{1}点",
-    "NegativeDescription": "减少{0}基础值{1}点",
+    "ModifierID": "damage_add",
+    "Name": "伤害附加值",
+    "PositiveDescription": "{0}附加{1}点",
+    "NegativeDescription": "{0}附加-{1}点",
     "Keywords": [
-      "Mana"
+      "Damage"
     ]
   },
   {
-    "$type": "Character.Modifier.StatModifierInfo, Assembly-CSharp",
-    "StatName": "Accuracy",
-    "StatModifierType": 0,
+    "$type": "Character.Modifier.StatModifierConfig, Assembly-CSharp",
+    "StatName": "Damage",
+    "StatModifierType": 1,
     "MaxLevel": 3,
     "LevelRanges": [
       {
@@ -126,16 +126,95 @@
         "Max": 60
       }
     ],
-    "ModifierID": "accuracy_base",
-    "Name": "命中基础值",
-    "PositiveDescription": "增加{0}基础值{1}点",
-    "NegativeDescription": "减少{0}基础值{1}点",
+    "ModifierID": "damage_increase",
+    "Name": "伤害提高",
+    "PositiveDescription": "{0}提高{1}%",
+    "NegativeDescription": "{0}降低{1}%",
     "Keywords": [
-      "Accuracy"
+      "Damage"
     ]
   },
   {
-    "$type": "Character.Modifier.StatModifierInfo, Assembly-CSharp",
+    "$type": "Character.Modifier.StatModifierConfig, Assembly-CSharp",
+    "StatName": "Damage",
+    "StatModifierType": 2,
+    "MaxLevel": 3,
+    "LevelRanges": [
+      {
+        "Min": 1,
+        "Max": 20
+      },
+      {
+        "Min": 21,
+        "Max": 40
+      },
+      {
+        "Min": 41,
+        "Max": 60
+      }
+    ],
+    "ModifierID": "damage_more",
+    "Name": "伤害总增",
+    "PositiveDescription": "{0}总增{1}%",
+    "NegativeDescription": "{0}总降{1}%",
+    "Keywords": [
+      "Damage"
+    ]
+  },
+  {
+    "$type": "Character.Modifier.StatModifierConfig, Assembly-CSharp",
+    "StatName": "Damage",
+    "StatModifierType": 3,
+    "MaxLevel": 3,
+    "LevelRanges": [
+      {
+        "Min": 1,
+        "Max": 20
+      },
+      {
+        "Min": 21,
+        "Max": 40
+      },
+      {
+        "Min": 41,
+        "Max": 60
+      }
+    ],
+    "ModifierID": "damage_fix",
+    "Name": "伤害固定",
+    "PositiveDescription": "{0}附加固定{1}点",
+    "NegativeDescription": "{0}附加固定-{1}%点",
+    "Keywords": [
+      "Damage"
+    ]
+  },
+  {
+    "$type": "Character.Modifier.StatModifierConfig, Assembly-CSharp",
+    "StatName": "CooldownInverse",
+    "StatModifierType": 1,
+    "MaxLevel": 3,
+    "LevelRanges": [
+      {
+        "Min": 1,
+        "Max": 20
+      },
+      {
+        "Min": 21,
+        "Max": 40
+      },
+      {
+        "Min": 41,
+        "Max": 60
+      }
+    ],
+    "ModifierID": "cdi_increase",
+    "Name": "CD降低",
+    "PositiveDescription": "{0}提高{1}%",
+    "NegativeDescription": "{0}降低{1}%",
+    "Keywords": []
+  },
+  {
+    "$type": "Character.Modifier.StatModifierConfig, Assembly-CSharp",
     "StatName": "CriticalChance",
     "StatModifierType": 0,
     "MaxLevel": 3,
@@ -153,12 +232,93 @@
         "Max": 60
       }
     ],
-    "ModifierID": "critical_chance_base",
-    "Name": "暴击率基础值",
-    "PositiveDescription": "增加{0}基础值{1}点",
-    "NegativeDescription": "减少{0}基础值{1}点",
+    "ModifierID": "critical_add",
+    "Name": "暴击率增加",
+    "PositiveDescription": "{0}增加{1}%",
+    "NegativeDescription": "{0}减少{1}%",
     "Keywords": [
       "Critical"
+    ]
+  },
+  {
+    "$type": "Character.Modifier.StatModifierConfig, Assembly-CSharp",
+    "StatName": "CoinGain",
+    "StatModifierType": 0,
+    "MaxLevel": 3,
+    "LevelRanges": [
+      {
+        "Min": 1,
+        "Max": 20
+      },
+      {
+        "Min": 21,
+        "Max": 40
+      },
+      {
+        "Min": 41,
+        "Max": 60
+      }
+    ],
+    "ModifierID": "coin_add",
+    "Name": "金币收入增加",
+    "PositiveDescription": "{0}增加{1}点",
+    "NegativeDescription": "{0}减少{1}点",
+    "Keywords": [
+      "Coin"
+    ]
+  },
+  {
+    "$type": "Character.Modifier.StatModifierConfig, Assembly-CSharp",
+    "StatName": "ProjectileCount",
+    "StatModifierType": 0,
+    "MaxLevel": 3,
+    "LevelRanges": [
+      {
+        "Min": 1,
+        "Max": 20
+      },
+      {
+        "Min": 21,
+        "Max": 40
+      },
+      {
+        "Min": 41,
+        "Max": 60
+      }
+    ],
+    "ModifierID": "projectileCount_add",
+    "Name": "投射物数量增加",
+    "PositiveDescription": "{0}增加{1}点",
+    "NegativeDescription": "{0}减少{1}点",
+    "Keywords": [
+      "Projectile"
+    ]
+  },
+  {
+    "$type": "Character.Modifier.StatModifierConfig, Assembly-CSharp",
+    "StatName": "WoodGain",
+    "StatModifierType": 0,
+    "MaxLevel": 3,
+    "LevelRanges": [
+      {
+        "Min": 1,
+        "Max": 20
+      },
+      {
+        "Min": 21,
+        "Max": 40
+      },
+      {
+        "Min": 41,
+        "Max": 60
+      }
+    ],
+    "ModifierID": "wood_add",
+    "Name": "木头收入增加",
+    "PositiveDescription": "{0}增加{1}点",
+    "NegativeDescription": "{0}减少{1}点",
+    "Keywords": [
+      "Wood"
     ]
   }
 ]

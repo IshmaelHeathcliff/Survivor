@@ -6,6 +6,7 @@ namespace Character
     public interface IMoveController : ICharacterControlled
     {
         float Speed { get; set; }
+        Transform Transform { get; }
         Vector2 Direction { get; set; }
         Vector2 Position { get; set; }
         void Face(Vector2 direction);
@@ -18,7 +19,7 @@ namespace Character
     {
         protected Animator Animator;
         protected Rigidbody2D Rigidbody;
-        protected ICharacterModel Model => CharacterController.Model;
+        protected ICharacterModel Model => CharacterController.CharacterModel;
 
         static readonly int Y = Animator.StringToHash("Y");
         static readonly int X = Animator.StringToHash("X");
@@ -28,6 +29,8 @@ namespace Character
             get => Model.Speed;
             set => Model.Speed = value;
         }
+
+        public Transform Transform => transform;
 
         public virtual Vector2 Direction
         {
@@ -46,7 +49,6 @@ namespace Character
         {
             Animator = GetComponentInChildren<Animator>();
             Rigidbody = GetComponent<Rigidbody2D>();
-            Model.BindTransform(transform);
         }
 
         protected override void OnDeinit()
@@ -57,13 +59,13 @@ namespace Character
         public async UniTask PlayAnimation(string stateName)
         {
             Animator.Play(stateName);
-            await UniTask.WaitUntil(() => Animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f);
+            await UniTask.WaitUntil(() => Animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f, cancellationToken: GlobalCancellation.GetCombinedToken(this));
         }
 
         public async UniTask PlayAnimation(int stateNameHash)
         {
             Animator.Play(stateNameHash);
-            await UniTask.WaitUntil(() => Animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f, cancellationToken: this.GetCancellationTokenOnDestroy());
+            await UniTask.WaitUntil(() => Animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f, cancellationToken: GlobalCancellation.GetCombinedToken(this));
         }
 
         public virtual void Face(Vector2 direction)

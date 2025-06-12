@@ -1,8 +1,10 @@
 ﻿using System;
 using Character.Enemy;
+using Character.Player;
 using Core;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace Character.Damage
 {
@@ -10,40 +12,30 @@ namespace Character.Damage
     {
         [SerializeField] float _hurtTime = 1f;
 
-        FSM<EnemyStateId> _fsm;
+        FSM<EnemyStateID> _fsm;
+        DropSystem _dropSystem;
 
         protected override void OnInit()
         {
             base.OnInit();
             OnHurt = new EasyEvent();
             OnDeath = new EasyEvent();
-            _fsm = (CharacterController as IHasFSM<EnemyStateId>).FSM;
+            _fsm = (CharacterController as IHasFSM<EnemyStateID>).FSM;
+            _dropSystem = this.GetSystem<DropSystem>();
         }
 
 
         void Start()
         {
-            SetStats(CharacterController.Stats);
+            SetStats(CharacterController.CharaterStats);
 
             OnHurt.Register(() => Hurt().Forget()).UnRegisterWhenDisabled(this);
             OnDeath.Register(Dead).UnRegisterWhenDisabled(this);
         }
 
-        public override void TakeDamage(float damage)
-        {
-            if (!IsDamageable)
-            {
-                return;
-            }
-
-            Health.ChangeCurrentValue(-damage);
-            // Debug.Log("Left Health:" + Health.CurrentValue);
-            OnHurt.Trigger();
-        }
-
         async UniTaskVoid Hurt()
         {
-            _fsm.ChangeState(EnemyStateId.Hurt);
+            _fsm.ChangeState(EnemyStateID.Hurt);
             await UniTask.Delay(TimeSpan.FromSeconds(_hurtTime));
 
             if (Health.CurrentValue <= 0)
@@ -52,13 +44,18 @@ namespace Character.Damage
                 return;
             }
 
-            _fsm.ChangeState(EnemyStateId.Idle);
+            _fsm.ChangeState(EnemyStateID.Idle);
         }
 
 
         void Dead()
         {
-            _fsm.ChangeState(EnemyStateId.Dead);
+            this.GetSystem<CountSystem>().IncrementKillCount(this.GetModel<PlayersModel>().Current, 1);
+
+            string dropAddress = _dropSystem.GetDropAddress("coin");
+            Addressables.InstantiateAsync(dropAddress, transform.position, Quaternion.identity);
+
+            _fsm.ChangeState(EnemyStateID.Dead);
         }
     }
 }

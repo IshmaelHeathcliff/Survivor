@@ -7,45 +7,51 @@ namespace Character.Modifier
 {
     public class ModifierSystem : AbstractSystem
     {
-        Dictionary<string, ModifierInfo> _modifierInfoCache = new();
+        Dictionary<string, ModifierConfig> _modifierConfigCache = new();
         const string JsonPath = "Preset";
         const string JsonName = "Modifiers.json";
 
         void Load()
         {
-            _modifierInfoCache = new Dictionary<string, ModifierInfo>();
-            List<ModifierInfo> modifierInfoList = this.GetUtility<SaveLoadUtility>().Load<List<ModifierInfo>>(JsonName, JsonPath);
-            foreach (ModifierInfo modifierInfo in modifierInfoList)
+            _modifierConfigCache = new Dictionary<string, ModifierConfig>();
+            List<ModifierConfig> modifierConfigList = this.GetUtility<SaveLoadUtility>().Load<List<ModifierConfig>>(JsonName, JsonPath);
+            foreach (ModifierConfig modifierConfig in modifierConfigList)
             {
-                _modifierInfoCache.Add(modifierInfo.ModifierID, modifierInfo);
+                _modifierConfigCache.Add(modifierConfig.ModifierID, modifierConfig);
             }
         }
 
-        public ModifierInfo GetModifierInfo(string id)
+        public ModifierConfig GetModifierConfig(string id)
         {
-            if (_modifierInfoCache == null)
+            if (_modifierConfigCache == null)
             {
                 Load();
             }
 
-            if (!_modifierInfoCache.TryGetValue(id, out ModifierInfo modifierInfo))
+            if (!_modifierConfigCache.TryGetValue(id, out ModifierConfig modifierConfig))
             {
                 Debug.LogError($"modifierID {id} is not registered");
                 return null;
             }
 
-            return modifierInfo;
+            return modifierConfig;
         }
 
-        public StatModifierInfo GetStatModifierInfo(string id)
+        public T GetModifierConfig<T>(string id) where T : ModifierConfig
         {
-            if (GetModifierInfo(id) is not StatModifierInfo statModifierInfo)
+            ModifierConfig modifierConfig = GetModifierConfig(id);
+            if (modifierConfig == null)
             {
-                Debug.LogError($"modifierID {id} is not a stat modifier");
                 return null;
             }
 
-            return statModifierInfo;
+            if (modifierConfig is not T t)
+            {
+                Debug.LogError($"modifierID {id} is not a {typeof(T).Name}");
+                return null;
+            }
+
+            return t;
         }
 
         readonly Dictionary<string, IModifierFactory> _modifierFactories = new();
@@ -67,13 +73,13 @@ namespace Character.Modifier
 
         public IStat GetStat(IStatModifier modifier)
         {
-            var factory = GetStatModifierFactory(modifier.FactoryID);
+            var factory = GetModifierFactory<IStatModifierFactory>(modifier.FactoryID);
             if (factory == null)
             {
                 return null;
             }
 
-            return factory.GetStat(modifier.ModifierInfo as StatModifierInfo);
+            return factory.GetStat(modifier.ModifierConfig);
         }
 
         public IModifierFactory GetModifierFactory(string factoryID)
@@ -87,27 +93,27 @@ namespace Character.Modifier
             return factory;
         }
 
-        public IStatModifierFactory GetStatModifierFactory(string factoryID)
+        public T GetModifierFactory<T>(string factoryID) where T : IModifierFactory
         {
             IModifierFactory factory = GetModifierFactory(factoryID);
             if (factory == null)
             {
-                return null;
+                return default;
             }
 
-            if (factory is not IStatModifierFactory statFactory)
+            if (factory is not T t)
             {
-                Debug.LogError($"factoryID {factoryID} is not a stat modifier factory");
-                return null;
+                Debug.LogError($"factoryID {factoryID} is not a {typeof(T).Name}");
+                return default;
             }
 
-            return statFactory;
+            return t;
         }
 
 
         public IStatModifier CreateStatModifier(string modifierId, string factoryID)
         {
-            IStatModifierFactory factory = GetStatModifierFactory(factoryID);
+            IStatModifierFactory factory = GetModifierFactory<IStatModifierFactory>(factoryID);
             if (factory == null)
             {
                 return null;
@@ -118,31 +124,36 @@ namespace Character.Modifier
 
         public IStatModifier CreateStatModifier(string modifierId, IStatModifierFactory factory)
         {
-            StatModifierInfo modifierInfo = GetStatModifierInfo(modifierId);
-            if (modifierInfo == null)
+            StatModifierConfig modifierConfig = GetModifierConfig<StatModifierConfig>(modifierId);
+            if (modifierConfig == null)
             {
                 return null;
             }
 
-            return factory.CreateModifier(modifierInfo);
+            return factory.CreateModifier(modifierConfig);
         }
 
         public IStatModifier CreateStatModifier(string modifierId, string factoryID, int value)
         {
 
-            IStatModifierFactory factory = GetStatModifierFactory(factoryID);
+            IStatModifierFactory factory = GetModifierFactory<IStatModifierFactory>(factoryID);
             if (factory == null)
             {
                 return null;
             }
 
-            StatModifierInfo modifierInfo = GetStatModifierInfo(modifierId);
-            if (modifierInfo == null)
+            return CreateStatModifier(modifierId, factory, value);
+        }
+
+        public IStatModifier CreateStatModifier(string modifierId, IStatModifierFactory factory, int value)
+        {
+            StatModifierConfig modifierConfig = GetModifierConfig<StatModifierConfig>(modifierId);
+            if (modifierConfig == null)
             {
                 return null;
             }
 
-            return factory.CreateModifier(modifierInfo, value);
+            return factory.CreateModifier(modifierConfig, value);
         }
 
         protected override void OnInit()

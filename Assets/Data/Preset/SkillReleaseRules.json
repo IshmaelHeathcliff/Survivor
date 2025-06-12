@@ -1,0 +1,55 @@
+[
+  {
+    "ID": "dice1-5",
+    "Name": "骰子1~5吞噬规则",
+    "Description": null,
+    "IsOnce": true,
+    "Condition": {
+      "$type": "SpecificSkillsReleaseConditionConfig, Assembly-CSharp",
+      "RequiredSkillIDs": [
+        "dice1",
+        "dice2",
+        "dice3",
+        "dice4",
+        "dice5"
+      ],
+      "Description": null,
+      "SkillsToRelease": [
+        "dice1",
+        "dice2",
+        "dice3",
+        "dice4",
+        "dice5"
+      ]
+    },
+    "Reward": {
+      "$type": "SpecificSkillsReleaseRewardConfig, Assembly-CSharp",
+      "NewSkillIDs": [
+        "dice6"
+      ],
+      "Description": null
+    }
+  },
+  {
+    "ID": "dice6",
+    "Name": "骰子6吞噬规则",
+    "Description": null,
+    "IsOnce": true,
+    "Condition": {
+      "$type": "ValueCountConditionConfig, Assembly-CSharp",
+      "ValueID": "RollDice",
+      "Value": 6,
+      "Description": null,
+      "SkillsToRelease": [
+        "dice6"
+      ]
+    },
+    "Reward": {
+      "$type": "SpecificSkillsReleaseRewardConfig, Assembly-CSharp",
+      "NewSkillIDs": [
+        "loaded_dice"
+      ],
+      "Description": null
+    }
+  }
+]

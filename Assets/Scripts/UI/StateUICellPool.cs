@@ -13,18 +13,13 @@ namespace Character.State
         [SerializeField] AssetReferenceGameObject _stateUICellReference;
         [SerializeField] int _initialSize = 10;
         [SerializeField] int _maxSize = 100;
-
-        AsyncOperationHandle<GameObject> _stateHandle;
         readonly Stack<StateUICell> _pool = new();
 
         public int Count => _pool.Count;
 
         async UniTask<StateUICell> CreatObject()
         {
-            await _stateHandle;
-            if (_stateHandle.Result == null) return null;
-
-            GameObject obj = Instantiate(_stateHandle.Result, transform);
+            GameObject obj = await Addressables.InstantiateAsync(_stateUICellReference);
             obj.SetActive(false);
             return obj.GetOrAddComponent<StateUICell>();
         }
@@ -45,21 +40,19 @@ namespace Character.State
             return stateUICell;
         }
 
-        public void Push(StateUICell obj)
+        public void Push(StateUICell stateUI)
         {
-            obj.gameObject.SetActive(false);
+            stateUI.gameObject.SetActive(false);
             if (Count > _maxSize)
             {
-                Destroy(obj.gameObject);
+                Addressables.ReleaseInstance(stateUI.gameObject);
                 return;
             }
-            _pool.Push(obj);
+            _pool.Push(stateUI);
         }
 
         async UniTaskVoid Init()
         {
-            _stateHandle = Addressables.LoadAssetAsync<GameObject>(_stateUICellReference);
-
             for (int i = 0; i < _initialSize; i++)
             {
                 _pool.Push(await CreatObject());
@@ -73,7 +66,12 @@ namespace Character.State
 
         void OnDisable()
         {
-            Addressables.Release(_stateHandle);
+            foreach (StateUICell stateUI in _pool)
+            {
+                Addressables.ReleaseInstance(stateUI.gameObject);
+            }
+
+            _pool.Clear();
         }
     }
 }

@@ -5,11 +5,7 @@ namespace Character.Damage
 {
     public enum DamageType
     {
-        Physical,
-        Fire,
-        Lightning,
-        Cold,
-        Chaos
+        Simple,
     }
 
     public abstract class Damage
@@ -48,19 +44,10 @@ namespace Character.Damage
 
         public override void Apply()
         {
-            // Debug.Log("Damage Applied");
-
-            if (!IsHit())
-            {
-                // Debug.Log("Damage Not Hit");
-                return;
-            }
-
             float damage = DamageCalculator.Calculate();
 
             if (IsCritical())
             {
-                // Debug.Log("Damage Critical");
                 float criticalMultiplier = Attacker.CriticalMultiplier.Value;
                 damage *= criticalMultiplier / 100f;
             }
@@ -84,46 +71,13 @@ namespace Character.Damage
             }
         }
 
-        bool IsHit()
-        {
-            float accuracy = Attacker.Accuracy.Value;
-            float evasion = Damageable.Evasion.Value;
-            float chance = accuracy / (accuracy + 0.2f * evasion);
-            return Random.Range(0f, 1f) < chance;
-        }
-
         public AttackDamage(IAttacker attacker, IDamageable damageable, List<string> keywords, DamageType type, float baseDamage, float addedMultiplier, float baseMultiplier) : base(attacker, damageable, keywords, type, baseDamage, addedMultiplier)
         {
             _baseMultiplier = baseMultiplier;
             DamageCalculator = type switch
             {
-                DamageType.Physical =>
-                    new PhysicalHitCalculator(attacker, damageable, baseDamage * baseMultiplier, keywords, addedMultiplier),
-                _ =>
-                    new ElementalHitCalculator(attacker, damageable, baseDamage * baseMultiplier, keywords, type, addedMultiplier),
+                _ => new SimpleHitCalculator(attacker, damageable, baseDamage * baseMultiplier, keywords, addedMultiplier),
             };
-        }
-    }
-
-    public class SpellDamage : Damage
-    {
-        public SpellDamage(IAttacker attacker, IDamageable damageable, List<string> keywords, DamageType type, float baseDamage, float addedMultiplier) : base(attacker, damageable, keywords, type, baseDamage, addedMultiplier)
-        {
-            DamageCalculator = type switch
-            {
-                DamageType.Physical =>
-                    new PhysicalHitCalculator(attacker, damageable, baseDamage, keywords, addedMultiplier),
-                _ =>
-                    new ElementalHitCalculator(attacker, damageable, baseDamage, keywords, type, addedMultiplier),
-            };
-        }
-    }
-
-    // 非攻击和法术伤害，主要包括死亡爆炸和自伤
-    public class SecondaryDamage : Damage
-    {
-        public SecondaryDamage(IAttacker attacker, IDamageable damageable, List<string> keywords, DamageType type, float baseDamage, float addedMultiplier) : base(attacker, damageable, keywords, type, baseDamage, addedMultiplier)
-        {
         }
     }
 
