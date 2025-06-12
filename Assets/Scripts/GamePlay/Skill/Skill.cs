@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Character.Stat;
 using Skill.Effect;
+using UnityEngine;
 
 namespace Skill
 {
@@ -35,7 +36,7 @@ namespace Skill
         // 技能启用时生效的效果，比如Buff，需要关闭技能时主动 Cancel
         protected readonly List<IEffect> SkillEffectsOnEnable = new();
         // 每次使用技能时生效的效果，比如攻击，一般不需要主动 Cancel
-        protected readonly List<IEffect> SkillEffectsOnUpdate = new();
+        protected readonly List<IEffect> SkillEffectsOnUse = new();
 
         public Skill(T skillConfig, CharacterStats characterStats)
         {
@@ -53,7 +54,7 @@ namespace Skill
 
             if (effectsOnUpdate != null)
             {
-                SkillEffectsOnUpdate.AddRange(effectsOnUpdate);
+                SkillEffectsOnUse.AddRange(effectsOnUpdate);
             }
         }
 
@@ -61,22 +62,24 @@ namespace Skill
         {
             foreach (IEffect skillEffect in SkillEffectsOnEnable)
             {
+                skillEffect.Enable();
                 skillEffect.Apply();
+                // Debug.Log(skillEffect.Description);
             }
         }
+
+        public abstract void Use();
+
+        public abstract void Cancel();
 
         public virtual void Disable()
         {
             foreach (IEffect skillEffect in SkillEffectsOnEnable)
             {
                 skillEffect.Cancel();
+                skillEffect.Disable();
             }
-
         }
-
-        public abstract void Use();
-
-        public abstract void Cancel();
     }
 
     public class RepetitiveSkill : Skill<RepetitiveSkillConfig>
@@ -85,6 +88,7 @@ namespace Skill
         public float Cooldown => 1f / CooldownInverse.Value;
         public bool IsReady => _leftTime <= 0;
 
+        bool _isEnabled;
         float _leftTime;
 
         public RepetitiveSkill(RepetitiveSkillConfig skillConfig, CharacterStats characterStats) :
@@ -94,8 +98,23 @@ namespace Skill
             _leftTime = 0;
         }
 
+        public override void Enable()
+        {
+            base.Enable();
+            _isEnabled = true;
+            foreach (IEffect skillEffect in SkillEffectsOnUse)
+            {
+                skillEffect.Enable();
+            }
+        }
+
         public void Update(float deltaTime)
         {
+            if (!_isEnabled)
+            {
+                return;
+            }
+
             if (!IsReady)
             {
                 _leftTime -= deltaTime;
@@ -104,30 +123,36 @@ namespace Skill
 
         public override void Use()
         {
-            if (!IsReady)
+            if (!_isEnabled || !IsReady)
             {
                 return;
             }
 
             _leftTime += Cooldown;
 
-            foreach (IEffect skillEffect in SkillEffectsOnUpdate)
+            foreach (IEffect skillEffect in SkillEffectsOnUse)
             {
                 skillEffect.Apply();
+            }
+        }
+
+        public override void Cancel()
+        {
+            foreach (IEffect skillEffect in SkillEffectsOnUse)
+            {
+                skillEffect.Cancel();
             }
         }
 
         public override void Disable()
         {
             base.Disable();
-            Cancel();
-        }
+            _isEnabled = false;
 
-        public override void Cancel()
-        {
-            foreach (IEffect skillEffect in SkillEffectsOnUpdate)
+            Cancel();
+            foreach (IEffect skillEffect in SkillEffectsOnUse)
             {
-                skillEffect.Cancel();
+                skillEffect.Disable();
             }
         }
     }
@@ -139,14 +164,35 @@ namespace Skill
         {
         }
 
-        public override void Cancel()
+        public override void Enable()
         {
-            Disable();
+            base.Enable();
+            Use();
         }
 
         public override void Use()
         {
-            Enable();
+            foreach (IEffect skillEffect in SkillEffectsOnUse)
+            {
+                skillEffect.Enable();
+                skillEffect.Apply();
+                // Debug.Log(skillEffect.Description);
+            }
+        }
+
+        public override void Cancel()
+        {
+            foreach  (IEffect skillEffect in SkillEffectsOnUse)
+            {
+                skillEffect.Cancel();
+                skillEffect.Disable();
+            }
+        }
+
+        public override void Disable()
+        {
+            Cancel();
+            base.Disable();
         }
     }
 }

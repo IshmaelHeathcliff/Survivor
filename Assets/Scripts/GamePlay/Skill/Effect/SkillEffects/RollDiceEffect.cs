@@ -40,6 +40,7 @@ namespace Skill.Effect
         public DiceOnValueEffect(DiceOnValueEffectConfig skillEffectConfig, IEnumerable<IEffect> childEffects) : base(skillEffectConfig, childEffects)
         {
             Roll = skillEffectConfig.Value;
+            Description = $"当骰子数为 {Roll} 时触发";
         }
 
         protected override void OnApply()

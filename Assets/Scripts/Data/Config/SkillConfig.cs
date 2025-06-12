@@ -14,19 +14,21 @@ public class SkillConfig
     [TypeFilter("GetFilteredTypeList")]
     public List<SkillEffectConfig> SkillEffectConfigsOnEnable { get; set; }
 
+    [ShowInInspector] public virtual List<SkillEffectConfig> SkillEffectConfigsOnUse { get; set; }
+
+
     IEnumerable<System.Type> GetFilteredTypeList()
     {
         return System.AppDomain.CurrentDomain.GetAssemblies()
             .SelectMany(assembly => assembly.GetTypes())
             .Where(type => typeof(SkillEffectConfig).IsAssignableFrom(type) &&
-                          !type.IsAbstract &&
-                          type != typeof(AttackEffectConfig));
+                            !type.IsAbstract &&
+                            type != typeof(AttackEffectConfig));
     }
 }
 
 public class RepetitiveSkillConfig : SkillConfig
 {
-    [ShowInInspector] public virtual List<SkillEffectConfig> SkillEffectConfigsOnUpdate { get; set; }
     [ShowInInspector] public float Cooldown { get; set; }
 }
 
@@ -44,5 +46,5 @@ public class AttackSkillConfig : RepetitiveSkillConfig
     [ShowInInspector] public float CriticalMultiplier { get; set; }
     [ShowInInspector] public float AttackArea { get; set; }
     [ShowInInspector] public float Duration { get; set; }
-
+    [ShowInInspector] public bool ReleaseOnAcquire { get; set; }
 }

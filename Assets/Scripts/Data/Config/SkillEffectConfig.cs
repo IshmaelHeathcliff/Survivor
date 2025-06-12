@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Newtonsoft.Json;
 using Sirenix.OdinInspector;
 
 public abstract class SkillEffectConfig
@@ -18,7 +19,17 @@ public class AttackEffectConfig : SkillEffectConfig
 
     public AttackEffectConfig()
     {
-        Description = "施加攻击";
+        Description = "创建攻击器";
+    }
+}
+
+public class AcquireSkillEffectConfig : SkillEffectConfig
+{
+    [ShowInInspector] public string SkillID { get; set; }
+
+    public AcquireSkillEffectConfig()
+    {
+        Description = "获取技能";
     }
 }
 
@@ -49,7 +60,7 @@ public class CountIncrementEffectConfig : NestedEffectConfig
 
     public CountIncrementEffectConfig()
     {
-        Description = "计数";
+        Description = "增量触发";
     }
 }
 
@@ -67,16 +78,16 @@ public class DiceOnValueEffectConfig : NestedEffectConfig
 
     public DiceOnValueEffectConfig()
     {
-        Description = "当骰子数满足时触发";
+        Description = "骰子数触发";
     }
 }
 
-public class AcquireResourceConfig : SkillEffectConfig
+public class AcquireResourceEffectConfig : SkillEffectConfig
 {
     [ShowInInspector] public string ResourceID { get; set; }
     [ShowInInspector] public int Amount { get; set; }
 
-    public AcquireResourceConfig()
+    public AcquireResourceEffectConfig()
     {
         Description = "获取资源";
     }

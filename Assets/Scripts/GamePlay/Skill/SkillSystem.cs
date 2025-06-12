@@ -21,7 +21,9 @@ namespace Skill
         const string JsonPath = "Preset";
         const string JsonName = "Skills.json";
 
-        public SkillCreateEnv SkillCreateEnv { get; set; }
+        readonly SkillConfigLoader _skillConfigLoader = new();
+
+        SkillCreateEnv SkillCreateEnv { get; set; }
 
         void Load()
         {
@@ -61,27 +63,39 @@ namespace Skill
         {
             SetEnv(model);
 
-            return SkillConfigLoader.CreateSkill(GetSkillConfig(id), SkillCreateEnv);
+            return _skillConfigLoader.CreateSkill(GetSkillConfig(id), SkillCreateEnv);
         }
 
         public void AcquireSkill(string id, ICharacterModel model = null)
         {
-            ISkill skill = CreateSkill(id, model);
+            SetEnv(model);
 
-            ISkillContainer SkillsInSlot = SkillCreateEnv.Model.SkillsInSlot;
-
-            if (SkillsInSlot.Count >= SkillsInSlot.MaxCount)
+            if (SkillCreateEnv.Model.SkillsReleased.HasSkill(id))
             {
-                Debug.Log($"技能槽位已满，最大数量: {SkillsInSlot.MaxCount}");
                 return;
             }
 
-            if (!SkillsInSlot.AddSkill(skill))
+            ISkill skill = CreateSkill(id, model);
+
+            ISkillContainer skillsInSlot = SkillCreateEnv.Model.SkillsInSlot;
+
+            if (skillsInSlot.Count >= skillsInSlot.MaxCount)
+            {
+                Debug.Log($"技能槽位已满，最大数量: {skillsInSlot.MaxCount}");
+                return;
+            }
+
+            if (!skillsInSlot.AddSkill(skill))
             {
                 return;
             }
 
             this.SendEvent(new SkillAcquiredEvent(skill, SkillCreateEnv.Model));
+
+            if (skill is AttackSkill { ReleaseOnAcquire: true })
+            {
+                ReleaseSkill(id, model);
+            }
         }
 
         public void ReleaseSkill(string id, ICharacterModel model = null)
@@ -143,7 +157,7 @@ namespace Skill
         protected override void OnInit()
         {
             Load();
-            SkillCreateEnv = new()
+            SkillCreateEnv = new SkillCreateEnv
             {
                 ModifierSystem = this.GetSystem<ModifierSystem>(),
                 ResourceSystem = this.GetSystem<ResourceSystem>(),

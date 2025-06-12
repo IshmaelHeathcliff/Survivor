@@ -5,15 +5,20 @@ namespace Skill.Effect
 {
     public class CountIncrementEffect : NestedSkillEffect<CountIncrementEffectConfig>
     {
-        CountSystem _countSystem;
         int _lastTriggerValue;
-        CountIncrementEffectConfig _countConfig;
-        ICharacterModel _model;
+
+        IUnRegister _unRegister;
+
+        readonly CountSystem _countSystem;
+        readonly ICharacterModel _model;
+
+
+
         public CountIncrementEffect(CountIncrementEffectConfig config, IEnumerable<IEffect> childEffects, CountSystem system, ICharacterModel model) : base(config, childEffects)
         {
             _countSystem = system;
-            _countConfig = config;
             _model = model;
+            Description = $"{config.CountValueID} 每 {config.Increment} 触发";
         }
 
         protected override void OnApply()
@@ -23,23 +28,20 @@ namespace Skill.Effect
                 return;
             }
 
-            _countSystem.Register(_countConfig.CountValueID, _model, OnCountValueChanged);
-            _lastTriggerValue = _countSystem.GetCount(_countConfig.CountValueID, _model); // 初始化上一次触发时的计数
+            _unRegister ??= _countSystem.Register(SkillEffectConfig.CountValueID, _model, OnCountValueChanged);
+            _lastTriggerValue = _countSystem.GetCount(SkillEffectConfig.CountValueID, _model); // 初始化上一次触发时的计数
         }
 
         protected override void OnCancel()
         {
-            if (_countSystem != null)
-            {
-                _countSystem.Unregister(_countConfig.CountValueID, _model, OnCountValueChanged);
-            }
-
+            _unRegister?.UnRegister();
+            _unRegister = null;
         }
 
         void OnCountValueChanged(CountChangedEvent e)
         {
             // 检查计数是否达到或超过阈值
-            if (e.Value - _lastTriggerValue >= _countConfig.Increment)
+            if (e.Value - _lastTriggerValue >= SkillEffectConfig.Increment)
             {
                 foreach (IEffect childEffect in ChildEffects)
                 {

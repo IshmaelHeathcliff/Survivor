@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Character.Damage;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -7,22 +8,25 @@ namespace Skill.Effect
     public class AttackEffect : SkillEffect<AttackEffectConfig>
     {
         readonly IAttackerController _attackerController;
-        IAttacker _attacker;
+        readonly List<IAttacker> _attackers = new();
 
-        public AttackEffect(AttackEffectConfig skillEffectConfig, IAttackerController attackerController) : base(skillEffectConfig)
+        public AttackEffect(AttackEffectConfig config, IAttackerController attackerController) : base(config)
         {
             _attackerController = attackerController;
+            Description = $"创建攻击器 {config.AttackerID}";
         }
 
         async UniTaskVoid CreateAttacker()
         {
-            _attacker = await _attackerController.CreateAttacker(Owner.ID, SkillEffectConfig.AttackerID);
+            IAttacker attacker = await _attackerController.CreateAttacker(Owner.ID, SkillEffectConfig.AttackerID);
             if (Owner is not AttackSkill attackSkill)
             {
                 Debug.LogError("AttackEffect is not owned by an AttackSkill");
                 return;
             }
-            _attacker.SetSkill(attackSkill);
+            attacker.SetSkill(attackSkill);
+
+            _attackers.Add(attacker);
         }
 
 
@@ -33,7 +37,12 @@ namespace Skill.Effect
 
         protected override void OnCancel()
         {
-            _attacker?.Cancel();
+            foreach (IAttacker attacker in _attackers)
+            {
+                attacker?.Cancel();
+            }
+
+            _attackers.Clear();
         }
     }
 }

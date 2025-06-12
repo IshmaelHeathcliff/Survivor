@@ -5,21 +5,20 @@ namespace Skill
 {
     public interface ISkillContainer
     {
-        bool TryGetSkill(string ID, out ISkill skill);
-        ISkill GetSkill(string ID);
+        bool TryGetSkill(string id, out ISkill skill);
+        ISkill GetSkill(string id);
         bool AddSkill(ISkill skill);
-        bool RemoveSkill(string ID);
-        bool ReleaseSkill(string ID, out ISkill skill);
-        bool HasSkill(string ID);
-        bool HasSkills(IEnumerable<string> IDs);
-        int HasCount(IEnumerable<string> IDs);
+        bool RemoveSkill(string id);
+        bool ReleaseSkill(string id, out ISkill skill);
+        bool HasSkill(string id);
+        bool HasSkills(IEnumerable<string> ids);
+        int HasCount(IEnumerable<string> ids);
         int MaxCount { get; set; }
         int Count { get; }
         IEnumerable<ISkill> GetAllSkills();
         void Clear();
     }
 
-    // ! 一个角色同一ID的技能只能拥有一个
     public class SkillContainer : ISkillContainer
     {
         readonly Dictionary<string, ISkill> _skills = new();
@@ -36,25 +35,22 @@ namespace Skill
             return _skills.Values;
         }
 
-        public bool TryGetSkill(string ID, out ISkill skill)
+        public bool TryGetSkill(string id, out ISkill skill)
         {
-            return _skills.TryGetValue(ID, out skill);
+            return _skills.TryGetValue(id, out skill);
         }
 
-        public ISkill GetSkill(string ID)
+        public ISkill GetSkill(string id)
         {
-            if (_skills.TryGetValue(ID, out ISkill skill))
-            {
-                return skill;
-            }
-
-            return null;
+            return _skills.GetValueOrDefault(id);
         }
 
         public bool AddSkill(ISkill skill)
         {
+            // ! 同一ID的技能只能拥有一个
             if (_skills.TryAdd(skill.ID, skill))
             {
+                // 默认获取时激活
                 skill.Enable();
                 return true;
             }
@@ -62,20 +58,20 @@ namespace Skill
             return false;
         }
 
-        public bool HasSkill(string ID)
+        public bool HasSkill(string id)
         {
-            return _skills.ContainsKey(ID);
+            return _skills.ContainsKey(id);
         }
 
-        public bool HasSkills(IEnumerable<string> IDs)
+        public bool HasSkills(IEnumerable<string> ids)
         {
-            return IDs.All(HasSkill);
+            return ids.All(HasSkill);
         }
 
-        public int HasCount(IEnumerable<string> IDs)
+        public int HasCount(IEnumerable<string> ids)
         {
             int count = 0;
-            foreach (string id in IDs)
+            foreach (string id in ids)
             {
                 if (HasSkill(id))
                 {
@@ -86,24 +82,24 @@ namespace Skill
             return count;
         }
 
-        public bool RemoveSkill(string ID)
+        public bool RemoveSkill(string id)
         {
-            if (_skills.ContainsKey(ID))
+            if (_skills.ContainsKey(id))
             {
-                _skills[ID].Disable();
-                _skills.Remove(ID);
+                _skills[id].Disable();
+                _skills.Remove(id);
                 return true;
             }
 
             return false;
         }
 
-        public bool ReleaseSkill(string ID, out ISkill skill)
+        public bool ReleaseSkill(string id, out ISkill skill)
         {
-            if (_skills.TryGetValue(ID, out skill))
+            if (_skills.TryGetValue(id, out skill))
             {
                 skill.Disable();
-                _skills.Remove(ID);
+                _skills.Remove(id);
                 return true;
             }
 
