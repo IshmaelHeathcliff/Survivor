@@ -1,7 +1,8 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using Core;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace Character
+namespace GamePlay.Character
 {
     public interface IMoveController : ICharacterControlled
     {

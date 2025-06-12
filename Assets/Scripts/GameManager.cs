@@ -1,10 +1,10 @@
-﻿using Character.State;
-using Character.Modifier;
-using Character.Player;
-using SaveLoad;
+﻿using GamePlay.Character.State;
+using GamePlay.Character.Modifier;
+using GamePlay.Character.Player;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using Character.Stat;
+using GamePlay.Character.Stat;
+using Data.SaveLoad;
 
 public class GameManager : MonoBehaviour, IController
 {

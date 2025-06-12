@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Character.Modifier;
-using SaveLoad;
+using Data.Config;
+using Data.SaveLoad;
+using GamePlay.Character.Modifier;
 using UnityEngine;
 
-namespace Character.State
+namespace GamePlay.Character.State
 {
     public class StateCreateSystem : AbstractSystem
     {

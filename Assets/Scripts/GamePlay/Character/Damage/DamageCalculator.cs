@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Character.Damage
+namespace GamePlay.Character.Damage
 {
     public abstract class DamageCalculator
     {

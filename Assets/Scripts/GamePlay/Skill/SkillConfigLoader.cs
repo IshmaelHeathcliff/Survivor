@@ -1,9 +1,10 @@
 using System.Collections.Generic;
-using Skill.Effect;
+using Data.Config;
+using GamePlay.Skill.Effect;
 using UnityEngine;
 
 
-namespace Skill
+namespace GamePlay.Skill
 {
     public class SkillCreationContext
     {

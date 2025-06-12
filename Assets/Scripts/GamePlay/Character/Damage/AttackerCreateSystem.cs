@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Cysharp.Threading.Tasks;
-using SaveLoad;
-using Skill;
+using Data.Config;
+using Data.SaveLoad;
+using GamePlay.Skill;
 
-namespace Character.Damage
+namespace GamePlay.Character.Damage
 {
     public interface IAttackerCreateSystem : ISystem
     {

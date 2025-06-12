@@ -1,8 +1,8 @@
-﻿using Character.Damage;
-using Core;
+﻿using Core;
 using Cysharp.Threading.Tasks;
+using GamePlay.Character.Damage;
 
-namespace Character.Enemy
+namespace GamePlay.Character.Enemy
 {
     public class EnemyAttackerController : AttackerController
     {

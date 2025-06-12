@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using Data.Config;
 using Newtonsoft.Json;
 
 
-namespace Character.Modifier
+namespace GamePlay.Character.Modifier
 {
     public interface IModifier
     {

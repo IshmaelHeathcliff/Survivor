@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
-using Character.Stat;
-using SaveLoad;
+using Data.Config;
+using Data.SaveLoad;
+using GamePlay.Character.Stat;
 using UnityEngine;
 
-namespace Character.Modifier
+namespace GamePlay.Character.Modifier
 {
     public class ModifierSystem : AbstractSystem
     {

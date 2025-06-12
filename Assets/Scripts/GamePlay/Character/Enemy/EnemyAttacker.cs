@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using GamePlay.Character.Damage;
 using UnityEngine;
 
-namespace Character.Damage
+namespace GamePlay.Character.Enemy
 {
     public class EnemyAttacker : Attacker
     {

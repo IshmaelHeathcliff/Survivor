@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 
-namespace Character.State
+namespace Data.Config
 {
     [Serializable]
     public class StateConfig

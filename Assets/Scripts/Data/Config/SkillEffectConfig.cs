@@ -1,94 +1,96 @@
 using System.Collections.Generic;
-using Newtonsoft.Json;
 using Sirenix.OdinInspector;
 
-public abstract class SkillEffectConfig
+namespace Data.Config
 {
-    [ShowInInspector][ReadOnly] public string Description { get; set; }
-}
-
-
-public class NestedEffectConfig : SkillEffectConfig
-{
-    [ShowInInspector, PropertyOrder(int.MaxValue)] public List<SkillEffectConfig> ChildEffects { get; set; }
-}
-
-public class AttackEffectConfig : SkillEffectConfig
-{
-    [ShowInInspector] public string AttackerID { get; set; }
-
-    public AttackEffectConfig()
+    public abstract class SkillEffectConfig
     {
-        Description = "创建攻击器";
+        [ShowInInspector][ReadOnly] public string Description { get; set; }
     }
-}
 
-public class AcquireSkillEffectConfig : SkillEffectConfig
-{
-    [ShowInInspector] public string SkillID { get; set; }
 
-    public AcquireSkillEffectConfig()
+    public class NestedEffectConfig : SkillEffectConfig
     {
-        Description = "获取技能";
+        [ShowInInspector, PropertyOrder(int.MaxValue)] public List<SkillEffectConfig> ChildEffects { get; set; }
     }
-}
 
-public class ModifierEffectConfig : SkillEffectConfig
-{
-    [ShowInInspector] public string ModifierID { get; set; }
-    [ShowInInspector] public int Value { get; set; }
-
-    public ModifierEffectConfig()
+    public class AttackEffectConfig : SkillEffectConfig
     {
-        Description = "添加词条";
+        [ShowInInspector] public string AttackerID { get; set; }
+
+        public AttackEffectConfig()
+        {
+            Description = "创建攻击器";
+        }
     }
-}
 
-public class LocalModifierEffectConfig : ModifierEffectConfig
-{
-    [ShowInInspector] public string AttackSkillID { get; set; }
-    public LocalModifierEffectConfig()
+    public class AcquireSkillEffectConfig : SkillEffectConfig
     {
-        Description = "添加局部词条";
+        [ShowInInspector] public string SkillID { get; set; }
+
+        public AcquireSkillEffectConfig()
+        {
+            Description = "获取技能";
+        }
     }
-}
 
-public class CountIncrementEffectConfig : NestedEffectConfig
-{
-    [ShowInInspector] public string CountValueID { get; set; }
-    [ShowInInspector] public int Increment { get; set; }
-
-    public CountIncrementEffectConfig()
+    public class ModifierEffectConfig : SkillEffectConfig
     {
-        Description = "增量触发";
+        [ShowInInspector] public string ModifierID { get; set; }
+        [ShowInInspector] public int Value { get; set; }
+
+        public ModifierEffectConfig()
+        {
+            Description = "添加词条";
+        }
     }
-}
 
-public class RollDiceEffectConfig : NestedEffectConfig
-{
-    public RollDiceEffectConfig()
+    public class LocalModifierEffectConfig : ModifierEffectConfig
     {
-        Description = "掷骰子";
+        [ShowInInspector] public string AttackSkillID { get; set; }
+        public LocalModifierEffectConfig()
+        {
+            Description = "添加局部词条";
+        }
     }
-}
 
-public class DiceOnValueEffectConfig : NestedEffectConfig
-{
-    [ShowInInspector] public int Value { get; set; }
-
-    public DiceOnValueEffectConfig()
+    public class CountIncrementEffectConfig : NestedEffectConfig
     {
-        Description = "骰子数触发";
+        [ShowInInspector] public string CountValueID { get; set; }
+        [ShowInInspector] public int Increment { get; set; }
+
+        public CountIncrementEffectConfig()
+        {
+            Description = "增量触发";
+        }
     }
-}
 
-public class AcquireResourceEffectConfig : SkillEffectConfig
-{
-    [ShowInInspector] public string ResourceID { get; set; }
-    [ShowInInspector] public int Amount { get; set; }
-
-    public AcquireResourceEffectConfig()
+    public class RollDiceEffectConfig : NestedEffectConfig
     {
-        Description = "获取资源";
+        public RollDiceEffectConfig()
+        {
+            Description = "掷骰子";
+        }
+    }
+
+    public class DiceOnValueEffectConfig : NestedEffectConfig
+    {
+        [ShowInInspector] public int Value { get; set; }
+
+        public DiceOnValueEffectConfig()
+        {
+            Description = "骰子数触发";
+        }
+    }
+
+    public class AcquireResourceEffectConfig : SkillEffectConfig
+    {
+        [ShowInInspector] public string ResourceID { get; set; }
+        [ShowInInspector] public int Amount { get; set; }
+
+        public AcquireResourceEffectConfig()
+        {
+            Description = "获取资源";
+        }
     }
 }

@@ -1,7 +1,9 @@
 using System.Collections.Generic;
-using Character;
+using Data.Config;
+using GamePlay.Character;
+using Data.SaveLoad;
 
-namespace Skill
+namespace GamePlay.Skill
 {
     public class SkillReleaseSystem : AbstractSystem
     {
@@ -25,7 +27,7 @@ namespace Skill
 
         void LoadRules()
         {
-            List<SkillReleaseRuleConfig> configs = this.GetUtility<SaveLoad.SaveLoadUtility>().Load<List<SkillReleaseRuleConfig>>(JsonName, JsonPath);
+            List<SkillReleaseRuleConfig> configs = this.GetUtility<SaveLoadUtility>().Load<List<SkillReleaseRuleConfig>>(JsonName, JsonPath);
 
             if (configs != null)
             {

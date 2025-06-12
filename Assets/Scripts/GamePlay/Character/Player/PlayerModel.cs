@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Character.Player
+namespace GamePlay.Character.Player
 {
     public class PlayerModel : CharacterModel
     {

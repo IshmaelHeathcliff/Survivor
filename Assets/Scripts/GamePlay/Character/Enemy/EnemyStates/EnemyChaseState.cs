@@ -1,7 +1,7 @@
 ﻿using Core;
 using Cysharp.Threading.Tasks;
 
-namespace Character.Enemy
+namespace GamePlay.Character.Enemy
 {
     public class EnemyChaseState : EnemyState
     {

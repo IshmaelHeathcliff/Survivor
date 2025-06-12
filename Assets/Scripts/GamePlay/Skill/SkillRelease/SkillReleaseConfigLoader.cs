@@ -1,6 +1,7 @@
 using System;
+using Data.Config;
 
-namespace Skill
+namespace GamePlay.Skill
 {
     public class SkillReleaseConfigLoader
     {

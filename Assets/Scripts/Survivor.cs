@@ -1,11 +1,14 @@
-﻿using Character.Enemy;
-using Character.State;
-using Character.Modifier;
-using Character.Player;
-using Character.Damage;
-using SaveLoad;
-using Scene;
-using Skill;
+﻿using Core;
+using Core.Scene;
+using GamePlay.Character.Enemy;
+using GamePlay.Character.State;
+using GamePlay.Character.Modifier;
+using GamePlay.Character.Player;
+using GamePlay.Character.Damage;
+using Data.SaveLoad;
+using GamePlay;
+using GamePlay.Item;
+using GamePlay.Skill;
 
 public class GameFrame : Architecture<GameFrame>
 {

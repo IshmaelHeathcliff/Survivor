@@ -1,4 +1,4 @@
-﻿namespace Character.Player
+﻿namespace GamePlay.Character.Player
 {
     public class PlayerModelCommand : AbstractCommand
     {

@@ -1,6 +1,7 @@
-﻿using Character.Stat;
+﻿using Data.Config;
+using GamePlay.Character.Stat;
 
-namespace Character.Modifier
+namespace GamePlay.Character.Modifier
 {
     public interface IModifierFactory
     {

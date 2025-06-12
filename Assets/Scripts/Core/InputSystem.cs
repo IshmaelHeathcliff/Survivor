@@ -1,13 +1,16 @@
-public class InputSystem : AbstractSystem
+namespace Core
 {
-    PlayerInput _input;
-
-    public PlayerInput.PlayerActions PlayerActionMap { get; private set; }
-
-
-    protected override void OnInit()
+    public class InputSystem : AbstractSystem
     {
-        _input = new PlayerInput();
-        PlayerActionMap = _input.Player;
+        PlayerInput _input;
+
+        public PlayerInput.PlayerActions PlayerActionMap { get; private set; }
+
+
+        protected override void OnInit()
+        {
+            _input = new PlayerInput();
+            PlayerActionMap = _input.Player;
+        }
     }
 }

@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Globalization;
 using UnityEngine;
 
-namespace Tool
+namespace Utilities
 {
     public class Vector2IntTypeConverter : TypeConverter
     {

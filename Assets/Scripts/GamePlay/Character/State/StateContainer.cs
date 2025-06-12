@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Sirenix.Utilities;
 
-namespace Character.State
+namespace GamePlay.Character.State
 {
     public interface IStateContainer
     {

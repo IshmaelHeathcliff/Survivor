@@ -1,4 +1,5 @@
-﻿using Character.State;
+﻿using Data.Config;
+using GamePlay.Character.State;
 using UnityEngine;
 
 namespace Editor

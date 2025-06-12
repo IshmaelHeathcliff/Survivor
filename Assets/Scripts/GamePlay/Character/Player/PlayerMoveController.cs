@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using InputSystem = Core.InputSystem;
 
-namespace Character
+namespace GamePlay.Character.Player
 {
     public class PlayerMoveController : MoveController
     {

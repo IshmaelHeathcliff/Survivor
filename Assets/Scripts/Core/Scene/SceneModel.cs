@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Scene
+namespace Core.Scene
 {
     public class SceneModel: AbstractModel
     {
@@ -21,7 +21,7 @@ namespace Scene
             _sceneEntrances[entranceTag] = entrance;
         }
 
-        
+
         protected override void OnInit()
         {
             _sceneEntrances = new Dictionary<string, SceneEntrance>();

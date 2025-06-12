@@ -1,6 +1,6 @@
 ﻿using Core;
 
-namespace Character.Enemy
+namespace GamePlay.Character.Enemy
 {
     public enum EnemyStateID
     {

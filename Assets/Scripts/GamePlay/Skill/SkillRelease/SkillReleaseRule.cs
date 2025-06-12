@@ -1,4 +1,4 @@
-namespace Skill
+namespace GamePlay.Skill
 {
     public class SkillReleaseRule
     {

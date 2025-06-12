@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using Cysharp.Threading.Tasks;
 using System.Threading;
+using GamePlay.Character.Player;
 
-namespace Character.Enemy
+namespace GamePlay.Character.Enemy
 {
     public class EnemyMoveController : MoveController
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Character
+namespace GamePlay.Character
 {
     public interface ICharacterControlled : ICanInit
     {

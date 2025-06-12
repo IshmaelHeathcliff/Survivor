@@ -1,6 +1,6 @@
 using System.Text;
-using Character.Player;
-using Skill;
+using GamePlay.Character.Player;
+using GamePlay.Skill;
 using TMPro;
 using UnityEngine;
 

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Skill
+namespace GamePlay.Skill
 {
     public interface ISkillContainer
     {

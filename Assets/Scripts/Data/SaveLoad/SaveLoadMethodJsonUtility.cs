@@ -2,7 +2,7 @@ using System.IO;
 using System.Text;
 using UnityEngine;
 
-namespace SaveLoad
+namespace Data.SaveLoad
 {
     public class SaveLoadMethodJsonUtility : ISaveLoadMethod
     {

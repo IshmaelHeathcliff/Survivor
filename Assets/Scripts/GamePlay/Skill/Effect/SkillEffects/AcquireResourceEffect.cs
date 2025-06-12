@@ -1,4 +1,6 @@
-namespace Skill.Effect
+using Data.Config;
+
+namespace GamePlay.Skill.Effect
 {
     public class AcquireResourceEffect : SkillEffect<AcquireResourceEffectConfig>, IEffect<int>
     {

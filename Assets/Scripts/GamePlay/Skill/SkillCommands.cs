@@ -1,6 +1,6 @@
-using Character;
+using GamePlay.Character;
 
-namespace Skill
+namespace GamePlay.Skill
 {
     public class SkillCommand : AbstractCommand
     {

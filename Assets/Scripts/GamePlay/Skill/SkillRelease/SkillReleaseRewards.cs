@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Skill
+namespace GamePlay.Skill
 {
     public interface ISkillReleaseReward
     {

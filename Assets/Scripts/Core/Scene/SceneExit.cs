@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Scene
+namespace Core.Scene
 {
     [RequireComponent(typeof(BoxCollider2D))]
     public class SceneExit : MonoBehaviour, IController

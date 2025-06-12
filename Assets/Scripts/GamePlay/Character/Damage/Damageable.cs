@@ -1,9 +1,10 @@
 ﻿using System;
-using Character.Stat;
+using Core;
 using Cysharp.Threading.Tasks;
+using GamePlay.Character.Stat;
 using UnityEngine;
 
-namespace Character.Damage
+namespace GamePlay.Character.Damage
 {
     public interface IDamageable : ICharacterControlled
     {

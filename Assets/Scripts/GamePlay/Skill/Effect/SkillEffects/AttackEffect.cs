@@ -1,9 +1,10 @@
 using System.Collections.Generic;
-using Character.Damage;
+using GamePlay.Character.Damage;
 using Cysharp.Threading.Tasks;
+using Data.Config;
 using UnityEngine;
 
-namespace Skill.Effect
+namespace GamePlay.Skill.Effect
 {
     public class AttackEffect : SkillEffect<AttackEffectConfig>
     {
