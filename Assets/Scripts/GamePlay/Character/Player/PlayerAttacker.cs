@@ -12,8 +12,6 @@ namespace GamePlay.Character.Player
     [RequireComponent(typeof(Collider2D), typeof(SpriteRenderer))]
     public class PlayerAttacker : Attacker
     {
-        [SerializeField] float _attackTime;
-        [SerializeField] float _attackSpeed;
         [SerializeField] float _rotateSpeed;
 
         Collider2D _collider;
@@ -54,13 +52,13 @@ namespace GamePlay.Character.Player
         protected override async UniTask Play()
         {
             transform.right = Direction;
-            float leftTime = _attackTime;
+            float leftTime = Duration.Value;
             CancellationToken ct = GlobalCancellation.GetCombinedToken(this);
 
             while (leftTime > 0)
             {
                 ct.ThrowIfCancellationRequested();
-                transform.Translate((1 + _attackSpeed) * Time.fixedDeltaTime * Direction, Space.World);
+                transform.Translate(ProjectileSpeed.Value * Time.fixedDeltaTime * Direction, Space.World);
                 transform.Rotate(0, 0, _rotateSpeed * 360 * Time.fixedDeltaTime);
                 leftTime -= Time.fixedDeltaTime;
                 await UniTask.WaitForFixedUpdate(ct);

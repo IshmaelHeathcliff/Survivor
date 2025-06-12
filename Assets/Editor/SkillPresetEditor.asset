@@ -23,62 +23,62 @@ MonoBehaviour:
     SerializationNodes:
     - Name: Data
       Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[SkillConfig, Assembly-CSharp]],
+      Data: 0|System.Collections.Generic.List`1[[Data.Config.SkillConfig, Assembly-CSharp]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 9
     - Name: 
       Entry: 7
-      Data: 1|AttackSkillConfig, Assembly-CSharp
+      Data: 1|Data.Config.AttackSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 2|OneTimeSkillConfig, Assembly-CSharp
+      Data: 2|Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 3|OneTimeSkillConfig, Assembly-CSharp
+      Data: 3|Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 4|OneTimeSkillConfig, Assembly-CSharp
+      Data: 4|Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 5|OneTimeSkillConfig, Assembly-CSharp
+      Data: 5|Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 6|OneTimeSkillConfig, Assembly-CSharp
+      Data: 6|Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 7|OneTimeSkillConfig, Assembly-CSharp
+      Data: 7|Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 8|OneTimeSkillConfig, Assembly-CSharp
+      Data: 8|Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 9|AttackSkillConfig, Assembly-CSharp
+      Data: 9|Data.Config.AttackSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 

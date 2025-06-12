@@ -1,4 +1,5 @@
-﻿using Core;
+﻿using System.Collections.Generic;
+using Core;
 using Cysharp.Threading.Tasks;
 using GamePlay.Character.Damage;
 
@@ -18,11 +19,11 @@ namespace GamePlay.Character.Enemy
             _attackerCreateSystem = this.GetSystem<AttackerCreateSystem>();
         }
 
-        protected override async UniTask<IAttacker> CreateAttackerInternal(string skillID, string attackerID)
+        protected override async UniTask<IEnumerable<IAttacker>> CreateAttackerInternal(string skillID, string attackerID)
         {
-            var attacker = await GetOrCreateAttacker(skillID, attackerID);
+            IEnumerable<IAttacker> attackers = await GetOrCreateAttacker(skillID, attackerID);
 
-            return attacker;
+            return attackers;
         }
     }
 }

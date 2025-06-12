@@ -18,6 +18,7 @@ namespace GamePlay.Character.Damage
         IStat CriticalMultiplier { get; }
         IStat AttackArea { get; }
         IStat Duration { get; }
+        IStat ProjectileSpeed { get; }
 
         void SetSkill(AttackSkill skill);
         UniTaskVoid Attack();
@@ -41,6 +42,7 @@ namespace GamePlay.Character.Damage
         public IStat CriticalMultiplier => _attackSkill.CriticalMultiplier;
         public IStat AttackArea => _attackSkill.AttackArea;
         public IStat Duration => _attackSkill.Duration;
+        public IStat ProjectileSpeed => _attackSkill.ProjectileSpeed;
 
         public void SetSkill(AttackSkill skill)
         {

@@ -34,13 +34,11 @@ namespace UI
         {
             var info = new StringBuilder();
             info.Append($"{skill.Name}:\n");
-            info.Append(GenerateStatInfo(skill.Damage, 1));
-            info.Append($"Cooldown: {FormatStatValue(skill.Cooldown)}\n");
-            info.Append(GenerateStatInfo(skill.CooldownInverse, 1));
-            info.Append(GenerateStatInfo(skill.CriticalChance, 1));
-            info.Append(GenerateStatInfo(skill.CriticalMultiplier, 1));
-            info.Append(GenerateStatInfo(skill.AttackArea, 1));
-            info.Append(GenerateStatInfo(skill.Duration, 1));
+            info.Append($"  Cooldown: {FormatStatValue(skill.Cooldown)}\n");
+            foreach (IStat stat in skill.SkillStats.GetAllStats())
+            {
+                info.Append(GenerateStatInfo(stat, 1));
+            }
             return info;
         }
 
