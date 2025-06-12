@@ -12,13 +12,14 @@
     "CriticalMultiplier": 50.0,
     "AttackArea": 1.0,
     "Duration": 1.0,
-    "SkillEffectConfigsOnUpdate": null,
+    "ReleaseOnAcquire": true,
     "Cooldown": 2.0,
-    "ID": "dice0",
+    "ID": "dice",
     "Name": "奇奥骰子",
     "Keywords": [],
     "Description": null,
-    "SkillEffectConfigsOnEnable": null
+    "SkillEffectConfigsOnEnable": null,
+    "SkillEffectConfigsOnUse": null
   },
   {
     "$type": "OneTimeSkillConfig, Assembly-CSharp",
@@ -28,8 +29,15 @@
     "Description": null,
     "SkillEffectConfigsOnEnable": [
       {
+        "$type": "AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "dice",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
         "$type": "LocalModifierEffectConfig, Assembly-CSharp",
-        "AttackSkillID": "dice0",
+        "AttackSkillID": "dice",
         "ModifierID": "damage_add",
         "Value": 5,
         "Description": "添加局部词条"
@@ -43,6 +51,13 @@
     "Keywords": [],
     "Description": null,
     "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "dice",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
       {
         "$type": "ModifierEffectConfig, Assembly-CSharp",
         "ModifierID": "cdi_increase",
@@ -59,8 +74,15 @@
     "Description": null,
     "SkillEffectConfigsOnEnable": [
       {
+        "$type": "AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "dice",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
         "$type": "LocalModifierEffectConfig, Assembly-CSharp",
-        "AttackSkillID": "dice0",
+        "AttackSkillID": "dice",
         "ModifierID": "critical_add",
         "Value": 5,
         "Description": "添加局部词条"
@@ -74,6 +96,13 @@
     "Keywords": [],
     "Description": null,
     "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "dice",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
       {
         "$type": "ModifierEffectConfig, Assembly-CSharp",
         "ModifierID": "coin_add",
@@ -89,6 +118,13 @@
     "Keywords": [],
     "Description": null,
     "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "dice",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
       {
         "$type": "ModifierEffectConfig, Assembly-CSharp",
         "ModifierID": "projectileCount_add",
@@ -113,7 +149,7 @@
             "$type": "RollDiceEffectConfig, Assembly-CSharp",
             "ChildEffects": [
               {
-                "$type": "AcquireResourceConfig, Assembly-CSharp",
+                "$type": "AcquireResourceEffectConfig, Assembly-CSharp",
                 "ResourceID": "Wood",
                 "Amount": 1,
                 "Description": "获取资源"
@@ -124,7 +160,8 @@
         ],
         "Description": "计数"
       }
-    ]
+    ],
+    "SkillEffectConfigsOnUse": null
   },
   {
     "$type": "OneTimeSkillConfig, Assembly-CSharp",
@@ -147,7 +184,7 @@
                 "ChildEffects": [
                   {
                     "$type": "LocalModifierEffectConfig, Assembly-CSharp",
-                    "AttackSkillID": "dice0",
+                    "AttackSkillID": "dice",
                     "ModifierID": "damage_add",
                     "Value": 5,
                     "Description": "添加局部词条"
@@ -174,7 +211,7 @@
                 "ChildEffects": [
                   {
                     "$type": "LocalModifierEffectConfig, Assembly-CSharp",
-                    "AttackSkillID": "dice0",
+                    "AttackSkillID": "dice",
                     "ModifierID": "critical_add",
                     "Value": 5,
                     "Description": "添加局部词条"
@@ -187,7 +224,7 @@
                 "Value": 4,
                 "ChildEffects": [
                   {
-                    "$type": "AcquireResourceConfig, Assembly-CSharp",
+                    "$type": "AcquireResourceEffectConfig, Assembly-CSharp",
                     "ResourceID": "Coin",
                     "Amount": 10,
                     "Description": "获取资源"
@@ -200,7 +237,7 @@
                 "Value": 5,
                 "ChildEffects": [
                   {
-                    "$type": "AcquireResourceConfig, Assembly-CSharp",
+                    "$type": "AcquireResourceEffectConfig, Assembly-CSharp",
                     "ResourceID": "Wood",
                     "Amount": 5,
                     "Description": "获取资源"
@@ -217,7 +254,7 @@
                     "ChildEffects": [
                       {
                         "$type": "LocalModifierEffectConfig, Assembly-CSharp",
-                        "AttackSkillID": "dice0",
+                        "AttackSkillID": "dice",
                         "ModifierID": "damage_add",
                         "Value": 5,
                         "Description": "添加局部词条"
@@ -230,19 +267,19 @@
                       },
                       {
                         "$type": "LocalModifierEffectConfig, Assembly-CSharp",
-                        "AttackSkillID": "dice0",
+                        "AttackSkillID": "dice",
                         "ModifierID": "critical_add",
                         "Value": 5,
                         "Description": "添加局部词条"
                       },
                       {
-                        "$type": "AcquireResourceConfig, Assembly-CSharp",
+                        "$type": "AcquireResourceEffectConfig, Assembly-CSharp",
                         "ResourceID": "Coin",
                         "Amount": 10,
                         "Description": "获取资源"
                       },
                       {
-                        "$type": "AcquireResourceConfig, Assembly-CSharp",
+                        "$type": "AcquireResourceEffectConfig, Assembly-CSharp",
                         "ResourceID": "Wood",
                         "Amount": 5,
                         "Description": "获取资源"
@@ -259,7 +296,8 @@
         ],
         "Description": "计数"
       }
-    ]
+    ],
+    "SkillEffectConfigsOnUse": null
   },
   {
     "$type": "AttackSkillConfig, Assembly-CSharp",
@@ -274,12 +312,13 @@
     "CriticalMultiplier": 0.0,
     "AttackArea": 0.0,
     "Duration": 0.0,
-    "SkillEffectConfigsOnUpdate": null,
+    "ReleaseOnAcquire": false,
     "Cooldown": 0.0,
     "ID": "dash",
     "Name": "冲刺",
     "Keywords": [],
     "Description": null,
-    "SkillEffectConfigsOnEnable": null
+    "SkillEffectConfigsOnEnable": null,
+    "SkillEffectConfigsOnUse": null
   }
 ]

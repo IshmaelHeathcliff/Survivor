@@ -153,6 +153,12 @@ namespace Character.Modifier
                 return null;
             }
 
+            if (factory == null)
+            {
+                Debug.LogError($"factory is null, modifierId: {modifierId}");
+                return null;
+            }
+
             return factory.CreateModifier(modifierConfig, value);
         }
 

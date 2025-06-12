@@ -11,9 +11,11 @@ namespace Skill
         public SkillCreateEnv Env { get; set; }
     }
 
-    public static class SkillConfigLoader
+    public class SkillConfigLoader
     {
-        static List<IEffect> CreateSkillEffects(IEnumerable<SkillEffectConfig> effectConfigs, SkillCreationContext context)
+        readonly SkillEffectConfigLoader _skillEffectConfigLoader = new();
+
+        List<IEffect> CreateSkillEffects(IEnumerable<SkillEffectConfig> effectConfigs, SkillCreationContext context)
         {
             List<IEffect> skillEffects = new();
 
@@ -24,7 +26,7 @@ namespace Skill
 
             foreach (SkillEffectConfig effectConfig in effectConfigs)
             {
-                IEffect effect = SkillEffectConfigLoader.CreateEffect(effectConfig, context);
+                IEffect effect = _skillEffectConfigLoader.CreateEffect(effectConfig, context);
                 if (effect != null)
                 {
                     skillEffects.Add(effect);
@@ -37,7 +39,7 @@ namespace Skill
             return skillEffects;
         }
 
-        public static ISkill CreateSkill(SkillConfig skillConfig, SkillCreateEnv env)
+        public ISkill CreateSkill(SkillConfig skillConfig, SkillCreateEnv env)
         {
             var context = new SkillCreationContext { Env = env };
 
@@ -52,7 +54,6 @@ namespace Skill
                     break;
                 case RepetitiveSkillConfig repetitiveSkillConfig:
                     context.Skill = new RepetitiveSkill(repetitiveSkillConfig, env.Model.Stats);
-                    skillEffectsOnUpdate.AddRange(CreateSkillEffects(repetitiveSkillConfig.SkillEffectConfigsOnUpdate, context));
                     break;
                 case OneTimeSkillConfig oneTimeSkillConfig:
                     context.Skill = new OneTimeSkill(oneTimeSkillConfig, env.Model.Stats);
@@ -63,6 +64,7 @@ namespace Skill
             }
 
             skillEffectsOnEnable.AddRange(CreateSkillEffects(skillConfig.SkillEffectConfigsOnEnable, context));
+            skillEffectsOnUpdate.AddRange(CreateSkillEffects(skillConfig.SkillEffectConfigsOnUse, context));
 
             context.Skill.SetEffects(skillEffectsOnEnable, skillEffectsOnUpdate);
 
@@ -70,17 +72,17 @@ namespace Skill
         }
     }
 
-    public static class SkillEffectConfigLoader
+    public class SkillEffectConfigLoader
     {
-        public static IEffect CreateEffect(SkillEffectConfig skillConfig, SkillCreationContext context)
+        public IEffect CreateEffect(SkillEffectConfig skillConfig, SkillCreationContext context)
         {
             IEffect effect = skillConfig switch
             {
                 AttackEffectConfig attackEffectConfig => new AttackEffect(attackEffectConfig, context.Env.Model.Controller.AttackerController),
-                LocalModifierEffectConfig localModifierEffectConfig => new ModifierEffect(localModifierEffectConfig, context.Env.ModifierSystem, context.Env.Model.GetSkill(localModifierEffectConfig.AttackSkillID).SkillStats),
-                ModifierEffectConfig modifierEffectConfig => new ModifierEffect(modifierEffectConfig, context.Env.ModifierSystem, context.Env.Model.Stats),
-                AcquireResourceConfig acquireResourceEffectConfig => new AcquireResourceEffect(acquireResourceEffectConfig, context.Env.ResourceSystem),
+                ModifierEffectConfig modifierEffectConfig => new ModifierEffect(modifierEffectConfig, context.Env.ModifierSystem, context.Env.Model),
+                AcquireResourceEffectConfig acquireResourceEffectConfig => new AcquireResourceEffect(acquireResourceEffectConfig, context.Env.ResourceSystem),
                 NestedEffectConfig nestedEffectConfig => CreateNestedEffect(nestedEffectConfig, context),
+                AcquireSkillEffectConfig acquireSkillEffectConfig => new AcquireSkillEffect(acquireSkillEffectConfig, context.Env.SkillSystem, context.Env.Model),
                 _ => null,
             };
 
@@ -92,7 +94,7 @@ namespace Skill
             return effect;
         }
 
-        public static IEffect CreateNestedEffect(NestedEffectConfig skillConfig, SkillCreationContext context)
+        public IEffect CreateNestedEffect(NestedEffectConfig skillConfig, SkillCreationContext context)
         {
             if (skillConfig?.ChildEffects == null || context?.Env == null)
             {

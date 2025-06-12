@@ -2,17 +2,20 @@ using System;
 
 namespace Skill
 {
-    public static class SkillReleaseConfigLoader
+    public class SkillReleaseConfigLoader
     {
-        public static SkillReleaseRule CreateRule(SkillReleaseRuleConfig config)
+        readonly SkillReleaseConditionConfigLoader _skillReleaseConditionConfigLoader = new();
+        readonly SkillReleaseRewardConfigLoader _skillReleaseRewardConfigLoader = new();
+
+        public SkillReleaseRule CreateRule(SkillReleaseRuleConfig config)
         {
-            return new SkillReleaseRule(config.ID, SkillReleaseConditionConfigLoader.CreateCondition(config.Condition), SkillReleaseRewardConfigLoader.CreateReward(config.Reward), config.IsOnce);
+            return new SkillReleaseRule(config.ID, _skillReleaseConditionConfigLoader.CreateCondition(config.Condition), _skillReleaseRewardConfigLoader.CreateReward(config.Reward), config.IsOnce);
         }
     }
 
-    public static class SkillReleaseConditionConfigLoader
+    public class SkillReleaseConditionConfigLoader
     {
-        public static ISkillReleaseCondition CreateCondition(SkillReleaseConditionConfig config)
+        public ISkillReleaseCondition CreateCondition(SkillReleaseConditionConfig config)
         {
             switch (config)
             {
@@ -28,9 +31,9 @@ namespace Skill
         }
     }
 
-    public static class SkillReleaseRewardConfigLoader
+    public class SkillReleaseRewardConfigLoader
     {
-        public static ISkillReleaseReward CreateReward(SkillReleaseRewardConfig config)
+        public ISkillReleaseReward CreateReward(SkillReleaseRewardConfig config)
         {
             switch (config)
             {

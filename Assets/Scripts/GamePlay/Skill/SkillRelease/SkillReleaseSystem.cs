@@ -6,6 +6,7 @@ namespace Skill
     public class SkillReleaseSystem : AbstractSystem
     {
         readonly Dictionary<string, SkillReleaseRule> _releaseRules = new();
+        readonly SkillReleaseConfigLoader _skillReleaseConfigLoader = new();
 
         const string JsonPath = "Preset";
         const string JsonName = "SkillReleaseRules.json";
@@ -13,7 +14,7 @@ namespace Skill
         SkillSystem _skillSystem;
 
         // 保存注册的事件，用于在OnDeinit时取消注册
-        List<IUnRegister> _unRegisters = new();
+        readonly List<IUnRegister> _unRegisters = new();
 
         protected override void OnInit()
         {
@@ -30,7 +31,7 @@ namespace Skill
             {
                 foreach (SkillReleaseRuleConfig config in configs)
                 {
-                    _releaseRules.Add(config.ID, SkillReleaseConfigLoader.CreateRule(config));
+                    _releaseRules.Add(config.ID, _skillReleaseConfigLoader.CreateRule(config));
                 }
             }
         }

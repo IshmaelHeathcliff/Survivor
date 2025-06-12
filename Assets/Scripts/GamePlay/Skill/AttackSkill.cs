@@ -12,6 +12,8 @@ namespace Skill
         public IStat AttackArea => SkillStats.GetStat("AttackArea");
         public IStat Duration => SkillStats.GetStat("Duration");
 
+        public bool ReleaseOnAcquire { get; set; }
+
         public AttackSkill(AttackSkillConfig skillConfig, CharacterStats characterStats)
             : base(skillConfig, characterStats)
         {
@@ -20,6 +22,7 @@ namespace Skill
             CriticalMultiplier.BaseValue = skillConfig.CriticalMultiplier;
             AttackArea.BaseValue = skillConfig.AttackArea;
             Duration.BaseValue = skillConfig.Duration;
+            ReleaseOnAcquire = skillConfig.ReleaseOnAcquire;
         }
     }
 }

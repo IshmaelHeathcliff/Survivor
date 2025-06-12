@@ -1648,12 +1648,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _skillIDs:
-  - dice0
   - dice1
   - dice2
   - dice3
   - dice4
-  - dice5
   _skillSlotCount: 10
 --- !u!1 &768642907
 GameObject:
