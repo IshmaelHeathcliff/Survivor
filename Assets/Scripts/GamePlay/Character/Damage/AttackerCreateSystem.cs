@@ -11,7 +11,7 @@ namespace GamePlay.Character.Damage
 {
     public interface IAttackerCreateSystem : ISystem
     {
-        UniTask<IAttacker> CreateAttacker(AttackSkill skill, string attackerID, Transform parent, Action<IAttacker> customSetup = null);
+        UniTask<IEnumerable<IAttacker>> CreateAttacker(AttackSkill skill, string attackerID, Transform parent);
     }
 
     public class AttackerCreateSystem : AbstractSystem, IAttackerCreateSystem
@@ -48,45 +48,39 @@ namespace GamePlay.Character.Damage
             return null;
         }
 
-        public async UniTask<IAttacker> CreateAttacker(AttackSkill skill, string attackerID, Transform parent, Action<IAttacker> customSetup = null)
+        public async UniTask<IEnumerable<IAttacker>> CreateAttacker(AttackSkill skill, string attackerID, Transform parent)
         {
             try
             {
+                List<IAttacker> attackers = new();
                 AttackerConfig config = GetAttackerConfig(attackerID);
                 if (config == null)
                 {
                     Debug.LogError($"未找到ID为{attackerID}的Attacker配置");
                     return null;
                 }
-                GameObject attackerObj = await Addressables.InstantiateAsync(config.Address, parent);
 
-                if (attackerObj == null)
+                for (int i = 0; i < skill.ProjectileCount.Value; i++)
                 {
-                    Debug.LogError($"创建Attacker失败: {config.Address}");
-                    return null;
+                    GameObject attackerObj = await Addressables.InstantiateAsync(config.Address, parent);
+                    if (attackerObj.TryGetComponent(out IAttacker attacker))
+                    {
+                        attackers.Add(attacker);
+                    }
+                    else
+                    {
+                        Debug.LogError($"无法获取Attacker组件: {config.Address}");
+                        Addressables.Release(attackerObj);
+                        return null;
+                    }
                 }
 
-                if (!attackerObj.TryGetComponent(out IAttacker attacker))
+                foreach (IAttacker attacker in attackers)
                 {
-                    Debug.LogError($"无法获取Attacker组件: {config.Address}");
-                    Addressables.Release(attackerObj);
-                    return null;
+                    attacker.SetSkill(skill);
                 }
 
-                if (attacker is Attacker attackerComponent)
-                {
-                    // ? 可能会有初始化问题
-                    attackerComponent.SetSkill(skill);
-                }
-                else
-                {
-                    Debug.LogWarning($"不是Attacker类型，无法设置属性: {config.Address}");
-                }
-
-                // 自定义设置
-                customSetup?.Invoke(attacker);
-
-                return attacker;
+                return attackers;
             }
             catch (Exception ex)
             {

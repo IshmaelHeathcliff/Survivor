@@ -1,4 +1,5 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using GamePlay.Character.Damage;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -13,19 +14,22 @@ namespace GamePlay.Character.Player
         PlayerInput.PlayerActions _playerInput;
         AttackerCreateSystem _attackerCreateSystem;
 
-        protected override async UniTask<IAttacker> CreateAttackerInternal(string skillID, string attackerID)
+        protected override async UniTask<IEnumerable<IAttacker>> CreateAttackerInternal(string skillID, string attackerID)
         {
             Vector2 playerPos = this.SendQuery(new PlayerPositionQuery());
             Vector2 direction = ((Vector2)Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()) - playerPos).normalized;
 
-            IAttacker attacker = await GetOrCreateAttacker(skillID, attackerID);
+            var attackers = (List<IAttacker>)await GetOrCreateAttacker(skillID, attackerID);
 
-            float angle = Random.Range(0, 2 * Mathf.PI);
-            var randomDirection = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
-            attacker.Direction = (direction + randomDirection * direction.magnitude / 2).normalized;
+            foreach (IAttacker attacker in attackers)
+            {
+                float angle = Random.Range(0, 2 * Mathf.PI);
+                var randomDirection = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+                attacker.Direction = (direction + randomDirection * direction.magnitude / 2).normalized;
+            }
             transform.DetachChildren();
 
-            return attacker;
+            return attackers;
         }
 
         void AttackAction(InputAction.CallbackContext context)

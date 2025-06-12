@@ -48,6 +48,8 @@ namespace Data.Config
         [ShowInInspector] public float CriticalMultiplier { get; set; }
         [ShowInInspector] public float AttackArea { get; set; }
         [ShowInInspector] public float Duration { get; set; }
+        [ShowInInspector] public float ProjectileCount { get; set; }
+        [ShowInInspector] public float ProjectileSpeed { get; set; }
         [ShowInInspector] public bool ReleaseOnAcquire { get; set; }
     }
 }

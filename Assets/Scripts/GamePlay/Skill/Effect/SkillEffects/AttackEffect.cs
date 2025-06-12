@@ -19,15 +19,17 @@ namespace GamePlay.Skill.Effect
 
         async UniTaskVoid CreateAttacker()
         {
-            IAttacker attacker = await _attackerController.CreateAttacker(Owner.ID, SkillEffectConfig.AttackerID);
+            IEnumerable<IAttacker> attackers = await _attackerController.CreateAttackers(Owner.ID, SkillEffectConfig.AttackerID);
             if (Owner is not AttackSkill attackSkill)
             {
                 Debug.LogError("AttackEffect is not owned by an AttackSkill");
                 return;
             }
-            attacker.SetSkill(attackSkill);
-
-            _attackers.Add(attacker);
+            foreach (IAttacker attacker in attackers)
+            {
+                attacker.SetSkill(attackSkill);
+                _attackers.Add(attacker);
+            }
         }
 
 

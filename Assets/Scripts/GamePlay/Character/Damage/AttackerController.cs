@@ -7,7 +7,7 @@ namespace GamePlay.Character.Damage
 {
     public interface IAttackerController : ICharacterControlled
     {
-        UniTask<IAttacker> CreateAttacker(string skillID, string attackerID);
+        UniTask<IEnumerable<IAttacker>> CreateAttackers(string skillID, string attackerID);
         void RemoveAttacker(IAttacker attacker);
         void ClearAttacker();
         bool CanAttack { get; set; }
@@ -29,16 +29,19 @@ namespace GamePlay.Character.Damage
         {
         }
 
-        public async UniTask<IAttacker> CreateAttacker(string skillID, string attackerID)
+        public async UniTask<IEnumerable<IAttacker>> CreateAttackers(string skillID, string attackerID)
         {
-            IAttacker attacker = await CreateAttackerInternal(skillID, attackerID);
-            attacker.AttackerController = this;
-            if (!Attackers.Contains(attacker))
+            IEnumerable<IAttacker> attackers = await CreateAttackerInternal(skillID, attackerID);
+            foreach (IAttacker attacker in attackers)
             {
-                Attackers.Add(attacker);
+                attacker.AttackerController = this;
+                if (!Attackers.Contains(attacker))
+                {
+                    Attackers.Add(attacker);
+                }
             }
 
-            return attacker;
+            return attackers;
         }
 
         public void RemoveAttacker(IAttacker attacker)
@@ -46,7 +49,7 @@ namespace GamePlay.Character.Damage
             Attackers.Remove(attacker);
         }
 
-        protected async UniTask<IAttacker> GetOrCreateAttacker(string skillID, string attackerID)
+        protected async UniTask<IEnumerable<IAttacker>> GetOrCreateAttacker(string skillID, string attackerID)
         {
             if (!CharacterController.CharacterModel.TryGetSkill(skillID, out ISkill skill))
             {
@@ -60,21 +63,20 @@ namespace GamePlay.Character.Damage
                 return null;
             }
 
-            IAttacker attacker;
+            IEnumerable<IAttacker> attackers;
             if (attackerID == "self")
             {
-                attacker = GetComponentInChildren<IAttacker>();
-                attacker?.SetSkill(attackSkill);
+                attackers = GetComponentsInChildren<IAttacker>();
             }
             else
             {
-                attacker = await _attackerCreateSystem.CreateAttacker(attackSkill, attackerID: attackerID, transform);
+                attackers = await _attackerCreateSystem.CreateAttacker(attackSkill, attackerID: attackerID, transform);
             }
 
-            return attacker;
+            return attackers;
         }
 
-        protected abstract UniTask<IAttacker> CreateAttackerInternal(string skillID, string attackerID);
+        protected abstract UniTask<IEnumerable<IAttacker>> CreateAttackerInternal(string skillID, string attackerID);
 
         public virtual void ClearAttacker()
         {
