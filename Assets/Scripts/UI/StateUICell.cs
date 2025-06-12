@@ -1,11 +1,13 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using Character.State;
+using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.UI;
 
-namespace Character.State
+
+namespace UI
 {
     public class StateUICell : MonoBehaviour
     {
@@ -23,7 +25,7 @@ namespace Character.State
 
         public void SetCount(int count)
         {
-           _count.text = $"{count}";
+            _count.text = $"{count}";
         }
 
         public void SetInfo(string stateName, string description)
@@ -47,7 +49,7 @@ namespace Character.State
             _iconHandle = Addressables.LoadAssetAsync<Sprite>(iconPath);
             _icon.sprite = await _iconHandle;
         }
-        
+
         public void InitStateUICell(IState state)
         {
             if (state is IStateWithTime bt)
@@ -58,10 +60,10 @@ namespace Character.State
 
             if (state is IStateWithCount bc)
             {
-               _count.gameObject.SetActive(true);
-               SetCount(bc.Count);
+                _count.gameObject.SetActive(true);
+                SetCount(bc.Count);
             }
-            
+
             SetInfo(state.GetName(), state.GetDescription());
             SetIcon(state.GetIconPath()).Forget();
         }
@@ -78,7 +80,7 @@ namespace Character.State
         {
             AddressablesManager.Release(_iconHandle);
         }
-        
+
         void OnValidate()
         {
             _slider = GetComponentInChildren<Slider>(true);

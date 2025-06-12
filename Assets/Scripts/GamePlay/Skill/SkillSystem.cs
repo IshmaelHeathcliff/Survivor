@@ -1,155 +1,155 @@
-using System;
 using System.Collections.Generic;
 using Character;
-using Character.Damage;
 using Character.Modifier;
-using Character.Player;
 using SaveLoad;
 using UnityEngine;
 
-public class SkillCreateEnv
+namespace Skill
 {
-    public ICharacterModel Model;
-    public ModifierSystem ModifierSystem;
-    public ResourceSystem ResourceSystem;
-    public CountSystem CountSystem;
-    public SkillSystem SkillSystem;
-}
-
-public class SkillSystem : AbstractSystem
-{
-    readonly Dictionary<string, SkillConfig> _skillConfigCache = new();
-    const string JsonPath = "Preset";
-    const string JsonName = "Skills.json";
-
-    public SkillCreateEnv SkillCreateEnv { get; set; }
-
-    void Load()
+    public class SkillCreateEnv
     {
-        _skillConfigCache.Clear();
-        List<SkillConfig> skillConfigList = this.GetUtility<SaveLoadUtility>().Load<List<SkillConfig>>(JsonName, JsonPath);
-        foreach (SkillConfig skillConfig in skillConfigList)
-        {
-            _skillConfigCache.Add(skillConfig.ID, skillConfig);
-        }
+        public ICharacterModel Model;
+        public ModifierSystem ModifierSystem;
+        public ResourceSystem ResourceSystem;
+        public CountSystem CountSystem;
+        public SkillSystem SkillSystem;
     }
 
-    public SkillConfig GetSkillConfig(string id)
+    public class SkillSystem : AbstractSystem
     {
-        if (_skillConfigCache.TryGetValue(id, out SkillConfig skillConfig))
+        readonly Dictionary<string, SkillConfig> _skillConfigCache = new();
+        const string JsonPath = "Preset";
+        const string JsonName = "Skills.json";
+
+        public SkillCreateEnv SkillCreateEnv { get; set; }
+
+        void Load()
         {
-            return skillConfig;
+            _skillConfigCache.Clear();
+            List<SkillConfig> skillConfigList = this.GetUtility<SaveLoadUtility>().Load<List<SkillConfig>>(JsonName, JsonPath);
+            foreach (SkillConfig skillConfig in skillConfigList)
+            {
+                _skillConfigCache.Add(skillConfig.ID, skillConfig);
+            }
         }
 
-        Debug.LogError($"SkillConfig not found: {id}");
-        return null;
-    }
-
-    public void SetEnv(ICharacterModel model)
-    {
-        if (model != null)
+        public SkillConfig GetSkillConfig(string id)
         {
-            SkillCreateEnv.Model = model;
+            if (_skillConfigCache.TryGetValue(id, out SkillConfig skillConfig))
+            {
+                return skillConfig;
+            }
+
+            Debug.LogError($"SkillConfig not found: {id}");
+            return null;
         }
 
-        if (!CheckEnv())
+        public void SetEnv(ICharacterModel model)
         {
-            Debug.LogError("SkillCreateEnv is not set correctly");
-        }
-    }
+            if (model != null)
+            {
+                SkillCreateEnv.Model = model;
+            }
 
-    public ISkill CreateSkill(string id, ICharacterModel model = null)
-    {
-        SetEnv(model);
-
-        return SkillConfigLoader.CreateSkill(GetSkillConfig(id), SkillCreateEnv);
-    }
-
-    public void AcquireSkill(string id, ICharacterModel model = null)
-    {
-        ISkill skill = CreateSkill(id, model);
-
-        ISkillContainer SkillsInSlot = SkillCreateEnv.Model.SkillsInSlot;
-
-        if (SkillsInSlot.Count >= SkillsInSlot.MaxCount)
-        {
-            Debug.Log($"技能槽位已满，最大数量: {SkillsInSlot.MaxCount}");
-            return;
+            if (!CheckEnv())
+            {
+                Debug.LogError("SkillCreateEnv is not set correctly");
+            }
         }
 
-        if (!SkillsInSlot.AddSkill(skill))
+        public ISkill CreateSkill(string id, ICharacterModel model = null)
         {
-            return;
+            SetEnv(model);
+
+            return SkillConfigLoader.CreateSkill(GetSkillConfig(id), SkillCreateEnv);
         }
 
-        this.SendEvent(new SkillAcquiredEvent(skill, SkillCreateEnv.Model));
-    }
-
-    public void ReleaseSkill(string id, ICharacterModel model = null)
-    {
-        SetEnv(model);
-
-        if (!SkillCreateEnv.Model.SkillsInSlot.ReleaseSkill(id, out ISkill skill))
+        public void AcquireSkill(string id, ICharacterModel model = null)
         {
-            return;
+            ISkill skill = CreateSkill(id, model);
+
+            ISkillContainer SkillsInSlot = SkillCreateEnv.Model.SkillsInSlot;
+
+            if (SkillsInSlot.Count >= SkillsInSlot.MaxCount)
+            {
+                Debug.Log($"技能槽位已满，最大数量: {SkillsInSlot.MaxCount}");
+                return;
+            }
+
+            if (!SkillsInSlot.AddSkill(skill))
+            {
+                return;
+            }
+
+            this.SendEvent(new SkillAcquiredEvent(skill, SkillCreateEnv.Model));
         }
 
-        if (!SkillCreateEnv.Model.SkillsReleased.AddSkill(skill))
+        public void ReleaseSkill(string id, ICharacterModel model = null)
         {
-            return;
+            SetEnv(model);
+
+            if (!SkillCreateEnv.Model.SkillsInSlot.ReleaseSkill(id, out ISkill skill))
+            {
+                return;
+            }
+
+            if (!SkillCreateEnv.Model.SkillsReleased.AddSkill(skill))
+            {
+                return;
+            }
+
+            this.SendEvent(new SkillReleasedEvent(skill, SkillCreateEnv.Model));
         }
 
-        this.SendEvent(new SkillReleasedEvent(skill, SkillCreateEnv.Model));
-    }
-
-    public void RemoveSkill(string id, ICharacterModel model = null)
-    {
-        SetEnv(model);
-
-        if (SkillCreateEnv.Model.SkillsInSlot.RemoveSkill(id) || SkillCreateEnv.Model.SkillsReleased.RemoveSkill(id))
+        public void RemoveSkill(string id, ICharacterModel model = null)
         {
-            this.SendEvent(new SkillRemovedEvent(id, SkillCreateEnv.Model));
-        }
-    }
+            SetEnv(model);
 
-    public void ClearSkill(ICharacterModel model)
-    {
-        foreach (ISkill skill in model.GetAllSkills())
-        {
-            this.SendEvent(new SkillRemovedEvent(skill.ID, model));
+            if (SkillCreateEnv.Model.SkillsInSlot.RemoveSkill(id) || SkillCreateEnv.Model.SkillsReleased.RemoveSkill(id))
+            {
+                this.SendEvent(new SkillRemovedEvent(id, SkillCreateEnv.Model));
+            }
         }
 
-        model.SkillsInSlot.Clear();
-        model.SkillsReleased.Clear();
-    }
-
-    public void SetSkillSlotCount(int count, ICharacterModel model = null)
-    {
-        SetEnv(model);
-        SkillCreateEnv.Model.SkillSlotCount = count;
-        this.SendEvent(new SkillSlotCountChangedEvent(count, SkillCreateEnv.Model));
-    }
-
-    public bool CheckEnv()
-    {
-        if (SkillCreateEnv.Model == null)
+        public void ClearSkill(ICharacterModel model)
         {
-            Debug.LogError("Model is null");
-            return false;
+            foreach (ISkill skill in model.GetAllSkills())
+            {
+                this.SendEvent(new SkillRemovedEvent(skill.ID, model));
+            }
+
+            model.SkillsInSlot.Clear();
+            model.SkillsReleased.Clear();
         }
 
-        return true;
-    }
-
-    protected override void OnInit()
-    {
-        Load();
-        SkillCreateEnv = new()
+        public void SetSkillSlotCount(int count, ICharacterModel model = null)
         {
-            ModifierSystem = this.GetSystem<ModifierSystem>(),
-            ResourceSystem = this.GetSystem<ResourceSystem>(),
-            CountSystem = this.GetSystem<CountSystem>(),
-            SkillSystem = this
-        };
+            SetEnv(model);
+            SkillCreateEnv.Model.SkillSlotCount = count;
+            this.SendEvent(new SkillSlotCountChangedEvent(count, SkillCreateEnv.Model));
+        }
+
+        public bool CheckEnv()
+        {
+            if (SkillCreateEnv.Model == null)
+            {
+                Debug.LogError("Model is null");
+                return false;
+            }
+
+            return true;
+        }
+
+        protected override void OnInit()
+        {
+            Load();
+            SkillCreateEnv = new()
+            {
+                ModifierSystem = this.GetSystem<ModifierSystem>(),
+                ResourceSystem = this.GetSystem<ResourceSystem>(),
+                CountSystem = this.GetSystem<CountSystem>(),
+                SkillSystem = this
+            };
+        }
     }
 }

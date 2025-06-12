@@ -1,7 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Character.Stat;
 using Character.State;
+using Skill;
 using UnityEngine;
+
+
 namespace Character
 {
     public interface ICharacterModel

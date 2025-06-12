@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using Skill;
 using UnityEngine;
 
 namespace Character.Damage
@@ -59,7 +60,7 @@ namespace Character.Damage
                 return null;
             }
 
-            IAttacker attacker = null;
+            IAttacker attacker;
             if (attackerID == "self")
             {
                 attacker = GetComponentInChildren<IAttacker>();
@@ -67,7 +68,7 @@ namespace Character.Damage
             }
             else
             {
-                attacker = await _attackerCreateSystem.CreateAttacker(attackSkill, attackerID, transform);
+                attacker = await _attackerCreateSystem.CreateAttacker(attackSkill, attackerID: attackerID, transform);
             }
 
             return attacker;
@@ -78,7 +79,7 @@ namespace Character.Damage
         public virtual void ClearAttacker()
         {
             Attackers.Clear();
-            Attackers = new();
+            Attackers = new List<IAttacker>();
         }
 
         public IArchitecture GetArchitecture()

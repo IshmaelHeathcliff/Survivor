@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Cysharp.Threading.Tasks;
-using Character.Stat;
 using SaveLoad;
+using Skill;
 
 namespace Character.Damage
 {

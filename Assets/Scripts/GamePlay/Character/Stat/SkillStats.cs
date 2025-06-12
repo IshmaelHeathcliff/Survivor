@@ -1,14 +1,12 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using Character.Modifier;
-using Character.Stat;
 
-public class SkillStats : Stats
+namespace Character.Stat
 {
-    public SkillStats(IEnumerable<string> keywords, CharacterStats characterStats)
+    public class SkillStats : Stats
     {
-        InternalStats = new()
+        public SkillStats(IEnumerable<string> keywords, CharacterStats characterStats)
+        {
+            InternalStats = new()
         {
             { "Damage", new LocalStat(new Stat("Damage"), characterStats.GetStat("Damage")) },
             { "CriticalChance", new LocalStat(new Stat("CriticalChance"), characterStats.GetStat("CriticalChance")) },
@@ -20,6 +18,7 @@ public class SkillStats : Stats
             { "ProjectileSpeed", new LocalStat(new Stat("ProjectileSpeed"), characterStats.GetStat("ProjectileSpeed")) },
             { "ProjectileCount", new LocalStat(new Stat("ProjectileCount"), characterStats.GetStat("ProjectileCount")) },
         };
+        }
     }
 }
 

@@ -1,31 +1,33 @@
-using System.Collections.Generic;
-
-public class AcquireResourceEffect : SkillEffect<AcquireResourceConfig>, IEffect<int>
+namespace Skill.Effect
 {
-    ResourceSystem _resourceSystem;
-    AcquireResourceConfig _config;
-
-    public AcquireResourceEffect(AcquireResourceConfig skillEffectConfig, ResourceSystem resourceSystem) : base(skillEffectConfig)
+    public class AcquireResourceEffect : SkillEffect<AcquireResourceConfig>, IEffect<int>
     {
-        _resourceSystem = resourceSystem;
-        _config = skillEffectConfig;
-    }
+        ResourceSystem _resourceSystem;
+        AcquireResourceConfig _config;
 
-    public void Apply(int value)
-    {
-        _resourceSystem.AcquireResource(_config.ResourceID, value);
-    }
+        public AcquireResourceEffect(AcquireResourceConfig skillEffectConfig, ResourceSystem resourceSystem) : base(skillEffectConfig)
+        {
+            _resourceSystem = resourceSystem;
+            _config = skillEffectConfig;
+        }
 
-    public void Cancel(int value)
-    {
-    }
+        public void Apply(int value)
+        {
+            _resourceSystem.AcquireResource(_config.ResourceID, value);
+        }
 
-    protected override void OnApply()
-    {
-        _resourceSystem.AcquireResource(_config.ResourceID, _config.Amount);
-    }
+        public void Cancel(int value)
+        {
+        }
 
-    protected override void OnCancel()
-    {
+        protected override void OnApply()
+        {
+            _resourceSystem.AcquireResource(_config.ResourceID, _config.Amount);
+        }
+
+        protected override void OnCancel()
+        {
+        }
+
     }
 }

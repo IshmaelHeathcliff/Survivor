@@ -1,7 +1,6 @@
 ﻿using System;
 using Character.Stat;
 using Newtonsoft.Json;
-using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Character.Modifier
@@ -36,7 +35,7 @@ namespace Character.Modifier
         public override void Check()
         {
             // TODO: 检查Modifier生效条件
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public override void Register()
@@ -56,7 +55,7 @@ namespace Character.Modifier
                     Stat.AddFixedValueModifier(InstanceID, this);
                     break;
                 default:
-                    break;
+                    throw new ArgumentOutOfRangeException();
             }
 
         }

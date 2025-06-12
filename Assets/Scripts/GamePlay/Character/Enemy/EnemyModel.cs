@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Character.Enemy
+﻿namespace Character.Enemy
 {
     public class EnemyModel : CharacterModel
     {

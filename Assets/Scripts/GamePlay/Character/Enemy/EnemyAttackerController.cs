@@ -1,8 +1,6 @@
 ﻿using Character.Damage;
-using UnityEngine;
 using Core;
 using Cysharp.Threading.Tasks;
-using System.Collections.Generic;
 
 namespace Character.Enemy
 {

@@ -1,10 +1,9 @@
-﻿using Character.Damage;
-using Character.Modifier;
-using Character.Player;
+﻿using Character.Modifier;
 using Character.Stat;
+using Skill;
 using UnityEngine;
 
-namespace Character
+namespace Character.Player
 {
     public class PlayerController : MyCharacterController<PlayerModel, PlayersModel>
     {
@@ -13,7 +12,7 @@ namespace Character
         public void Respawn()
         {
             Model.Position = _initialPosition;
-            (CharaterStats.GetStat("Health") as IConsumableStat).SetMaxValue();
+            (CharaterStats.GetStat("Health") as IConsumableStat)?.SetMaxValue();
         }
 
         protected override void SetStats()
@@ -22,7 +21,7 @@ namespace Character
 
             IStatModifier healthModifier = ModifierSystem.CreateStatModifier("health_increase", "player", 100);
             healthModifier.Register();
-            (CharaterStats.GetStat("Health") as IConsumableStat).SetMaxValue();
+            (CharaterStats.GetStat("Health") as IConsumableStat)?.SetMaxValue();
         }
 
         protected override void MakeSureID()

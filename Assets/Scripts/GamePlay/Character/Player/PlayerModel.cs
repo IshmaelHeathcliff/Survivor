@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 
 namespace Character.Player
 {
@@ -7,8 +6,8 @@ namespace Character.Player
     {
         public Dictionary<string, BindableProperty<int>> Resources { get; } = new()
         {
-            { "Coin", new BindableProperty<int>(0) },
-            { "Wood", new BindableProperty<int>(0) },
+            { "Coin", new BindableProperty<int>() },
+            { "Wood", new BindableProperty<int>() },
         };
 
     }

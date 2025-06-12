@@ -1,78 +1,79 @@
 using Character;
-using Character.Damage;
-using UnityEngine;
 
-public class SkillCommand : AbstractCommand
+namespace Skill
 {
-    protected readonly ICharacterModel Model;
-
-    public SkillCommand(ICharacterModel model) : base()
+    public class SkillCommand : AbstractCommand
     {
-        Model = model;
+        protected readonly ICharacterModel Model;
+
+        public SkillCommand(ICharacterModel model) : base()
+        {
+            Model = model;
+        }
+
+        protected override void OnExecute()
+        {
+            this.GetSystem<SkillSystem>().SetEnv(Model);
+        }
     }
 
-    protected override void OnExecute()
+    public class SetSkillSlotCountCommand : SkillCommand
     {
-        this.GetSystem<SkillSystem>().SetEnv(Model);
-    }
-}
+        readonly int _count;
 
-public class SetSkillSlotCountCommand : SkillCommand
-{
-    readonly int _count;
+        public SetSkillSlotCountCommand(int count, ICharacterModel model) : base(model)
+        {
+            _count = count;
+        }
 
-    public SetSkillSlotCountCommand(int count, ICharacterModel model) : base(model)
-    {
-        _count = count;
-    }
-
-    protected override void OnExecute()
-    {
-        this.GetSystem<SkillSystem>().SetSkillSlotCount(_count, Model);
-    }
-}
-
-public class AcquireSkillCommand : SkillCommand
-{
-    readonly string _skillID;
-
-    public AcquireSkillCommand(string skillID, ICharacterModel model) : base(model)
-    {
-        _skillID = skillID;
+        protected override void OnExecute()
+        {
+            this.GetSystem<SkillSystem>().SetSkillSlotCount(_count, Model);
+        }
     }
 
-    protected override void OnExecute()
+    public class AcquireSkillCommand : SkillCommand
     {
-        this.GetSystem<SkillSystem>().AcquireSkill(_skillID, Model);
-    }
-}
+        readonly string _skillID;
 
-public class ReleaseSkillCommand : SkillCommand
-{
-    readonly string _skillID;
+        public AcquireSkillCommand(string skillID, ICharacterModel model) : base(model)
+        {
+            _skillID = skillID;
+        }
 
-    public ReleaseSkillCommand(string skillID, ICharacterModel model) : base(model)
-    {
-        _skillID = skillID;
-    }
-
-    protected override void OnExecute()
-    {
-        this.GetSystem<SkillSystem>().ReleaseSkill(_skillID, Model);
-    }
-}
-
-public class RemoveSkillCommand : SkillCommand
-{
-    readonly string _skillID;
-
-    public RemoveSkillCommand(string skillID, ICharacterModel model) : base(model)
-    {
-        _skillID = skillID;
+        protected override void OnExecute()
+        {
+            this.GetSystem<SkillSystem>().AcquireSkill(_skillID, Model);
+        }
     }
 
-    protected override void OnExecute()
+    public class ReleaseSkillCommand : SkillCommand
     {
-        this.GetSystem<SkillSystem>().RemoveSkill(_skillID, Model);
+        readonly string _skillID;
+
+        public ReleaseSkillCommand(string skillID, ICharacterModel model) : base(model)
+        {
+            _skillID = skillID;
+        }
+
+        protected override void OnExecute()
+        {
+            this.GetSystem<SkillSystem>().ReleaseSkill(_skillID, Model);
+        }
+    }
+
+    public class RemoveSkillCommand : SkillCommand
+    {
+        readonly string _skillID;
+
+        public RemoveSkillCommand(string skillID, ICharacterModel model) : base(model)
+        {
+            _skillID = skillID;
+        }
+
+        protected override void OnExecute()
+        {
+            this.GetSystem<SkillSystem>().RemoveSkill(_skillID, Model);
+        }
     }
 }

@@ -1,8 +1,8 @@
-﻿using Character.Player;
+﻿using Character.Damage;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace Character.Damage
+namespace Character.Player
 {
     [RequireComponent(typeof(Collider2D))]
     public class PlayerDamageable : Damageable
@@ -27,7 +27,7 @@ namespace Character.Damage
         {
             IsDamageable = false;
             await UniTask.Delay((int)(1000 * 0.5f));
-            (CharacterController as PlayerController).Respawn();
+            (CharacterController as PlayerController)?.Respawn();
             await UniTask.Delay((int)(1000 * 0.5f));
             IsDamageable = true;
         }

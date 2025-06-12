@@ -1,11 +1,10 @@
-using System.Collections.Generic;
-using Character.Stat;
-
-public class CharacterStats : Stats
+namespace Character.Stat
 {
-    public CharacterStats()
+    public class CharacterStats : Stats
     {
-        InternalStats = new()
+        public CharacterStats()
+        {
+            InternalStats = new()
         {
             { "Health", new ConsumableStat("Health") },
             { "HealthRegen", new Stat("HealthRegen") },
@@ -24,5 +23,6 @@ public class CharacterStats : Stats
             { "ProjectileSpeed", new Stat("ProjectileSpeed") },
             { "ProjectileCount", new Stat("ProjectileCount") },
         };
+        }
     }
 }

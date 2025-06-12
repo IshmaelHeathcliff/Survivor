@@ -2,78 +2,81 @@ using System.Collections.Generic;
 using Character;
 using UnityEngine;
 
-public class RollDiceEffect : NestedSkillEffect<RollDiceEffectConfig>
+namespace Skill.Effect
 {
-    readonly CountSystem _countSystem;
-    readonly ICharacterModel _model;
-    public RollDiceEffect(RollDiceEffectConfig skillEffectConfig, IEnumerable<IEffect> childEffects, CountSystem countSystem, ICharacterModel model) : base(skillEffectConfig, childEffects)
+    public class RollDiceEffect : NestedSkillEffect<RollDiceEffectConfig>
     {
-        _countSystem = countSystem;
-        _model = model;
-    }
-
-    protected override void OnApply()
-    {
-        int value = Random.Range(1, 6);
-        _countSystem.IncrementCount("RollDice", _model, value);
-
-        foreach (IEffect childEffect in ChildEffects)
+        readonly CountSystem _countSystem;
+        readonly ICharacterModel _model;
+        public RollDiceEffect(RollDiceEffectConfig skillEffectConfig, IEnumerable<IEffect> childEffects, CountSystem countSystem, ICharacterModel model) : base(skillEffectConfig, childEffects)
         {
-            if (childEffect is IEffect<int> effect)
+            _countSystem = countSystem;
+            _model = model;
+        }
+
+        protected override void OnApply()
+        {
+            int value = Random.Range(1, 6);
+            _countSystem.IncrementCount("RollDice", _model, value);
+
+            foreach (IEffect childEffect in ChildEffects)
             {
-                effect.Apply(value);
+                if (childEffect is IEffect<int> effect)
+                {
+                    effect.Apply(value);
+                }
+                else
+                {
+                    childEffect.Apply();
+                }
             }
-            else
-            {
-                childEffect.Apply();
-            }
         }
     }
-}
 
-public class DiceOnValueEffect : NestedSkillEffect<DiceOnValueEffectConfig>, IEffect<int>
-{
-    public int Roll { get; set; }
-
-    public DiceOnValueEffect(DiceOnValueEffectConfig skillEffectConfig, IEnumerable<IEffect> childEffects) : base(skillEffectConfig, childEffects)
+    public class DiceOnValueEffect : NestedSkillEffect<DiceOnValueEffectConfig>, IEffect<int>
     {
-        Roll = skillEffectConfig.Value;
-    }
+        public int Roll { get; set; }
 
-    protected override void OnApply()
-    {
-        foreach (IEffect childEffect in ChildEffects)
+        public DiceOnValueEffect(DiceOnValueEffectConfig skillEffectConfig, IEnumerable<IEffect> childEffects) : base(skillEffectConfig, childEffects)
         {
-            childEffect.Apply();
+            Roll = skillEffectConfig.Value;
         }
-    }
 
-    protected override void OnCancel()
-    {
-        foreach (IEffect childEffect in ChildEffects)
-        {
-            childEffect.Cancel();
-        }
-    }
-
-    public void Apply(int value)
-    {
-        if (value == Roll)
+        protected override void OnApply()
         {
             foreach (IEffect childEffect in ChildEffects)
             {
                 childEffect.Apply();
             }
         }
-    }
 
-    public void Cancel(int value)
-    {
-        if (value == Roll)
+        protected override void OnCancel()
         {
             foreach (IEffect childEffect in ChildEffects)
             {
                 childEffect.Cancel();
+            }
+        }
+
+        public void Apply(int value)
+        {
+            if (value == Roll)
+            {
+                foreach (IEffect childEffect in ChildEffects)
+                {
+                    childEffect.Apply();
+                }
+            }
+        }
+
+        public void Cancel(int value)
+        {
+            if (value == Roll)
+            {
+                foreach (IEffect childEffect in ChildEffects)
+                {
+                    childEffect.Cancel();
+                }
             }
         }
     }
