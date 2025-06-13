@@ -289,6 +289,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterId: 5511fa9c6177d214692bbbfabb853e5a
   _baseHealth: 10
+  _skillPoolPath: EnemySkillPool.json
 --- !u!114 &1009774605795107126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -342,6 +343,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4979da59659f7fe44a793b215343f42c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _skillIDs:
-  - dash
+  _initSkill: dash
   _skillSlotCount: 1

@@ -4,6 +4,7 @@ using GamePlay.Character;
 using GamePlay.Character.Modifier;
 using Data.SaveLoad;
 using UnityEngine;
+using System.Linq;
 
 namespace GamePlay.Skill
 {
@@ -22,6 +23,8 @@ namespace GamePlay.Skill
         const string JsonPath = "Preset";
         const string JsonName = "Skills.json";
 
+        bool _isLoaded = false;
+
         readonly SkillConfigLoader _skillConfigLoader = new();
 
         SkillCreateEnv SkillCreateEnv { get; set; }
@@ -34,10 +37,17 @@ namespace GamePlay.Skill
             {
                 _skillConfigCache.Add(skillConfig.ID, skillConfig);
             }
+
+            _isLoaded = true;
         }
 
         public SkillConfig GetSkillConfig(string id)
         {
+            if (!_isLoaded)
+            {
+                Load();
+            }
+
             if (_skillConfigCache.TryGetValue(id, out SkillConfig skillConfig))
             {
                 return skillConfig;
@@ -45,6 +55,11 @@ namespace GamePlay.Skill
 
             Debug.LogError($"SkillConfig not found: {id}");
             return null;
+        }
+
+        public IEnumerable<SkillConfig> GetSkillConfigs(IEnumerable<string> ids)
+        {
+            return ids.Select(GetSkillConfig).Where(config => config != null);
         }
 
         public void SetEnv(ICharacterModel model)

@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using Data.Config;
 using GamePlay.Character;
 
 namespace GamePlay.Skill
@@ -59,6 +61,32 @@ namespace GamePlay.Skill
         public SkillRemovedEvent(string skillID, ICharacterModel model) : base(model)
         {
             SkillID = skillID;
+        }
+    }
+
+    public class GachaSkillsEvent
+    {
+        public ICharacterModel Model { get; set; }
+        public List<SkillConfig> Skills { get; set; }
+
+        public GachaSkillsEvent(List<SkillConfig> skills, ICharacterModel model)
+        {
+            Model = model;
+            Skills = skills;
+        }
+    }
+
+    public class SelectSkillEvent
+    {
+        public ICharacterModel Model { get; set; }
+        public List<SkillConfig> Skills { get; set; }
+        public int Index { get; set; }
+
+        public SelectSkillEvent(List<SkillConfig> skills, int index, ICharacterModel model)
+        {
+            Model = model;
+            Skills = skills;
+            Index = index;
         }
     }
 }

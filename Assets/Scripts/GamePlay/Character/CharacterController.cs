@@ -34,6 +34,8 @@ namespace GamePlay.Character
     {
         [SerializeField] string _characterId;
         [SerializeField] float _baseHealth = 100;
+        [SerializeField] string _skillPoolPath;
+
         protected ModifierSystem ModifierSystem;
 
         public IAttackerController AttackerController { get; protected set; }
@@ -143,6 +145,11 @@ namespace GamePlay.Character
             {
                 Init();
             }
+        }
+
+        protected virtual void Start()
+        {
+            this.GetSystem<SkillGachaSystem>().InitSkillPool(Model, _skillPoolPath);
         }
 
         protected virtual void OnDestroy()

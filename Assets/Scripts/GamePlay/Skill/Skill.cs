@@ -2,21 +2,36 @@ using System.Collections.Generic;
 using Data.Config;
 using GamePlay.Character.Stat;
 using GamePlay.Skill.Effect;
-using UnityEngine;
 
 namespace GamePlay.Skill
 {
+    public enum SkillRarity
+    {
+        Common,
+        Magic,
+        Rare,
+        Epic,
+        Legendary,
+    }
+    public enum SkillType
+    {
+        OneTime,
+        Repetitive,
+        Attack
+    }
+
     public interface ISkill
     {
-        string ID { get; set; }
+        string ID { get; }
         string Name { get; }
+        string Description { get; }
+        SkillRarity Rarity { get; }
         SkillStats SkillStats { get; }
         void Enable();
         void Disable();
         void Use();
         void Cancel();
         void SetEffects(IEnumerable<IEffect> effectsOnEnable, IEnumerable<IEffect> effectsOnUpdate);
-        string Description { get; }
         List<string> Keywords { get; }
     }
 
@@ -29,10 +44,11 @@ namespace GamePlay.Skill
     {
         public T SkillConfig { get; set; }
         public SkillStats SkillStats { get; }
-        public string ID { get; set; }
+        public string ID => SkillConfig.ID;
         public string Name => SkillConfig.Name;
         public virtual List<string> Keywords => SkillConfig.Keywords;
         public virtual string Description => SkillConfig.Description;
+        public SkillRarity Rarity => SkillConfig.Rarity;
 
         // 技能启用时生效的效果，比如Buff，需要关闭技能时主动 Cancel
         protected readonly List<IEffect> SkillEffectsOnEnable = new();
@@ -41,7 +57,6 @@ namespace GamePlay.Skill
 
         public Skill(T skillConfig, CharacterStats characterStats)
         {
-            ID = skillConfig.ID;
             SkillConfig = skillConfig;
             SkillStats = new SkillStats(skillConfig.Keywords, characterStats);
         }
@@ -183,7 +198,7 @@ namespace GamePlay.Skill
 
         public override void Cancel()
         {
-            foreach  (IEffect skillEffect in SkillEffectsOnUse)
+            foreach (IEffect skillEffect in SkillEffectsOnUse)
             {
                 skillEffect.Cancel();
                 skillEffect.Disable();

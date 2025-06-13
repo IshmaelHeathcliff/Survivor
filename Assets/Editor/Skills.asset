@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b702bf5b3b1166449ca20d8577554f5, type: 3}
-  m_Name: ModifierInfoPresetEditor
+  m_Script: {fileID: 11500000, guid: 0450696356ef4a04d918d4510db82f50, type: 3}
+  m_Name: Skills
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -23,80 +23,62 @@ MonoBehaviour:
     SerializationNodes:
     - Name: Data
       Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[Character.Modifier.ModifierConfig,
-        Assembly-CSharp]], mscorlib
+      Data: 0|System.Collections.Generic.List`1[[Data.Config.SkillConfig, Assembly-CSharp]],
+        mscorlib
     - Name: 
       Entry: 12
-      Data: 12
+      Data: 9
     - Name: 
       Entry: 7
-      Data: 1|Character.Modifier.StatModifierConfig, Assembly-CSharp
+      Data: 1|Data.Config.AttackSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 2|Character.Modifier.StatModifierConfig, Assembly-CSharp
+      Data: 2|Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 3|Character.Modifier.StatModifierConfig, Assembly-CSharp
+      Data: 3|Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 4|Character.Modifier.StatModifierConfig, Assembly-CSharp
+      Data: 4|Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 5|Character.Modifier.StatModifierConfig, Assembly-CSharp
+      Data: 5|Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 6|Character.Modifier.StatModifierConfig, Assembly-CSharp
+      Data: 6|Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 7|Character.Modifier.StatModifierConfig, Assembly-CSharp
+      Data: 7|Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 8|Character.Modifier.StatModifierConfig, Assembly-CSharp
+      Data: 8|Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 9|Character.Modifier.StatModifierConfig, Assembly-CSharp
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 10|Character.Modifier.StatModifierConfig, Assembly-CSharp
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 11|Character.Modifier.StatModifierConfig, Assembly-CSharp
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 12|Character.Modifier.StatModifierConfig, Assembly-CSharp
+      Data: 9|Data.Config.AttackSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
@@ -106,5 +88,5 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  JsonName: Modifiers.json
+  JsonName: Skills.json
   JsonPath: Preset

@@ -19,6 +19,7 @@
     "ID": "dice",
     "Name": "奇奥骰子",
     "Keywords": [],
+    "Rarity": 0,
     "Description": null,
     "SkillEffectConfigsOnEnable": null,
     "SkillEffectConfigsOnUse": null
@@ -28,6 +29,7 @@
     "ID": "dice1",
     "Name": "奇奥骰子-1点",
     "Keywords": [],
+    "Rarity": 0,
     "Description": null,
     "SkillEffectConfigsOnEnable": [
       {
@@ -51,6 +53,7 @@
     "ID": "dice2",
     "Name": "奇奥骰子-2点",
     "Keywords": [],
+    "Rarity": 0,
     "Description": null,
     "SkillEffectConfigsOnEnable": [
       {
@@ -73,6 +76,7 @@
     "ID": "dice3",
     "Name": "奇奥骰子-3点",
     "Keywords": [],
+    "Rarity": 0,
     "Description": null,
     "SkillEffectConfigsOnEnable": [
       {
@@ -96,6 +100,7 @@
     "ID": "dice4",
     "Name": "奇奥骰子-4点",
     "Keywords": [],
+    "Rarity": 1,
     "Description": null,
     "SkillEffectConfigsOnEnable": [
       {
@@ -118,6 +123,7 @@
     "ID": "dice5",
     "Name": "奇奥骰子-5点",
     "Keywords": [],
+    "Rarity": 1,
     "Description": null,
     "SkillEffectConfigsOnEnable": [
       {
@@ -140,6 +146,7 @@
     "ID": "dice6",
     "Name": "奇奥骰子-6点",
     "Keywords": [],
+    "Rarity": 2,
     "Description": null,
     "SkillEffectConfigsOnEnable": [
       {
@@ -170,6 +177,7 @@
     "ID": "loaded_dice",
     "Name": "灌铅骰子",
     "Keywords": [],
+    "Rarity": 3,
     "Description": null,
     "SkillEffectConfigsOnEnable": [
       {
@@ -321,6 +329,7 @@
     "ID": "dash",
     "Name": "冲刺",
     "Keywords": [],
+    "Rarity": 0,
     "Description": null,
     "SkillEffectConfigsOnEnable": null,
     "SkillEffectConfigsOnUse": null

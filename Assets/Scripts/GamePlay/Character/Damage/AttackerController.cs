@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Cysharp.Threading.Tasks;
 using GamePlay.Skill;
 using UnityEngine;
@@ -31,7 +32,7 @@ namespace GamePlay.Character.Damage
 
         public async UniTask<IEnumerable<IAttacker>> CreateAttackers(string skillID, string attackerID)
         {
-            IEnumerable<IAttacker> attackers = await CreateAttackerInternal(skillID, attackerID);
+            var attackers = (await CreateAttackerInternal(skillID, attackerID)).ToList();
             foreach (IAttacker attacker in attackers)
             {
                 attacker.AttackerController = this;

@@ -10,7 +10,7 @@ namespace GamePlay.Skill
     [RequireComponent(typeof(ICharacterController))]
     public class SkillController : MonoBehaviour, IController
     {
-        [SerializeField] string[] _skillIDs;
+        [SerializeField] string _initSkill;
         [SerializeField] int _skillSlotCount;
         readonly Dictionary<string, RepetitiveSkill> _repetitiveSkills = new();
 
@@ -56,16 +56,6 @@ namespace GamePlay.Skill
             this.SendCommand(new AcquireSkillCommand(skillID, _model));
         }
 
-
-        async UniTaskVoid CreateInitSkills()
-        {
-            foreach (string skillID in _skillIDs)
-            {
-                this.SendCommand(new AcquireSkillCommand(skillID, _model));
-                await UniTask.Delay(TimeSpan.FromSeconds(0.1));
-            }
-        }
-
         void Awake()
         {
             _characterController = GetComponent<ICharacterController>();
@@ -82,7 +72,7 @@ namespace GamePlay.Skill
             this.RegisterEvent<SkillReleasedEvent>(OnSkillReleased).UnRegisterWhenGameObjectDestroyed(gameObject);
             this.RegisterEvent<SkillRemovedEvent>(OnSkillRemoved).UnRegisterWhenGameObjectDestroyed(gameObject);
 
-            CreateInitSkills().Forget();
+            this.SendCommand(new AcquireSkillCommand(_initSkill, _model));
         }
 
 

@@ -32,8 +32,9 @@
             base.OnDeinit();
         }
 
-        void Start()
+        protected override void Start()
         {
+            base.Start();
             FSM.StartState(EnemyStateID.Idle);
         }
 

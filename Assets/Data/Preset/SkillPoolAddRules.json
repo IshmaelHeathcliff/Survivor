@@ -1,0 +1,15 @@
+[
+  {
+    "$type": "Data.Config.SpecificSkillsPoolAddRuleConfig, Assembly-CSharp",
+    "RequiredSkillIDs": [
+      "dice1",
+      "dice2",
+      "dice3"
+    ],
+    "Name": "骰子45",
+    "SkillIDsToAdd": [
+      "dice4",
+      "dice5"
+    ]
+  }
+]

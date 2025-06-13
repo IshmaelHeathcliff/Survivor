@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using GamePlay.Skill;
 using Sirenix.OdinInspector;
 
 namespace Data.Config
@@ -9,6 +10,8 @@ namespace Data.Config
         [ShowInInspector] public string ID { get; set; }
         [ShowInInspector] public string Name { get; set; }
         [ShowInInspector] public List<string> Keywords { get; set; }
+
+        [ShowInInspector] public SkillRarity Rarity { get; set; }
         [ShowInInspector] public string Description { get; set; }
 
         [ShowInInspector]
@@ -17,7 +20,6 @@ namespace Data.Config
         public List<SkillEffectConfig> SkillEffectConfigsOnEnable { get; set; }
 
         [ShowInInspector] public virtual List<SkillEffectConfig> SkillEffectConfigsOnUse { get; set; }
-
 
         IEnumerable<System.Type> GetFilteredTypeList()
         {

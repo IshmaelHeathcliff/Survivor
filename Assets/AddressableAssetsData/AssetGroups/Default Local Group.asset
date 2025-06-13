@@ -60,6 +60,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a821af5d713127a4e8d52ddc37ed843b
+    m_Address: Assets/Prefabs/SkillGachaButton.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: af92f5bc633516443ba564b2a2824e96
     m_Address: Assets/Prefabs/coin.prefab
     m_ReadOnly: 0

@@ -1,10 +1,9 @@
 ﻿using Data.Config;
-using GamePlay.Character.Modifier;
 using UnityEngine;
 
 namespace Editor
 {
-    [CreateAssetMenu(menuName = "Tools/ModifierInfo Preset Editor", fileName = "ModifierInfoPresetEditor")]
+    [CreateAssetMenu(menuName = "Tools/Modifier Preset Editor", fileName = "ModifierPresetEditor")]
     public class ModifierPresetEditor : DataPresetEditor<ModifierConfig>
     {
     }

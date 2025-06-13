@@ -86,7 +86,7 @@ namespace GamePlay.Character.Modifier
         public override void Load()
         {
             //TODO: 不使用全局静态调用？
-            ModifierConfig = GetModifierConfig(ModifierID) as StatModifierConfig;
+            ModifierConfig = GetModifierConfig(ModifierID);
             Stat = GetStat(this);
 
         }
