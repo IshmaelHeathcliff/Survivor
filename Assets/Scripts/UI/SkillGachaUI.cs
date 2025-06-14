@@ -1,47 +1,47 @@
-using UnityEngine;
 using Data.Config;
-using UnityEngine.UI;
 using TMPro;
-using System;
-using GamePlay.Skill;
-using GamePlay.Character.Player;
+using UnityEngine;
+using UnityEngine.UI;
 
-public class SkillGachaUI : MonoBehaviour, IController
+namespace UI
 {
-    [SerializeField] TextMeshProUGUI _skillName;
-    [SerializeField] Button _selectButton;
-
-    public EasyEvent<int> OnSelect = new();
-
-    public int Index { get; set; }
-
-    SkillConfig _skill;
-
-    public void SetSkill(SkillConfig skill)
+    public class SkillGachaUI : MonoBehaviour, IController
     {
-        _skill = skill;
-        _skillName.text = skill.Name;
-    }
+        [SerializeField] TextMeshProUGUI _skillName;
+        [SerializeField] Button _selectButton;
 
-    void OnValidate()
-    {
-        _selectButton = GetComponent<Button>();
-        _skillName = GetComponentInChildren<TextMeshProUGUI>();
-    }
+        public EasyEvent<int> OnSelect = new();
+
+        public int Index { get; set; }
+
+        SkillConfig _skill;
+
+        public void SetSkill(SkillConfig skill)
+        {
+            _skill = skill;
+            _skillName.text = skill.Name;
+        }
+
+        void OnValidate()
+        {
+            _selectButton = GetComponent<Button>();
+            _skillName = GetComponentInChildren<TextMeshProUGUI>();
+        }
 
 
-    void Awake()
-    {
-    }
+        void Awake()
+        {
+        }
 
 
-    void Start()
-    {
-        _selectButton.onClick.AddListener(() => OnSelect.Trigger(Index));
-    }
+        void Start()
+        {
+            _selectButton.onClick.AddListener(() => OnSelect.Trigger(Index));
+        }
 
-    public IArchitecture GetArchitecture()
-    {
-        return GameFrame.Interface;
+        public IArchitecture GetArchitecture()
+        {
+            return GameFrame.Interface;
+        }
     }
 }

@@ -7,93 +7,95 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-public class SkillGachaUIController : MonoBehaviour, IController
+namespace UI
 {
-    [SerializeField] AssetReferenceGameObject _skillGachaUIPrefab;
-
-    SkillGachaSystem _skillGachaSystem;
-    PlayerModel _model;
-
-
-    List<SkillConfig> _gachaSkills = new();
-    List<SkillGachaUI> _skillGachaUIs = new();
-
-    [Button]
-    public void GachaSkills()
+    public class SkillGachaUIController : MonoBehaviour, IController
     {
-        _gachaSkills = _skillGachaSystem.GachaSkills(_model, 3);
-    }
+        [SerializeField] AssetReferenceGameObject _skillGachaUIPrefab;
 
-    public void SelectSkill(int index)
-    {
-        _skillGachaSystem.SelectSkill(_model, _gachaSkills, index);
-    }
+        SkillGachaSystem _skillGachaSystem;
+        PlayerModel _model;
 
-    public void CancelSelect()
-    {
-        _skillGachaSystem.CancelSelect(_model, _gachaSkills);
-    }
 
-    async UniTask CreateSkillGachaUI(int index, SkillConfig skill)
-    {
-        GameObject obj = await Addressables.InstantiateAsync(_skillGachaUIPrefab, transform);
-        obj.transform.localPosition = Vector3.zero + new Vector3(index * 200, 0, 0);
-        obj.transform.localScale = Vector3.one;
+        List<SkillConfig> _gachaSkills = new();
+        List<SkillGachaUI> _skillGachaUIs = new();
 
-        SkillGachaUI skillGachaUI = obj.GetComponent<SkillGachaUI>();
-        skillGachaUI.SetSkill(skill);
-        skillGachaUI.Index = index;
-        skillGachaUI.OnSelect.Register(SelectSkill).UnRegisterWhenDisabled(this);
-        _skillGachaUIs.Add(skillGachaUI);
-    }
-
-    void SelectSkillGachaUI(int index)
-    {
-        for (int i = 0; i < _skillGachaUIs.Count; i++)
+        [Button]
+        public void GachaSkills()
         {
-            Addressables.ReleaseInstance(_skillGachaUIs[i].gameObject);
+            _gachaSkills = _skillGachaSystem.GachaSkills(_model, 3);
         }
 
-        _skillGachaUIs.Clear();
-    }
-
-    void Awake()
-    {
-        _skillGachaSystem = this.GetSystem<SkillGachaSystem>();
-
-    }
-
-    void Start()
-    {
-        _model = this.GetModel<PlayersModel>().Current;
-
-        this.RegisterEvent<GachaSkillsEvent>(e =>
+        public void SelectSkill(int index)
         {
-            if (e.Model != _model)
-            {
-                return;
-            }
+            _skillGachaSystem.SelectSkill(_model, _gachaSkills, index);
+        }
 
-            for (int i = 0; i < e.Skills.Count; i++)
-            {
-                CreateSkillGachaUI(i, e.Skills[i]).Forget();
-            }
-        }).UnRegisterWhenDisabled(this);
-
-        this.RegisterEvent<SelectSkillEvent>(e =>
+        public void CancelSelect()
         {
-            if (e.Model != _model)
+            _skillGachaSystem.CancelSelect(_model, _gachaSkills);
+        }
+
+        async UniTask CreateSkillGachaUI(int index, SkillConfig skill)
+        {
+            GameObject obj = await Addressables.InstantiateAsync(_skillGachaUIPrefab, transform);
+            obj.transform.localPosition = Vector3.zero + new Vector3(index * 300, 0, 0);
+
+            SkillGachaUI skillGachaUI = obj.GetComponent<SkillGachaUI>();
+            skillGachaUI.SetSkill(skill);
+            skillGachaUI.Index = index;
+            skillGachaUI.OnSelect.Register(SelectSkill).UnRegisterWhenDisabled(this);
+            _skillGachaUIs.Add(skillGachaUI);
+        }
+
+        void SelectSkillGachaUI(int index)
+        {
+            for (int i = 0; i < _skillGachaUIs.Count; i++)
             {
-                return;
+                Addressables.ReleaseInstance(_skillGachaUIs[i].gameObject);
             }
 
-            SelectSkillGachaUI(e.Index);
+            _skillGachaUIs.Clear();
+        }
 
-        }).UnRegisterWhenDisabled(this);
-    }
+        void Awake()
+        {
+            _skillGachaSystem = this.GetSystem<SkillGachaSystem>();
 
-    public IArchitecture GetArchitecture()
-    {
-        return GameFrame.Interface;
+        }
+
+        void Start()
+        {
+            _model = this.GetModel<PlayersModel>().Current;
+
+            this.RegisterEvent<GachaSkillsEvent>(e =>
+            {
+                if (e.Model != _model)
+                {
+                    return;
+                }
+
+                for (int i = 0; i < e.Skills.Count; i++)
+                {
+                    CreateSkillGachaUI(i, e.Skills[i]).Forget();
+                }
+            }).UnRegisterWhenDisabled(this);
+
+            this.RegisterEvent<SelectSkillEvent>(e =>
+            {
+                if (e.Model != _model)
+                {
+                    return;
+                }
+
+                SelectSkillGachaUI(e.Index);
+
+            }).UnRegisterWhenDisabled(this);
+        }
+
+        public IArchitecture GetArchitecture()
+        {
+            return GameFrame.Interface;
+        }
     }
 }
