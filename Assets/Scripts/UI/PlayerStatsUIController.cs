@@ -20,6 +20,10 @@ namespace UI
         {
             var info = new StringBuilder();
             info.Append(GenerateStatInfo(_playerModel.Stats.GetStat("Health")));
+            info.Append(GenerateStatInfo(_playerModel.Stats.GetStat("HealthRegen")));
+            info.Append(GenerateStatInfo(_playerModel.Stats.GetStat("MoveSpeed")));
+            info.Append(GenerateStatInfo(_playerModel.Stats.GetStat("CoinGain")));
+            info.Append(GenerateStatInfo(_playerModel.Stats.GetStat("WoodGain")));
             foreach (ISkill skill in _playerModel.GetAllSkills())
             {
                 if (skill is AttackSkill attackSkill)

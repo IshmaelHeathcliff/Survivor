@@ -1,5 +1,8 @@
-﻿using GamePlay.Character.Modifier;
+﻿using Core;
+using Cysharp.Threading.Tasks;
+using GamePlay.Character.Modifier;
 using GamePlay.Character.Stat;
+using GamePlay.Item;
 using GamePlay.Skill;
 using UnityEngine;
 
@@ -49,6 +52,10 @@ namespace GamePlay.Character.Player
             base.Awake();
         }
 
-
+        protected override void Start()
+        {
+            base.Start();
+            new ResourceGenerator(this.GetSystem<ResourceSystem>(), Model, 1f).StartGenerating(GlobalCancellation.GetCombinedToken(this)).Forget();
+        }
     }
 }
