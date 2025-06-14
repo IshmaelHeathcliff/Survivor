@@ -46,7 +46,7 @@ namespace GamePlay.Character.Enemy
             }
             catch (OperationCanceledException)
             {
-                Debug.Log("EnemyFactory is canceled");
+                // Debug.Log("EnemyFactory is canceled");
             }
         }
 

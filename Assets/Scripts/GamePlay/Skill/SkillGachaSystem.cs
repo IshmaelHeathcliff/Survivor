@@ -1,11 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Data.Config;
 using Data.SaveLoad;
 using GamePlay.Character;
-using GamePlay.Character.Player;
-using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace GamePlay.Skill
@@ -41,10 +38,10 @@ namespace GamePlay.Skill
                 _skillAddRules.Add(_skillPoolAddRuleLoader.Load(config));
             }
 
-            foreach (SkillPoolAddRuleConfig config in addRuleConfigs)
-            {
-                Debug.Log($"卡池规则 {config.Name} 已添加");
-            }
+            // foreach (SkillPoolAddRuleConfig config in addRuleConfigs)
+            // {
+            //     Debug.Log($"卡池规则 {config.Name} 已添加");
+            // }
         }
 
         public void InitSkillPool(ICharacterModel model, string path)
@@ -150,14 +147,14 @@ namespace GamePlay.Skill
                 {
                     var skillConfigsToAdd = _skillSystem.GetSkillConfigs(rule.SkillIDsToAdd).ToList();
                     e.Model.SkillPool.AddSkills(skillConfigsToAdd);
-                    foreach (SkillConfig config in skillConfigsToAdd)
-                    {
-                        Debug.Log($"Skill {config.ID} added to pool");
-                    }
+                    // foreach (SkillConfig config in skillConfigsToAdd)
+                    // {
+                    //     Debug.Log($"Skill {config.ID} added to pool");
+                    // }
                 }
             })
             );
-            Debug.Log($"卡池规则 {rule.Name} 已注册");
+            // Debug.Log($"卡池规则 {rule.Name} 已注册");
 
         }
 

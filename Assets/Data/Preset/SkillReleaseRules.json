@@ -47,7 +47,7 @@
     "Reward": {
       "$type": "Data.Config.SpecificSkillsReleaseRewardConfig, Assembly-CSharp",
       "NewSkillIDs": [
-        "loaded_dice"
+        "odd_dice"
       ],
       "Description": null
     }

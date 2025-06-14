@@ -17,7 +17,7 @@
     "ReleaseOnAcquire": true,
     "Cooldown": 2.0,
     "ID": "dice",
-    "Name": "奇奥骰子",
+    "Name": "奇奥骰子基础",
     "Keywords": [],
     "Rarity": 0,
     "Description": null,
@@ -148,7 +148,8 @@
     "Keywords": [],
     "Rarity": 2,
     "Description": null,
-    "SkillEffectConfigsOnEnable": [
+    "SkillEffectConfigsOnEnable": [],
+    "SkillEffectConfigsOnUse": [
       {
         "$type": "Data.Config.CountIncrementEffectConfig, Assembly-CSharp",
         "CountValueID": "KillCount",
@@ -167,19 +168,19 @@
             "Description": "掷骰子"
           }
         ],
-        "Description": "计数"
+        "Description": "增量触发"
       }
-    ],
-    "SkillEffectConfigsOnUse": null
+    ]
   },
   {
     "$type": "Data.Config.OneTimeSkillConfig, Assembly-CSharp",
-    "ID": "loaded_dice",
-    "Name": "灌铅骰子",
+    "ID": "odd_dice",
+    "Name": "奇奥骰子",
     "Keywords": [],
     "Rarity": 3,
     "Description": null,
-    "SkillEffectConfigsOnEnable": [
+    "SkillEffectConfigsOnEnable": [],
+    "SkillEffectConfigsOnUse": [
       {
         "$type": "Data.Config.CountIncrementEffectConfig, Assembly-CSharp",
         "CountValueID": "KillCount",
@@ -189,7 +190,7 @@
             "$type": "Data.Config.RollDiceEffectConfig, Assembly-CSharp",
             "ChildEffects": [
               {
-                "$type": "Data.Config.DiceOnValueEffectConfig, Assembly-CSharp",
+                "$type": "Data.Config.OnValueEffectConfig, Assembly-CSharp",
                 "Value": 1,
                 "ChildEffects": [
                   {
@@ -200,10 +201,10 @@
                     "Description": "添加局部词条"
                   }
                 ],
-                "Description": "当骰子数满足时触发"
+                "Description": "对应数值时触发"
               },
               {
-                "$type": "Data.Config.DiceOnValueEffectConfig, Assembly-CSharp",
+                "$type": "Data.Config.OnValueEffectConfig, Assembly-CSharp",
                 "Value": 2,
                 "ChildEffects": [
                   {
@@ -213,10 +214,10 @@
                     "Description": "添加词条"
                   }
                 ],
-                "Description": "当骰子数满足时触发"
+                "Description": "对应数值时触发"
               },
               {
-                "$type": "Data.Config.DiceOnValueEffectConfig, Assembly-CSharp",
+                "$type": "Data.Config.OnValueEffectConfig, Assembly-CSharp",
                 "Value": 3,
                 "ChildEffects": [
                   {
@@ -227,10 +228,10 @@
                     "Description": "添加局部词条"
                   }
                 ],
-                "Description": "当骰子数满足时触发"
+                "Description": "对应数值时触发"
               },
               {
-                "$type": "Data.Config.DiceOnValueEffectConfig, Assembly-CSharp",
+                "$type": "Data.Config.OnValueEffectConfig, Assembly-CSharp",
                 "Value": 4,
                 "ChildEffects": [
                   {
@@ -240,10 +241,10 @@
                     "Description": "获取资源"
                   }
                 ],
-                "Description": "当骰子数满足时触发"
+                "Description": "对应数值时触发"
               },
               {
-                "$type": "Data.Config.DiceOnValueEffectConfig, Assembly-CSharp",
+                "$type": "Data.Config.OnValueEffectConfig, Assembly-CSharp",
                 "Value": 5,
                 "ChildEffects": [
                   {
@@ -253,10 +254,10 @@
                     "Description": "获取资源"
                   }
                 ],
-                "Description": "当骰子数满足时触发"
+                "Description": "对应数值时触发"
               },
               {
-                "$type": "Data.Config.DiceOnValueEffectConfig, Assembly-CSharp",
+                "$type": "Data.Config.OnValueEffectConfig, Assembly-CSharp",
                 "Value": 6,
                 "ChildEffects": [
                   {
@@ -298,16 +299,15 @@
                     "Description": null
                   }
                 ],
-                "Description": "当骰子数满足时触发"
+                "Description": "对应数值时触发"
               }
             ],
             "Description": "掷骰子"
           }
         ],
-        "Description": "计数"
+        "Description": "增量触发"
       }
-    ],
-    "SkillEffectConfigsOnUse": null
+    ]
   },
   {
     "$type": "Data.Config.AttackSkillConfig, Assembly-CSharp",

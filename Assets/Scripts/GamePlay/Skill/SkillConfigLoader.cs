@@ -121,7 +121,7 @@ namespace GamePlay.Skill
             {
                 RollDiceEffectConfig rollDiceEffectConfig => new RollDiceEffect(rollDiceEffectConfig, childEffects, context.Env.CountSystem, context.Env.Model),
                 CountIncrementEffectConfig countIncrementEffectConfig => new CountIncrementEffect(countIncrementEffectConfig, childEffects, context.Env.CountSystem, context.Env.Model),
-                DiceOnValueEffectConfig diceOnValueEffectConfig => new DiceOnValueEffect(diceOnValueEffectConfig, childEffects),
+                OnValueEffectConfig diceOnValueEffectConfig => new OnValueEffect(diceOnValueEffectConfig, childEffects),
                 not null => new NestedSkillEffect<NestedEffectConfig>(skillConfig, childEffects),
             };
 

@@ -73,13 +73,13 @@ namespace Data.Config
         }
     }
 
-    public class DiceOnValueEffectConfig : NestedEffectConfig
+    public class OnValueEffectConfig : NestedEffectConfig
     {
         [ShowInInspector] public int Value { get; set; }
 
-        public DiceOnValueEffectConfig()
+        public OnValueEffectConfig()
         {
-            Description = "骰子数触发";
+            Description = "对应数值时触发";
         }
     }
 
