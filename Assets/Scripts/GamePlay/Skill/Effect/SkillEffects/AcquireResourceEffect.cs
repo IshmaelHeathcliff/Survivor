@@ -1,4 +1,7 @@
 using Data.Config;
+using GamePlay.Character;
+using GamePlay.Item;
+using UnityEngine;
 
 namespace GamePlay.Skill.Effect
 {
@@ -7,32 +10,58 @@ namespace GamePlay.Skill.Effect
         readonly ResourceSystem _resourceSystem;
         int _acquireValue;
 
-        public AcquireResourceEffect(AcquireResourceEffectConfig config, ResourceSystem resourceSystem) : base(config)
+        public AcquireResourceEffect(AcquireResourceEffectConfig config, ICharacterModel model, ResourceSystem resourceSystem) : base(config, model)
         {
             _resourceSystem = resourceSystem;
             Description = $"获取资源 {config.ResourceID} {config.Amount}";
         }
 
+        bool CheckModel(ICharacterModel model, out IHasResources resourceModel)
+        {
+            if (model is IHasResources resources)
+            {
+                resourceModel = resources;
+                return true;
+            }
+
+            Debug.LogError("AcquireResourceEffect: model is not IHasResources");
+            resourceModel = null;
+            return false;
+        }
+
         protected override void OnApply()
         {
             _acquireValue += SkillEffectConfig.Amount;
-            _resourceSystem.AcquireResource(SkillEffectConfig.ResourceID, SkillEffectConfig.Amount);
+
+            if (CheckModel(Model, out IHasResources model))
+            {
+                _resourceSystem.AcquireResource(SkillEffectConfig.ResourceID, SkillEffectConfig.Amount, model);
+            }
         }
 
         protected override void OnCancel()
         {
-            _resourceSystem.AcquireResource(SkillEffectConfig.ResourceID, -_acquireValue);
+            if (CheckModel(Model, out IHasResources model))
+            {
+                _resourceSystem.AcquireResource(SkillEffectConfig.ResourceID, -_acquireValue, model);
+            }
         }
 
         public void Apply(int value)
         {
             _acquireValue += value;
-            _resourceSystem.AcquireResource(SkillEffectConfig.ResourceID, value);
+            if (CheckModel(Model, out IHasResources model))
+            {
+                _resourceSystem.AcquireResource(SkillEffectConfig.ResourceID, value, model);
+            }
         }
 
         public void Cancel(int value)
         {
-            _resourceSystem.AcquireResource(SkillEffectConfig.ResourceID, -_acquireValue);
+            if (CheckModel(Model, out IHasResources model))
+            {
+                _resourceSystem.AcquireResource(SkillEffectConfig.ResourceID, -_acquireValue, model);
+            }
         }
     }
 }

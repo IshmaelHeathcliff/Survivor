@@ -3,6 +3,8 @@ using System.Linq;
 using Data.Config;
 using Data.SaveLoad;
 using GamePlay.Character;
+using GamePlay.Character.Player;
+using GamePlay.Item;
 using Random = UnityEngine.Random;
 
 namespace GamePlay.Skill
@@ -15,6 +17,7 @@ namespace GamePlay.Skill
         const string AddRulesPath = "SkillPoolAddRules.json";
 
         SkillSystem _skillSystem;
+        ResourceSystem _resourceSystem;
         List<SkillPoolAddRule> _skillAddRules = new();
         SkillPoolAddRuleLoader _skillPoolAddRuleLoader = new();
 
@@ -64,6 +67,28 @@ namespace GamePlay.Skill
                 count = model.SkillPool.GetCount();
             }
 
+            List<SkillConfig> result = new();
+
+
+            if (count == 0)
+            {
+                return result;
+            }
+
+            if (model is not IHasResources resourceModel)
+            {
+                return result;
+            }
+
+            if (_resourceSystem.GetResourceCount("Wood", resourceModel) < 1)
+            {
+                return result;
+            }
+            else
+            {
+                _resourceSystem.ConsumeResource("Wood", 1, resourceModel);
+            }
+
             int totalWeight = 0;
             Dictionary<SkillRarity, int> effectiveWeights = new();
             foreach ((SkillRarity rarity, int weight) in _skillGachaWeights)
@@ -75,7 +100,6 @@ namespace GamePlay.Skill
                 }
             }
 
-            List<SkillConfig> result = new();
             for (int i = 0; i < count; i++)
             {
                 int randomValue = Random.Range(0, totalWeight);
@@ -173,7 +197,7 @@ namespace GamePlay.Skill
         protected override void OnInit()
         {
             _skillSystem = this.GetSystem<SkillSystem>();
-
+            _resourceSystem = this.GetSystem<ResourceSystem>();
             Load();
             RegisterRules();
         }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using GamePlay.Character;
 using GamePlay.Character.Damage;
 using Cysharp.Threading.Tasks;
 using Data.Config;
@@ -8,18 +9,16 @@ namespace GamePlay.Skill.Effect
 {
     public class AttackEffect : SkillEffect<AttackEffectConfig>
     {
-        readonly IAttackerController _attackerController;
         readonly List<IAttacker> _attackers = new();
 
-        public AttackEffect(AttackEffectConfig config, IAttackerController attackerController) : base(config)
+        public AttackEffect(AttackEffectConfig config, ICharacterModel model) : base(config, model)
         {
-            _attackerController = attackerController;
             Description = $"创建攻击器 {config.AttackerID}";
         }
 
         async UniTaskVoid CreateAttacker()
         {
-            IEnumerable<IAttacker> attackers = await _attackerController.CreateAttackers(Owner.ID, SkillEffectConfig.AttackerID);
+            IEnumerable<IAttacker> attackers = await Model.Controller.AttackerController.CreateAttackers(Owner.ID, SkillEffectConfig.AttackerID);
             if (Owner is not AttackSkill attackSkill)
             {
                 Debug.LogError("AttackEffect is not owned by an AttackSkill");

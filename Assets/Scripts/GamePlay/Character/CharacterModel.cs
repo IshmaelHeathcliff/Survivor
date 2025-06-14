@@ -2,6 +2,7 @@
 using System.Linq;
 using GamePlay.Character.Stat;
 using GamePlay.Character.State;
+using GamePlay.Item;
 using GamePlay.Skill;
 using UnityEngine;
 
@@ -28,6 +29,11 @@ namespace GamePlay.Character
     public interface ICanCountValue
     {
         Dictionary<string, ValueCounter> CountValues { get; }
+    }
+
+    public interface IHasResources
+    {
+        IResourceContainer Resources { get; }
     }
 
     public interface ICharacterModel : IHasSkill, IHasState, ICanCountValue

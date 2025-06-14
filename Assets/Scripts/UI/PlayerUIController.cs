@@ -1,5 +1,6 @@
 ﻿using GamePlay.Character.Player;
 using GamePlay.Character.Stat;
+using GamePlay.Item;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -57,8 +58,8 @@ namespace UI
 
             health?.RegisterWithInitValue(OnHealthChanged).UnRegisterWhenDisabled(this);
 
-            _model.Resources["Coin"].RegisterWithInitValue(OnCoinChanged).UnRegisterWhenDisabled(this);
-            _model.Resources["Wood"].RegisterWithInitValue(OnWoodChanged).UnRegisterWhenDisabled(this);
+            this.GetSystem<ResourceSystem>().RegisterWithInitValue("Coin", OnCoinChanged, _model).UnRegisterWhenDisabled(this);
+            this.GetSystem<ResourceSystem>().RegisterWithInitValue("Wood", OnWoodChanged, _model).UnRegisterWhenDisabled(this);
         }
 
         void OnCoinChanged(int coin)

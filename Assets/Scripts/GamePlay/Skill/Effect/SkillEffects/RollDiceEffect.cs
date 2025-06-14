@@ -8,17 +8,15 @@ namespace GamePlay.Skill.Effect
     public class RollDiceEffect : NestedSkillEffect<RollDiceEffectConfig>
     {
         readonly CountSystem _countSystem;
-        readonly ICharacterModel _model;
-        public RollDiceEffect(RollDiceEffectConfig skillEffectConfig, IEnumerable<IEffect> childEffects, CountSystem countSystem, ICharacterModel model) : base(skillEffectConfig, childEffects)
+        public RollDiceEffect(RollDiceEffectConfig skillEffectConfig, ICharacterModel model, IEnumerable<IEffect> childEffects, CountSystem countSystem) : base(skillEffectConfig, model, childEffects)
         {
             _countSystem = countSystem;
-            _model = model;
         }
 
         protected override void OnApply()
         {
             int value = Random.Range(1, 6);
-            _countSystem.IncrementCount("RollDice", _model, value);
+            _countSystem.IncrementCount("RollDice", Model, value);
 
             foreach (IEffect childEffect in ChildEffects)
             {

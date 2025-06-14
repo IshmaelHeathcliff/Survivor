@@ -9,12 +9,10 @@ namespace GamePlay.Skill.Effect
     {
         readonly List<IStatModifier> _modifiers = new();
         readonly ModifierSystem _modifierSystem;
-        readonly ICharacterModel _model;
 
-        public ModifierEffect(ModifierEffectConfig config, ModifierSystem modifierSystem, ICharacterModel model) : base(config)
+        public ModifierEffect(ModifierEffectConfig config, ICharacterModel model, ModifierSystem modifierSystem) : base(config, model)
         {
             _modifierSystem = modifierSystem;
-            _model = model;
         }
 
 
@@ -23,11 +21,11 @@ namespace GamePlay.Skill.Effect
             IStatModifierFactory factory;
             if (SkillEffectConfig is LocalModifierEffectConfig localConfig)
             {
-                factory = _model.GetSkill(localConfig.AttackSkillID)?.SkillStats;
+                factory = Model.GetSkill(localConfig.AttackSkillID)?.SkillStats;
             }
             else
             {
-                factory = _model.Stats;
+                factory = Model.Stats;
             }
 
             IStatModifier modifier = _modifierSystem.CreateStatModifier(SkillEffectConfig.ModifierID, factory, SkillEffectConfig.Value);

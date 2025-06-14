@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Data.Config;
+using GamePlay.Character;
 
 namespace GamePlay.Skill.Effect
 {
@@ -38,12 +39,14 @@ namespace GamePlay.Skill.Effect
         public T SkillEffectConfig { get; }
         public ISkill Owner { get; set; }
         public string Description { get; protected set; }
+        public ICharacterModel Model { get; set; }
 
 
-        protected SkillEffect(T skillEffectConfig)
+        protected SkillEffect(T skillEffectConfig, ICharacterModel model)
         {
             SkillEffectConfig = skillEffectConfig;
             Description = skillEffectConfig.Description;
+            Model = model;
         }
 
         public virtual void Enable() => OnEnable();
@@ -69,7 +72,7 @@ namespace GamePlay.Skill.Effect
     {
         public List<IEffect> ChildEffects { get; set; } = new();
 
-        public NestedSkillEffect(T skillEffectConfig, IEnumerable<IEffect> childEffects) : base(skillEffectConfig)
+        public NestedSkillEffect(T skillEffectConfig, ICharacterModel model, IEnumerable<IEffect> childEffects) : base(skillEffectConfig, model)
         {
             ChildEffects.AddRange(childEffects);
         }

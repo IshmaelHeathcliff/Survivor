@@ -51,10 +51,19 @@ namespace GamePlay.Character.Enemy
 
         void Dead()
         {
-            this.GetSystem<CountSystem>().IncrementKillCount(this.GetModel<PlayersModel>().Current, 1);
+            var playerModel = this.GetModel<PlayersModel>().Current;
+            this.GetSystem<CountSystem>().IncrementKillCount(playerModel, 1);
 
-            string dropAddress = _dropSystem.GetDropAddress("coin");
-            Addressables.InstantiateAsync(dropAddress, transform.position, Quaternion.identity);
+            // 10% 概率掉落金币
+            int randomValue = UnityEngine.Random.Range(0, 10);
+            if (randomValue < 2)
+            {
+                this.GetSystem<ResourceSystem>().AcquireResource("Coin", 1, playerModel);
+            }
+            else if (randomValue < 5)
+            {
+                this.GetSystem<ResourceSystem>().AcquireResource("Wood", 1, playerModel);
+            }
 
             _fsm.ChangeState(EnemyStateID.Dead);
         }

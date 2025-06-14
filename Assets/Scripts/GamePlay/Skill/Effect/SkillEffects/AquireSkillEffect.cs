@@ -6,23 +6,21 @@ namespace GamePlay.Skill.Effect
     public class AcquireSkillEffect : SkillEffect<AcquireSkillEffectConfig>
     {
         readonly SkillSystem _skillSystem;
-        readonly ICharacterModel _model;
 
-        public AcquireSkillEffect(AcquireSkillEffectConfig config, SkillSystem skillSystem, ICharacterModel model) : base(config)
+        public AcquireSkillEffect(AcquireSkillEffectConfig config, ICharacterModel model, SkillSystem skillSystem) : base(config, model)
         {
             _skillSystem = skillSystem;
-            _model = model;
             Description = $"获取技能 {config.SkillID}";
         }
 
         protected override void OnApply()
         {
-            _skillSystem.AcquireSkill(SkillEffectConfig.SkillID, _model);
+            _skillSystem.AcquireSkill(SkillEffectConfig.SkillID, Model);
         }
 
         protected override void OnCancel()
         {
-            _skillSystem.RemoveSkill(SkillEffectConfig.SkillID, _model);
+            _skillSystem.RemoveSkill(SkillEffectConfig.SkillID, Model);
         }
     }
 }

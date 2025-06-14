@@ -79,11 +79,11 @@ namespace GamePlay.Skill
         {
             IEffect effect = skillConfig switch
             {
-                AttackEffectConfig attackEffectConfig => new AttackEffect(attackEffectConfig, context.Env.Model.Controller.AttackerController),
-                ModifierEffectConfig modifierEffectConfig => new ModifierEffect(modifierEffectConfig, context.Env.ModifierSystem, context.Env.Model),
-                AcquireResourceEffectConfig acquireResourceEffectConfig => new AcquireResourceEffect(acquireResourceEffectConfig, context.Env.ResourceSystem),
+                AttackEffectConfig attackEffectConfig => new AttackEffect(attackEffectConfig, context.Env.Model),
+                ModifierEffectConfig modifierEffectConfig => new ModifierEffect(modifierEffectConfig, context.Env.Model, context.Env.ModifierSystem),
+                AcquireResourceEffectConfig acquireResourceEffectConfig => new AcquireResourceEffect(acquireResourceEffectConfig, context.Env.Model, context.Env.ResourceSystem),
                 NestedEffectConfig nestedEffectConfig => CreateNestedEffect(nestedEffectConfig, context),
-                AcquireSkillEffectConfig acquireSkillEffectConfig => new AcquireSkillEffect(acquireSkillEffectConfig, context.Env.SkillSystem, context.Env.Model),
+                AcquireSkillEffectConfig acquireSkillEffectConfig => new AcquireSkillEffect(acquireSkillEffectConfig, context.Env.Model, context.Env.SkillSystem),
                 _ => null,
             };
 
@@ -119,10 +119,10 @@ namespace GamePlay.Skill
 
             IEffect effect = skillConfig switch
             {
-                RollDiceEffectConfig rollDiceEffectConfig => new RollDiceEffect(rollDiceEffectConfig, childEffects, context.Env.CountSystem, context.Env.Model),
-                CountIncrementEffectConfig countIncrementEffectConfig => new CountIncrementEffect(countIncrementEffectConfig, childEffects, context.Env.CountSystem, context.Env.Model),
-                OnValueEffectConfig diceOnValueEffectConfig => new OnValueEffect(diceOnValueEffectConfig, childEffects),
-                not null => new NestedSkillEffect<NestedEffectConfig>(skillConfig, childEffects),
+                RollDiceEffectConfig rollDiceEffectConfig => new RollDiceEffect(rollDiceEffectConfig, context.Env.Model, childEffects, context.Env.CountSystem),
+                CountIncrementEffectConfig countIncrementEffectConfig => new CountIncrementEffect(countIncrementEffectConfig, context.Env.Model, childEffects, context.Env.CountSystem),
+                OnValueEffectConfig diceOnValueEffectConfig => new OnValueEffect(diceOnValueEffectConfig, context.Env.Model, childEffects),
+                not null => new NestedSkillEffect<NestedEffectConfig>(skillConfig, context.Env.Model, childEffects),
             };
 
             effect.Owner = context.Skill;

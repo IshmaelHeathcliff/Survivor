@@ -5,6 +5,7 @@ using GamePlay.Character.Modifier;
 using Data.SaveLoad;
 using UnityEngine;
 using System.Linq;
+using GamePlay.Item;
 
 namespace GamePlay.Skill
 {

@@ -1,15 +1,11 @@
 ﻿using System.Collections.Generic;
+using GamePlay.Item;
 
 namespace GamePlay.Character.Player
 {
-    public class PlayerModel : CharacterModel
+    public class PlayerModel : CharacterModel, IHasResources
     {
-        public Dictionary<string, BindableProperty<int>> Resources { get; } = new()
-        {
-            { "Coin", new BindableProperty<int>() },
-            { "Wood", new BindableProperty<int>() },
-        };
-
+        public IResourceContainer Resources { get; } = new ResourceContainer();
     }
 
     public class PlayersModel : CharactersModel<PlayerModel>

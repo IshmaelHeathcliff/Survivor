@@ -1,4 +1,5 @@
-using GamePlay.Character.Player;
+using GamePlay.Character;
+using GamePlay.Character.Damage;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -17,7 +18,7 @@ namespace GamePlay.Item
         {
             if (other.gameObject.CompareTag("Player"))
             {
-                this.GetModel<PlayersModel>().Current.Resources["Coin"].Value += 1;
+                this.GetSystem<ResourceSystem>().AcquireResource("Coin", 1, other.GetComponent<IDamageable>().CharacterController.CharacterModel as IHasResources);
                 Addressables.ReleaseInstance(gameObject);
             }
         }
