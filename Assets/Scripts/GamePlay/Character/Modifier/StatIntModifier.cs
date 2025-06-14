@@ -29,8 +29,8 @@ namespace GamePlay.Character.Modifier
         public override string GetDescription()
         {
             return Value >= 0 ?
-                string.Format(ModifierConfig.PositiveDescription, Stat.Name, Value) :
-                string.Format(ModifierConfig.NegativeDescription, Stat.Name, -Value);
+                string.Format(ModifierConfig.PositiveDescription, Stat.ID, Value) :
+                string.Format(ModifierConfig.NegativeDescription, Stat.ID, -Value);
         }
 
         public override void Check()

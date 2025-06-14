@@ -6,7 +6,6 @@ using GamePlay.Character.Modifier;
 using GamePlay.Character.Player;
 using GamePlay.Character.Damage;
 using Data.SaveLoad;
-using GamePlay;
 using GamePlay.Item;
 using GamePlay.Skill;
 
@@ -23,7 +22,7 @@ public class GameFrame : Architecture<GameFrame>
         RegisterSystem(new StateCreateSystem());
         RegisterSystem(new DropSystem());
         RegisterSystem(new SkillSystem());
-        RegisterSystem(new SkillGachaSystem());;
+        RegisterSystem(new SkillGachaSystem()); ;
         RegisterSystem(new SkillReleaseSystem());
         RegisterSystem(new ResourceSystem());
         RegisterSystem(new CountSystem());

@@ -13,16 +13,7 @@ namespace GamePlay.Character.Stat
         protected IStat Local;
         protected EasyEvent<float> OnValueChanged = new();
 
-        public LocalStat(IStat localStat, IStat globalStat)
-        {
-            Name = localStat.Name;
-            Local = localStat;
-            _global = globalStat;
-
-            Local.Register(_ => OnValueChanged.Trigger(Value));
-            _global.Register(_ => OnValueChanged.Trigger(Value));
-        }
-
+        public string ID { get; }
         public string Name { get; }
         public float Value => GetValue();
 
@@ -41,6 +32,17 @@ namespace GamePlay.Character.Stat
         public virtual float FixedValue => Local.FixedValue + _global.FixedValue;
         public virtual float Increase => Local.Increase + _global.Increase;
         public virtual float More => Local.More * _global.More;
+
+        public LocalStat(IStat localStat, IStat globalStat)
+        {
+            ID = localStat.ID;
+            Name = localStat.Name;
+            Local = localStat;
+            _global = globalStat;
+
+            Local.Register(_ => OnValueChanged.Trigger(Value));
+            _global.Register(_ => OnValueChanged.Trigger(Value));
+        }
 
         protected float Calculate(float addedMultiplier = 1)
         {

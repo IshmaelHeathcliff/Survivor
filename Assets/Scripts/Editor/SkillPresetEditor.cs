@@ -1,6 +1,5 @@
 using Data.Config;
 using UnityEngine;
-using GamePlay.Skill;
 
 namespace Editor
 {

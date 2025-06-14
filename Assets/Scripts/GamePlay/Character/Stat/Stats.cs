@@ -13,7 +13,7 @@ namespace GamePlay.Character.Stat
 
         public void AddStat(IStat stat)
         {
-            InternalStats[stat.Name] = stat;
+            InternalStats[stat.ID] = stat;
         }
 
 

@@ -1,42 +1,44 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using GamePlay.Character;
-using GamePlay.Item;
 using UnityEngine;
 
-public class ResourceGenerator
+namespace GamePlay.Item
 {
-    readonly ResourceSystem _resourceSystem;
-    readonly ICharacterModel _model;
-    public float Interval { get; set; }
-
-    public ResourceGenerator(ResourceSystem resourceSystem, ICharacterModel model, float interval)
+    public class ResourceGenerator
     {
-        _resourceSystem = resourceSystem;
-        _model = model;
-        Interval = interval;
-    }
+        readonly ResourceSystem _resourceSystem;
+        readonly ICharacterModel _model;
+        public float Interval { get; set; }
 
-    public void GenerateResource(string resourceID, int amount)
-    {
-        if (_model is IHasResources resources)
+        public ResourceGenerator(ResourceSystem resourceSystem, ICharacterModel model, float interval)
         {
-            _resourceSystem.AcquireResource(resourceID, amount, resources);
+            _resourceSystem = resourceSystem;
+            _model = model;
+            Interval = interval;
         }
-    }
 
-    public async UniTask StartGenerating(CancellationToken cancellationToken)
-    {
-        float leftTime = Interval;
-
-        while (!cancellationToken.IsCancellationRequested)
+        public void GenerateResource(string resourceID, int amount)
         {
-            await UniTask.WaitForFixedUpdate(cancellationToken);
-            leftTime -= Time.fixedDeltaTime;
-            if (leftTime <= 0)
+            if (_model is IHasResources resources)
             {
-                GenerateResource("Coin", (int)_model.Stats.GetStat("CoinGain").Value);
-                leftTime += Interval;
+                _resourceSystem.AcquireResource(resourceID, amount, resources);
+            }
+        }
+
+        public async UniTask StartGenerating(CancellationToken cancellationToken)
+        {
+            float leftTime = Interval;
+
+            while (!cancellationToken.IsCancellationRequested)
+            {
+                await UniTask.WaitForFixedUpdate(cancellationToken);
+                leftTime -= Time.fixedDeltaTime;
+                if (leftTime <= 0)
+                {
+                    GenerateResource("Coin", (int)_model.Stats.GetStat("CoinGain").Value);
+                    leftTime += Interval;
+                }
             }
         }
     }

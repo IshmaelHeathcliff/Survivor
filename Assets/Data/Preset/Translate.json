@@ -1,0 +1,72 @@
+[
+  {
+    "ID": "Health",
+    "Name": "生命",
+    "Description": null
+  },
+  {
+    "ID": "HealthRegen",
+    "Name": "生命恢复",
+    "Description": null
+  },
+  {
+    "ID": "MoveSpeed",
+    "Name": "移动速度",
+    "Description": null
+  },
+  {
+    "ID": "CoinGain",
+    "Name": "金币获取",
+    "Description": null
+  },
+  {
+    "ID": "WoodGain",
+    "Name": "木材获取",
+    "Description": null
+  },
+  {
+    "ID": "Damage",
+    "Name": "伤害",
+    "Description": null
+  },
+  {
+    "ID": "CriticalChance",
+    "Name": "暴击几率",
+    "Description": null
+  },
+  {
+    "ID": "CriticalMultiplier",
+    "Name": "暴击伤害",
+    "Description": null
+  },
+  {
+    "ID": "Duration",
+    "Name": "持续时间",
+    "Description": null
+  },
+  {
+    "ID": "CooldownInverse",
+    "Name": "冷却时间",
+    "Description": null
+  },
+  {
+    "ID": "AttackSpeed",
+    "Name": "攻击速度",
+    "Description": null
+  },
+  {
+    "ID": "AttackArea",
+    "Name": "攻击范围",
+    "Description": null
+  },
+  {
+    "ID": "ProjectileSpeed",
+    "Name": "投射物速度",
+    "Description": null
+  },
+  {
+    "ID": "ProjectileCount",
+    "Name": "投射物数量",
+    "Description": null
+  }
+]
