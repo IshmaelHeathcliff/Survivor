@@ -3,16 +3,23 @@ using System.Collections.Generic;
 using System.Threading;
 using Core;
 using Cysharp.Threading.Tasks;
-using GamePlay.Character.Damage;
+using GamePlay.Character.Stat;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace GamePlay.Character.Player
+namespace GamePlay.Character.Damage
 {
+    public interface IProjectileAttacker : IAttacker
+    {
+        IStat ProjectileSpeed { get; }
+    }
+
     [RequireComponent(typeof(Collider2D), typeof(SpriteRenderer))]
-    public class PlayerAttacker : Attacker
+    public class ProjectileAttacker : Attacker, IProjectileAttacker
     {
         [SerializeField] float _rotateSpeed;
+
+        public IStat ProjectileSpeed => AttackSkill.ProjectileSpeed;
 
         Collider2D _collider;
         SpriteRenderer _renderer;
@@ -34,19 +41,21 @@ namespace GamePlay.Character.Player
         {
             Damageable damageable = other.GetComponent<Damageable>();
 
-            if (damageable == null || damageable.CompareTag("Player"))
+            if (damageable == null || !damageable.CompareTag(TargetTag))
             {
                 return;
             }
 
-            var keywords = new List<string>()
-            {
-                "Damage", "Attack", "Physical",
-            };
+            ApplyDamage(damageable).Forget();
+        }
 
-
-            var damage = new AttackDamage(this, damageable, keywords, DamageType.Simple, Damage.BaseValue, 1, 1);
+        async UniTaskVoid ApplyDamage(IDamageable damageable)
+        {
+            var damage = new AttackDamage(this, damageable, Keywords, DamageType.Simple, Damage.BaseValue, 1, 1);
             damage.Apply();
+            _collider.enabled = false;
+            await UniTask.Delay(100);
+            Cancel();
         }
 
         protected override async UniTask Play()

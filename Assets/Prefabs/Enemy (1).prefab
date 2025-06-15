@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8891624194664583248}
   m_Layer: 6
   m_Name: EnemyDamageable
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -113,7 +113,7 @@ GameObject:
   - component: {fileID: 7504329890447957612}
   m_Layer: 6
   m_Name: Enemy (1)
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -302,6 +302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49ab9d9fd31f476ebee3681a0e49cc43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _targetTag: Player
 --- !u!114 &8392287563744253542
 MonoBehaviour:
   m_ObjectHideFlags: 0

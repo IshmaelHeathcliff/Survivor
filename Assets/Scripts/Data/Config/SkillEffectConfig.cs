@@ -38,6 +38,7 @@ namespace Data.Config
     {
         [ShowInInspector] public string ModifierID { get; set; }
         [ShowInInspector] public int Value { get; set; }
+        [ShowInInspector] public List<string> Keywords { get; set; }
 
         public ModifierEffectConfig()
         {

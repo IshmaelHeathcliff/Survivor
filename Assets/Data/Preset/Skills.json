@@ -18,7 +18,10 @@
     "Cooldown": 2.0,
     "ID": "dice",
     "Name": "奇奥骰子基础",
-    "Keywords": [],
+    "Keywords": [
+      "Range",
+      "Projectile"
+    ],
     "Rarity": 0,
     "Description": null,
     "SkillEffectConfigsOnEnable": null,
@@ -44,6 +47,7 @@
         "AttackSkillID": "dice",
         "ModifierID": "damage_add",
         "Value": 5,
+        "Keywords": null,
         "Description": "添加局部词条"
       }
     ]
@@ -67,6 +71,7 @@
         "$type": "Data.Config.ModifierEffectConfig, Assembly-CSharp",
         "ModifierID": "cdi_increase",
         "Value": 30,
+        "Keywords": null,
         "Description": "添加词条"
       }
     ]
@@ -91,6 +96,7 @@
         "AttackSkillID": "dice",
         "ModifierID": "critical_add",
         "Value": 5,
+        "Keywords": null,
         "Description": "添加局部词条"
       }
     ]
@@ -114,6 +120,7 @@
         "$type": "Data.Config.ModifierEffectConfig, Assembly-CSharp",
         "ModifierID": "coin_add",
         "Value": 1,
+        "Keywords": null,
         "Description": "添加词条"
       }
     ]
@@ -137,6 +144,7 @@
         "$type": "Data.Config.ModifierEffectConfig, Assembly-CSharp",
         "ModifierID": "projectileCount_add",
         "Value": 1,
+        "Keywords": null,
         "Description": "添加词条"
       }
     ]
@@ -198,6 +206,7 @@
                     "AttackSkillID": "dice",
                     "ModifierID": "damage_add",
                     "Value": 5,
+                    "Keywords": null,
                     "Description": "添加局部词条"
                   }
                 ],
@@ -211,6 +220,7 @@
                     "$type": "Data.Config.ModifierEffectConfig, Assembly-CSharp",
                     "ModifierID": "cdi_increase",
                     "Value": 30,
+                    "Keywords": null,
                     "Description": "添加词条"
                   }
                 ],
@@ -225,6 +235,7 @@
                     "AttackSkillID": "dice",
                     "ModifierID": "critical_add",
                     "Value": 5,
+                    "Keywords": null,
                     "Description": "添加局部词条"
                   }
                 ],
@@ -268,12 +279,14 @@
                         "AttackSkillID": "dice",
                         "ModifierID": "damage_add",
                         "Value": 5,
+                        "Keywords": null,
                         "Description": "添加局部词条"
                       },
                       {
                         "$type": "Data.Config.ModifierEffectConfig, Assembly-CSharp",
                         "ModifierID": "cdi_increase",
                         "Value": 30,
+                        "Keywords": null,
                         "Description": "添加词条"
                       },
                       {
@@ -281,6 +294,7 @@
                         "AttackSkillID": "dice",
                         "ModifierID": "critical_add",
                         "Value": 5,
+                        "Keywords": null,
                         "Description": "添加局部词条"
                       },
                       {

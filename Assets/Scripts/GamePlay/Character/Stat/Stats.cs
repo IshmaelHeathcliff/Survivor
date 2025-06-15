@@ -35,6 +35,26 @@ namespace GamePlay.Character.Stat
             }
         }
 
+        public IKeywordStat GetKeywordStat(string statName)
+        {
+            IStat stat = GetStat(statName);
+
+            if (stat == null)
+            {
+                return null;
+            }
+
+            if (stat is IKeywordStat keywordStat)
+            {
+                return keywordStat;
+            }
+            else
+            {
+                Debug.LogError($"Stat {statName} is not a keyword stat");
+                return null;
+            }
+        }
+
         public IStat GetStat(StatModifierConfig modifierConfig)
         {
             return GetStat(modifierConfig.StatName);

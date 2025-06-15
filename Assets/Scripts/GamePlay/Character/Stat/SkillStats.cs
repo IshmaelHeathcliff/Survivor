@@ -4,20 +4,20 @@ namespace GamePlay.Character.Stat
 {
     public class SkillStats : Stats
     {
-        public SkillStats(IEnumerable<string> keywords, CharacterStats characterStats)
+        public SkillStats(List<string> keywords, CharacterStats characterStats)
         {
             InternalStats = new()
-        {
-            { "Damage", new LocalStat(new Stat("Damage"), characterStats.GetStat("Damage")) },
-            { "CriticalChance", new LocalStat(new Stat("CriticalChance"), characterStats.GetStat("CriticalChance")) },
-            { "CriticalMultiplier", new LocalStat(new Stat("CriticalMultiplier"), characterStats.GetStat("CriticalMultiplier")) },
-            { "Duration", new LocalStat(new Stat("Duration"), characterStats.GetStat("Duration"))},
-            { "CooldownInverse", new LocalStat(new Stat("CooldownInverse"), characterStats.GetStat("CooldownInverse"))},
-            { "AttackSpeed", new LocalStat(new Stat("AttackSpeed"), characterStats.GetStat("AttackSpeed")) },
-            { "AttackArea", new LocalStat(new Stat("AttackArea"), characterStats.GetStat("AttackArea")) },
-            { "ProjectileSpeed", new LocalStat(new Stat("ProjectileSpeed"), characterStats.GetStat("ProjectileSpeed")) },
-            { "ProjectileCount", new LocalStat(new Stat("ProjectileCount"), characterStats.GetStat("ProjectileCount")) },
-        };
+            {
+                { "Damage", new LocalKeywordStat(keywords, new KeywordStat("Damage"), characterStats.GetKeywordStat("Damage")) },
+                { "CriticalChance", new LocalKeywordStat(keywords, new KeywordStat("CriticalChance"), characterStats.GetKeywordStat("CriticalChance")) },
+                { "CriticalMultiplier", new LocalKeywordStat(keywords, new KeywordStat("CriticalMultiplier"), characterStats.GetKeywordStat("CriticalMultiplier")) },
+                { "Duration", new LocalKeywordStat(keywords, new KeywordStat("Duration"), characterStats.GetKeywordStat("Duration"))},
+                { "CooldownInverse", new LocalKeywordStat(keywords, new KeywordStat("CooldownInverse"), characterStats.GetKeywordStat("CooldownInverse"))},
+                { "AttackSpeed", new LocalKeywordStat(keywords, new KeywordStat("AttackSpeed"), characterStats.GetKeywordStat("AttackSpeed")) },
+                { "AttackArea", new LocalKeywordStat(keywords, new KeywordStat("AttackArea"), characterStats.GetKeywordStat("AttackArea")) },
+                { "ProjectileSpeed", new LocalKeywordStat(keywords, new KeywordStat("ProjectileSpeed"), characterStats.GetKeywordStat("ProjectileSpeed")) },
+                { "ProjectileCount", new LocalKeywordStat(keywords, new KeywordStat("ProjectileCount"), characterStats.GetKeywordStat("ProjectileCount")) },
+            };
         }
     }
 }

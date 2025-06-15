@@ -16,6 +16,7 @@ namespace GamePlay.Character.Damage
 
     public abstract class AttackerController : CharacterControlled, IController, IAttackerController
     {
+        [SerializeField] string _targetTag;
         protected ICharacterModel Model => CharacterController.CharacterModel;
         public bool CanAttack { get; set; } = true;
         protected List<IAttacker> Attackers = new();
@@ -36,6 +37,7 @@ namespace GamePlay.Character.Damage
             foreach (IAttacker attacker in attackers)
             {
                 attacker.AttackerController = this;
+                attacker.TargetTag = _targetTag;
                 if (!Attackers.Contains(attacker))
                 {
                     Attackers.Add(attacker);

@@ -46,6 +46,8 @@ namespace GamePlay.Skill
         public SkillStats SkillStats { get; }
         public string ID => SkillConfig.ID;
         public string Name => SkillConfig.Name;
+
+        //
         public virtual List<string> Keywords => SkillConfig.Keywords;
         public virtual string Description => SkillConfig.Description;
         public SkillRarity Rarity => SkillConfig.Rarity;
@@ -100,7 +102,7 @@ namespace GamePlay.Skill
 
     public class RepetitiveSkill : Skill<RepetitiveSkillConfig>
     {
-        public IStat CooldownInverse => SkillStats.GetStat("CooldownInverse");
+        public IKeywordStat CooldownInverse => SkillStats.GetKeywordStat("CooldownInverse");
         public float Cooldown => 1f / CooldownInverse.Value;
         public bool IsReady => _leftTime <= 0;
 

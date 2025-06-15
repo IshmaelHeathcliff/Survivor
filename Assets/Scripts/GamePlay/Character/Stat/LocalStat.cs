@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using GamePlay.Character.Modifier;
+using UnityEngine;
 
 namespace GamePlay.Character.Stat
 {
@@ -15,7 +16,7 @@ namespace GamePlay.Character.Stat
 
         public string ID { get; }
         public string Name { get; }
-        public float Value => GetValue();
+        public virtual float Value => GetValue();
 
 
         public float BaseValue
@@ -90,13 +91,19 @@ namespace GamePlay.Character.Stat
         IKeywordStat _localKeywordStat;
         IKeywordStat _globalKeywordStat;
 
-        public LocalKeywordStat(IEnumerable<string> keywords, IKeywordStat localStat, IKeywordStat globalStat) : base(localStat, globalStat)
+        public LocalKeywordStat(List<string> keywords, IKeywordStat localStat, IKeywordStat globalStat) : base(localStat, globalStat)
         {
             _localKeywordStat = localStat;
             _globalKeywordStat = globalStat;
+
+            Keywords = keywords;
         }
 
-        public IEnumerable<string> KeywordsToQuery
+        public override float Value => GetValueByKeywords();
+
+        public List<string> Keywords { get; protected set; }
+
+        public List<string> KeywordsToQuery
         {
             get => _localKeywordStat.KeywordsToQuery;
             set
@@ -139,14 +146,26 @@ namespace GamePlay.Character.Stat
             }
         }
 
-        public float GetValueByKeywords(IEnumerable<string> keywords)
+        public float GetValueByKeywords()
+        {
+            if (Keywords != null)
+            {
+                KeywordsToQuery = Keywords;
+                return Calculate();
+            }
+
+            Debug.LogError($"Keywords is null for {ID}, return total value");
+            return GetValue();
+        }
+
+        public float GetValueByKeywords(List<string> keywords)
         {
             _localKeywordStat.KeywordsToQuery = keywords;
             _globalKeywordStat.KeywordsToQuery = keywords;
             return GetValue();
         }
 
-        public float GetValueByKeywords(float baseValue, IEnumerable<string> keywords, float addedMultiplier = 1)
+        public float GetValueByKeywords(float baseValue, List<string> keywords, float addedMultiplier = 1)
         {
             BaseValue = baseValue;
             _localKeywordStat.KeywordsToQuery = keywords;

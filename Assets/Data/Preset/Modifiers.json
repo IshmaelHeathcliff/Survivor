@@ -22,9 +22,7 @@
     "Name": "生命附加值",
     "PositiveDescription": "增加{0}基础值{1}点",
     "NegativeDescription": "减少{0}基础值{1}点",
-    "Keywords": [
-      "Life"
-    ]
+    "Keywords": []
   },
   {
     "$type": "Data.Config.StatModifierConfig, Assembly-CSharp",
@@ -49,9 +47,7 @@
     "Name": "生命值提高",
     "PositiveDescription": "{0}提高{1}%",
     "NegativeDescription": "{0}降低{1}%",
-    "Keywords": [
-      "Life"
-    ]
+    "Keywords": []
   },
   {
     "$type": "Data.Config.StatModifierConfig, Assembly-CSharp",
@@ -76,9 +72,7 @@
     "Name": "生命值总增",
     "PositiveDescription": "{0}总增{1}%",
     "NegativeDescription": "{0}总降{1}%",
-    "Keywords": [
-      "Life"
-    ]
+    "Keywords": []
   },
   {
     "$type": "Data.Config.StatModifierConfig, Assembly-CSharp",
@@ -103,9 +97,7 @@
     "Name": "伤害附加值",
     "PositiveDescription": "{0}附加{1}点",
     "NegativeDescription": "{0}附加-{1}点",
-    "Keywords": [
-      "Damage"
-    ]
+    "Keywords": []
   },
   {
     "$type": "Data.Config.StatModifierConfig, Assembly-CSharp",
@@ -130,9 +122,7 @@
     "Name": "伤害提高",
     "PositiveDescription": "{0}提高{1}%",
     "NegativeDescription": "{0}降低{1}%",
-    "Keywords": [
-      "Damage"
-    ]
+    "Keywords": []
   },
   {
     "$type": "Data.Config.StatModifierConfig, Assembly-CSharp",
@@ -157,9 +147,7 @@
     "Name": "伤害总增",
     "PositiveDescription": "{0}总增{1}%",
     "NegativeDescription": "{0}总降{1}%",
-    "Keywords": [
-      "Damage"
-    ]
+    "Keywords": []
   },
   {
     "$type": "Data.Config.StatModifierConfig, Assembly-CSharp",
@@ -184,8 +172,33 @@
     "Name": "伤害固定",
     "PositiveDescription": "{0}附加固定{1}点",
     "NegativeDescription": "{0}附加固定-{1}%点",
+    "Keywords": []
+  },
+  {
+    "$type": "Data.Config.StatModifierConfig, Assembly-CSharp",
+    "StatName": "Damage",
+    "StatModifierType": 1,
+    "MaxLevel": 3,
+    "LevelRanges": [
+      {
+        "Min": 1,
+        "Max": 20
+      },
+      {
+        "Min": 21,
+        "Max": 40
+      },
+      {
+        "Min": 41,
+        "Max": 60
+      }
+    ],
+    "ModifierID": "range_damage_increase",
+    "Name": "远程伤害提高",
+    "PositiveDescription": "{0}提高{1}%",
+    "NegativeDescription": "{0}降低{1}%",
     "Keywords": [
-      "Damage"
+      "Range"
     ]
   },
   {
@@ -215,6 +228,33 @@
   },
   {
     "$type": "Data.Config.StatModifierConfig, Assembly-CSharp",
+    "StatName": "CooldownInverse",
+    "StatModifierType": 1,
+    "MaxLevel": 3,
+    "LevelRanges": [
+      {
+        "Min": 1,
+        "Max": 20
+      },
+      {
+        "Min": 21,
+        "Max": 40
+      },
+      {
+        "Min": 41,
+        "Max": 60
+      }
+    ],
+    "ModifierID": "range_cdi_increase",
+    "Name": "远程CD降低",
+    "PositiveDescription": "{0}提高{1}%",
+    "NegativeDescription": "{0}降低{1}%",
+    "Keywords": [
+      "Range"
+    ]
+  },
+  {
+    "$type": "Data.Config.StatModifierConfig, Assembly-CSharp",
     "StatName": "CriticalChance",
     "StatModifierType": 0,
     "MaxLevel": 3,
@@ -236,9 +276,7 @@
     "Name": "暴击率增加",
     "PositiveDescription": "{0}增加{1}%",
     "NegativeDescription": "{0}减少{1}%",
-    "Keywords": [
-      "Critical"
-    ]
+    "Keywords": []
   },
   {
     "$type": "Data.Config.StatModifierConfig, Assembly-CSharp",
@@ -263,9 +301,7 @@
     "Name": "金币收入增加",
     "PositiveDescription": "{0}增加{1}点",
     "NegativeDescription": "{0}减少{1}点",
-    "Keywords": [
-      "Coin"
-    ]
+    "Keywords": []
   },
   {
     "$type": "Data.Config.StatModifierConfig, Assembly-CSharp",
@@ -317,8 +353,6 @@
     "Name": "木头收入增加",
     "PositiveDescription": "{0}增加{1}点",
     "NegativeDescription": "{0}减少{1}点",
-    "Keywords": [
-      "Wood"
-    ]
+    "Keywords": []
   }
 ]

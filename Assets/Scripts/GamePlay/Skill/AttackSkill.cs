@@ -7,13 +7,13 @@ namespace GamePlay.Skill
 
     public class AttackSkill : RepetitiveSkill
     {
-        public IStat Damage => SkillStats.GetStat("Damage");
-        public IStat CriticalChance => SkillStats.GetStat("CriticalChance");
-        public IStat CriticalMultiplier => SkillStats.GetStat("CriticalMultiplier");
-        public IStat AttackArea => SkillStats.GetStat("AttackArea");
-        public IStat Duration => SkillStats.GetStat("Duration");
-        public IStat ProjectileCount => SkillStats.GetStat("ProjectileCount");
-        public IStat ProjectileSpeed => SkillStats.GetStat("ProjectileSpeed");
+        public IKeywordStat Damage => SkillStats.GetKeywordStat("Damage");
+        public IKeywordStat CriticalChance => SkillStats.GetKeywordStat("CriticalChance");
+        public IKeywordStat CriticalMultiplier => SkillStats.GetKeywordStat("CriticalMultiplier");
+        public IKeywordStat AttackArea => SkillStats.GetKeywordStat("AttackArea");
+        public IKeywordStat Duration => SkillStats.GetKeywordStat("Duration");
+        public IKeywordStat ProjectileCount => SkillStats.GetKeywordStat("ProjectileCount");
+        public IKeywordStat ProjectileSpeed => SkillStats.GetKeywordStat("ProjectileSpeed");
 
         public bool ReleaseOnAcquire { get; set; }
 

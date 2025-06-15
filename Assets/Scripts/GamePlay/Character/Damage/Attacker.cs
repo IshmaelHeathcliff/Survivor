@@ -9,16 +9,16 @@ namespace GamePlay.Character.Damage
     public interface IAttacker
     {
         string ID { get; }
-        IEnumerable<string> Keywords { get; }
+        List<string> Keywords { get; }
         IAttackerController AttackerController { get; set; }
+        string TargetTag { get; set; }
         Vector2 Direction { get; set; }
 
-        IStat Damage { get; }
-        IStat CriticalChance { get; }
-        IStat CriticalMultiplier { get; }
-        IStat AttackArea { get; }
-        IStat Duration { get; }
-        IStat ProjectileSpeed { get; }
+        IKeywordStat Damage { get; }
+        IKeywordStat CriticalChance { get; }
+        IKeywordStat CriticalMultiplier { get; }
+        IKeywordStat AttackArea { get; }
+        IKeywordStat Duration { get; }
 
         void SetSkill(AttackSkill skill);
         UniTaskVoid Attack();
@@ -30,23 +30,25 @@ namespace GamePlay.Character.Damage
     public abstract class Attacker : MonoBehaviour, IAttacker, IController
     {
         public IAttackerController AttackerController { get; set; }
-        AttackSkill _attackSkill;
+        protected AttackSkill AttackSkill;
 
-        public string ID => _attackSkill.ID;
-        public IEnumerable<string> Keywords => _attackSkill.Keywords;
+        // TODO: 需要一个更通用的方式来处理目标选择
+        public string TargetTag { get; set; }
         public Vector2 Direction { get; set; }
 
 
-        public IStat Damage => _attackSkill.Damage;
-        public IStat CriticalChance => _attackSkill.CriticalChance;
-        public IStat CriticalMultiplier => _attackSkill.CriticalMultiplier;
-        public IStat AttackArea => _attackSkill.AttackArea;
-        public IStat Duration => _attackSkill.Duration;
-        public IStat ProjectileSpeed => _attackSkill.ProjectileSpeed;
+        public string ID => AttackSkill.ID;
+        public List<string> Keywords => AttackSkill.Keywords;
+        public IKeywordStat Damage => AttackSkill.Damage;
+        public IKeywordStat CriticalChance => AttackSkill.CriticalChance;
+        public IKeywordStat CriticalMultiplier => AttackSkill.CriticalMultiplier;
+        public IKeywordStat AttackArea => AttackSkill.AttackArea;
+        public IKeywordStat Duration => AttackSkill.Duration;
+
 
         public void SetSkill(AttackSkill skill)
         {
-            _attackSkill = skill;
+            AttackSkill = skill;
         }
 
         protected abstract UniTask Play();

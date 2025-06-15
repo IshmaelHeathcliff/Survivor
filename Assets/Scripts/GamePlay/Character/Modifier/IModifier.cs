@@ -13,6 +13,8 @@ namespace GamePlay.Character.Modifier
         string ModifierID { get; set; }
         string FactoryID { get; set; }
         string GetDescription();
+
+        // ! 严格关键词，所有关键词都满足时才生效
         List<string> Keywords { get; }
         string InstanceID { get; set; }
         void Load();
@@ -25,6 +27,7 @@ namespace GamePlay.Character.Modifier
 
     public abstract class Modifier<T> : IModifier<T> where T : ModifierConfig
     {
+        //TODO: 不使用全局静态调用？
         protected static T GetModifierConfig(string modifierId)
         {
             return GameFrame.Interface.GetSystem<ModifierSystem>().GetModifierConfig<T>(modifierId);

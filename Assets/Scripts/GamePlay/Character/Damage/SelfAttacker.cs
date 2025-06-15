@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using GamePlay.Character.Damage;
 using UnityEngine;
 
-namespace GamePlay.Character.Enemy
+namespace GamePlay.Character.Damage
 {
-    public class EnemyAttacker : Attacker
+    public class SelfAttacker : Attacker
     {
         Collider2D _collider;
 
@@ -49,18 +48,13 @@ namespace GamePlay.Character.Enemy
 
             Damageable damageable = other.GetComponent<Damageable>();
 
-            if (damageable == null || !damageable.CompareTag("Player"))
+            if (damageable == null || !damageable.CompareTag(TargetTag))
             {
                 return;
             }
 
-            var keywords = new List<string>()
-            {
-                "Damage", "Attack",
-            };
 
-
-            var damage = new AttackDamage(this, damageable, keywords, DamageType.Simple, Damage.BaseValue, 1, 1);
+            var damage = new AttackDamage(this, damageable, Keywords, DamageType.Simple, Damage.BaseValue, 1, 1);
             damage.Apply();
         }
 

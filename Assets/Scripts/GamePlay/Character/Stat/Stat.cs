@@ -32,7 +32,7 @@ namespace GamePlay.Character.Stat
         float _baseValue;
         public string ID { get; private set; }
         public string Name { get; private set; }
-        public float Value => GetValue();
+        public virtual float Value => GetValue();
         public float BaseValue
         {
             get => _baseValue;

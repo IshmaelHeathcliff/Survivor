@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace GamePlay.Character.Stat
 {
     public class CharacterStats : Stats
@@ -13,15 +15,15 @@ namespace GamePlay.Character.Stat
             { "CoinGain", new Stat("CoinGain") },
             { "WoodGain", new Stat("WoodGain") },
 
-            { "Damage", new Stat("Damage") },
-            { "CriticalChance", new Stat("CriticalChance") },
-            { "CriticalMultiplier", new Stat("CriticalMultiplier") },
-            { "Duration", new Stat("Duration")},
-            { "CooldownInverse", new Stat("CooldownInverse")},
-            { "AttackSpeed", new Stat("AttackSpeed") },
-            { "AttackArea", new Stat("AttackArea") },
-            { "ProjectileSpeed", new Stat("ProjectileSpeed") },
-            { "ProjectileCount", new Stat("ProjectileCount") },
+            { "Damage", new KeywordStat("Damage") },
+            { "CriticalChance", new KeywordStat("CriticalChance") },
+            { "CriticalMultiplier", new KeywordStat("CriticalMultiplier") },
+            { "Duration", new KeywordStat("Duration")},
+            { "CooldownInverse", new KeywordStat("CooldownInverse")},
+            { "AttackSpeed", new KeywordStat("AttackSpeed") },
+            { "AttackArea", new KeywordStat("AttackArea") },
+            { "ProjectileSpeed", new KeywordStat("ProjectileSpeed") },
+            { "ProjectileCount", new KeywordStat("ProjectileCount") },
         };
         }
     }
