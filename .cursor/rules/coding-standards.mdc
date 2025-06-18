@@ -1,7 +1,7 @@
 ---
-description: 编程规范
+description:
 globs:
-alwaysApply: false
+alwaysApply: true
 ---
 # 编码标准
 
@@ -15,6 +15,7 @@ alwaysApply: false
 ## 命名规范
 ### 私有字段
 - 使用下划线前缀，驼峰命名
+- 不声明 private
 
 ### 公共成员
 - 使用帕斯卡命名法
@@ -22,9 +23,13 @@ alwaysApply: false
 - 适用于：属性、方法、事件、委托
 - 访问级别：public、internal、protected、protected_internal
 
+### 私有成员
+- 不声明 private
+
 ### 接口
 - 必须以 "I" 开头
 - 使用帕斯卡命名法
+- 不声明 public 方法
 
 ### 私有常量
 - 使用帕斯卡命名法
@@ -61,8 +66,8 @@ alwaysApply: false
 - 方法调用名称和左括号间不加空格
 
 ### 其他代码风格
-- 省略默认访问修饰符 private
-- 不强制使用 readonly 字段
+- 省略默认访问修饰符
+- 强制使用 readonly 字段
 - 内置类型不使用 var
 - 类型明显时使用 var
 - 其他情况不使用 var
@@ -88,4 +93,5 @@ alwaysApply: false
 
 ## Unity 特定规范
 - 使用 `[SerializeField]` 标记需要在 Inspector 中显示的私有字段
+- 使用 `[ShowInInspector]` 标记需要在 Inspector 中显示的属性
 
