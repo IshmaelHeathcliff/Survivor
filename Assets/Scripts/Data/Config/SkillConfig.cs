@@ -14,6 +14,9 @@ namespace Data.Config
         [ShowInInspector] public SkillRarity Rarity { get; set; }
         [ShowInInspector] public string Description { get; set; }
 
+        [ShowInInspector] public bool ReleaseOnAcquire { get; set; }
+
+
         [ShowInInspector]
         [ListDrawerSettings(ShowIndexLabels = true)]
         [TypeFilter("GetFilteredTypeList")]
@@ -52,6 +55,10 @@ namespace Data.Config
         [ShowInInspector] public float Duration { get; set; }
         [ShowInInspector] public float ProjectileCount { get; set; }
         [ShowInInspector] public float ProjectileSpeed { get; set; }
-        [ShowInInspector] public bool ReleaseOnAcquire { get; set; }
+        [ShowInInspector] public float ChainCount { get; set; }
+        [ShowInInspector] public float PenetrateCount { get; set; }
+        [ShowInInspector] public float SplitCount { get; set; }
+        [ShowInInspector] public bool IsTargetLocked { get; set; }
+        [ShowInInspector] public bool CanReturn { get; set; }
     }
 }

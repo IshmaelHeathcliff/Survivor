@@ -109,7 +109,7 @@ namespace GamePlay.Skill
 
             this.SendEvent(new SkillAcquiredEvent(skill, SkillCreateEnv.Model));
 
-            if (skill is AttackSkill { ReleaseOnAcquire: true })
+            if (skill is ISkill { ReleaseOnAcquire: true })
             {
                 ReleaseSkill(id, model);
             }

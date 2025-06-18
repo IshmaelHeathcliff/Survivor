@@ -25,6 +25,8 @@ namespace GamePlay.Skill
         string ID { get; }
         string Name { get; }
         string Description { get; }
+        bool ReleaseOnAcquire { get; }
+        List<string> Keywords { get; }
         SkillRarity Rarity { get; }
         SkillStats SkillStats { get; }
         void Enable();
@@ -32,7 +34,6 @@ namespace GamePlay.Skill
         void Use();
         void Cancel();
         void SetEffects(IEnumerable<IEffect> effectsOnEnable, IEnumerable<IEffect> effectsOnUpdate);
-        List<string> Keywords { get; }
     }
 
     public interface ISkill<T> : ISkill where T : SkillConfig
@@ -43,14 +44,14 @@ namespace GamePlay.Skill
     public abstract class Skill<T> : ISkill<T> where T : SkillConfig
     {
         public T SkillConfig { get; set; }
-        public SkillStats SkillStats { get; }
         public string ID => SkillConfig.ID;
         public string Name => SkillConfig.Name;
-
-        //
-        public virtual List<string> Keywords => SkillConfig.Keywords;
         public virtual string Description => SkillConfig.Description;
+        public bool ReleaseOnAcquire => SkillConfig.ReleaseOnAcquire;
+        public virtual List<string> Keywords => SkillConfig.Keywords;
         public SkillRarity Rarity => SkillConfig.Rarity;
+        public SkillStats SkillStats { get; }
+
 
         // 技能启用时生效的效果，比如Buff，需要关闭技能时主动 Cancel
         protected readonly List<IEffect> SkillEffectsOnEnable = new();

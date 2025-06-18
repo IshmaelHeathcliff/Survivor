@@ -14,8 +14,11 @@ namespace GamePlay.Skill
         public IKeywordStat Duration => SkillStats.GetKeywordStat("Duration");
         public IKeywordStat ProjectileCount => SkillStats.GetKeywordStat("ProjectileCount");
         public IKeywordStat ProjectileSpeed => SkillStats.GetKeywordStat("ProjectileSpeed");
-
-        public bool ReleaseOnAcquire { get; set; }
+        public IKeywordStat ChainCount => SkillStats.GetKeywordStat("ChainCount");
+        public IKeywordStat PenetrateCount => SkillStats.GetKeywordStat("PenetrateCount");
+        public IKeywordStat SplitCount => SkillStats.GetKeywordStat("SplitCount");
+        public bool IsTargetLocked { get; set; }
+        public bool CanReturn { get; set; }
 
         public AttackSkill(AttackSkillConfig skillConfig, CharacterStats characterStats)
             : base(skillConfig, characterStats)
@@ -27,7 +30,11 @@ namespace GamePlay.Skill
             Duration.BaseValue = skillConfig.Duration;
             ProjectileCount.BaseValue = skillConfig.ProjectileCount;
             ProjectileSpeed.BaseValue = skillConfig.ProjectileSpeed;
-            ReleaseOnAcquire = skillConfig.ReleaseOnAcquire;
+            ChainCount.BaseValue = skillConfig.ChainCount;
+            PenetrateCount.BaseValue = skillConfig.PenetrateCount;
+            SplitCount.BaseValue = skillConfig.SplitCount;
+            IsTargetLocked = skillConfig.IsTargetLocked;
+            CanReturn = skillConfig.CanReturn;
         }
     }
 }

@@ -17,6 +17,9 @@ namespace GamePlay.Character.Stat
                 { "AttackArea", new LocalKeywordStat(keywords, new KeywordStat("AttackArea"), characterStats.GetKeywordStat("AttackArea")) },
                 { "ProjectileSpeed", new LocalKeywordStat(keywords, new KeywordStat("ProjectileSpeed"), characterStats.GetKeywordStat("ProjectileSpeed")) },
                 { "ProjectileCount", new LocalKeywordStat(keywords, new KeywordStat("ProjectileCount"), characterStats.GetKeywordStat("ProjectileCount")) },
+                { "ChainCount", new LocalKeywordStat(keywords, new KeywordStat("ChainCount"), characterStats.GetKeywordStat("ChainCount")) },
+                { "PenetrateCount", new LocalKeywordStat(keywords, new KeywordStat("PenetrateCount"), characterStats.GetKeywordStat("PenetrateCount")) },
+                { "SplitCount", new LocalKeywordStat(keywords, new KeywordStat("SplitCount"), characterStats.GetKeywordStat("SplitCount")) },
             };
         }
     }

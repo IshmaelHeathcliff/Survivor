@@ -8,8 +8,10 @@ namespace GamePlay.Character.Damage
 {
     public interface IDamageable : ICharacterControlled
     {
+        string ID { get; }
         EasyEvent OnHurt { get; }
         EasyEvent OnDeath { get; }
+        Transform Transform { get; }
         IConsumableStat Health { get; }
         bool IsDamageable { get; set; }
         void TakeDamage(float damage);
@@ -19,13 +21,16 @@ namespace GamePlay.Character.Damage
     {
         [SerializeField] float _invincibleTime;
 
+        public string ID => CharacterController.CharacterModel.ID;
         public EasyEvent OnHurt { get; protected set; }
         public EasyEvent OnDeath { get; protected set; }
+        public Transform Transform { get; protected set; }
         public IConsumableStat Health { get; protected set; }
         public bool IsDamageable { get; set; } = true;
 
         protected override void OnInit()
         {
+            Transform = transform;
         }
 
         protected override void OnDeinit()

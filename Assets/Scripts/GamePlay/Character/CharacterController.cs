@@ -77,7 +77,7 @@ namespace GamePlay.Character
             MakeSureID();
             TModels models = this.GetModel<TModels>();
             TModel model = models.AddModel(ID);
-            model.BindTransform(MoveController.Transform);
+            model.Transform = MoveController.Transform;
             models.Current = model;
             Model = model;
         }

@@ -33,9 +33,9 @@ namespace GamePlay.Character.Damage
         }
 
 
-        public override void Cancel()
+        public override async UniTaskVoid Cancel()
         {
-            return;
+            await UniTask.CompletedTask;
         }
 
 

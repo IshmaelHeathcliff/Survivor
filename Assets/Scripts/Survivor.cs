@@ -8,6 +8,7 @@ using GamePlay.Character.Damage;
 using Data.SaveLoad;
 using GamePlay.Item;
 using GamePlay.Skill;
+using GamePlay.Character;
 
 public class GameFrame : Architecture<GameFrame>
 {
@@ -27,6 +28,7 @@ public class GameFrame : Architecture<GameFrame>
         RegisterSystem(new ResourceSystem());
         RegisterSystem(new CountSystem());
         RegisterSystem(new AttackerCreateSystem());
+        RegisterSystem(new PositionQuerySystem());
 
         RegisterUtility(new SaveLoadUtility());
     }

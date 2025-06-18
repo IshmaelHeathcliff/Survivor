@@ -14,7 +14,11 @@
     "Duration": 2.0,
     "ProjectileCount": 1.0,
     "ProjectileSpeed": 10.0,
-    "ReleaseOnAcquire": true,
+    "ChainCount": 0.0,
+    "PenetrateCount": 1.0,
+    "SplitCount": 0.0,
+    "IsTargetLocked": false,
+    "CanReturn": false,
     "Cooldown": 2.0,
     "ID": "dice",
     "Name": "奇奥骰子基础",
@@ -24,6 +28,7 @@
     ],
     "Rarity": 0,
     "Description": null,
+    "ReleaseOnAcquire": true,
     "SkillEffectConfigsOnEnable": null,
     "SkillEffectConfigsOnUse": null
   },
@@ -34,6 +39,7 @@
     "Keywords": [],
     "Rarity": 0,
     "Description": null,
+    "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {
         "$type": "Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
@@ -59,6 +65,7 @@
     "Keywords": [],
     "Rarity": 0,
     "Description": null,
+    "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {
         "$type": "Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
@@ -83,6 +90,7 @@
     "Keywords": [],
     "Rarity": 0,
     "Description": null,
+    "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {
         "$type": "Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
@@ -108,6 +116,7 @@
     "Keywords": [],
     "Rarity": 1,
     "Description": null,
+    "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {
         "$type": "Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
@@ -132,6 +141,7 @@
     "Keywords": [],
     "Rarity": 1,
     "Description": null,
+    "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {
         "$type": "Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
@@ -156,6 +166,7 @@
     "Keywords": [],
     "Rarity": 2,
     "Description": null,
+    "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [],
     "SkillEffectConfigsOnUse": [
       {
@@ -187,6 +198,7 @@
     "Keywords": [],
     "Rarity": 3,
     "Description": null,
+    "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [],
     "SkillEffectConfigsOnUse": [
       {
@@ -338,13 +350,18 @@
     "Duration": 0.0,
     "ProjectileCount": 0.0,
     "ProjectileSpeed": 0.0,
-    "ReleaseOnAcquire": false,
+    "ChainCount": 0.0,
+    "PenetrateCount": 0.0,
+    "SplitCount": 0.0,
+    "IsTargetLocked": false,
+    "CanReturn": false,
     "Cooldown": 0.0,
     "ID": "dash",
     "Name": "冲刺",
     "Keywords": [],
     "Rarity": 0,
     "Description": null,
+    "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": null,
     "SkillEffectConfigsOnUse": null
   }

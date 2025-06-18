@@ -16,7 +16,7 @@ namespace GamePlay.Character.Damage
 
     public abstract class AttackerController : CharacterControlled, IController, IAttackerController
     {
-        [SerializeField] string _targetTag;
+        [SerializeField] protected string TargetTag;
         protected ICharacterModel Model => CharacterController.CharacterModel;
         public bool CanAttack { get; set; } = true;
         protected List<IAttacker> Attackers = new();
@@ -29,6 +29,7 @@ namespace GamePlay.Character.Damage
 
         protected override void OnDeinit()
         {
+            ClearAttacker();
         }
 
         public async UniTask<IEnumerable<IAttacker>> CreateAttackers(string skillID, string attackerID)
@@ -37,7 +38,8 @@ namespace GamePlay.Character.Damage
             foreach (IAttacker attacker in attackers)
             {
                 attacker.AttackerController = this;
-                attacker.TargetTag = _targetTag;
+                attacker.TargetTag = TargetTag;
+
                 if (!Attackers.Contains(attacker))
                 {
                     Attackers.Add(attacker);
@@ -73,7 +75,7 @@ namespace GamePlay.Character.Damage
             }
             else
             {
-                attackers = await _attackerCreateSystem.CreateAttacker(attackSkill, attackerID: attackerID, transform);
+                attackers = await _attackerCreateSystem.CreateAttacker(attackSkill, attackerID, transform);
             }
 
             return attackers;
@@ -83,8 +85,12 @@ namespace GamePlay.Character.Damage
 
         public virtual void ClearAttacker()
         {
+            var attackers = Attackers.ToList();
+            foreach (IAttacker attacker in attackers)
+            {
+                attacker.Cancel().Forget();
+            }
             Attackers.Clear();
-            Attackers = new List<IAttacker>();
         }
 
         public IArchitecture GetArchitecture()

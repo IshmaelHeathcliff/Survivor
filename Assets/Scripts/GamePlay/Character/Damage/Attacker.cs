@@ -12,7 +12,9 @@ namespace GamePlay.Character.Damage
         List<string> Keywords { get; }
         IAttackerController AttackerController { get; set; }
         string TargetTag { get; set; }
+        Transform Target { get; set; }
         Vector2 Direction { get; set; }
+
 
         IKeywordStat Damage { get; }
         IKeywordStat CriticalChance { get; }
@@ -22,7 +24,7 @@ namespace GamePlay.Character.Damage
 
         void SetSkill(AttackSkill skill);
         UniTaskVoid Attack();
-        void Cancel();
+        UniTaskVoid Cancel();
     }
 
 
@@ -34,6 +36,7 @@ namespace GamePlay.Character.Damage
 
         // TODO: 需要一个更通用的方式来处理目标选择
         public string TargetTag { get; set; }
+        public Transform Target { get; set; }
         public Vector2 Direction { get; set; }
 
 
@@ -45,7 +48,6 @@ namespace GamePlay.Character.Damage
         public IKeywordStat AttackArea => AttackSkill.AttackArea;
         public IKeywordStat Duration => AttackSkill.Duration;
 
-
         public void SetSkill(AttackSkill skill)
         {
             AttackSkill = skill;
@@ -53,7 +55,7 @@ namespace GamePlay.Character.Damage
 
         protected abstract UniTask Play();
         public abstract UniTaskVoid Attack();
-        public abstract void Cancel();
+        public abstract UniTaskVoid Cancel();
 
         public IArchitecture GetArchitecture()
         {

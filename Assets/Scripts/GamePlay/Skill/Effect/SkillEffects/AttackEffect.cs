@@ -41,7 +41,7 @@ namespace GamePlay.Skill.Effect
         {
             foreach (IAttacker attacker in _attackers)
             {
-                attacker?.Cancel();
+                attacker?.Cancel().Forget();
             }
 
             _attackers.Clear();

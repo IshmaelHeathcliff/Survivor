@@ -68,5 +68,20 @@
     "ID": "ProjectileCount",
     "Name": "投射物数量",
     "Description": null
+  },
+  {
+    "ID": "ChainCount",
+    "Name": "连锁数量",
+    "Description": null
+  },
+  {
+    "ID": "PenetrateCount",
+    "Name": "穿透数量",
+    "Description": null
+  },
+  {
+    "ID": "SplitCount",
+    "Name": "分裂数量",
+    "Description": null
   }
 ]

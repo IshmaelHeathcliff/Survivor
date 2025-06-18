@@ -41,47 +41,58 @@ namespace GamePlay.Character
         ICharacterController Controller { get; set; }
 
         string ID { get; set; }
+        Transform Transform { get; set; }
+
         float Speed { get; set; }
         Vector2 Position { get; set; }
         Vector2 Direction { get; set; }
-        CharacterStats Stats { get; }
 
-        void BindTransform(Transform transform);
+        CharacterStats Stats { get; }
     }
 
     public abstract class CharacterModel : ICharacterModel
     {
-        Transform _transform;
+        public ICharacterController Controller { get; set; }
+
         public string ID { get; set; }
+
+        public Transform Transform { get; set; }
+
         public float Speed { get; set; }
 
         public Vector2 Position
         {
             get
             {
-                if (_transform == null)
+                if (Transform == null)
                 {
                     return Vector2.zero;
                 }
 
-                return _transform.position;
+                return Transform.position;
             }
             set
             {
-                if (_transform == null)
+                if (Transform == null)
                 {
                     return;
                 }
 
-                _transform.position = value;
+                Transform.position = value;
             }
         }
 
         public Vector2 Direction { get; set; }
-        public CharacterStats Stats { get; } = new CharacterStats();
-        public IStateContainer StateContainer { get; } = new StateContainer();
-        public SkillPool SkillPool { get; set; } = new();
 
+        public CharacterStats Stats { get; } = new CharacterStats();
+
+        public IStateContainer StateContainer { get; } = new StateContainer();
+
+        public Dictionary<string, ValueCounter> CountValues { get; } = new();
+
+
+        #region IHasSkill
+        public SkillPool SkillPool { get; set; } = new();
 
         public int SkillSlotCount
         {
@@ -91,15 +102,6 @@ namespace GamePlay.Character
 
         public ISkillContainer SkillsReleased { get; } = new SkillContainer();
         public ISkillContainer SkillsInSlot { get; } = new SkillContainer(7);
-
-        public ICharacterController Controller { get; set; }
-
-        public Dictionary<string, ValueCounter> CountValues { get; } = new();
-
-        public void BindTransform(Transform transform)
-        {
-            _transform = transform;
-        }
 
         public ISkill GetSkill(string id)
         {
@@ -138,65 +140,7 @@ namespace GamePlay.Character
 
             return true;
         }
-    }
+        #endregion
 
-    public abstract class CharactersModel<TModel> : AbstractModel where TModel : ICharacterModel, new()
-    {
-        string _currentID;
-
-        //* 实时调用Current是更安全的
-        public TModel Current
-        {
-            get
-            {
-                if (TryGetModel(_currentID, out TModel model))
-                {
-                    return model;
-                }
-
-                Debug.LogError($"Current model {_currentID} does not exist;");
-                return default;
-            }
-
-            set => _currentID = value.ID;
-        }
-
-        readonly protected Dictionary<string, TModel> Models = new();
-        public bool TryGetModel(string id, out TModel model)
-        {
-            if (Models.TryGetValue(id, out model))
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        public TModel AddModel(string id)
-        {
-            if (!Models.TryGetValue(id, out TModel model))
-            {
-                model = new TModel
-                {
-                    ID = id
-                };
-
-                Models.Add(id, model);
-            }
-
-            return model;
-        }
-
-        public void RemoveModel(string id)
-        {
-            if (TryGetModel(id, out TModel model))
-            {
-                model.SkillsInSlot.Clear();
-                model.SkillsReleased.Clear();
-                model.StateContainer.Clear();
-                model.Controller = null;
-                Models.Remove(id);
-            }
-        }
     }
 }

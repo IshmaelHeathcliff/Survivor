@@ -24,6 +24,9 @@ namespace GamePlay.Character.Stat
             { "AttackArea", new KeywordStat("AttackArea") },
             { "ProjectileSpeed", new KeywordStat("ProjectileSpeed") },
             { "ProjectileCount", new KeywordStat("ProjectileCount") },
+            { "ChainCount", new KeywordStat("ChainCount") },
+            { "PenetrateCount", new KeywordStat("PenetrateCount") },
+            { "SplitCount", new KeywordStat("SplitCount") },
         };
         }
     }
