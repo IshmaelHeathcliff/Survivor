@@ -176,6 +176,8 @@
         "ChildEffects": [
           {
             "$type": "Data.Config.RollDiceEffectConfig, Assembly-CSharp",
+            "Min": 1,
+            "Max": 6,
             "ChildEffects": [
               {
                 "$type": "Data.Config.AcquireResourceEffectConfig, Assembly-CSharp",
@@ -208,6 +210,8 @@
         "ChildEffects": [
           {
             "$type": "Data.Config.RollDiceEffectConfig, Assembly-CSharp",
+            "Min": 1,
+            "Max": 6,
             "ChildEffects": [
               {
                 "$type": "Data.Config.OnValueEffectConfig, Assembly-CSharp",

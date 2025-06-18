@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using Newtonsoft.Json;
 using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace Data.Config
 {
@@ -66,11 +68,24 @@ namespace Data.Config
         }
     }
 
-    public class RollDiceEffectConfig : NestedEffectConfig
+    public class OnRandomValueEffectConfig : NestedEffectConfig
+    {
+        [ShowInInspector] public int Min { get; set; }
+        [ShowInInspector] public int Max { get; set; }
+
+        public OnRandomValueEffectConfig()
+        {
+            Description = "范围内随机数值并触发";
+        }
+    }
+
+    public class RollDiceEffectConfig : OnRandomValueEffectConfig
     {
         public RollDiceEffectConfig()
         {
             Description = "掷骰子";
+            Min = 1;
+            Max = 6;
         }
     }
 

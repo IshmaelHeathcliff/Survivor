@@ -23,20 +23,20 @@ MonoBehaviour:
     SerializationNodes:
     - Name: Data
       Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[SkillReleaseRuleConfig, Assembly-CSharp]],
-        mscorlib
+      Data: 0|System.Collections.Generic.List`1[[Data.Config.SkillReleaseRuleConfig,
+        Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 2
     - Name: 
       Entry: 7
-      Data: 1|SkillReleaseRuleConfig, Assembly-CSharp
+      Data: 1|Data.Config.SkillReleaseRuleConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 2|SkillReleaseRuleConfig, Assembly-CSharp
+      Data: 2|Data.Config.SkillReleaseRuleConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 

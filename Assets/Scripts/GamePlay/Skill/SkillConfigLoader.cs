@@ -120,6 +120,7 @@ namespace GamePlay.Skill
             IEffect effect = skillConfig switch
             {
                 RollDiceEffectConfig rollDiceEffectConfig => new RollDiceEffect(rollDiceEffectConfig, context.Env.Model, childEffects, context.Env.CountSystem),
+                OnRandomValueEffectConfig onRandomValueEffectConfig => new OnRandomValueEffect(onRandomValueEffectConfig, context.Env.Model, childEffects),
                 CountIncrementEffectConfig countIncrementEffectConfig => new CountIncrementEffect(countIncrementEffectConfig, context.Env.Model, childEffects, context.Env.CountSystem),
                 OnValueEffectConfig diceOnValueEffectConfig => new OnValueEffect(diceOnValueEffectConfig, context.Env.Model, childEffects),
                 not null => new NestedSkillEffect<NestedEffectConfig>(skillConfig, context.Env.Model, childEffects),

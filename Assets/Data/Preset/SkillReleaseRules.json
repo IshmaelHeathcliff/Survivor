@@ -37,7 +37,7 @@
     "IsOnce": true,
     "Condition": {
       "$type": "Data.Config.ValueCountConditionConfig, Assembly-CSharp",
-      "ValueID": "RollDice",
+      "ValueID": "RollDiceTimes",
       "Value": 6,
       "Description": null,
       "SkillsToRelease": [
