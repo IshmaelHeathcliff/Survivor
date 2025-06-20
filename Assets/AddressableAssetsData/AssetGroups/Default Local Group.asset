@@ -35,6 +35,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4c49420468c962b4bb3554db841fdfe1
+    m_Address: Assets/Prefabs/StateUICell.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 500b9ae4f70ef4447ba808c85366b190
     m_Address: Assets/Prefabs/wood.prefab
     m_ReadOnly: 0
@@ -72,6 +77,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b1f0f5feb5d52ce498144de6dc606919
     m_Address: Assets/Textures/Background
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d3a78b04d8c98504f929e408d6bfa054
+    m_Address: Assets/Prefabs/Chip.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

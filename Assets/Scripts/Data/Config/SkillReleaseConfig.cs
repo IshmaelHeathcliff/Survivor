@@ -54,5 +54,15 @@ namespace Data.Config
         [ShowInInspector] public int Value { get; set; }
     }
 
+    public class CompositeAndConditionConfig : SkillReleaseConditionConfig
+    {
+        [ShowInInspector] public List<SkillReleaseConditionConfig> Conditions { get; set; } = new();
+    }
+
+    public class CompositeOrConditionConfig : SkillReleaseConditionConfig
+    {
+        [ShowInInspector] public List<SkillReleaseConditionConfig> Conditions { get; set; } = new();
+    }
+
     #endregion
 }

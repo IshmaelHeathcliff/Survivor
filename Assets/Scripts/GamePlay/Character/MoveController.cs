@@ -60,13 +60,13 @@ namespace GamePlay.Character
         public async UniTask PlayAnimation(string stateName)
         {
             Animator.Play(stateName);
-            await UniTask.WaitUntil(() => Animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f, cancellationToken: GlobalCancellation.GetCombinedToken(this));
+            await UniTask.WaitUntil(() => Animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f, cancellationToken: GlobalCancellation.GetCombinedTokenSource(this).Token);
         }
 
         public async UniTask PlayAnimation(int stateNameHash)
         {
             Animator.Play(stateNameHash);
-            await UniTask.WaitUntil(() => Animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f, cancellationToken: GlobalCancellation.GetCombinedToken(this));
+            await UniTask.WaitUntil(() => Animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f, cancellationToken: GlobalCancellation.GetCombinedTokenSource(this).Token);
         }
 
         public virtual void Face(Vector2 direction)

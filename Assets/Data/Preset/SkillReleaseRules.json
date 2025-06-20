@@ -47,7 +47,92 @@
     "Reward": {
       "$type": "Data.Config.SpecificSkillsReleaseRewardConfig, Assembly-CSharp",
       "NewSkillIDs": [
-        "odd_dice"
+        "dice"
+      ],
+      "Description": null
+    }
+  },
+  {
+    "ID": "joystick-button-case-lucky_coin",
+    "Name": "遥感、按钮、机箱、幸运币吞噬规则",
+    "Description": null,
+    "IsOnce": true,
+    "Condition": {
+      "$type": "Data.Config.SpecificSkillsReleaseConditionConfig, Assembly-CSharp",
+      "RequiredSkillIDs": [
+        "joystick",
+        "button",
+        "case",
+        "lucky_coin"
+      ],
+      "Description": null,
+      "SkillsToRelease": [
+        "joystick",
+        "button",
+        "case",
+        "lucky_coin"
+      ]
+    },
+    "Reward": {
+      "$type": "Data.Config.SpecificSkillsReleaseRewardConfig, Assembly-CSharp",
+      "NewSkillIDs": [
+        "roulette"
+      ],
+      "Description": null
+    }
+  },
+  {
+    "ID": "roulette",
+    "Name": "轮盘吞噬规则",
+    "Description": null,
+    "IsOnce": true,
+    "Condition": {
+      "$type": "Data.Config.CompositeAndConditionConfig, Assembly-CSharp",
+      "Conditions": [
+        {
+          "$type": "Data.Config.SpecificSkillsReleaseConditionConfig, Assembly-CSharp",
+          "RequiredSkillIDs": [
+            "roulette"
+          ],
+          "Description": "",
+          "SkillsToRelease": [
+            "roulette"
+          ]
+        },
+        {
+          "$type": "Data.Config.AnySkillsCountReleaseConditionConfig, Assembly-CSharp",
+          "RequiredCount": 3,
+          "RequiredSkillIDs": [
+            "bow_icon",
+            "can_icon",
+            "coin_icon",
+            "wood_icon",
+            "cherry_icon"
+          ],
+          "Description": null,
+          "SkillsToRelease": [
+            "bow_icon",
+            "can_icon",
+            "coin_icon",
+            "wood_icon",
+            "cherry_icon"
+          ]
+        }
+      ],
+      "Description": null,
+      "SkillsToRelease": [
+        "roulette",
+        "bow_icon",
+        "coin_icon",
+        "wood_icon",
+        "cherry_icon",
+        "can_icon"
+      ]
+    },
+    "Reward": {
+      "$type": "Data.Config.SpecificSkillsReleaseRewardConfig, Assembly-CSharp",
+      "NewSkillIDs": [
+        "slot_machine"
       ],
       "Description": null
     }

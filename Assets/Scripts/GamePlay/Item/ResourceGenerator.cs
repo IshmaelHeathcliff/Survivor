@@ -37,6 +37,7 @@ namespace GamePlay.Item
                 if (leftTime <= 0)
                 {
                     GenerateResource("Coin", (int)_model.Stats.GetStat("CoinGain").Value);
+                    GenerateResource("Wood", (int)_model.Stats.GetStat("WoodGain").Value);
                     leftTime += Interval;
                 }
             }

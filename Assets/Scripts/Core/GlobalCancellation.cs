@@ -25,7 +25,7 @@ namespace Core
         }
 
         // 获取组合令牌（推荐使用）
-        public static CancellationToken GetCombinedToken(MonoBehaviour behaviour = null)
+        public static CancellationTokenSource GetCombinedTokenSource(MonoBehaviour behaviour = null)
         {
             var tokens = new List<CancellationToken>
             {
@@ -37,7 +37,7 @@ namespace Core
                 tokens.Add(behaviour.GetCancellationTokenOnDestroy());
             }
 
-            return CancellationTokenSource.CreateLinkedTokenSource(tokens.ToArray()).Token;
+            return CancellationTokenSource.CreateLinkedTokenSource(tokens.ToArray());
         }
 
         void OnApplicationQuitting()

@@ -1,8 +1,8 @@
-﻿using GamePlay.Character.State;
+﻿using UI;
 
 namespace GamePlay.Character.Player
 {
-    public class PlayerStateController : StateController
+    public class PlayerStateUIController : StateUIController
     {
         protected override void SetStateContainer()
         {

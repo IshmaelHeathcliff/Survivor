@@ -1,0 +1,44 @@
+[
+  {
+    "$type": "Data.Config.SpecificSkillsPoolRemoveRuleConfig, Assembly-CSharp",
+    "RequiredSkillIDs": [
+      "dice"
+    ],
+    "Name": "奇奥骰子",
+    "SkillIDsToRemove": [
+      "dice1",
+      "dice2",
+      "dice3",
+      "dice4",
+      "dice5",
+      "dice6"
+    ]
+  },
+  {
+    "$type": "Data.Config.SpecificSkillsPoolRemoveRuleConfig, Assembly-CSharp",
+    "RequiredSkillIDs": [
+      "roulette"
+    ],
+    "Name": "轮盘",
+    "SkillIDsToRemove": [
+      "joystick",
+      "button",
+      "case",
+      "lucky_coin"
+    ]
+  },
+  {
+    "$type": "Data.Config.SpecificSkillsPoolRemoveRuleConfig, Assembly-CSharp",
+    "RequiredSkillIDs": [
+      "slot_machine"
+    ],
+    "Name": "老虎机",
+    "SkillIDsToRemove": [
+      "bow_icon",
+      "can_icon",
+      "coin_icon",
+      "wood_icon",
+      "cherry_icon"
+    ]
+  }
+]

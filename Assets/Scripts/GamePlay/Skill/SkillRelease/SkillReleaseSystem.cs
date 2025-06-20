@@ -50,6 +50,12 @@ namespace GamePlay.Skill
                     case ValueCountCondition valueCountCondition:
                         _unRegisters.Add(this.GetSystem<CountSystem>().Register(valueCountCondition.ValueID, model, e => valueCountCondition.CheckCondition(e)));
                         break;
+                    case CompositeAndReleaseCondition compositeAndReleaseCondition:
+                        _unRegisters.Add(this.RegisterEvent<SkillAcquiredEvent>(compositeAndReleaseCondition.CheckCondition));
+                        break;
+                    case CompositeOrReleaseCondition compositeOrReleaseCondition:
+                        _unRegisters.Add(this.RegisterEvent<SkillAcquiredEvent>(compositeOrReleaseCondition.CheckCondition));
+                        break;
                 }
             }
         }

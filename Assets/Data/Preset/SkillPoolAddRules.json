@@ -2,14 +2,27 @@
   {
     "$type": "Data.Config.SpecificSkillsPoolAddRuleConfig, Assembly-CSharp",
     "RequiredSkillIDs": [
-      "dice1",
-      "dice2",
-      "dice3"
+      "joystick",
+      "button",
+      "case"
     ],
-    "Name": "骰子45",
+    "Name": "人头幸运币",
     "SkillIDsToAdd": [
-      "dice4",
-      "dice5"
+      "lucky_coin"
+    ]
+  },
+  {
+    "$type": "Data.Config.SpecificSkillsPoolAddRuleConfig, Assembly-CSharp",
+    "RequiredSkillIDs": [
+      "roulette"
+    ],
+    "Name": "图标",
+    "SkillIDsToAdd": [
+      "bow_icon",
+      "can_icon",
+      "coin_icon",
+      "wood_icon",
+      "cherry_icon"
     ]
   }
 ]

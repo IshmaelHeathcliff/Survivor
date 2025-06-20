@@ -4,13 +4,19 @@ using Sirenix.OdinInspector;
 
 namespace Data.Config
 {
-    [Serializable]
+    public struct ModifierEntry
+    {
+        public string ModifierID;
+        public int Value;
+    }
+
     public class StateConfig
     {
         [ShowInInspector] public string ID { get; set; }
         [ShowInInspector] public string Name { get; set; }
         [ShowInInspector] public string Description { get; set; }
-        [ShowInInspector] public List<string> ModifierID { get; set; }
+        [ShowInInspector] public int Duration { get; set; }
+        [ShowInInspector] public List<ModifierEntry> ModifierEntries { get; set; }
         [ShowInInspector] public string Icon { get; set; }
     }
 }

@@ -354,5 +354,32 @@
     "PositiveDescription": "{0}增加{1}点",
     "NegativeDescription": "{0}减少{1}点",
     "Keywords": []
+  },
+  {
+    "$type": "Data.Config.StatModifierConfig, Assembly-CSharp",
+    "StatName": "ChainCount",
+    "StatModifierType": 0,
+    "MaxLevel": 3,
+    "LevelRanges": [
+      {
+        "Min": 1,
+        "Max": 1
+      },
+      {
+        "Min": 2,
+        "Max": 2
+      },
+      {
+        "Min": 3,
+        "Max": 3
+      }
+    ],
+    "ModifierID": "chainCount_add",
+    "Name": "弹射数量增加",
+    "PositiveDescription": "{0}增加{1}点",
+    "NegativeDescription": "{0}减少{1}点",
+    "Keywords": [
+      "Chain"
+    ]
   }
 ]

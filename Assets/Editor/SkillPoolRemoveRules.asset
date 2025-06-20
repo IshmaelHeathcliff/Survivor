@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df82b95240da4543842da8809bcb282e, type: 3}
-  m_Name: SkillPoolAddRules
-  m_EditorClassIdentifier: 
+  m_Script: {fileID: 0}
+  m_Name: SkillPoolRemoveRules
+  m_EditorClassIdentifier: Assembly-CSharp-Editor:Editor:SkillPoolRemoveRulePresetEditor
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
@@ -23,20 +23,26 @@ MonoBehaviour:
     SerializationNodes:
     - Name: Data
       Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[Data.Config.SkillPoolAddRuleConfig,
+      Data: 0|System.Collections.Generic.List`1[[Data.Config.SkillPoolRemoveRuleConfig,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
-      Data: 2
+      Data: 3
     - Name: 
       Entry: 7
-      Data: 1|Data.Config.SpecificSkillsPoolAddRuleConfig, Assembly-CSharp
+      Data: 1|Data.Config.SpecificSkillsPoolRemoveRuleConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 2|Data.Config.SpecificSkillsPoolAddRuleConfig, Assembly-CSharp
+      Data: 2|Data.Config.SpecificSkillsPoolRemoveRuleConfig, Assembly-CSharp
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 3|Data.Config.SpecificSkillsPoolRemoveRuleConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
@@ -46,5 +52,5 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  JsonName: SkillPoolAddRules.json
+  JsonName: SkillPoolRemoveRules.json
   JsonPath: Preset

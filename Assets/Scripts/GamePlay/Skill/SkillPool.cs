@@ -11,8 +11,8 @@ namespace GamePlay.Skill
         bool RemoveSkill(SkillConfig config);
         bool HasSkill(SkillConfig config);
         bool HasSkills(IEnumerable<SkillConfig> configs); // ( config1, config2, ...)
-        bool AddSkills(IEnumerable<SkillConfig> configs);
-        bool RemoveSkills(IEnumerable<SkillConfig> configs);
+        void AddSkills(IEnumerable<SkillConfig> configs);
+        void RemoveSkills(IEnumerable<SkillConfig> configs);
         SkillConfig PopRandomSkill(SkillRarity rarity);
         int GetCount(SkillRarity rarity);
         int GetCount();
@@ -54,19 +54,32 @@ namespace GamePlay.Skill
             return configs.All(HasSkill);
         }
 
-        public bool AddSkills(IEnumerable<SkillConfig> configs)
+        public void AddSkills(IEnumerable<SkillConfig> configs)
         {
-            return configs.All(AddSkill);
+            foreach (SkillConfig config in configs)
+            {
+                AddSkill(config);
+            }
         }
 
-        public bool RemoveSkills(IEnumerable<SkillConfig> configs)
+        public void RemoveSkills(IEnumerable<SkillConfig> configs)
         {
-            return configs.All(RemoveSkill);
+            foreach (SkillConfig config in configs)
+            {
+                RemoveSkill(config);
+            }
         }
 
         public SkillConfig PopRandomSkill(SkillRarity rarity)
         {
-            SkillConfig config = SkillsInPool[rarity].ElementAt(Random.Range(0, SkillsInPool[rarity].Count));
+            if (SkillsInPool[rarity].Count == 0)
+            {
+                Debug.LogError($"No skill in pool for rarity: {rarity}");
+                return null;
+            }
+
+            List<SkillConfig> skills = SkillsInPool[rarity];
+            SkillConfig config = skills[Random.Range(0, skills.Count)];
             RemoveSkill(config);
             return config;
         }
@@ -109,6 +122,33 @@ namespace GamePlay.Skill
     {
         public List<string> RequiredSkillIDs { get; set; }
         public SpecificSkillsPoolAddRule(SpecificSkillsPoolAddRuleConfig config) : base(config)
+        {
+            RequiredSkillIDs = config.RequiredSkillIDs;
+        }
+    }
+
+    public abstract class SkillPoolRemoveRule
+    {
+        public string Name { get; set; }
+        public List<string> SkillIDsToRemove { get; set; }
+    }
+
+    public abstract class SkillPoolRemoveRule<T> : SkillPoolRemoveRule where T : SkillPoolRemoveRuleConfig
+    {
+        protected T Config { get; set; }
+
+        protected SkillPoolRemoveRule(T config)
+        {
+            Name = config.Name;
+            Config = config;
+            SkillIDsToRemove = config.SkillIDsToRemove;
+        }
+    }
+
+    public class SpecificSkillsPoolRemoveRule : SkillPoolRemoveRule<SpecificSkillsPoolRemoveRuleConfig>
+    {
+        public List<string> RequiredSkillIDs { get; set; }
+        public SpecificSkillsPoolRemoveRule(SpecificSkillsPoolRemoveRuleConfig config) : base(config)
         {
             RequiredSkillIDs = config.RequiredSkillIDs;
         }

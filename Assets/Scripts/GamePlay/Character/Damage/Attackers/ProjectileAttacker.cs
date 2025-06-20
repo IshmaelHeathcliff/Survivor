@@ -142,7 +142,7 @@ namespace GamePlay.Character.Damage
             while (Vector2.SqrMagnitude(Target.position - transform.position) > 0.1f)
             {
                 Move();
-                await UniTask.WaitForFixedUpdate(GlobalCancellation.GetCombinedToken(this));
+                await UniTask.WaitForFixedUpdate(GlobalCancellation.GetCombinedTokenSource(this).Token);
             }
         }
 
@@ -171,14 +171,14 @@ namespace GamePlay.Character.Damage
             transform.right = Direction;
 
             float leftTime = Duration.Value;
-            CancellationToken ct = GlobalCancellation.GetCombinedToken(this);
+            CancellationTokenSource cts = GlobalCancellation.GetCombinedTokenSource(this);
 
             while (!_isReturning && leftTime > 0)
             {
-                ct.ThrowIfCancellationRequested();
+                cts.Token.ThrowIfCancellationRequested();
                 Move();
                 leftTime -= Time.fixedDeltaTime;
-                await UniTask.WaitForFixedUpdate(ct);
+                await UniTask.WaitForFixedUpdate(cts.Token);
             }
         }
 
@@ -197,7 +197,7 @@ namespace GamePlay.Character.Damage
                 {
                     while (Vector2.SqrMagnitude(Target.position - transform.position) > 0.1f)
                     {
-                        await UniTask.WaitForFixedUpdate(GlobalCancellation.GetCombinedToken(this));
+                        await UniTask.WaitForFixedUpdate(GlobalCancellation.GetCombinedTokenSource(this).Token);
                     }
                 }
 

@@ -55,7 +55,7 @@ namespace GamePlay.Character.Player
         protected override void Start()
         {
             base.Start();
-            new ResourceGenerator(this.GetSystem<ResourceSystem>(), Model, 1f).StartGenerating(GlobalCancellation.GetCombinedToken(this)).Forget();
+            new ResourceGenerator(this.GetSystem<ResourceSystem>(), Model, 1f).StartGenerating(GlobalCancellation.GetCombinedTokenSource(this).Token).Forget();
         }
     }
 }

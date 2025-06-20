@@ -21,7 +21,7 @@ namespace GamePlay.Skill.Effect
             IStatModifierFactory factory;
             if (SkillEffectConfig is LocalModifierEffectConfig localConfig)
             {
-                factory = Model.GetSkill(localConfig.AttackSkillID)?.SkillStats;
+                factory = Model.GetSkill(localConfig.SkillID)?.SkillStats;
             }
             else
             {

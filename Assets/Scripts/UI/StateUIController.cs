@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using GamePlay.Character.State;
+using UnityEngine;
 
-namespace GamePlay.Character.State
+namespace UI
 {
     public interface IStateUI
     {
@@ -18,7 +19,7 @@ namespace GamePlay.Character.State
         public abstract void ChangeStateCount(IStateWithCount state);
     }
 
-    public abstract class StateController : MonoBehaviour, IController
+    public abstract class StateUIController : MonoBehaviour, IController
     {
         [SerializeField] StateUI _stateUI;
         protected IStateContainer StateContainer;

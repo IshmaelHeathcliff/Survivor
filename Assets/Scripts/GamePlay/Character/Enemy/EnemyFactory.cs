@@ -30,7 +30,7 @@ namespace GamePlay.Character.Enemy
 
         async UniTask ProduceEnemies()
         {
-            CancellationToken ct = GlobalCancellation.GetCombinedToken(this);
+            CancellationToken ct = GlobalCancellation.GetCombinedTokenSource(this).Token;
 
             try
             {

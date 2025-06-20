@@ -7,5 +7,20 @@
   },
   {
     "Name": "dice3"
+  },
+  {
+    "Name": "dice4"
+  },
+  {
+    "Name": "dice5"
+  },
+  {
+    "Name": "joystick"
+  },
+  {
+    "Name": "button"
+  },
+  {
+    "Name": "case"
   }
 ]

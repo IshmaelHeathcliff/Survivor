@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Data.Config;
 
 namespace GamePlay.Skill
@@ -26,6 +27,10 @@ namespace GamePlay.Skill
                     return new SpecificSkillsReleaseCondition(specificSkillsConfig.RequiredSkillIDs, specificSkillsConfig.SkillsToRelease, specificSkillsConfig.Description);
                 case ValueCountConditionConfig valueCountConfig:
                     return new ValueCountCondition(valueCountConfig.ValueID, valueCountConfig.Value, valueCountConfig.SkillsToRelease, valueCountConfig.Description);
+                case CompositeAndConditionConfig compositeAndConfig:
+                    return new CompositeAndReleaseCondition(compositeAndConfig.Conditions.Select(c => CreateCondition(c)).ToList(), compositeAndConfig.Description);
+                case CompositeOrConditionConfig compositeOrConfig:
+                    return new CompositeOrReleaseCondition(compositeOrConfig.Conditions.Select(c => CreateCondition(c)).ToList(), compositeOrConfig.Description);
                 default:
                     throw new Exception($"Unknown skill release condition type: {config.GetType().Name}");
             }

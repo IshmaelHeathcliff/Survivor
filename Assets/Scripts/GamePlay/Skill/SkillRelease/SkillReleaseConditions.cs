@@ -18,6 +18,7 @@ namespace GamePlay.Skill
         EasyEvent<IReleaseEvent> OnRelease { get; }
         List<string> SkillsToRelease { get; }
         void CheckCondition(IReleaseEvent e);
+        bool IsMet(ICharacterModel model);
         string Description { get; }
     }
 
@@ -33,7 +34,15 @@ namespace GamePlay.Skill
             SkillsToRelease = skillsToRelease ?? new List<string>();
         }
 
-        public abstract void CheckCondition(IReleaseEvent e);
+        public virtual void CheckCondition(IReleaseEvent e)
+        {
+            if (IsMet(e.Model))
+            {
+                OnRelease.Trigger(e);
+            }
+        }
+
+        public abstract bool IsMet(ICharacterModel model);
     }
 
 
@@ -43,19 +52,6 @@ namespace GamePlay.Skill
         public ReleaseOnSkillAcquiredCondition(List<string> requiredSkillIDs, List<string> skillsToRelease, string description) : base(skillsToRelease, description)
         {
             RequiredSkillIDs = requiredSkillIDs ?? new List<string>();
-        }
-
-        public override void CheckCondition(IReleaseEvent e)
-        {
-            if (e is not SkillAcquiredEvent skillAcquiredEvent)
-            {
-                return;
-            }
-
-            if (!RequiredSkillIDs.Contains(skillAcquiredEvent.Skill.ID))
-            {
-                return;
-            }
         }
     }
 
@@ -69,19 +65,9 @@ namespace GamePlay.Skill
             Description = string.IsNullOrEmpty(description) ? $"凑齐技能: {string.Join(", ", RequiredSkillIDs)}" : description;
         }
 
-        public override void CheckCondition(IReleaseEvent e)
+        public override bool IsMet(ICharacterModel model)
         {
-            base.CheckCondition(e);
-
-            if (e is not SkillAcquiredEvent skillAcquiredEvent)
-            {
-                return;
-            }
-
-            if (skillAcquiredEvent.SkillsInSlot.HasSkills(RequiredSkillIDs))
-            {
-                OnRelease.Trigger(e);
-            }
+            return model.HasSkills(RequiredSkillIDs);
         }
     }
 
@@ -94,19 +80,9 @@ namespace GamePlay.Skill
             Description = string.IsNullOrEmpty(description) ? $"凑齐技能 {string.Join(", ", RequiredSkillIDs)} 至少 {RequiredCount} 个" : description;
         }
 
-        public override void CheckCondition(IReleaseEvent e)
+        public override bool IsMet(ICharacterModel model)
         {
-            base.CheckCondition(e);
-
-            if (e is not SkillAcquiredEvent skillAcquiredEvent)
-            {
-                return;
-            }
-
-            if (skillAcquiredEvent.SkillsInSlot.HasCount(RequiredSkillIDs) >= RequiredCount)
-            {
-                OnRelease.Trigger(e);
-            }
+            return model.SkillsInSlot.HasCount(RequiredSkillIDs) >= RequiredCount;
         }
     }
 
@@ -121,17 +97,9 @@ namespace GamePlay.Skill
             Value = value;
         }
 
-        public override void CheckCondition(IReleaseEvent e)
+        public override bool IsMet(ICharacterModel model)
         {
-            if (e is not CountChangedEvent countChangedEvent)
-            {
-                return;
-            }
-
-            if (countChangedEvent.ID == ValueID && countChangedEvent.Value >= Value)
-            {
-                OnRelease.Trigger(e);
-            }
+            return model.CountValues[ValueID].Value >= Value;
         }
     }
 
@@ -147,31 +115,11 @@ namespace GamePlay.Skill
             Description = string.IsNullOrEmpty(description)
                 ? $"满足所有条件: {string.Join(" 且 ", Conditions.Select(c => c.Description))}"
                 : description;
-
-            // 用于记录每个子条件是否已触发
-            bool[] triggeredFlags = new bool[Conditions.Count];
-
-            for (int i = 0; i < Conditions.Count; i++)
-            {
-                int index = i; // 捕获当前索引
-                Conditions[i].OnRelease.Register((e) =>
-                {
-                    triggeredFlags[index] = true;
-                    // 检查所有子条件是否都已触发
-                    if (triggeredFlags.All(flag => flag))
-                    {
-                        OnRelease.Trigger(e);
-                    }
-                });
-            }
         }
 
-        public override void CheckCondition(IReleaseEvent e)
+        public override bool IsMet(ICharacterModel model)
         {
-            foreach (ISkillReleaseCondition condition in Conditions)
-            {
-                condition.CheckCondition(e);
-            }
+            return Conditions.Count > 0 && Conditions.All(c => c.IsMet(model));
         }
     }
 
@@ -187,19 +135,11 @@ namespace GamePlay.Skill
             Description = string.IsNullOrEmpty(description)
                 ? $"满足任一条件: {string.Join(" 或 ", Conditions.Select(c => c.Description))}"
                 : description;
-
-            foreach (ISkillReleaseCondition condition in Conditions)
-            {
-                condition.OnRelease.Register(e => OnRelease.Trigger(e));
-            }
         }
 
-        public override void CheckCondition(IReleaseEvent e)
+        public override bool IsMet(ICharacterModel model)
         {
-            foreach (ISkillReleaseCondition condition in Conditions)
-            {
-                condition.CheckCondition(e);
-            }
+            return Conditions.Count > 0 && Conditions.Any(c => c.IsMet(model));
         }
     }
 }

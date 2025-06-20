@@ -1380,6 +1380,7 @@ GameObject:
   m_Component:
   - component: {fileID: 674855471}
   - component: {fileID: 674855472}
+  - component: {fileID: 674855473}
   m_Layer: 5
   m_Name: Player
   m_TagString: Untagged
@@ -1402,6 +1403,7 @@ RectTransform:
   - {fileID: 768642908}
   - {fileID: 1837023309}
   - {fileID: 1634303301}
+  - {fileID: 1752765977}
   m_Father: {fileID: 1690029472}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1424,6 +1426,19 @@ MonoBehaviour:
   _healthSlider: {fileID: 768642909}
   _coinText: {fileID: 2014063405}
   _woodText: {fileID: 279715106}
+--- !u!114 &674855473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 674855470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96a06d7032484e288aad3a4628f8590d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stateUI: {fileID: 1752765978}
 --- !u!1 &703353468
 GameObject:
   m_ObjectHideFlags: 0
@@ -1648,8 +1663,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4979da59659f7fe44a793b215343f42c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _initSkill: dice
-  _skillSlotCount: 10
+  _initSkill: dice_base
+  _skillSlotCount: 30
 --- !u!1 &768642907
 GameObject:
   m_ObjectHideFlags: 0
@@ -8979,6 +8994,76 @@ Transform:
   - {fileID: 1341668216}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1752765976
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1752765977}
+  - component: {fileID: 1752765979}
+  - component: {fileID: 1752765978}
+  m_Layer: 5
+  m_Name: State
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1752765977
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1752765976}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 674855471}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -836, y: 317}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1752765978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1752765976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 541bc0790e08b26419a6bb13027c78d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pool: {fileID: 1752765979}
+--- !u!114 &1752765979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1752765976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27fb203f2e7c4431a6a06128fb067b38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stateUICellReference:
+    m_AssetGUID: 4c49420468c962b4bb3554db841fdfe1
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 1
+  _initialSize: 10
+  _maxSize: 100
 --- !u!1 &1837023308
 GameObject:
   m_ObjectHideFlags: 0

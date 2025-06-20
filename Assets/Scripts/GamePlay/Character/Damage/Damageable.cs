@@ -65,7 +65,7 @@ namespace GamePlay.Character.Damage
 
         async UniTaskVoid Invincible()
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(_invincibleTime), cancellationToken: GlobalCancellation.GetCombinedToken(this));
+            await UniTask.Delay(TimeSpan.FromSeconds(_invincibleTime), cancellationToken: GlobalCancellation.GetCombinedTokenSource(this).Token);
             IsDamageable = true;
         }
 

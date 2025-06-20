@@ -5,6 +5,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using GamePlay.Character.Stat;
 using Data.SaveLoad;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour, IController
 {
@@ -28,7 +29,7 @@ public class GameManager : MonoBehaviour, IController
     [Button]
     public void AddBuff()
     {
-        IStateWithTime state = _stateCreateSystem.CreateState("1", "player", new[] { 20, 20, 20 }, 4);
+        IStateWithTime state = _stateCreateSystem.CreateState("1", "player", 4, new List<int> { 20, 20, 20 });
         _playerModel.StateContainer.AddState(state);
     }
 
@@ -56,6 +57,7 @@ public class GameManager : MonoBehaviour, IController
     void Start()
     {
         _playerModel = this.GetModel<PlayersModel>().Current;
+        _playerModel.Stats.GetStat("WoodGain").BaseValue = 1;
         // Debug.Log("Game Start");
     }
 

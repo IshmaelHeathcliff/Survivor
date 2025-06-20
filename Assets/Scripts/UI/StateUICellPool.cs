@@ -18,7 +18,7 @@ namespace UI
 
         async UniTask<StateUICell> CreatObject()
         {
-            GameObject obj = await Addressables.InstantiateAsync(_stateUICellReference);
+            GameObject obj = await Addressables.InstantiateAsync(_stateUICellReference, transform);
             obj.SetActive(false);
             return obj.GetOrAddComponent<StateUICell>();
         }

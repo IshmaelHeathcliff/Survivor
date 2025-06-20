@@ -1,12 +1,14 @@
 [
   {
-    "ID": "1",
-    "Name": "健实",
-    "Description": "加强生命",
-    "ModifierID": [
-      "health_add",
-      "health_increase",
-      "health_more"
+    "ID": "frenzy",
+    "Name": "狂暴",
+    "Description": null,
+    "Duration": 3,
+    "ModifierEntries": [
+      {
+        "ModifierID": "cdi_increase",
+        "Value": 70
+      }
     ],
     "Icon": "Assets/Textures/UI/icons.aseprite[icons_2]"
   }

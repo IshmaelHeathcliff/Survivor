@@ -79,9 +79,12 @@ namespace GamePlay.Skill
         {
             IEffect effect = skillConfig switch
             {
+                HealEffectConfig healEffectConfig => new HealEffect(healEffectConfig, context.Env.Model),
                 AttackEffectConfig attackEffectConfig => new AttackEffect(attackEffectConfig, context.Env.Model),
                 ModifierEffectConfig modifierEffectConfig => new ModifierEffect(modifierEffectConfig, context.Env.Model, context.Env.ModifierSystem),
                 AcquireResourceEffectConfig acquireResourceEffectConfig => new AcquireResourceEffect(acquireResourceEffectConfig, context.Env.Model, context.Env.ResourceSystem),
+                StateWithTimeEffectConfig stateWithTimeEffectConfig => new StateWithTimeEffect(stateWithTimeEffectConfig, context.Env.Model, context.Env.StateCreateSystem),
+                StateEffectConfig stateEffectConfig => new StateEffect(stateEffectConfig, context.Env.Model, context.Env.StateCreateSystem),
                 NestedEffectConfig nestedEffectConfig => CreateNestedEffect(nestedEffectConfig, context),
                 AcquireSkillEffectConfig acquireSkillEffectConfig => new AcquireSkillEffect(acquireSkillEffectConfig, context.Env.Model, context.Env.SkillSystem),
                 _ => null,
@@ -119,6 +122,7 @@ namespace GamePlay.Skill
 
             IEffect effect = skillConfig switch
             {
+                FixedRepeatEffectConfig fixedRepeatEffectConfig => new FixedRepeatEffect(fixedRepeatEffectConfig, context.Env.Model, childEffects),
                 RollDiceEffectConfig rollDiceEffectConfig => new RollDiceEffect(rollDiceEffectConfig, context.Env.Model, childEffects, context.Env.CountSystem),
                 OnRandomValueEffectConfig onRandomValueEffectConfig => new OnRandomValueEffect(onRandomValueEffectConfig, context.Env.Model, childEffects),
                 CountIncrementEffectConfig countIncrementEffectConfig => new CountIncrementEffect(countIncrementEffectConfig, context.Env.Model, childEffects, context.Env.CountSystem),

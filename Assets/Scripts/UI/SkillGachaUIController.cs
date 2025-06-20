@@ -28,6 +28,10 @@ namespace UI
 
         public void SelectSkill(int index)
         {
+            if (index < 0 || index >= _gachaSkills.Count)
+            {
+                return;
+            }
             _skillGachaSystem.SelectSkill(_model, _gachaSkills, index);
         }
 

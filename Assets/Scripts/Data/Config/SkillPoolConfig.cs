@@ -18,4 +18,15 @@ namespace Data.Config
     {
         [ShowInInspector] public List<string> RequiredSkillIDs { get; set; }
     }
+
+    public abstract class SkillPoolRemoveRuleConfig
+    {
+        [ShowInInspector] public string Name { get; set; }
+        [ShowInInspector] public List<string> SkillIDsToRemove { get; set; }
+    }
+
+    public class SpecificSkillsPoolRemoveRuleConfig : SkillPoolRemoveRuleConfig
+    {
+        [ShowInInspector] public List<string> RequiredSkillIDs { get; set; }
+    }
 }

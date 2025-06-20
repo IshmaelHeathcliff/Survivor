@@ -30,25 +30,51 @@ namespace GamePlay.Character.State
                 Load();
             }
 
-            return _stateConfigCache.GetValueOrDefault(id);
+            if (_stateConfigCache.TryGetValue(id, out StateConfig config))
+            {
+                return config;
+            }
+
+            Debug.LogError($"StateConfig not found: {id}");
+            return null;
         }
 
-        public IState CreateState(string id, string factoryID, int[] values)
+        public IState CreateState(string id, string factoryID, List<int> values = null)
+        {
+            IStatModifierFactory factory = this.GetSystem<ModifierSystem>().GetModifierFactory<IStatModifierFactory>(factoryID);
+            return CreateState(id, factory, values);
+        }
+
+        public IStateWithTime CreateState(string id, string factoryID, int time = -1, List<int> values = null)
+        {
+            IStatModifierFactory factory = this.GetSystem<ModifierSystem>().GetModifierFactory<IStatModifierFactory>(factoryID);
+            return CreateState(id, factory, time, values);
+        }
+
+
+        public IState CreateState(string id, IStatModifierFactory factory, List<int> values = null)
         {
             StateConfig stateConfig = GetStateConfig(id);
-            ModifierSystem entrySystem = this.GetSystem<ModifierSystem>();
-            IEnumerable<IStatModifier> entries = stateConfig.ModifierID.Select(
-                    (entryId, i) => entrySystem.CreateStatModifier(entryId, factoryID, values[i]));
+            ModifierSystem modifierSystem = this.GetSystem<ModifierSystem>();
+            if (values != null && stateConfig.ModifierEntries.Count != values.Count)
+            {
+                Debug.LogError("values.Length != stateConfig.EntryID.Count");
+                return null;
+            }
+
+            IEnumerable<IStatModifier> entries = stateConfig.ModifierEntries.Select(
+                    (entry, i) => modifierSystem.CreateStatModifier(entry.ModifierID, factory, values != null ? values[i] : entry.Value));
 
             return new State(stateConfig, entries);
         }
 
-        public IStateWithTime CreateState(string id, string factoryID, int[] values, int time)
+        public IStateWithTime CreateState(string id, IStatModifierFactory factory, int time = -1, List<int> values = null)
         {
             StateConfig stateConfig = GetStateConfig(id);
-            ModifierSystem entrySystem = this.GetSystem<ModifierSystem>();
 
-            if (stateConfig.ModifierID.Count != values.Length)
+            ModifierSystem modifierSystem = this.GetSystem<ModifierSystem>();
+
+            if (values != null && stateConfig.ModifierEntries.Count != values.Count)
             {
                 Debug.LogError("values.Length != stateConfig.EntryID.Count");
                 return null;
@@ -56,12 +82,12 @@ namespace GamePlay.Character.State
 
             var entries = new List<IModifier>();
 
-            for (int i = 0; i < stateConfig.ModifierID.Count; i++)
+            for (int i = 0; i < stateConfig.ModifierEntries.Count; i++)
             {
-                entries.Add(entrySystem.CreateStatModifier(stateConfig.ModifierID[i], factoryID, values[i]));
+                entries.Add(modifierSystem.CreateStatModifier(stateConfig.ModifierEntries[i].ModifierID, factory, values != null ? values[i] : stateConfig.ModifierEntries[i].Value));
             }
 
-            return new StateWithTime(stateConfig, entries, time);
+            return new StateWithTime(stateConfig, entries, time == -1 ? stateConfig.Duration : time);
         }
 
 
