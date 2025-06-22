@@ -30,6 +30,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 46e59e101b9d3274db0c54a2553bc151
+    m_Address: Assets/Prefabs/Poker.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 495df071d8e533245a1904aea5ce931d
     m_Address: Assets/Textures/UI/icons.aseprite
     m_ReadOnly: 0

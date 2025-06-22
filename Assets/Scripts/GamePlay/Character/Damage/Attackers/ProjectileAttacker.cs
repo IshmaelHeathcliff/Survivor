@@ -8,6 +8,7 @@ using UnityEngine.AddressableAssets;
 using System.Collections.Generic;
 using GamePlay.Character.Enemy;
 using System.Linq;
+using GamePlay.Item;
 
 namespace GamePlay.Character.Damage
 {
@@ -184,6 +185,15 @@ namespace GamePlay.Character.Damage
 
         public override async UniTaskVoid Attack()
         {
+            // TODO 暂时性处理 WoodOnUse
+            if (WoodOnUse.Value > 0)
+            {
+                if (AttackerController.CharacterController.CharacterModel is IHasResources resourceModel)
+                {
+                    this.GetSystem<ResourceSystem>().AcquireResource(ResourceType.Wood, (int)WoodOnUse.Value, resourceModel);
+                }
+            }
+
             try
             {
                 await Play();

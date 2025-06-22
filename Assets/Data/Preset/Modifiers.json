@@ -272,7 +272,7 @@
         "Max": 60
       }
     ],
-    "ModifierID": "critical_add",
+    "ModifierID": "criticalChance_add",
     "Name": "暴击率增加",
     "PositiveDescription": "{0}增加{1}%",
     "NegativeDescription": "{0}减少{1}%",
@@ -297,8 +297,110 @@
         "Max": 60
       }
     ],
-    "ModifierID": "coin_add",
+    "ModifierID": "coinGain_add",
     "Name": "金币收入增加",
+    "PositiveDescription": "{0}增加{1}点",
+    "NegativeDescription": "{0}减少{1}点",
+    "Keywords": []
+  },
+  {
+    "$type": "Data.Config.StatModifierConfig, Assembly-CSharp",
+    "StatName": "WoodGain",
+    "StatModifierType": 0,
+    "MaxLevel": 3,
+    "LevelRanges": [
+      {
+        "Min": 1,
+        "Max": 20
+      },
+      {
+        "Min": 21,
+        "Max": 40
+      },
+      {
+        "Min": 41,
+        "Max": 60
+      }
+    ],
+    "ModifierID": "woodGain_add",
+    "Name": "木头收入增加",
+    "PositiveDescription": "{0}增加{1}点",
+    "NegativeDescription": "{0}减少{1}点",
+    "Keywords": []
+  },
+  {
+    "$type": "Data.Config.StatModifierConfig, Assembly-CSharp",
+    "StatName": "ChainCount",
+    "StatModifierType": 0,
+    "MaxLevel": 3,
+    "LevelRanges": [
+      {
+        "Min": 1,
+        "Max": 1
+      },
+      {
+        "Min": 2,
+        "Max": 2
+      },
+      {
+        "Min": 3,
+        "Max": 3
+      }
+    ],
+    "ModifierID": "chainCount_add",
+    "Name": "弹射数量增加",
+    "PositiveDescription": "{0}增加{1}点",
+    "NegativeDescription": "{0}减少{1}点",
+    "Keywords": [
+      "Chain"
+    ]
+  },
+  {
+    "$type": "Data.Config.StatModifierConfig, Assembly-CSharp",
+    "StatName": "CoinOnKill",
+    "StatModifierType": 0,
+    "MaxLevel": 3,
+    "LevelRanges": [
+      {
+        "Min": 1,
+        "Max": 1
+      },
+      {
+        "Min": 2,
+        "Max": 2
+      },
+      {
+        "Min": 3,
+        "Max": 3
+      }
+    ],
+    "ModifierID": "coinOnKill_add",
+    "Name": "杀敌奖励金币增加",
+    "PositiveDescription": "{0}增加{1}点",
+    "NegativeDescription": "{0}减少{1}点",
+    "Keywords": []
+  },
+  {
+    "$type": "Data.Config.StatModifierConfig, Assembly-CSharp",
+    "StatName": "WoodOnUse",
+    "StatModifierType": 0,
+    "MaxLevel": 3,
+    "LevelRanges": [
+      {
+        "Min": 1,
+        "Max": 1
+      },
+      {
+        "Min": 2,
+        "Max": 2
+      },
+      {
+        "Min": 3,
+        "Max": 3
+      }
+    ],
+    "ModifierID": "woodOnUse_add",
+    "Name": "使用技能奖励木头增加",
     "PositiveDescription": "{0}增加{1}点",
     "NegativeDescription": "{0}减少{1}点",
     "Keywords": []
@@ -332,7 +434,7 @@
   },
   {
     "$type": "Data.Config.StatModifierConfig, Assembly-CSharp",
-    "StatName": "WoodGain",
+    "StatName": "ProjectileCount",
     "StatModifierType": 0,
     "MaxLevel": 3,
     "LevelRanges": [
@@ -349,37 +451,13 @@
         "Max": 60
       }
     ],
-    "ModifierID": "wood_add",
-    "Name": "木头收入增加",
-    "PositiveDescription": "{0}增加{1}点",
-    "NegativeDescription": "{0}减少{1}点",
-    "Keywords": []
-  },
-  {
-    "$type": "Data.Config.StatModifierConfig, Assembly-CSharp",
-    "StatName": "ChainCount",
-    "StatModifierType": 0,
-    "MaxLevel": 3,
-    "LevelRanges": [
-      {
-        "Min": 1,
-        "Max": 1
-      },
-      {
-        "Min": 2,
-        "Max": 2
-      },
-      {
-        "Min": 3,
-        "Max": 3
-      }
-    ],
-    "ModifierID": "chainCount_add",
-    "Name": "弹射数量增加",
+    "ModifierID": "range_projectileCount_add",
+    "Name": "远程投射物数量增加",
     "PositiveDescription": "{0}增加{1}点",
     "NegativeDescription": "{0}减少{1}点",
     "Keywords": [
-      "Chain"
+      "Projectile",
+      "Range"
     ]
   }
 ]

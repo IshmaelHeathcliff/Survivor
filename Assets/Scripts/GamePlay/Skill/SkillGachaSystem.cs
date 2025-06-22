@@ -106,6 +106,7 @@ namespace GamePlay.Skill
 
         public List<SkillConfig> GachaSkills(ICharacterModel model, int count = 1)
         {
+
             if (model.SkillPool.GetCount() < count)
             {
                 count = model.SkillPool.GetCount();
@@ -118,12 +119,12 @@ namespace GamePlay.Skill
                 return result;
             }
 
-            if (model is not IHasResources resourceModel || _resourceSystem.GetResourceCount("Wood", resourceModel) < 1)
+            if (model is not IHasResources resourceModel || _resourceSystem.GetResourceCount(ResourceType.Wood, resourceModel) < 1)
             {
                 return result;
             }
 
-            _resourceSystem.ConsumeResource("Wood", 1, resourceModel);
+            _resourceSystem.ConsumeResource(ResourceType.Wood, 1, resourceModel);
 
             for (int i = 0; i < count; i++)
             {
@@ -148,6 +149,11 @@ namespace GamePlay.Skill
         {
             if (index < 0 || index >= configs.Count)
             {
+                foreach (SkillConfig config in configs)
+                {
+                    model.SkillPool.AddSkill(config);
+                }
+
                 return;
             }
 

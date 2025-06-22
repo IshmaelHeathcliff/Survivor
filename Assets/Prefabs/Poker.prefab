@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6449945589658010901}
   - component: {fileID: 7352825043378018076}
   m_Layer: 6
-  m_Name: Dice
+  m_Name: Poker
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 643928469, guid: 29736243f0fc6db4ea8625bb65812a70, type: 3}
+  m_Sprite: {fileID: 7209244637907178434, guid: 5a27cd3bfb112fb4189dc1123b967c40, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -123,17 +123,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.006163895, y: -0.002641648}
+  m_Offset: {x: -0.011592746, y: 0.32689822}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.6666667, y: 0.6666667}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 1, y: 0.6666667}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.5790869, y: 0.58260936}
+  m_Size: {x: 0.7528192, y: 0.4777732}
   m_EdgeRadius: 0
 --- !u!114 &7352825043378018076
 MonoBehaviour:
@@ -147,5 +147,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f3f3dbe4d724740a304f0cdaf9659ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotateSpeed: 1
-  _randomDirectionFactor: 0.5
+  _rotateSpeed: 0
+  _randomDirectionFactor: 0.2

@@ -1,6 +1,7 @@
 using System;
 using GamePlay.Character;
 using GamePlay.Skill;
+using UnityEngine;
 
 public class ValueCounter
 {
@@ -86,6 +87,7 @@ public class CountSystem : AbstractSystem
         }
 
         model.CountValues[ID].IncrementCount(amount);
+        // Debug.Log($"IncrementCount: {ID} {amount}");
     }
 
     protected override void OnInit()

@@ -26,11 +26,13 @@ namespace GamePlay.Skill
                 case SpecificSkillsReleaseConditionConfig specificSkillsConfig:
                     return new SpecificSkillsReleaseCondition(specificSkillsConfig.RequiredSkillIDs, specificSkillsConfig.SkillsToRelease, specificSkillsConfig.Description);
                 case ValueCountConditionConfig valueCountConfig:
-                    return new ValueCountCondition(valueCountConfig.ValueID, valueCountConfig.Value, valueCountConfig.SkillsToRelease, valueCountConfig.Description);
+                    return new ValueCountCondition(valueCountConfig.ValueID, valueCountConfig.Value, valueCountConfig.RequiredSkillIDs, valueCountConfig.SkillsToRelease, valueCountConfig.Description);
                 case CompositeAndConditionConfig compositeAndConfig:
                     return new CompositeAndReleaseCondition(compositeAndConfig.Conditions.Select(c => CreateCondition(c)).ToList(), compositeAndConfig.Description);
                 case CompositeOrConditionConfig compositeOrConfig:
                     return new CompositeOrReleaseCondition(compositeOrConfig.Conditions.Select(c => CreateCondition(c)).ToList(), compositeOrConfig.Description);
+                case CompositeCountConditionConfig compositeCountConfig:
+                    return new CompositeCountReleaseCondition(compositeCountConfig.Count, compositeCountConfig.Conditions.Select(c => CreateCondition(c)).ToList(), compositeCountConfig.Description);
                 default:
                     throw new Exception($"Unknown skill release condition type: {config.GetType().Name}");
             }

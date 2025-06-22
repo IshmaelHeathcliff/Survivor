@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Data.Config;
 using GamePlay.Character.Player;
+using GamePlay.Item;
 using GamePlay.Skill;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -21,8 +22,23 @@ namespace UI
         List<SkillGachaUI> _skillGachaUIs = new();
 
         [Button]
+        public void ConsumeResource()
+        {
+            ResourceSystem resourceSystem = this.GetSystem<ResourceSystem>();
+            resourceSystem.ConsumeResource(ResourceType.Wood, 10, _model);
+            resourceSystem.ConsumeResource(ResourceType.Coin, 10, _model);
+        }
+
+
+
         public void GachaSkills()
         {
+            if (_gachaSkills.Count > 0)
+            {
+                SelectSkill(-1);
+                return;
+            }
+
             _gachaSkills = _skillGachaSystem.GachaSkills(_model, 3);
         }
 
@@ -33,6 +49,7 @@ namespace UI
                 return;
             }
             _skillGachaSystem.SelectSkill(_model, _gachaSkills, index);
+            _gachaSkills.Clear();
         }
 
         public void CancelSelect()

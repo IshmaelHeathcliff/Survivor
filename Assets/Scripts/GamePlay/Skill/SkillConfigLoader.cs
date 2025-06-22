@@ -87,6 +87,7 @@ namespace GamePlay.Skill
                 StateEffectConfig stateEffectConfig => new StateEffect(stateEffectConfig, context.Env.Model, context.Env.StateCreateSystem),
                 NestedEffectConfig nestedEffectConfig => CreateNestedEffect(nestedEffectConfig, context),
                 AcquireSkillEffectConfig acquireSkillEffectConfig => new AcquireSkillEffect(acquireSkillEffectConfig, context.Env.Model, context.Env.SkillSystem),
+                RemoveSkillEffectConfig removeSkillEffectConfig => new RemoveSkillEffect(removeSkillEffectConfig, context.Env.Model, context.Env.SkillSystem),
                 _ => null,
             };
 

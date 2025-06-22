@@ -47,6 +47,7 @@ namespace GamePlay.Character.Damage
         public IKeywordStat CriticalMultiplier => AttackSkill.CriticalMultiplier;
         public IKeywordStat AttackArea => AttackSkill.AttackArea;
         public IKeywordStat Duration => AttackSkill.Duration;
+        public IStat WoodOnUse => AttackSkill.WoodOnUse;
 
         public void SetSkill(AttackSkill skill)
         {

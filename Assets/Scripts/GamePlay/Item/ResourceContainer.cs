@@ -5,14 +5,21 @@ using UnityEngine;
 
 namespace GamePlay.Item
 {
+    public enum ResourceType
+    {
+        Coin,
+        Wood,
+    }
+
     public interface IResourceContainer
     {
-        int Coin { get; set; }
-        int Wood { get; set; }
-
         int GetResourceCount(string id);
         void SetResourceCount(string id, int value);
         void AddResourceCount(string id, int value);
+
+        int GetResourceCount(ResourceType type);
+        void SetResourceCount(ResourceType type, int value);
+        void AddResourceCount(ResourceType type, int value);
 
         IUnRegister Register(string id, Action<int> onValueChanged);
         IUnRegister RegisterWithInitValue(string id, Action<int> onValueChanged);
@@ -26,45 +33,38 @@ namespace GamePlay.Item
         void UnRegisterWood(Action<int> onValueChanged);
     }
 
-    public enum ResourceType
-    {
-        Coin,
-        Wood,
-    }
-
     public class ResourceContainer : IResourceContainer
     {
-        public int Coin
-        {
-            get => Resources[ResourceType.Coin].Value;
-            set => Resources[ResourceType.Coin].Value = value;
-        }
-
-        public int Wood
-        {
-            get => Resources[ResourceType.Wood].Value;
-            set => Resources[ResourceType.Wood].Value = value;
-        }
-
-        Dictionary<string, ResourceType> ResourceTypeMap { get; } = new();
-        Dictionary<ResourceType, BindableProperty<int>> Resources { get; } = new();
+        Dictionary<string, BindableProperty<int>> Resources { get; } = new();
 
         public ResourceContainer()
         {
-            ResourceTypeMap.Add("Coin", ResourceType.Coin);
-            ResourceTypeMap.Add("Wood", ResourceType.Wood);
-
-            foreach (ResourceType type in ResourceTypeMap.Values)
+            foreach (ResourceType type in Enum.GetValues(typeof(ResourceType)))
             {
-                Resources.Add(type, new BindableProperty<int>());
+                Resources.Add(type.ToString(), new BindableProperty<int>());
             }
+        }
+
+        public int GetResourceCount(ResourceType type)
+        {
+            return Resources[type.ToString()].Value;
+        }
+
+        public void SetResourceCount(ResourceType type, int value)
+        {
+            Resources[type.ToString()].Value = value;
+        }
+
+        public void AddResourceCount(ResourceType type, int value)
+        {
+            Resources[type.ToString()].Value += value;
         }
 
         public int GetResourceCount(string id)
         {
-            if (ResourceTypeMap.TryGetValue(id, out ResourceType type))
+            if (Resources.TryGetValue(id, out BindableProperty<int> resource))
             {
-                return Resources[type].Value;
+                return resource.Value;
             }
 
             Debug.LogError($"Resource type not found: {id}");
@@ -73,9 +73,9 @@ namespace GamePlay.Item
 
         public void SetResourceCount(string id, int value)
         {
-            if (ResourceTypeMap.TryGetValue(id, out ResourceType type))
+            if (Resources.TryGetValue(id, out BindableProperty<int> resource))
             {
-                Resources[type].Value = value;
+                resource.Value = value;
             }
             else
             {
@@ -86,9 +86,9 @@ namespace GamePlay.Item
 
         public void AddResourceCount(string id, int value)
         {
-            if (ResourceTypeMap.TryGetValue(id, out ResourceType type))
+            if (Resources.TryGetValue(id, out BindableProperty<int> resource))
             {
-                Resources[type].Value += value;
+                resource.Value += value;
             }
             else
             {
@@ -98,32 +98,32 @@ namespace GamePlay.Item
 
         public IUnRegister Register(string id, Action<int> onValueChanged)
         {
-            return Resources[ResourceTypeMap[id]].Register(onValueChanged);
+            return Resources[id].Register(onValueChanged);
         }
 
         public IUnRegister RegisterWithInitValue(string id, Action<int> onValueChanged)
         {
-            return Resources[ResourceTypeMap[id]].RegisterWithInitValue(onValueChanged);
+            return Resources[id].RegisterWithInitValue(onValueChanged);
         }
 
         public void UnRegister(string id, Action<int> onValueChanged)
         {
-            Resources[ResourceTypeMap[id]].UnRegister(onValueChanged);
+            Resources[id].UnRegister(onValueChanged);
         }
 
         public IUnRegister Register(ResourceType type, Action<int> onValueChanged)
         {
-            return Resources[type].Register(onValueChanged);
+            return Resources[type.ToString()].Register(onValueChanged);
         }
 
         public IUnRegister RegisterWithInitValue(ResourceType type, Action<int> onValueChanged)
         {
-            return Resources[type].RegisterWithInitValue(onValueChanged);
+            return Resources[type.ToString()].RegisterWithInitValue(onValueChanged);
         }
 
         public void UnRegister(ResourceType type, Action<int> onValueChanged)
         {
-            Resources[type].UnRegister(onValueChanged);
+            Resources[type.ToString()].UnRegister(onValueChanged);
         }
 
         public IUnRegister RegisterCoin(Action<int> onValueChanged)

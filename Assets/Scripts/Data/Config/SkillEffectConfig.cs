@@ -36,6 +36,16 @@ namespace Data.Config
         }
     }
 
+    public class RemoveSkillEffectConfig : SkillEffectConfig
+    {
+        [ShowInInspector] public string SkillID { get; set; }
+
+        public RemoveSkillEffectConfig()
+        {
+            Description = "移除技能";
+        }
+    }
+
     public class ModifierEffectConfig : SkillEffectConfig
     {
         [ShowInInspector] public string ModifierID { get; set; }

@@ -27,7 +27,7 @@ MonoBehaviour:
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
-      Data: 4
+      Data: 12
     - Name: 
       Entry: 7
       Data: 1|Data.Config.SkillReleaseRuleConfig, Assembly-CSharp
@@ -49,6 +49,54 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 4|Data.Config.SkillReleaseRuleConfig, Assembly-CSharp
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 5|Data.Config.SkillReleaseRuleConfig, Assembly-CSharp
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 6|Data.Config.SkillReleaseRuleConfig, Assembly-CSharp
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 7|Data.Config.SkillReleaseRuleConfig, Assembly-CSharp
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 8|Data.Config.SkillReleaseRuleConfig, Assembly-CSharp
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 9|Data.Config.SkillReleaseRuleConfig, Assembly-CSharp
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 10|Data.Config.SkillReleaseRuleConfig, Assembly-CSharp
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 11|Data.Config.SkillReleaseRuleConfig, Assembly-CSharp
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 12|Data.Config.SkillReleaseRuleConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 

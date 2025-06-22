@@ -60,5 +60,6 @@ namespace Data.Config
         [ShowInInspector] public float SplitCount { get; set; }
         [ShowInInspector] public bool IsTargetLocked { get; set; }
         [ShowInInspector] public bool CanReturn { get; set; }
+        [ShowInInspector] public float WoodOnUse { get; set; }
     }
 }

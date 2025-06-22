@@ -42,48 +42,56 @@ namespace GamePlay.Skill
         {
             foreach (SkillReleaseRule rule in _releaseRules.Values)
             {
+                _unRegisters.Add(this.RegisterEvent<SkillAcquiredEvent>(rule.Condition.CheckCondition));
+
                 switch (rule.Condition)
                 {
-                    case ReleaseOnSkillAcquiredCondition skillReleaseCondition:
-                        _unRegisters.Add(this.RegisterEvent<SkillAcquiredEvent>(skillReleaseCondition.CheckCondition));
-                        break;
                     case ValueCountCondition valueCountCondition:
                         _unRegisters.Add(this.GetSystem<CountSystem>().Register(valueCountCondition.ValueID, model, e => valueCountCondition.CheckCondition(e)));
-                        break;
-                    case CompositeAndReleaseCondition compositeAndReleaseCondition:
-                        _unRegisters.Add(this.RegisterEvent<SkillAcquiredEvent>(compositeAndReleaseCondition.CheckCondition));
-                        break;
-                    case CompositeOrReleaseCondition compositeOrReleaseCondition:
-                        _unRegisters.Add(this.RegisterEvent<SkillAcquiredEvent>(compositeOrReleaseCondition.CheckCondition));
                         break;
                 }
             }
         }
 
-        public void RegisterRewards(ICharacterModel model)
+        public void RegisterRelease(ICharacterModel model)
         {
             foreach (SkillReleaseRule rule in _releaseRules.Values)
             {
-                _unRegisters.Add(rule.Condition.OnRelease.Register((e) =>
-                    {
-                        foreach (string skillID in rule.Condition.SkillsToRelease)
-                        {
-                            _skillSystem.ReleaseSkill(skillID, e.Model);
-                        }
-                        rule.HasTriggered = true;
-                    }));
-
-                if (rule.Reward is SpecificSkillsReleaseReward skillReleaseReward)
-                {
-                    _unRegisters.Add(rule.Condition.OnRelease.Register((e) =>
-                    {
-                        foreach (string skillID in skillReleaseReward.NewSkillIDs)
-                        {
-                            _skillSystem.AcquireSkill(skillID, e.Model);
-                        }
-                    }));
-                }
+                RegisterSkillRelease(rule);
             }
+        }
+
+        void RegisterSkillRelease(SkillReleaseRule rule)
+        {
+            _unRegisters.Add(rule.Condition.OnRelease.Register(e =>
+            {
+                if (!CanTriggerRule(rule)) return;
+
+                foreach (string skillID in new List<string>(rule.Condition.SkillsToRelease))
+                {
+                    _skillSystem.ReleaseSkill(skillID, e.Model);
+                }
+
+                MarkRuleAsTriggered(rule);
+
+                if (rule.Reward is not SpecificSkillsReleaseReward skillReleaseReward)
+                    return;
+
+                foreach (string skillID in skillReleaseReward.NewSkillIDs)
+                {
+                    _skillSystem.AcquireSkill(skillID, e.Model);
+                }
+            }));
+        }
+
+        bool CanTriggerRule(SkillReleaseRule rule)
+        {
+            return !(rule.IsOneTime && rule.HasTriggered);
+        }
+
+        void MarkRuleAsTriggered(SkillReleaseRule rule)
+        {
+            rule.HasTriggered = true;
         }
 
         protected override void OnDeinit()

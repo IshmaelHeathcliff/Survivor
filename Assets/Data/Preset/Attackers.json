@@ -10,5 +10,11 @@
     "Name": "筹码",
     "Address": "Assets/Prefabs/Chip.prefab",
     "Keywords": []
+  },
+  {
+    "AttackerID": "poker",
+    "Name": "扑克",
+    "Address": "Assets/Prefabs/Poker.prefab",
+    "Keywords": []
   }
 ]

@@ -39,7 +39,7 @@ namespace GamePlay.Character.Player
         {
             SkillReleaseSystem skillReleaseSystem = this.GetSystem<SkillReleaseSystem>();
             skillReleaseSystem.RegisterConditions(Model);
-            skillReleaseSystem.RegisterRewards(Model);
+            skillReleaseSystem.RegisterRelease(Model);
         }
 
         protected override void OnDeinit()

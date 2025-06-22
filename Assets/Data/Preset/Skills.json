@@ -3,6 +3,37 @@
     "$type": "Data.Config.AttackSkillConfig, Assembly-CSharp",
     "AttackEffectConfigs": [
       {
+        "AttackerID": "self",
+        "Description": "施加攻击"
+      }
+    ],
+    "Damage": 5.0,
+    "CriticalChance": 0.0,
+    "CriticalMultiplier": 0.0,
+    "AttackArea": 0.0,
+    "Duration": 0.0,
+    "ProjectileCount": 0.0,
+    "ProjectileSpeed": 0.0,
+    "ChainCount": 0.0,
+    "PenetrateCount": 0.0,
+    "SplitCount": 0.0,
+    "IsTargetLocked": false,
+    "CanReturn": false,
+    "WoodOnUse": 0.0,
+    "Cooldown": 0.0,
+    "ID": "dash",
+    "Name": "冲刺",
+    "Keywords": [],
+    "Rarity": 0,
+    "Description": null,
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": null,
+    "SkillEffectConfigsOnUse": null
+  },
+  {
+    "$type": "Data.Config.AttackSkillConfig, Assembly-CSharp",
+    "AttackEffectConfigs": [
+      {
         "AttackerID": "dice",
         "Description": "施加攻击"
       }
@@ -19,6 +50,7 @@
     "SplitCount": 0.0,
     "IsTargetLocked": false,
     "CanReturn": false,
+    "WoodOnUse": 0.0,
     "Cooldown": 2.0,
     "ID": "dice_base",
     "Name": "奇奥骰子基础",
@@ -100,7 +132,7 @@
       {
         "$type": "Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
         "SkillID": "dice_base",
-        "ModifierID": "critical_add",
+        "ModifierID": "criticalChance_add",
         "Value": 5,
         "Description": "添加局部词条"
       }
@@ -124,7 +156,7 @@
     "SkillEffectConfigsOnUse": [
       {
         "$type": "Data.Config.ModifierEffectConfig, Assembly-CSharp",
-        "ModifierID": "coin_add",
+        "ModifierID": "coinGain_add",
         "Value": 1,
         "Description": "添加词条"
       }
@@ -243,7 +275,7 @@
                   {
                     "$type": "Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
                     "SkillID": "dice_base",
-                    "ModifierID": "critical_add",
+                    "ModifierID": "criticalChance_add",
                     "Value": 5,
                     "Description": "添加局部词条"
                   }
@@ -299,7 +331,7 @@
                       {
                         "$type": "Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
                         "SkillID": "dice_base",
-                        "ModifierID": "critical_add",
+                        "ModifierID": "criticalChance_add",
                         "Value": 5,
                         "Description": "添加局部词条"
                       },
@@ -333,36 +365,6 @@
     "$type": "Data.Config.AttackSkillConfig, Assembly-CSharp",
     "AttackEffectConfigs": [
       {
-        "AttackerID": "self",
-        "Description": "施加攻击"
-      }
-    ],
-    "Damage": 5.0,
-    "CriticalChance": 0.0,
-    "CriticalMultiplier": 0.0,
-    "AttackArea": 0.0,
-    "Duration": 0.0,
-    "ProjectileCount": 0.0,
-    "ProjectileSpeed": 0.0,
-    "ChainCount": 0.0,
-    "PenetrateCount": 0.0,
-    "SplitCount": 0.0,
-    "IsTargetLocked": false,
-    "CanReturn": false,
-    "Cooldown": 0.0,
-    "ID": "dash",
-    "Name": "冲刺",
-    "Keywords": [],
-    "Rarity": 0,
-    "Description": null,
-    "ReleaseOnAcquire": false,
-    "SkillEffectConfigsOnEnable": null,
-    "SkillEffectConfigsOnUse": null
-  },
-  {
-    "$type": "Data.Config.AttackSkillConfig, Assembly-CSharp",
-    "AttackEffectConfigs": [
-      {
         "AttackerID": "chip",
         "Description": "施加攻击"
       }
@@ -379,6 +381,7 @@
     "SplitCount": 0.0,
     "IsTargetLocked": true,
     "CanReturn": false,
+    "WoodOnUse": 0.0,
     "Cooldown": 3.0,
     "ID": "slot_machine_base",
     "Name": "老虎机基础",
@@ -591,7 +594,7 @@
     "SkillEffectConfigsOnUse": [
       {
         "$type": "Data.Config.ModifierEffectConfig, Assembly-CSharp",
-        "ModifierID": "coin_add",
+        "ModifierID": "coinGain_add",
         "Value": 3,
         "Description": "添加词条"
       }
@@ -615,7 +618,7 @@
     "SkillEffectConfigsOnUse": [
       {
         "$type": "Data.Config.ModifierEffectConfig, Assembly-CSharp",
-        "ModifierID": "wood_add",
+        "ModifierID": "woodGain_add",
         "Value": 1,
         "Description": "添加词条"
       }
@@ -738,6 +741,1200 @@
           }
         ],
         "Description": "固定时间触发"
+      }
+    ]
+  },
+  {
+    "$type": "Data.Config.AttackSkillConfig, Assembly-CSharp",
+    "AttackEffectConfigs": [
+      {
+        "AttackerID": "poker",
+        "Description": "创建攻击器"
+      }
+    ],
+    "Damage": 10.0,
+    "CriticalChance": 0.0,
+    "CriticalMultiplier": 50.0,
+    "AttackArea": 1.0,
+    "Duration": 2.0,
+    "ProjectileCount": 1.0,
+    "ProjectileSpeed": 10.0,
+    "ChainCount": 0.0,
+    "PenetrateCount": 0.0,
+    "SplitCount": 0.0,
+    "IsTargetLocked": false,
+    "CanReturn": false,
+    "WoodOnUse": 0.0,
+    "Cooldown": 3.0,
+    "ID": "poker_base",
+    "Name": "扑克基础",
+    "Keywords": [
+      "Range",
+      "Projectile"
+    ],
+    "Rarity": 0,
+    "Description": null,
+    "ReleaseOnAcquire": true,
+    "SkillEffectConfigsOnEnable": null,
+    "SkillEffectConfigsOnUse": null
+  },
+  {
+    "$type": "Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "poker_10_1",
+    "Name": "扑克10",
+    "Keywords": [],
+    "Rarity": 0,
+    "Description": null,
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "ModifierID": "damage_add",
+        "Value": 1,
+        "Description": "添加局部词条"
+      },
+      {
+        "$type": "Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinOnKill_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "poker_10_2",
+    "Name": "扑克10",
+    "Keywords": [],
+    "Rarity": 0,
+    "Description": null,
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "ModifierID": "damage_add",
+        "Value": 1,
+        "Description": "添加局部词条"
+      },
+      {
+        "$type": "Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinOnKill_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "poker_10_3",
+    "Name": "扑克10",
+    "Keywords": [],
+    "Rarity": 0,
+    "Description": null,
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "ModifierID": "damage_add",
+        "Value": 1,
+        "Description": "添加局部词条"
+      },
+      {
+        "$type": "Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinOnKill_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "poker_10_4",
+    "Name": "扑克10",
+    "Keywords": [],
+    "Rarity": 0,
+    "Description": null,
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "ModifierID": "damage_add",
+        "Value": 1,
+        "Description": "添加局部词条"
+      },
+      {
+        "$type": "Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinOnKill_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "poker_J_1",
+    "Name": "扑克J",
+    "Keywords": [],
+    "Rarity": 0,
+    "Description": null,
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "ModifierID": "damage_add",
+        "Value": 1,
+        "Description": "添加局部词条"
+      },
+      {
+        "$type": "Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinOnKill_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "poker_J_2",
+    "Name": "扑克J",
+    "Keywords": [],
+    "Rarity": 0,
+    "Description": null,
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "ModifierID": "damage_add",
+        "Value": 1,
+        "Description": "添加局部词条"
+      },
+      {
+        "$type": "Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinOnKill_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "poker_J_3",
+    "Name": "扑克J",
+    "Keywords": [],
+    "Rarity": 0,
+    "Description": null,
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "ModifierID": "damage_add",
+        "Value": 1,
+        "Description": "添加局部词条"
+      },
+      {
+        "$type": "Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinOnKill_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "poker_J_4",
+    "Name": "扑克J",
+    "Keywords": [],
+    "Rarity": 0,
+    "Description": null,
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "ModifierID": "damage_add",
+        "Value": 1,
+        "Description": "添加局部词条"
+      },
+      {
+        "$type": "Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinOnKill_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "poker_Q_1",
+    "Name": "扑克Q",
+    "Keywords": [],
+    "Rarity": 0,
+    "Description": null,
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "ModifierID": "damage_add",
+        "Value": 1,
+        "Description": "添加局部词条"
+      },
+      {
+        "$type": "Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinOnKill_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "poker_Q_2",
+    "Name": "扑克Q",
+    "Keywords": [],
+    "Rarity": 0,
+    "Description": null,
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "ModifierID": "damage_add",
+        "Value": 1,
+        "Description": "添加局部词条"
+      },
+      {
+        "$type": "Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinOnKill_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "poker_Q_3",
+    "Name": "扑克Q",
+    "Keywords": [],
+    "Rarity": 0,
+    "Description": null,
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "ModifierID": "damage_add",
+        "Value": 1,
+        "Description": "添加局部词条"
+      },
+      {
+        "$type": "Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinOnKill_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "poker_Q_4",
+    "Name": "扑克Q",
+    "Keywords": [],
+    "Rarity": 0,
+    "Description": null,
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "ModifierID": "damage_add",
+        "Value": 1,
+        "Description": "添加局部词条"
+      },
+      {
+        "$type": "Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinOnKill_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "poker_K_1",
+    "Name": "扑克K",
+    "Keywords": [],
+    "Rarity": 0,
+    "Description": null,
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "ModifierID": "damage_add",
+        "Value": 1,
+        "Description": "添加局部词条"
+      },
+      {
+        "$type": "Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinOnKill_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "poker_K_2",
+    "Name": "扑克K",
+    "Keywords": [],
+    "Rarity": 0,
+    "Description": null,
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "ModifierID": "damage_add",
+        "Value": 1,
+        "Description": "添加局部词条"
+      },
+      {
+        "$type": "Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinOnKill_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "poker_K_3",
+    "Name": "扑克K",
+    "Keywords": [],
+    "Rarity": 0,
+    "Description": null,
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "ModifierID": "damage_add",
+        "Value": 1,
+        "Description": "添加局部词条"
+      },
+      {
+        "$type": "Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinOnKill_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "poker_K_4",
+    "Name": "扑克K",
+    "Keywords": [],
+    "Rarity": 0,
+    "Description": null,
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "ModifierID": "damage_add",
+        "Value": 1,
+        "Description": "添加局部词条"
+      },
+      {
+        "$type": "Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinOnKill_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "poker_A_1",
+    "Name": "扑克A",
+    "Keywords": [],
+    "Rarity": 0,
+    "Description": null,
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "ModifierID": "damage_add",
+        "Value": 1,
+        "Description": "添加局部词条"
+      },
+      {
+        "$type": "Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinOnKill_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "poker_A_2",
+    "Name": "扑克A",
+    "Keywords": [],
+    "Rarity": 0,
+    "Description": null,
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "ModifierID": "damage_add",
+        "Value": 1,
+        "Description": "添加局部词条"
+      },
+      {
+        "$type": "Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinOnKill_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "poker_A_3",
+    "Name": "扑克A",
+    "Keywords": [],
+    "Rarity": 0,
+    "Description": null,
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "ModifierID": "damage_add",
+        "Value": 1,
+        "Description": "添加局部词条"
+      },
+      {
+        "$type": "Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinOnKill_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "poker_A_4",
+    "Name": "扑克A",
+    "Keywords": [],
+    "Rarity": 0,
+    "Description": null,
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "ModifierID": "damage_add",
+        "Value": 1,
+        "Description": "添加局部词条"
+      },
+      {
+        "$type": "Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinOnKill_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "two_pair",
+    "Name": "两对",
+    "Keywords": [],
+    "Rarity": 1,
+    "Description": null,
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinGain_add",
+        "Value": 10,
+        "Description": "添加词条"
+      },
+      {
+        "$type": "Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "woodGain_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "three_of_a_kind",
+    "Name": "三张",
+    "Keywords": [],
+    "Rarity": 1,
+    "Description": null,
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinGain_add",
+        "Value": 10,
+        "Description": "添加词条"
+      },
+      {
+        "$type": "Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "woodGain_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "four_of_a_kind",
+    "Name": "四张",
+    "Keywords": [],
+    "Rarity": 1,
+    "Description": null,
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinGain_add",
+        "Value": 10,
+        "Description": "添加词条"
+      },
+      {
+        "$type": "Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "woodGain_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "straight",
+    "Name": "顺子",
+    "Keywords": [],
+    "Rarity": 1,
+    "Description": null,
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinGain_add",
+        "Value": 10,
+        "Description": "添加词条"
+      },
+      {
+        "$type": "Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "woodGain_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "little_joker",
+    "Name": "小王",
+    "Keywords": [],
+    "Rarity": 1,
+    "Description": null,
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "Data.Config.CountIncrementEffectConfig, Assembly-CSharp",
+        "CountValueID": "KillCount",
+        "Increment": 50,
+        "ChildEffects": [
+          {
+            "$type": "Data.Config.AcquireResourceEffectConfig, Assembly-CSharp",
+            "ResourceID": "Coin",
+            "Amount": 50,
+            "Description": "获取资源"
+          }
+        ],
+        "Description": "增量触发"
+      }
+    ]
+  },
+  {
+    "$type": "Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "joker",
+    "Name": "大王",
+    "Keywords": [],
+    "Rarity": 2,
+    "Description": null,
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "Data.Config.CountIncrementEffectConfig, Assembly-CSharp",
+        "CountValueID": "KillCount",
+        "Increment": 50,
+        "ChildEffects": [
+          {
+            "$type": "Data.Config.AcquireResourceEffectConfig, Assembly-CSharp",
+            "ResourceID": "Wood",
+            "Amount": 30,
+            "Description": "获取资源"
+          }
+        ],
+        "Description": "增量触发"
+      }
+    ]
+  },
+  {
+    "$type": "Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "poker",
+    "Name": "扑克",
+    "Keywords": [],
+    "Rarity": 3,
+    "Description": null,
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "ModifierID": "woodOnUse_add",
+        "Value": 1,
+        "Description": "添加局部词条"
+      }
+    ]
+  },
+  {
+    "$type": "Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "winner",
+    "Name": "大赢家",
+    "Keywords": [],
+    "Rarity": 4,
+    "Description": null,
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "Data.Config.RemoveSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "dice",
+        "Description": "移除技能"
+      },
+      {
+        "$type": "Data.Config.RemoveSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "slot_machine",
+        "Description": "移除技能"
+      },
+      {
+        "$type": "Data.Config.RemoveSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "joker",
+        "Description": "移除技能"
+      },
+      {
+        "$type": "Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "dice_plus",
+        "Description": "获取技能"
+      },
+      {
+        "$type": "Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "slot_machine_plus",
+        "Description": "获取技能"
+      },
+      {
+        "$type": "Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_plus",
+        "Description": "获取技能"
+      }
+    ]
+  },
+  {
+    "$type": "Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "dice_plus",
+    "Name": "奇奥骰子进阶",
+    "Keywords": [],
+    "Rarity": 4,
+    "Description": null,
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "Data.Config.CountIncrementEffectConfig, Assembly-CSharp",
+        "CountValueID": "KillCount",
+        "Increment": 5,
+        "ChildEffects": [
+          {
+            "$type": "Data.Config.RollDiceEffectConfig, Assembly-CSharp",
+            "Min": 1,
+            "Max": 7,
+            "ChildEffects": [
+              {
+                "$type": "Data.Config.OnValueEffectConfig, Assembly-CSharp",
+                "Value": 1,
+                "ChildEffects": [
+                  {
+                    "$type": "Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+                    "SkillID": "dice_base",
+                    "ModifierID": "damage_add",
+                    "Value": 5,
+                    "Description": "添加局部词条"
+                  }
+                ],
+                "Description": "对应数值时触发"
+              },
+              {
+                "$type": "Data.Config.OnValueEffectConfig, Assembly-CSharp",
+                "Value": 2,
+                "ChildEffects": [
+                  {
+                    "$type": "Data.Config.ModifierEffectConfig, Assembly-CSharp",
+                    "ModifierID": "cdi_increase",
+                    "Value": 30,
+                    "Description": "添加词条"
+                  }
+                ],
+                "Description": "对应数值时触发"
+              },
+              {
+                "$type": "Data.Config.OnValueEffectConfig, Assembly-CSharp",
+                "Value": 3,
+                "ChildEffects": [
+                  {
+                    "$type": "Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+                    "SkillID": "dice_base",
+                    "ModifierID": "criticalChance_add",
+                    "Value": 5,
+                    "Description": "添加局部词条"
+                  }
+                ],
+                "Description": "对应数值时触发"
+              },
+              {
+                "$type": "Data.Config.OnValueEffectConfig, Assembly-CSharp",
+                "Value": 4,
+                "ChildEffects": [
+                  {
+                    "$type": "Data.Config.AcquireResourceEffectConfig, Assembly-CSharp",
+                    "ResourceID": "Coin",
+                    "Amount": 10,
+                    "Description": "获取资源"
+                  }
+                ],
+                "Description": "对应数值时触发"
+              },
+              {
+                "$type": "Data.Config.OnValueEffectConfig, Assembly-CSharp",
+                "Value": 5,
+                "ChildEffects": [
+                  {
+                    "$type": "Data.Config.AcquireResourceEffectConfig, Assembly-CSharp",
+                    "ResourceID": "Wood",
+                    "Amount": 5,
+                    "Description": "获取资源"
+                  }
+                ],
+                "Description": "对应数值时触发"
+              },
+              {
+                "$type": "Data.Config.OnValueEffectConfig, Assembly-CSharp",
+                "Value": 6,
+                "ChildEffects": [
+                  {
+                    "$type": "Data.Config.NestedEffectConfig, Assembly-CSharp",
+                    "ChildEffects": [
+                      {
+                        "$type": "Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+                        "SkillID": "dice_base",
+                        "ModifierID": "damage_add",
+                        "Value": 5,
+                        "Description": "添加局部词条"
+                      },
+                      {
+                        "$type": "Data.Config.ModifierEffectConfig, Assembly-CSharp",
+                        "ModifierID": "cdi_increase",
+                        "Value": 30,
+                        "Description": "添加词条"
+                      },
+                      {
+                        "$type": "Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+                        "SkillID": "dice_base",
+                        "ModifierID": "criticalChance_add",
+                        "Value": 5,
+                        "Description": "添加局部词条"
+                      },
+                      {
+                        "$type": "Data.Config.AcquireResourceEffectConfig, Assembly-CSharp",
+                        "ResourceID": "Coin",
+                        "Amount": 10,
+                        "Description": "获取资源"
+                      },
+                      {
+                        "$type": "Data.Config.AcquireResourceEffectConfig, Assembly-CSharp",
+                        "ResourceID": "Wood",
+                        "Amount": 5,
+                        "Description": "获取资源"
+                      }
+                    ],
+                    "Description": null
+                  }
+                ],
+                "Description": "对应数值时触发"
+              },
+              {
+                "$type": "Data.Config.OnValueEffectConfig, Assembly-CSharp",
+                "Value": 7,
+                "ChildEffects": [
+                  {
+                    "$type": "Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+                    "SkillID": "dice_base",
+                    "ModifierID": "projectileCount_add",
+                    "Value": 1,
+                    "Description": "添加局部词条"
+                  }
+                ],
+                "Description": "对应数值时触发"
+              }
+            ],
+            "Description": "掷骰子"
+          }
+        ],
+        "Description": "增量触发"
+      }
+    ]
+  },
+  {
+    "$type": "Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "slot_machine_plus",
+    "Name": "老虎机进阶",
+    "Keywords": [],
+    "Rarity": 4,
+    "Description": null,
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "slot_machine_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "Data.Config.FixedRepeatEffectConfig, Assembly-CSharp",
+        "Interval": 3,
+        "ChildEffects": [
+          {
+            "$type": "Data.Config.OnRandomValueEffectConfig, Assembly-CSharp",
+            "Min": 1,
+            "Max": 6,
+            "ChildEffects": [
+              {
+                "$type": "Data.Config.OnValueEffectConfig, Assembly-CSharp",
+                "Value": 1,
+                "ChildEffects": [
+                  {
+                    "$type": "Data.Config.ModifierEffectConfig, Assembly-CSharp",
+                    "ModifierID": "range_cdi_increase",
+                    "Value": 10,
+                    "Description": "添加词条"
+                  }
+                ],
+                "Description": "对应数值时触发"
+              },
+              {
+                "$type": "Data.Config.OnValueEffectConfig, Assembly-CSharp",
+                "Value": 2,
+                "ChildEffects": [
+                  {
+                    "$type": "Data.Config.ModifierEffectConfig, Assembly-CSharp",
+                    "ModifierID": "range_damage_increase",
+                    "Value": 10,
+                    "Description": "添加词条"
+                  }
+                ],
+                "Description": "对应数值时触发"
+              },
+              {
+                "$type": "Data.Config.OnValueEffectConfig, Assembly-CSharp",
+                "Value": 3,
+                "ChildEffects": [
+                  {
+                    "$type": "Data.Config.AcquireResourceEffectConfig, Assembly-CSharp",
+                    "ResourceID": "Coin",
+                    "Amount": 50,
+                    "Description": "获取资源"
+                  }
+                ],
+                "Description": "对应数值时触发"
+              },
+              {
+                "$type": "Data.Config.OnValueEffectConfig, Assembly-CSharp",
+                "Value": 4,
+                "ChildEffects": [
+                  {
+                    "$type": "Data.Config.AcquireResourceEffectConfig, Assembly-CSharp",
+                    "ResourceID": "Wood",
+                    "Amount": 10,
+                    "Description": "获取资源"
+                  }
+                ],
+                "Description": "对应数值时触发"
+              },
+              {
+                "$type": "Data.Config.OnValueEffectConfig, Assembly-CSharp",
+                "Value": 5,
+                "ChildEffects": [
+                  {
+                    "$type": "Data.Config.HealEffectConfig, Assembly-CSharp",
+                    "Amount": 20,
+                    "Description": "治疗"
+                  }
+                ],
+                "Description": "对应数值时触发"
+              },
+              {
+                "$type": "Data.Config.OnValueEffectConfig, Assembly-CSharp",
+                "Value": 6,
+                "ChildEffects": [
+                  {
+                    "$type": "Data.Config.ModifierEffectConfig, Assembly-CSharp",
+                    "ModifierID": "range_projectileCount_add",
+                    "Value": 1,
+                    "Description": "添加词条"
+                  }
+                ],
+                "Description": "对应数值时触发"
+              }
+            ],
+            "Description": "范围内随机数值并触发"
+          }
+        ],
+        "Description": "固定时间触发"
+      }
+    ]
+  },
+  {
+    "$type": "Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "poker_plus",
+    "Name": "扑克进阶",
+    "Keywords": [],
+    "Rarity": 4,
+    "Description": null,
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "ModifierID": "woodOnUse_add",
+        "Value": 2,
+        "Description": "添加局部词条"
       }
     ]
   }

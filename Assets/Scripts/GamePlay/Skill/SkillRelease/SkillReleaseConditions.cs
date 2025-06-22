@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using GamePlay.Character;
+using UnityEngine;
 
 namespace GamePlay.Skill
 {
@@ -67,7 +68,14 @@ namespace GamePlay.Skill
 
         public override bool IsMet(ICharacterModel model)
         {
-            return model.HasSkills(RequiredSkillIDs);
+            if (model.SkillsInSlot.HasSkills(RequiredSkillIDs))
+            {
+                SkillsToRelease.Clear();
+                SkillsToRelease.AddRange(RequiredSkillIDs);
+                return true;
+            }
+
+            return false;
         }
     }
 
@@ -82,24 +90,48 @@ namespace GamePlay.Skill
 
         public override bool IsMet(ICharacterModel model)
         {
-            return model.SkillsInSlot.HasCount(RequiredSkillIDs) >= RequiredCount;
+            int count = 0;
+            List<string> releasedSkills = new();
+            foreach (string skillID in RequiredSkillIDs)
+            {
+                if (model.SkillsInSlot.HasSkill(skillID))
+                {
+                    releasedSkills.Add(skillID);
+                    count++;
+
+                    if (count >= RequiredCount)
+                    {
+                        SkillsToRelease.Clear();
+                        SkillsToRelease.AddRange(releasedSkills);
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
     }
 
-    public class ValueCountCondition : SkillReleaseCondition
+    public class ValueCountCondition : ReleaseOnSkillAcquiredCondition
     {
         public string ValueID { get; set; }
         public int Value { get; set; }
 
-        public ValueCountCondition(string valueID, int value, List<string> skillsToRelease, string description) : base(skillsToRelease, description)
+        public ValueCountCondition(string valueID, int value, List<string> requiredSkillIDs, List<string> skillsToRelease, string description) : base(requiredSkillIDs, skillsToRelease, description)
         {
             ValueID = valueID;
             Value = value;
+
         }
 
         public override bool IsMet(ICharacterModel model)
         {
-            return model.CountValues[ValueID].Value >= Value;
+            if (model.SkillsInSlot.HasSkills(RequiredSkillIDs))
+            {
+                return model.CountValues.TryGetValue(ValueID, out ValueCounter valueCounter) && valueCounter.Value >= Value;
+            }
+
+            return false;
         }
     }
 
@@ -109,7 +141,7 @@ namespace GamePlay.Skill
     public class CompositeAndReleaseCondition : SkillReleaseCondition
     {
         public List<ISkillReleaseCondition> Conditions { get; set; }
-        public CompositeAndReleaseCondition(List<ISkillReleaseCondition> conditions, string description = "") : base(conditions.SelectMany(c => c.SkillsToRelease).ToList(), description)
+        public CompositeAndReleaseCondition(List<ISkillReleaseCondition> conditions, string description = "") : base(new List<string>(), description)
         {
             Conditions = conditions ?? new List<ISkillReleaseCondition>();
             Description = string.IsNullOrEmpty(description)
@@ -119,7 +151,14 @@ namespace GamePlay.Skill
 
         public override bool IsMet(ICharacterModel model)
         {
-            return Conditions.Count > 0 && Conditions.All(c => c.IsMet(model));
+            if (Conditions.Count > 0 && Conditions.All(c => c.IsMet(model)))
+            {
+                SkillsToRelease.Clear();
+                SkillsToRelease.AddRange(Conditions.SelectMany(c => c.SkillsToRelease));
+                return true;
+            }
+
+            return false;
         }
     }
 
@@ -129,7 +168,7 @@ namespace GamePlay.Skill
     public class CompositeOrReleaseCondition : SkillReleaseCondition
     {
         public List<ISkillReleaseCondition> Conditions { get; set; }
-        public CompositeOrReleaseCondition(List<ISkillReleaseCondition> conditions, string description = "") : base(conditions.SelectMany(c => c.SkillsToRelease).ToList(), description)
+        public CompositeOrReleaseCondition(List<ISkillReleaseCondition> conditions, string description = "") : base(new List<string>(), description)
         {
             Conditions = conditions ?? new List<ISkillReleaseCondition>();
             Description = string.IsNullOrEmpty(description)
@@ -139,7 +178,54 @@ namespace GamePlay.Skill
 
         public override bool IsMet(ICharacterModel model)
         {
-            return Conditions.Count > 0 && Conditions.Any(c => c.IsMet(model));
+            foreach (ISkillReleaseCondition condition in Conditions)
+            {
+                if (condition.IsMet(model))
+                {
+                    SkillsToRelease.Clear();
+                    SkillsToRelease.AddRange(condition.SkillsToRelease);
+                    return true;
+                }
+            }
+
+            return false;
+        }
+    }
+
+    public class CompositeCountReleaseCondition : SkillReleaseCondition
+    {
+        public int Count { get; set; }
+        public List<ISkillReleaseCondition> Conditions { get; set; }
+        public CompositeCountReleaseCondition(int count, List<ISkillReleaseCondition> conditions, string description) : base(new List<string>(), description)
+        {
+            Count = count;
+            Conditions = conditions ?? new List<ISkillReleaseCondition>();
+        }
+
+        public override bool IsMet(ICharacterModel model)
+        {
+            if (Conditions.Count == 0)
+                return false;
+
+            int count = 0;
+            List<string> releasedSkills = new();
+            foreach (ISkillReleaseCondition condition in Conditions)
+            {
+                if (condition.IsMet(model))
+                {
+                    releasedSkills.AddRange(condition.SkillsToRelease);
+                    count++;
+
+                    if (count >= Count)
+                    {
+                        SkillsToRelease.Clear();
+                        SkillsToRelease.AddRange(releasedSkills);
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
     }
 }

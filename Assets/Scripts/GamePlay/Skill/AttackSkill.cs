@@ -17,6 +17,7 @@ namespace GamePlay.Skill
         public IKeywordStat ChainCount => SkillStats.GetKeywordStat("ChainCount");
         public IKeywordStat PenetrateCount => SkillStats.GetKeywordStat("PenetrateCount");
         public IKeywordStat SplitCount => SkillStats.GetKeywordStat("SplitCount");
+        public IStat WoodOnUse => SkillStats.GetStat("WoodOnUse");
         public bool IsTargetLocked { get; set; }
         public bool CanReturn { get; set; }
 
@@ -35,6 +36,7 @@ namespace GamePlay.Skill
             SplitCount.BaseValue = skillConfig.SplitCount;
             IsTargetLocked = skillConfig.IsTargetLocked;
             CanReturn = skillConfig.CanReturn;
+            WoodOnUse.BaseValue = skillConfig.WoodOnUse;
         }
     }
 }

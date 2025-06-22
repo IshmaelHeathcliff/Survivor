@@ -7,51 +7,74 @@ namespace GamePlay.Item
 {
     public class ResourceSystem : AbstractSystem
     {
+        CountSystem _countSystem;
 
-        // 提供默认值，如果model为null，则使用当前玩家模型
-        IHasResources CheckModel(IHasResources model)
+
+        public int GetResourceCount(string id, IHasResources model)
         {
-            if (model == null)
+            return model.Resources.GetResourceCount(id);
+        }
+
+        public void AcquireResource(string id, int amount, IHasResources model)
+        {
+            model.Resources.AddResourceCount(id, amount);
+        }
+
+        public void ConsumeResource(string id, int amount, IHasResources model)
+        {
+            model.Resources.AddResourceCount(id, -amount);
+
+            if (model is not ICharacterModel characterModel)
             {
-                Debug.LogError("ResourceSystem: model is null, using current player model");
-                return this.GetModel<PlayersModel>().Current;
+                return;
             }
 
-            return model;
+            if (id == ResourceType.Wood.ToString())
+            {
+                _countSystem.IncrementCount("WoodConsumed", characterModel, amount);
+            }
+            else if (id == ResourceType.Coin.ToString())
+            {
+                _countSystem.IncrementCount("CoinConsumed", characterModel, amount);
+            }
         }
 
-        public int GetResourceCount(string id, IHasResources model = null)
+        public int GetResourceCount(ResourceType type, IHasResources model)
         {
-            return CheckModel(model).Resources.GetResourceCount(id);
+            return GetResourceCount(type.ToString(), model);
         }
 
-        public IUnRegister Register(string id, Action<int> onValueChanged, IHasResources model = null)
+        public void AcquireResource(ResourceType type, int amount, IHasResources model)
         {
-            return CheckModel(model).Resources.Register(id, onValueChanged);
+            AcquireResource(type.ToString(), amount, model);
         }
 
-        public IUnRegister RegisterWithInitValue(string id, Action<int> onValueChanged, IHasResources model = null)
+
+        public void ConsumeResource(ResourceType type, int amount, IHasResources model)
         {
-            return CheckModel(model).Resources.RegisterWithInitValue(id, onValueChanged);
+            ConsumeResource(type.ToString(), amount, model);
         }
 
-        public void Unregister(string id, Action<int> onValueChanged, IHasResources model = null)
+
+        public IUnRegister Register(ResourceType type, Action<int> onValueChanged, IHasResources model)
         {
-            CheckModel(model).Resources.UnRegister(id, onValueChanged);
+            return model.Resources.Register(type.ToString(), onValueChanged);
         }
 
-        public void AcquireResource(string id, int amount, IHasResources model = null)
+        public IUnRegister RegisterWithInitValue(ResourceType type, Action<int> onValueChanged, IHasResources model)
         {
-            CheckModel(model).Resources.AddResourceCount(id, amount);
+            return model.Resources.RegisterWithInitValue(type.ToString(), onValueChanged);
         }
 
-        public void ConsumeResource(string id, int amount, IHasResources model = null)
+        public void Unregister(ResourceType type, Action<int> onValueChanged, IHasResources model)
         {
-            CheckModel(model).Resources.AddResourceCount(id, -amount);
+            model.Resources.UnRegister(type.ToString(), onValueChanged);
         }
+
 
         protected override void OnInit()
         {
+            _countSystem = this.GetSystem<CountSystem>();
         }
     }
 }

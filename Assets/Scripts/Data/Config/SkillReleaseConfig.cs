@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace Data.Config
 {
@@ -28,6 +29,7 @@ namespace Data.Config
     {
         [ShowInInspector] public string Description { get; set; }
         [ShowInInspector] public List<string> SkillsToRelease { get; set; } = new();
+        [ShowInInspector] public List<string> RequiredSkillIDs { get; set; } = new();
 
     }
 
@@ -39,10 +41,9 @@ namespace Data.Config
 
     public class SpecificSkillsReleaseConditionConfig : SkillReleaseConditionConfig
     {
-        [ShowInInspector] public List<string> RequiredSkillIDs { get; set; } = new();
     }
 
-    public class AnySkillsCountReleaseConditionConfig : SpecificSkillsReleaseConditionConfig
+    public class AnySkillsCountReleaseConditionConfig : SkillReleaseConditionConfig
     {
         [ShowInInspector] public int RequiredCount { get; set; }
     }
@@ -54,14 +55,22 @@ namespace Data.Config
         [ShowInInspector] public int Value { get; set; }
     }
 
-    public class CompositeAndConditionConfig : SkillReleaseConditionConfig
+    public abstract class CompositeConditionConfig : SkillReleaseConditionConfig
     {
         [ShowInInspector] public List<SkillReleaseConditionConfig> Conditions { get; set; } = new();
     }
 
-    public class CompositeOrConditionConfig : SkillReleaseConditionConfig
+    public class CompositeAndConditionConfig : CompositeConditionConfig
     {
-        [ShowInInspector] public List<SkillReleaseConditionConfig> Conditions { get; set; } = new();
+    }
+
+    public class CompositeOrConditionConfig : CompositeConditionConfig
+    {
+    }
+
+    public class CompositeCountConditionConfig : CompositeConditionConfig
+    {
+        [ShowInInspector] public int Count { get; set; }
     }
 
     #endregion

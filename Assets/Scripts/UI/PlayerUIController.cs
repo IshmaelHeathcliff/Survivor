@@ -58,8 +58,8 @@ namespace UI
 
             health?.RegisterWithInitValue(OnHealthChanged).UnRegisterWhenDisabled(this);
 
-            this.GetSystem<ResourceSystem>().RegisterWithInitValue("Coin", OnCoinChanged, _model).UnRegisterWhenDisabled(this);
-            this.GetSystem<ResourceSystem>().RegisterWithInitValue("Wood", OnWoodChanged, _model).UnRegisterWhenDisabled(this);
+            this.GetSystem<ResourceSystem>().RegisterWithInitValue(ResourceType.Coin, OnCoinChanged, _model).UnRegisterWhenDisabled(this);
+            this.GetSystem<ResourceSystem>().RegisterWithInitValue(ResourceType.Wood, OnWoodChanged, _model).UnRegisterWhenDisabled(this);
         }
 
         void OnCoinChanged(int coin)
