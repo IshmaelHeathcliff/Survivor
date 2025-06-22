@@ -30,6 +30,8 @@
 .idea/
 *.code-workspace
 .history/
+.cursor/
+.serena/
 
 # Gradle cache directory
 .gradle/
