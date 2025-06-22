@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Data.Translate;
 using GamePlay.Character.Modifier;
+using UnityEngine;
 
 namespace GamePlay.Character.Stat
 {
@@ -56,10 +56,10 @@ namespace GamePlay.Character.Stat
 
         readonly EasyEvent<float> _onValueChanged = new();
 
-        public Stat(string id)
+        public Stat(string id, string name)
         {
             ID = id;
-            Name = TranslateManager.GetName(id);
+            Name = name;
         }
 
 
@@ -151,8 +151,15 @@ namespace GamePlay.Character.Stat
             _onValueChanged.UnRegister(onValueChanged);
         }
 
-
     }
+
+    public interface IReadonlyBindableProperty<T1, T2> : IReadonlyBindableProperty<T2>
+    {
+        IUnRegister RegisterWithInitValue(Action<T1, T2> action);
+        IUnRegister Register(Action<T1, T2> onValueChanged);
+        void UnRegister(Action<T1, T2> onValueChanged);
+    }
+
 
     public interface IConsumableStat : IStat
     {
@@ -160,9 +167,10 @@ namespace GamePlay.Character.Stat
         void ChangeCurrentValue(float value);
         void SetCurrentValue(float value);
         void SetMaxValue();
+
     }
 
-    public class ConsumableStat : Stat, IConsumableStat
+    public class ConsumableStat : Stat, IConsumableStat, IReadonlyBindableProperty<float, float>
     {
         float _currentValue;
         public float CurrentValue
@@ -170,6 +178,12 @@ namespace GamePlay.Character.Stat
             get => _currentValue;
             private set
             {
+                value = Mathf.Clamp(value, 0, Value);
+                if (value == _currentValue)
+                {
+                    return;
+                }
+
                 _currentValue = value;
                 _onValueChanged.Trigger(value, Value);
             }
@@ -177,41 +191,24 @@ namespace GamePlay.Character.Stat
 
         readonly EasyEvent<float, float> _onValueChanged = new();
 
-        public float CheckValue(float value)
-        {
-            float maxValue = GetValue();
-            if (value < 0)
-            {
-                value = 0;
-            }
-
-            if (value > maxValue)
-            {
-                value = maxValue;
-            }
-
-            return value;
-        }
-
         public void ChangeCurrentValue(float value)
         {
-            float newCurrentValue = CurrentValue + value;
-            CurrentValue = CheckValue(newCurrentValue);
+            CurrentValue += value;
         }
 
         public void SetCurrentValue(float value)
         {
-            CurrentValue = CheckValue(value);
+            CurrentValue = value;
         }
 
         public void SetMaxValue()
         {
-            CurrentValue = GetValue();
+            CurrentValue = Value;
         }
 
-        public ConsumableStat(string id) : base(id)
+        public ConsumableStat(string id, string name) : base(id, name)
         {
-            CurrentValue = GetValue();
+            CurrentValue = Value;
         }
 
         public IUnRegister Register(Action<float, float> onValueChanged)
@@ -221,7 +218,7 @@ namespace GamePlay.Character.Stat
 
         public IUnRegister RegisterWithInitValue(Action<float, float> onValueChanged)
         {
-            onValueChanged(CurrentValue, GetValue());
+            onValueChanged(CurrentValue, Value);
             return Register(onValueChanged);
         }
 

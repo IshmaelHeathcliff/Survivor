@@ -35,6 +35,26 @@ namespace GamePlay.Character.Stat
             }
         }
 
+        public IConsumableStat GetConsumableStat(string statName)
+        {
+            IStat stat = GetStat(statName);
+
+            if (stat == null)
+            {
+                return null;
+            }
+
+            if (stat is IConsumableStat consumableStat)
+            {
+                return consumableStat;
+            }
+            else
+            {
+                Debug.LogError($"Stat {statName} is not a consumable stat");
+                return null;
+            }
+        }
+
         public IKeywordStat GetKeywordStat(string statName)
         {
             IStat stat = GetStat(statName);

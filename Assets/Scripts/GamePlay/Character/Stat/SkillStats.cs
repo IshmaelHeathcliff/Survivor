@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Data.Config;
+using Data.SaveLoad;
 
 namespace GamePlay.Character.Stat
 {
@@ -6,21 +8,22 @@ namespace GamePlay.Character.Stat
     {
         public SkillStats(List<string> keywords, CharacterStats characterStats)
         {
-            InternalStats = new()
+            List<StatConfig> skillStats = SaveLoadManager.Load<List<StatConfig>>("SkillStats.json", "Preset");
+            foreach (StatConfig stat in skillStats)
             {
-                { "Damage", new LocalKeywordStat(keywords, new KeywordStat("Damage"), characterStats.GetKeywordStat("Damage")) },
-                { "CriticalChance", new LocalKeywordStat(keywords, new KeywordStat("CriticalChance"), characterStats.GetKeywordStat("CriticalChance")) },
-                { "CriticalMultiplier", new LocalKeywordStat(keywords, new KeywordStat("CriticalMultiplier"), characterStats.GetKeywordStat("CriticalMultiplier")) },
-                { "Duration", new LocalKeywordStat(keywords, new KeywordStat("Duration"), characterStats.GetKeywordStat("Duration"))},
-                { "CooldownInverse", new LocalKeywordStat(keywords, new KeywordStat("CooldownInverse"), characterStats.GetKeywordStat("CooldownInverse"))},
-                { "AttackSpeed", new LocalKeywordStat(keywords, new KeywordStat("AttackSpeed"), characterStats.GetKeywordStat("AttackSpeed")) },
-                { "AttackArea", new LocalKeywordStat(keywords, new KeywordStat("AttackArea"), characterStats.GetKeywordStat("AttackArea")) },
-                { "ProjectileSpeed", new LocalKeywordStat(keywords, new KeywordStat("ProjectileSpeed"), characterStats.GetKeywordStat("ProjectileSpeed")) },
-                { "ProjectileCount", new LocalKeywordStat(keywords, new KeywordStat("ProjectileCount"), characterStats.GetKeywordStat("ProjectileCount")) },
-                { "ChainCount", new LocalKeywordStat(keywords, new KeywordStat("ChainCount"), characterStats.GetKeywordStat("ChainCount")) },
-                { "PenetrateCount", new LocalKeywordStat(keywords, new KeywordStat("PenetrateCount"), characterStats.GetKeywordStat("PenetrateCount")) },
-                { "SplitCount", new LocalKeywordStat(keywords, new KeywordStat("SplitCount"), characterStats.GetKeywordStat("SplitCount")) },
-            };
+                switch (stat.Type)
+                {
+                    case StatType.Consumable:
+                        InternalStats.Add(stat.ID, new LocalConsumableStat(new ConsumableStat(stat.ID, stat.Name), characterStats.GetConsumableStat(stat.ID)));
+                        break;
+                    case StatType.Keyword:
+                        InternalStats.Add(stat.ID, new LocalKeywordStat(keywords, new KeywordStat(stat.ID, stat.Name), characterStats.GetKeywordStat(stat.ID)));
+                        break;
+                    default:
+                        InternalStats.Add(stat.ID, new LocalStat(new Stat(stat.ID, stat.Name), characterStats.GetStat(stat.ID)));
+                        break;
+                }
+            }
         }
     }
 }

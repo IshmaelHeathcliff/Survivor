@@ -173,4 +173,62 @@ namespace GamePlay.Character.Stat
             return Calculate(addedMultiplier);
         }
     }
+
+    public class LocalConsumableStat : LocalStat, IConsumableStat, IReadonlyBindableProperty<float, float>
+    {
+        float _currentValue;
+        public float CurrentValue
+        {
+            get => _currentValue;
+            set
+            {
+                value = Mathf.Clamp(value, 0, Value);
+                if (value == _currentValue)
+                {
+                    return;
+                }
+
+                _currentValue = value;
+                _onValueChanged?.Trigger(_currentValue, Value);
+            }
+        }
+
+        readonly EasyEvent<float, float> _onValueChanged = new();
+
+        public LocalConsumableStat(IConsumableStat localStat, IConsumableStat globalStat) : base(localStat, globalStat)
+        {
+            CurrentValue = Value;
+        }
+
+        public void ChangeCurrentValue(float value)
+        {
+            CurrentValue += value;
+        }
+
+        public void SetCurrentValue(float value)
+        {
+            CurrentValue = value;
+        }
+
+        public void SetMaxValue()
+        {
+            CurrentValue = Value;
+        }
+
+        public IUnRegister Register(Action<float, float> onValueChanged)
+        {
+            return _onValueChanged.Register(onValueChanged);
+        }
+
+        public IUnRegister RegisterWithInitValue(Action<float, float> onValueChanged)
+        {
+            onValueChanged(CurrentValue, Value);
+            return Register(onValueChanged);
+        }
+
+        public void UnRegister(Action<float, float> onValueChanged)
+        {
+            _onValueChanged.UnRegister(onValueChanged);
+        }
+    }
 }

@@ -52,16 +52,16 @@ namespace Editor
         [TableList(
             ShowIndexLabels = true,
             DrawScrollView = true,
-            MaxScrollViewHeight = 400,
+            // MaxScrollViewHeight = 400,
             AlwaysExpanded = true
             )]
         [ListDrawerSettings(
-            DraggableItems = false,
+            DraggableItems = true,
             ShowFoldout = false,
             ShowPaging = true,
             ShowIndexLabels = true,
             AddCopiesLastElement = true,
-            NumberOfItemsPerPage = 20,
+            NumberOfItemsPerPage = 30,
             DefaultExpandedState = true,
             OnTitleBarGUI = "DrawRefreshButton",
             ListElementLabelName = "Name"

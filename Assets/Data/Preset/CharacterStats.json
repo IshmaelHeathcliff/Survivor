@@ -1,0 +1,38 @@
+[
+  {
+    "ID": "Health",
+    "Name": "生命",
+    "Type": 1,
+    "Description": null
+  },
+  {
+    "ID": "HealthRegen",
+    "Name": "生命恢复",
+    "Type": 0,
+    "Description": null
+  },
+  {
+    "ID": "MoveSpeed",
+    "Name": "移动速度",
+    "Type": 0,
+    "Description": null
+  },
+  {
+    "ID": "CoinGain",
+    "Name": "金币获取",
+    "Type": 0,
+    "Description": null
+  },
+  {
+    "ID": "WoodGain",
+    "Name": "木头获取",
+    "Type": 0,
+    "Description": null
+  },
+  {
+    "ID": "CoinOnKill",
+    "Name": "杀敌金币奖励",
+    "Type": 0,
+    "Description": null
+  }
+]

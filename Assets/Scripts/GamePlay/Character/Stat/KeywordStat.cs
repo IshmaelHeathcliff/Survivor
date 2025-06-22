@@ -37,7 +37,7 @@ namespace GamePlay.Character.Stat
         // 实际查询关键词
         public List<string> KeywordsToQuery { get; set; } = new();
 
-        public KeywordStat(string id, List<string> keywords = null) : base(id)
+        public KeywordStat(string id, string name, List<string> keywords = null) : base(id, name)
         {
             if (keywords != null)
             {

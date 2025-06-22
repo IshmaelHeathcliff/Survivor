@@ -1,4 +1,7 @@
 using System.Collections.Generic;
+using System.Linq;
+using Data.Config;
+using Data.SaveLoad;
 
 namespace GamePlay.Character.Stat
 {
@@ -6,28 +9,23 @@ namespace GamePlay.Character.Stat
     {
         public CharacterStats()
         {
-            InternalStats = new()
-        {
-            { "Health", new ConsumableStat("Health") },
-            { "HealthRegen", new Stat("HealthRegen") },
-            { "MoveSpeed", new Stat("MoveSpeed") },
-
-            { "CoinGain", new Stat("CoinGain") },
-            { "WoodGain", new Stat("WoodGain") },
-
-            { "Damage", new KeywordStat("Damage") },
-            { "CriticalChance", new KeywordStat("CriticalChance") },
-            { "CriticalMultiplier", new KeywordStat("CriticalMultiplier") },
-            { "Duration", new KeywordStat("Duration")},
-            { "CooldownInverse", new KeywordStat("CooldownInverse")},
-            { "AttackSpeed", new KeywordStat("AttackSpeed") },
-            { "AttackArea", new KeywordStat("AttackArea") },
-            { "ProjectileSpeed", new KeywordStat("ProjectileSpeed") },
-            { "ProjectileCount", new KeywordStat("ProjectileCount") },
-            { "ChainCount", new KeywordStat("ChainCount") },
-            { "PenetrateCount", new KeywordStat("PenetrateCount") },
-            { "SplitCount", new KeywordStat("SplitCount") },
-        };
+            List<StatConfig> characterStats = SaveLoadManager.Load<List<StatConfig>>("CharacterStats.json", "Preset");
+            List<StatConfig> skillStats = SaveLoadManager.Load<List<StatConfig>>("SkillStats.json", "Preset");
+            foreach (StatConfig stat in characterStats.Concat(skillStats))
+            {
+                switch (stat.Type)
+                {
+                    case StatType.Consumable:
+                        InternalStats.Add(stat.ID, new ConsumableStat(stat.ID, stat.Name));
+                        break;
+                    case StatType.Keyword:
+                        InternalStats.Add(stat.ID, new KeywordStat(stat.ID, stat.Name));
+                        break;
+                    default:
+                        InternalStats.Add(stat.ID, new Stat(stat.ID, stat.Name));
+                        break;
+                }
+            }
         }
     }
 }
