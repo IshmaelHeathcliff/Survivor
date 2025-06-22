@@ -72,6 +72,12 @@
     "Description": null
   },
   {
+    "ID": "CoinOnUse",
+    "Name": "使用时获得金币",
+    "Type": 0,
+    "Description": null
+  },
+  {
     "ID": "WoodOnUse",
     "Name": "使用时获得木头",
     "Type": 0,

@@ -54,16 +54,8 @@ namespace GamePlay.Character.Enemy
             var playerModel = this.GetModel<PlayersModel>().Current;
             this.GetSystem<CountSystem>().IncrementKillCount(playerModel, 1);
 
-            // 10% 概率掉落金币
-            int randomValue = UnityEngine.Random.Range(0, 10);
-            if (randomValue < 2)
-            {
-                this.GetSystem<ResourceSystem>().AcquireResource("Coin", 1, playerModel);
-            }
-            else if (randomValue < 5)
-            {
-                this.GetSystem<ResourceSystem>().AcquireResource("Wood", 1, playerModel);
-            }
+            this.GetSystem<ResourceSystem>().AcquireResource("Coin", (int)playerModel.Stats.GetStat("CoinOnKill").Value, playerModel);
+            this.GetSystem<ResourceSystem>().AcquireResource("Wood", (int)playerModel.Stats.GetStat("WoodOnKill").Value, playerModel);
 
             _fsm.ChangeState(EnemyStateID.Dead);
         }

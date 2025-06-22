@@ -234,7 +234,7 @@
       {
         "$type": "Data.Config.CountIncrementEffectConfig, Assembly-CSharp",
         "CountValueID": "KillCount",
-        "Increment": 5,
+        "Increment": 50,
         "ChildEffects": [
           {
             "$type": "Data.Config.RollDiceEffectConfig, Assembly-CSharp",
@@ -665,7 +665,7 @@
     "SkillEffectConfigsOnUse": [
       {
         "$type": "Data.Config.FixedRepeatEffectConfig, Assembly-CSharp",
-        "Interval": 3,
+        "Interval": 30,
         "ChildEffects": [
           {
             "$type": "Data.Config.OnRandomValueEffectConfig, Assembly-CSharp",
@@ -1662,7 +1662,7 @@
       {
         "$type": "Data.Config.CountIncrementEffectConfig, Assembly-CSharp",
         "CountValueID": "KillCount",
-        "Increment": 5,
+        "Increment": 25,
         "ChildEffects": [
           {
             "$type": "Data.Config.RollDiceEffectConfig, Assembly-CSharp",
@@ -1821,7 +1821,7 @@
     "SkillEffectConfigsOnUse": [
       {
         "$type": "Data.Config.FixedRepeatEffectConfig, Assembly-CSharp",
-        "Interval": 3,
+        "Interval": 20,
         "ChildEffects": [
           {
             "$type": "Data.Config.OnRandomValueEffectConfig, Assembly-CSharp",

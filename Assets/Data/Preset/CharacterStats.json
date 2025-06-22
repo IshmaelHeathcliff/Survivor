@@ -34,5 +34,11 @@
     "Name": "杀敌金币奖励",
     "Type": 0,
     "Description": null
+  },
+  {
+    "ID": "WoodOnKill",
+    "Name": "杀敌木头奖励",
+    "Type": 0,
+    "Description": null
   }
 ]
