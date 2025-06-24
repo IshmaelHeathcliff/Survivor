@@ -668,13 +668,13 @@
         "Interval": 30,
         "ChildEffects": [
           {
-            "$type": "Data.Config.OnRandomValueEffectConfig, Assembly-CSharp",
-            "Min": 1,
-            "Max": 5,
+            "$type": "Data.Config.RandomChildEffectConfig, Assembly-CSharp",
             "ChildEffects": [
               {
-                "$type": "Data.Config.OnValueEffectConfig, Assembly-CSharp",
-                "Value": 1,
+                "$type": "Data.Config.ConditionalSkillEffectConfig, Assembly-CSharp",
+                "RequiredSkillIDs": [
+                  "bow_icon"
+                ],
                 "ChildEffects": [
                   {
                     "$type": "Data.Config.ModifierEffectConfig, Assembly-CSharp",
@@ -683,11 +683,13 @@
                     "Description": "添加词条"
                   }
                 ],
-                "Description": "对应数值时触发"
+                "Description": "拥有指定技能时生效"
               },
               {
-                "$type": "Data.Config.OnValueEffectConfig, Assembly-CSharp",
-                "Value": 2,
+                "$type": "Data.Config.ConditionalSkillEffectConfig, Assembly-CSharp",
+                "RequiredSkillIDs": [
+                  "can_icon"
+                ],
                 "ChildEffects": [
                   {
                     "$type": "Data.Config.ModifierEffectConfig, Assembly-CSharp",
@@ -696,11 +698,13 @@
                     "Description": "添加词条"
                   }
                 ],
-                "Description": "对应数值时触发"
+                "Description": "拥有指定技能时生效"
               },
               {
-                "$type": "Data.Config.OnValueEffectConfig, Assembly-CSharp",
-                "Value": 3,
+                "$type": "Data.Config.ConditionalSkillEffectConfig, Assembly-CSharp",
+                "RequiredSkillIDs": [
+                  "coin_icon"
+                ],
                 "ChildEffects": [
                   {
                     "$type": "Data.Config.AcquireResourceEffectConfig, Assembly-CSharp",
@@ -709,11 +713,13 @@
                     "Description": "获取资源"
                   }
                 ],
-                "Description": "对应数值时触发"
+                "Description": "拥有指定技能时生效"
               },
               {
-                "$type": "Data.Config.OnValueEffectConfig, Assembly-CSharp",
-                "Value": 4,
+                "$type": "Data.Config.ConditionalSkillEffectConfig, Assembly-CSharp",
+                "RequiredSkillIDs": [
+                  "wood_icon"
+                ],
                 "ChildEffects": [
                   {
                     "$type": "Data.Config.AcquireResourceEffectConfig, Assembly-CSharp",
@@ -722,11 +728,13 @@
                     "Description": "获取资源"
                   }
                 ],
-                "Description": "对应数值时触发"
+                "Description": "拥有指定技能时生效"
               },
               {
-                "$type": "Data.Config.OnValueEffectConfig, Assembly-CSharp",
-                "Value": 5,
+                "$type": "Data.Config.ConditionalSkillEffectConfig, Assembly-CSharp",
+                "RequiredSkillIDs": [
+                  "cherry_icon"
+                ],
                 "ChildEffects": [
                   {
                     "$type": "Data.Config.HealEffectConfig, Assembly-CSharp",
@@ -734,10 +742,10 @@
                     "Description": "治疗"
                   }
                 ],
-                "Description": "对应数值时触发"
+                "Description": "拥有指定技能时生效"
               }
             ],
-            "Description": "范围内随机数值并触发"
+            "Description": "随机启用一个子效果"
           }
         ],
         "Description": "固定时间触发"
@@ -1824,13 +1832,13 @@
         "Interval": 20,
         "ChildEffects": [
           {
-            "$type": "Data.Config.OnRandomValueEffectConfig, Assembly-CSharp",
-            "Min": 1,
-            "Max": 6,
+            "$type": "Data.Config.RandomChildEffectConfig, Assembly-CSharp",
             "ChildEffects": [
               {
-                "$type": "Data.Config.OnValueEffectConfig, Assembly-CSharp",
-                "Value": 1,
+                "$type": "Data.Config.ConditionalSkillEffectConfig, Assembly-CSharp",
+                "RequiredSkillIDs": [
+                  "bow_icon"
+                ],
                 "ChildEffects": [
                   {
                     "$type": "Data.Config.ModifierEffectConfig, Assembly-CSharp",
@@ -1839,11 +1847,13 @@
                     "Description": "添加词条"
                   }
                 ],
-                "Description": "对应数值时触发"
+                "Description": "拥有指定技能时生效"
               },
               {
-                "$type": "Data.Config.OnValueEffectConfig, Assembly-CSharp",
-                "Value": 2,
+                "$type": "Data.Config.ConditionalSkillEffectConfig, Assembly-CSharp",
+                "RequiredSkillIDs": [
+                  "can_icon"
+                ],
                 "ChildEffects": [
                   {
                     "$type": "Data.Config.ModifierEffectConfig, Assembly-CSharp",
@@ -1852,11 +1862,13 @@
                     "Description": "添加词条"
                   }
                 ],
-                "Description": "对应数值时触发"
+                "Description": "拥有指定技能时生效"
               },
               {
-                "$type": "Data.Config.OnValueEffectConfig, Assembly-CSharp",
-                "Value": 3,
+                "$type": "Data.Config.ConditionalSkillEffectConfig, Assembly-CSharp",
+                "RequiredSkillIDs": [
+                  "coin_icon"
+                ],
                 "ChildEffects": [
                   {
                     "$type": "Data.Config.AcquireResourceEffectConfig, Assembly-CSharp",
@@ -1865,11 +1877,13 @@
                     "Description": "获取资源"
                   }
                 ],
-                "Description": "对应数值时触发"
+                "Description": "拥有指定技能时生效"
               },
               {
-                "$type": "Data.Config.OnValueEffectConfig, Assembly-CSharp",
-                "Value": 4,
+                "$type": "Data.Config.ConditionalSkillEffectConfig, Assembly-CSharp",
+                "RequiredSkillIDs": [
+                  "wood_icon"
+                ],
                 "ChildEffects": [
                   {
                     "$type": "Data.Config.AcquireResourceEffectConfig, Assembly-CSharp",
@@ -1878,11 +1892,13 @@
                     "Description": "获取资源"
                   }
                 ],
-                "Description": "对应数值时触发"
+                "Description": "拥有指定技能时生效"
               },
               {
-                "$type": "Data.Config.OnValueEffectConfig, Assembly-CSharp",
-                "Value": 5,
+                "$type": "Data.Config.ConditionalSkillEffectConfig, Assembly-CSharp",
+                "RequiredSkillIDs": [
+                  "cherry_icon"
+                ],
                 "ChildEffects": [
                   {
                     "$type": "Data.Config.HealEffectConfig, Assembly-CSharp",
@@ -1890,23 +1906,16 @@
                     "Description": "治疗"
                   }
                 ],
-                "Description": "对应数值时触发"
+                "Description": "拥有指定技能时生效"
               },
               {
-                "$type": "Data.Config.OnValueEffectConfig, Assembly-CSharp",
-                "Value": 6,
-                "ChildEffects": [
-                  {
-                    "$type": "Data.Config.ModifierEffectConfig, Assembly-CSharp",
-                    "ModifierID": "range_projectileCount_add",
-                    "Value": 1,
-                    "Description": "添加词条"
-                  }
-                ],
-                "Description": "对应数值时触发"
+                "$type": "Data.Config.ModifierEffectConfig, Assembly-CSharp",
+                "ModifierID": "range_projectileCount_add",
+                "Value": 1,
+                "Description": "添加词条"
               }
             ],
-            "Description": "范围内随机数值并触发"
+            "Description": "随机启用一个子效果"
           }
         ],
         "Description": "固定时间触发"

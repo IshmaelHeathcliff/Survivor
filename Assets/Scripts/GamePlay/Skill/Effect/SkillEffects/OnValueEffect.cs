@@ -15,30 +15,11 @@ namespace GamePlay.Skill.Effect
             Description = $"当数值为 {Value} 时触发";
         }
 
-        protected override void OnApply()
-        {
-            foreach (IEffect childEffect in ChildEffects)
-            {
-                childEffect.Apply();
-            }
-        }
-
-        protected override void OnCancel()
-        {
-            foreach (IEffect childEffect in ChildEffects)
-            {
-                childEffect.Cancel();
-            }
-        }
-
         public void Apply(int value)
         {
             if (value == Value)
             {
-                foreach (IEffect childEffect in ChildEffects)
-                {
-                    childEffect.Apply();
-                }
+                base.OnApply();
             }
         }
 
@@ -46,10 +27,7 @@ namespace GamePlay.Skill.Effect
         {
             if (value == Value)
             {
-                foreach (IEffect childEffect in ChildEffects)
-                {
-                    childEffect.Cancel();
-                }
+                base.OnCancel();
             }
         }
     }

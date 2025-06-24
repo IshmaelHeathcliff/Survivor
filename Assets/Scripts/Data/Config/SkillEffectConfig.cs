@@ -77,18 +77,18 @@ namespace Data.Config
         }
     }
 
-    public class OnRandomValueEffectConfig : NestedEffectConfig
+    public class RandomValueEffectConfig : NestedEffectConfig
     {
         [ShowInInspector] public int Min { get; set; }
         [ShowInInspector] public int Max { get; set; }
 
-        public OnRandomValueEffectConfig()
+        public RandomValueEffectConfig()
         {
             Description = "范围内随机数值并触发";
         }
     }
 
-    public class RollDiceEffectConfig : OnRandomValueEffectConfig
+    public class RollDiceEffectConfig : RandomValueEffectConfig
     {
         public RollDiceEffectConfig()
         {
@@ -157,6 +157,24 @@ namespace Data.Config
         public HealEffectConfig()
         {
             Description = "治疗";
+        }
+    }
+
+    public class RandomChildEffectConfig : NestedEffectConfig
+    {
+        public RandomChildEffectConfig()
+        {
+            Description = "随机启用一个子效果";
+        }
+    }
+
+    public class ConditionalSkillEffectConfig : NestedEffectConfig
+    {
+        [ShowInInspector] public List<string> RequiredSkillIDs { get; set; }
+
+        public ConditionalSkillEffectConfig()
+        {
+            Description = "拥有指定技能时生效";
         }
     }
 }

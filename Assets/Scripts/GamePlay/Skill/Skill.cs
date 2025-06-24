@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Data.Config;
 using GamePlay.Character.Stat;
 using GamePlay.Skill.Effect;
@@ -29,6 +30,7 @@ namespace GamePlay.Skill
         List<string> Keywords { get; }
         SkillRarity Rarity { get; }
         SkillStats SkillStats { get; }
+        bool IsEnabled { get; }
         void Enable();
         void Disable();
         void Use();
@@ -51,7 +53,7 @@ namespace GamePlay.Skill
         public virtual List<string> Keywords => SkillConfig.Keywords;
         public SkillRarity Rarity => SkillConfig.Rarity;
         public SkillStats SkillStats { get; }
-
+        public bool IsEnabled { get; private set; }
 
         // 技能启用时生效的效果，比如Buff，需要关闭技能时主动 Cancel
         protected readonly List<IEffect> SkillEffectsOnEnable = new();
@@ -83,8 +85,14 @@ namespace GamePlay.Skill
             {
                 skillEffect.Enable();
                 skillEffect.Apply();
-                // Debug.Log(skillEffect.Description);
             }
+
+            foreach (IEffect skillEffect in SkillEffectsOnUse)
+            {
+                skillEffect.Enable();
+            }
+
+            IsEnabled = true;
         }
 
         public abstract void Use();
@@ -93,11 +101,12 @@ namespace GamePlay.Skill
 
         public virtual void Disable()
         {
-            foreach (IEffect skillEffect in SkillEffectsOnEnable)
+            foreach (IEffect skillEffect in SkillEffectsOnEnable.Concat(SkillEffectsOnUse))
             {
-                skillEffect.Cancel();
                 skillEffect.Disable();
             }
+
+            IsEnabled = false;
         }
     }
 
@@ -107,7 +116,6 @@ namespace GamePlay.Skill
         public float Cooldown => 1f / CooldownInverse.Value;
         public bool IsReady => _leftTime <= 0;
 
-        bool _isEnabled;
         float _leftTime;
 
         public RepetitiveSkill(RepetitiveSkillConfig skillConfig, CharacterStats characterStats) :
@@ -117,19 +125,9 @@ namespace GamePlay.Skill
             _leftTime = 0;
         }
 
-        public override void Enable()
-        {
-            base.Enable();
-            _isEnabled = true;
-            foreach (IEffect skillEffect in SkillEffectsOnUse)
-            {
-                skillEffect.Enable();
-            }
-        }
-
         public void Update(float deltaTime)
         {
-            if (!_isEnabled)
+            if (!IsEnabled)
             {
                 return;
             }
@@ -142,7 +140,7 @@ namespace GamePlay.Skill
 
         public override void Use()
         {
-            if (!_isEnabled || !IsReady)
+            if (!IsEnabled || !IsReady)
             {
                 return;
             }
@@ -162,18 +160,6 @@ namespace GamePlay.Skill
                 skillEffect.Cancel();
             }
         }
-
-        public override void Disable()
-        {
-            base.Disable();
-            _isEnabled = false;
-
-            Cancel();
-            foreach (IEffect skillEffect in SkillEffectsOnUse)
-            {
-                skillEffect.Disable();
-            }
-        }
     }
 
     public class OneTimeSkill : Skill<OneTimeSkillConfig>
@@ -191,27 +177,28 @@ namespace GamePlay.Skill
 
         public override void Use()
         {
+            if (!IsEnabled)
+            {
+                return;
+            }
+
             foreach (IEffect skillEffect in SkillEffectsOnUse)
             {
-                skillEffect.Enable();
                 skillEffect.Apply();
-                // Debug.Log(skillEffect.Description);
             }
         }
 
         public override void Cancel()
         {
+            if (!IsEnabled)
+            {
+                return;
+            }
+
             foreach (IEffect skillEffect in SkillEffectsOnUse)
             {
                 skillEffect.Cancel();
-                skillEffect.Disable();
             }
-        }
-
-        public override void Disable()
-        {
-            Cancel();
-            base.Disable();
         }
     }
 }

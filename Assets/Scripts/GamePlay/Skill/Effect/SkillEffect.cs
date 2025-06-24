@@ -11,12 +11,13 @@ namespace GamePlay.Skill.Effect
 
     public interface IEffect
     {
-        void Enable(); // 激活效果
-        void Apply(); // 应用效果，可在技能激活下反复应用
+        void Enable(); // 检查激活条件并激活效果，默认无条件自动激活
+        void Apply(); // 应用效果，可在技能激活下可反复应用
         void Cancel(); // 取消效果，取消激活状态下应用的所有效果
         void Disable(); // 禁用效果
 
         string Description { get; }
+        bool IsEnabled { get; }
 
         ISkill Owner { get; set; }
     }
@@ -41,6 +42,8 @@ namespace GamePlay.Skill.Effect
         public string Description { get; protected set; }
         public ICharacterModel Model { get; set; }
 
+        public bool IsEnabled { get; private set; }
+
 
         protected SkillEffect(T skillEffectConfig, ICharacterModel model)
         {
@@ -49,19 +52,44 @@ namespace GamePlay.Skill.Effect
             Model = model;
         }
 
-        public virtual void Enable() => OnEnable();
-        public virtual void Apply() => OnApply();
-        public virtual void Cancel() => OnCancel();
-        public virtual void Disable() => OnDisable();
-
-
-        protected virtual void OnEnable()
+        public virtual void Enable()
         {
+            IsEnabled = OnEnable();
         }
+
+        public virtual void Apply()
+        {
+            if (IsEnabled)
+            {
+                OnApply();
+            }
+        }
+
+        public virtual void Cancel()
+        {
+            if (IsEnabled)
+            {
+                OnCancel();
+            }
+        }
+
+        public virtual void Disable()
+        {
+            if (IsEnabled)
+            {
+                OnCancel();
+                OnDisable();
+                IsEnabled = false;
+            }
+        }
+
+        // 检测激活条件
+        protected virtual bool OnEnable() => true;
 
         protected abstract void OnApply();
         protected abstract void OnCancel();
 
+        // 禁用时回调，大多时候无效果
         protected virtual void OnDisable()
         {
         }
@@ -77,12 +105,13 @@ namespace GamePlay.Skill.Effect
             ChildEffects.AddRange(childEffects);
         }
 
-        protected override void OnEnable()
+        protected override bool OnEnable()
         {
             foreach (IEffect childEffect in ChildEffects)
             {
                 childEffect.Enable();
             }
+            return true;
         }
 
         protected override void OnApply()

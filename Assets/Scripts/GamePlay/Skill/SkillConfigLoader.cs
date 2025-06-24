@@ -125,9 +125,11 @@ namespace GamePlay.Skill
             {
                 FixedRepeatEffectConfig fixedRepeatEffectConfig => new FixedRepeatEffect(fixedRepeatEffectConfig, context.Env.Model, childEffects),
                 RollDiceEffectConfig rollDiceEffectConfig => new RollDiceEffect(rollDiceEffectConfig, context.Env.Model, childEffects, context.Env.CountSystem),
-                OnRandomValueEffectConfig onRandomValueEffectConfig => new OnRandomValueEffect(onRandomValueEffectConfig, context.Env.Model, childEffects),
+                RandomValueEffectConfig randomValueEffectConfig => new RandomValueEffect(randomValueEffectConfig, context.Env.Model, childEffects),
                 CountIncrementEffectConfig countIncrementEffectConfig => new CountIncrementEffect(countIncrementEffectConfig, context.Env.Model, childEffects, context.Env.CountSystem),
                 OnValueEffectConfig diceOnValueEffectConfig => new OnValueEffect(diceOnValueEffectConfig, context.Env.Model, childEffects),
+                RandomChildEffectConfig randomChildEffectConfig => new RandomChildEffect(randomChildEffectConfig, context.Env.Model, childEffects),
+                ConditionalSkillEffectConfig conditionalSkillEffectConfig => new ConditionalSkillEffect(conditionalSkillEffectConfig, context.Env.Model, childEffects),
                 not null => new NestedSkillEffect<NestedEffectConfig>(skillConfig, context.Env.Model, childEffects),
             };
 
