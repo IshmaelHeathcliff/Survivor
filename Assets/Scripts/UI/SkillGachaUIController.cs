@@ -29,14 +29,11 @@ namespace UI
             resourceSystem.ConsumeResource(ResourceType.Coin, 10, _model);
         }
 
-
-
         public void GachaSkills()
         {
             if (_gachaSkills.Count > 0)
             {
-                SelectSkill(-1);
-                return;
+                CancelSelect();
             }
 
             _gachaSkills = _skillGachaSystem.GachaSkills(_model, 3);
@@ -55,6 +52,7 @@ namespace UI
         public void CancelSelect()
         {
             _skillGachaSystem.CancelSelect(_model, _gachaSkills);
+            _gachaSkills.Clear();
         }
 
         async UniTask CreateSkillGachaUI(int index, SkillConfig skill)

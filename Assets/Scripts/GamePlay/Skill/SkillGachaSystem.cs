@@ -176,6 +176,8 @@ namespace GamePlay.Skill
             {
                 model.SkillPool.AddSkill(config);
             }
+
+            this.SendEvent(new SelectSkillEvent(configs, -1, model));
         }
 
 
