@@ -36,7 +36,7 @@ namespace GamePlay.Character
         public virtual Vector2 Direction
         {
             get => Model.Direction;
-            set => Model.Direction = value;
+            set => Model.Direction = value.normalized;
         }
 
 
@@ -73,7 +73,7 @@ namespace GamePlay.Character
         {
             Animator.SetFloat(X, direction.x);
             Animator.SetFloat(Y, direction.y);
-            Direction = direction.normalized;
+            Direction = direction;
         }
 
         public virtual void Freeze()
