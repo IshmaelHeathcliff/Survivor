@@ -41,7 +41,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4c49420468c962b4bb3554db841fdfe1
-    m_Address: Assets/Prefabs/StateUI.prefab
+    m_Address: Assets/Prefabs/State.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -87,6 +87,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d3a78b04d8c98504f929e408d6bfa054
     m_Address: Assets/Prefabs/Chip.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ddba823ecbf89ff44b1495b883bb0520
+    m_Address: Assets/Prefabs/UI/Heart.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

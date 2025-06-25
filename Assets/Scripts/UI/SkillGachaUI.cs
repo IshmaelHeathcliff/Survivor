@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class SkillGachaUI : MonoBehaviour, IController
+    public class SkillGachaUI : MonoBehaviour
     {
         [SerializeField] TextMeshProUGUI _skillName;
         [SerializeField] Button _selectButton;
@@ -37,11 +37,6 @@ namespace UI
         void Start()
         {
             _selectButton.onClick.AddListener(() => OnSelect.Trigger(Index));
-        }
-
-        public IArchitecture GetArchitecture()
-        {
-            return GameFrame.Interface;
         }
     }
 }

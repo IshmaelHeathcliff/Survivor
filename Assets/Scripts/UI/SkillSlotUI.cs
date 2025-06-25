@@ -6,16 +6,11 @@ using UnityEngine;
 
 namespace UI
 {
-    public class SkillSlotUI : MonoBehaviour, IController
+    public class SkillSlotUI : MonoBehaviour
     {
 
         void Awake()
         {
-        }
-
-        public IArchitecture GetArchitecture()
-        {
-            return GameFrame.Interface;
         }
     }
 }

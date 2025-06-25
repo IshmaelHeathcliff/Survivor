@@ -464,7 +464,7 @@
       {
         "$type": "Data.Config.ModifierEffectConfig, Assembly-CSharp",
         "ModifierID": "health_add",
-        "Value": 200,
+        "Value": 4,
         "Description": "添加词条"
       }
     ]

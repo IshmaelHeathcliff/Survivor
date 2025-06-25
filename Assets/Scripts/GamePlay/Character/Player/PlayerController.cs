@@ -21,10 +21,6 @@ namespace GamePlay.Character.Player
         protected override void SetStats()
         {
             base.SetStats();
-
-            IStatModifier healthModifier = ModifierSystem.CreateStatModifier("health_increase", "player", 100);
-            healthModifier.Register();
-            (CharaterStats.GetStat("Health") as IConsumableStat)?.SetMaxValue();
         }
 
         protected override void MakeSureID()

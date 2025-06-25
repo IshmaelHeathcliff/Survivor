@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace UI
 {
-    public class SkillReleasedUI : MonoBehaviour, IController
+    public class SkillReleasedUIController : MonoBehaviour, IController
     {
         [SerializeField] TextMeshProUGUI _skillsDescription;
 
