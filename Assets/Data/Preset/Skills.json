@@ -7,7 +7,7 @@
         "Description": "施加攻击"
       }
     ],
-    "Damage": 5.0,
+    "Damage": 1.0,
     "CriticalChance": 0.0,
     "CriticalMultiplier": 0.0,
     "AttackArea": 0.0,

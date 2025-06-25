@@ -1,9 +1,11 @@
-﻿using GamePlay.Character.State;
+﻿using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using GamePlay.Character.State;
 using UnityEngine;
 
 namespace UI
 {
-    public interface IStateUI
+    public interface IStateUIController
     {
         void AddState(IState state);
         void RemoveState(string id);
@@ -11,37 +13,71 @@ namespace UI
         void ChangeStateCount(IStateWithCount state);
     }
 
-    public abstract class StateUI : MonoBehaviour, IStateUI
+    [RequireComponent(typeof(StateUIPool))]
+    public abstract class StateUIController : MonoBehaviour, IController, IStateUIController
     {
-        public abstract void AddState(IState state);
-        public abstract void RemoveState(string id);
-        public abstract void ChangeStateTime(IStateWithTime state);
-        public abstract void ChangeStateCount(IStateWithCount state);
-    }
-
-    public abstract class StateUIController : MonoBehaviour, IController
-    {
-        [SerializeField] StateUI _stateUI;
         protected IStateContainer StateContainer;
 
+        protected abstract void SetStateContainer();
 
-        void OnValidate()
+        readonly Dictionary<string, StateUI> _stateUIs = new();
+        [SerializeField] StateUIPool _pool;
+
+        async UniTaskVoid AddStateAsync(IState state)
         {
-            if (_stateUI == null)
+            StateUI stateUI = await _pool.Pop();
+
+            if (_stateUIs.ContainsKey(state.GetID()))
             {
-                _stateUI = GetComponentInChildren<StateUI>();
+                RemoveState(state.GetID());
+            }
+
+            _stateUIs.Add(state.GetID(), stateUI);
+            stateUI.InitStateUI(state);
+        }
+
+        public void AddState(IState state)
+        {
+            AddStateAsync(state).Forget();
+
+        }
+
+        public void RemoveState(string id)
+        {
+            if (_stateUIs.Remove(id, out StateUI stateUI))
+            {
+                _pool.Push(stateUI);
             }
         }
 
-        protected abstract void SetStateContainer();
+        public void ChangeStateTime(IStateWithTime state)
+        {
+            if (_stateUIs.TryGetValue(state.GetID(), out StateUI stateUI))
+            {
+                stateUI.SetTime(state.TimeLeft, state.Duration);
+            }
+        }
+
+        public void ChangeStateCount(IStateWithCount state)
+        {
+            if (_stateUIs.TryGetValue(state.GetID(), out StateUI stateUI))
+            {
+                stateUI.SetCount(state.Count);
+            }
+        }
+
+        void OnValidate()
+        {
+            _pool = GetComponent<StateUIPool>();
+        }
 
         void Start()
         {
             SetStateContainer();
-            StateContainer.OnStateAdded.Register(_stateUI.AddState);
-            StateContainer.OnStateRemoved.Register(_stateUI.RemoveState);
-            StateContainer.OnStateTimeChanged.Register(_stateUI.ChangeStateTime);
-            StateContainer.OnStateCountChanged.Register(_stateUI.ChangeStateCount);
+            StateContainer.OnStateAdded.Register(AddState);
+            StateContainer.OnStateRemoved.Register(RemoveState);
+            StateContainer.OnStateTimeChanged.Register(ChangeStateTime);
+            StateContainer.OnStateCountChanged.Register(ChangeStateCount);
         }
 
         void FixedUpdate()

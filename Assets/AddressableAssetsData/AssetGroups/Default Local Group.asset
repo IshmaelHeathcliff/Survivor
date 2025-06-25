@@ -41,7 +41,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4c49420468c962b4bb3554db841fdfe1
-    m_Address: Assets/Prefabs/StateUICell.prefab
+    m_Address: Assets/Prefabs/StateUI.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

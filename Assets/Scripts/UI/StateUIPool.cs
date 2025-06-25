@@ -7,39 +7,39 @@ using UnityEngine.AddressableAssets;
 
 namespace UI
 {
-    public class StateUICellPool : MonoBehaviour, IAsyncObjectPool<StateUICell>
+    public class StateUIPool : MonoBehaviour, IAsyncObjectPool<StateUI>
     {
-        [SerializeField] AssetReferenceGameObject _stateUICellReference;
+        [SerializeField] AssetReferenceGameObject _stateUIReference;
         [SerializeField] int _initialSize = 10;
         [SerializeField] int _maxSize = 100;
-        readonly Stack<StateUICell> _pool = new();
+        readonly Stack<StateUI> _pool = new();
 
         public int Count => _pool.Count;
 
-        async UniTask<StateUICell> CreatObject()
+        async UniTask<StateUI> CreatObject()
         {
-            GameObject obj = await Addressables.InstantiateAsync(_stateUICellReference, transform);
+            GameObject obj = await Addressables.InstantiateAsync(_stateUIReference, transform);
             obj.SetActive(false);
-            return obj.GetOrAddComponent<StateUICell>();
+            return obj.GetOrAddComponent<StateUI>();
         }
 
-        public async UniTask<StateUICell> Pop()
+        public async UniTask<StateUI> Pop()
         {
-            StateUICell stateUICell;
+            StateUI stateUI;
             if (Count > 0)
             {
-                stateUICell = _pool.Pop();
+                stateUI = _pool.Pop();
             }
             else
             {
-                stateUICell = await CreatObject();
+                stateUI = await CreatObject();
             }
 
-            stateUICell.gameObject.SetActive(true);
-            return stateUICell;
+            stateUI.gameObject.SetActive(true);
+            return stateUI;
         }
 
-        public void Push(StateUICell stateUI)
+        public void Push(StateUI stateUI)
         {
             stateUI.gameObject.SetActive(false);
             if (Count > _maxSize)
@@ -65,7 +65,7 @@ namespace UI
 
         void OnDisable()
         {
-            foreach (StateUICell stateUI in _pool)
+            foreach (StateUI stateUI in _pool)
             {
                 Addressables.ReleaseInstance(stateUI.gameObject);
             }

@@ -64,29 +64,35 @@ namespace GamePlay.Skill
         }
     }
 
-    public class GachaSkillsEvent
+    public class GachaSkillsEvent : SkillEvent
     {
-        public ICharacterModel Model { get; set; }
         public List<SkillConfig> Skills { get; set; }
 
-        public GachaSkillsEvent(List<SkillConfig> skills, ICharacterModel model)
+        public GachaSkillsEvent(List<SkillConfig> skills, ICharacterModel model) : base(model)
         {
-            Model = model;
             Skills = skills;
         }
     }
 
-    public class SelectSkillEvent
+    public class SelectSkillEvent : SkillEvent
     {
-        public ICharacterModel Model { get; set; }
         public List<SkillConfig> Skills { get; set; }
         public int Index { get; set; }
 
-        public SelectSkillEvent(List<SkillConfig> skills, int index, ICharacterModel model)
+        public SelectSkillEvent(List<SkillConfig> skills, int index, ICharacterModel model) : base(model)
         {
-            Model = model;
             Skills = skills;
             Index = index;
+        }
+    }
+
+    public class FullSlotWhenAcquireSkillEvent : SkillEvent
+    {
+        public SkillConfig Skill { get; set; }
+
+        public FullSlotWhenAcquireSkillEvent(SkillConfig skill, ICharacterModel model) : base(model)
+        {
+            Skill = skill;
         }
     }
 }

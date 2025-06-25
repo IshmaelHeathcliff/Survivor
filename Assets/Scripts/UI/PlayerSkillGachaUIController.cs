@@ -10,7 +10,7 @@ using UnityEngine.AddressableAssets;
 
 namespace UI
 {
-    public class SkillGachaUIController : MonoBehaviour, IController
+    public class PlayerSkillGachaUIController : MonoBehaviour, IController
     {
         [SerializeField] AssetReferenceGameObject _skillGachaUIPrefab;
 

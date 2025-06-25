@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class StateUICell : MonoBehaviour
+    public class StateUI : MonoBehaviour
     {
         [SerializeField] Slider _slider;
         [SerializeField] TextMeshProUGUI _info;
@@ -50,7 +50,7 @@ namespace UI
             _icon.sprite = await _iconHandle;
         }
 
-        public void InitStateUICell(IState state)
+        public void InitStateUI(IState state)
         {
             if (state is IStateWithTime bt)
             {

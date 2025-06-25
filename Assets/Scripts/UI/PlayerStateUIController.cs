@@ -1,6 +1,11 @@
-﻿using UI;
+﻿using System.Collections.Generic;
+using GamePlay.Character.State;
+using Cysharp.Threading.Tasks;
+using UnityEngine;
+using GamePlay.Character.Player;
 
-namespace GamePlay.Character.Player
+
+namespace UI
 {
     public class PlayerStateUIController : StateUIController
     {

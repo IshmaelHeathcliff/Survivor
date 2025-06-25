@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace UI
 {
-    public class SkillUI : MonoBehaviour, IController
+    public class SkillReleasedUI : MonoBehaviour, IController
     {
         [SerializeField] TextMeshProUGUI _skillsDescription;
 
@@ -14,21 +14,14 @@ namespace UI
 
         void Awake()
         {
-            this.RegisterEvent<SkillAcquiredEvent>(e =>
+            this.RegisterEvent<SkillReleasedEvent>(e =>
             {
                 if (e.Model is PlayerModel playerModel)
                 {
                     _skillsDescriptionBuilder.Clear();
-                    _skillsDescriptionBuilder.AppendLine("已装备技能：");
-                    foreach (ISkill skill in playerModel.SkillsInSlot.GetAllSkills())
-                    {
-                        _skillsDescriptionBuilder.AppendLine($"  {skill.Name}");
-                    }
-
-                    _skillsDescriptionBuilder.AppendLine("已吞噬技能：");
                     foreach (ISkill skill in playerModel.SkillsReleased.GetAllSkills())
                     {
-                        _skillsDescriptionBuilder.AppendLine($"  {skill.Name}");
+                        _skillsDescriptionBuilder.Append($"{skill.Name}, ");
                     }
 
                     _skillsDescription.text = _skillsDescriptionBuilder.ToString();
