@@ -47,7 +47,7 @@ namespace UI
             _threeQuarterHeartBackgroundSprite = await _threeQuarterHeartBackground.LoadAssetAsync<Sprite>();
             _halfHeartBackgroundSprite = await _halfHeartBackground.LoadAssetAsync<Sprite>();
             _quarterHeartBackgroundSprite = await _quarterHeartBackground.LoadAssetAsync<Sprite>();
-            
+
             _spritesLoaded = true;
         }
 
@@ -88,7 +88,7 @@ namespace UI
             {
                 await _loadSpritesTask;
             }
-            
+
             switch (maxHealth)
             {
                 case 4:

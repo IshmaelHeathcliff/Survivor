@@ -67,7 +67,7 @@
   {
     "$type": "Data.Config.OneTimeSkillConfig, Assembly-CSharp",
     "ID": "dice1",
-    "Name": "奇奥骰子-1点",
+    "Name": "骰子1点",
     "Keywords": [],
     "Rarity": 0,
     "Description": null,
@@ -92,7 +92,7 @@
   {
     "$type": "Data.Config.OneTimeSkillConfig, Assembly-CSharp",
     "ID": "dice2",
-    "Name": "奇奥骰子-2点",
+    "Name": "骰子2点",
     "Keywords": [],
     "Rarity": 0,
     "Description": null,
@@ -116,7 +116,7 @@
   {
     "$type": "Data.Config.OneTimeSkillConfig, Assembly-CSharp",
     "ID": "dice3",
-    "Name": "奇奥骰子-3点",
+    "Name": "骰子3点",
     "Keywords": [],
     "Rarity": 0,
     "Description": null,
@@ -141,7 +141,7 @@
   {
     "$type": "Data.Config.OneTimeSkillConfig, Assembly-CSharp",
     "ID": "dice4",
-    "Name": "奇奥骰子-4点",
+    "Name": "骰子4点",
     "Keywords": [],
     "Rarity": 1,
     "Description": null,
@@ -165,7 +165,7 @@
   {
     "$type": "Data.Config.OneTimeSkillConfig, Assembly-CSharp",
     "ID": "dice5",
-    "Name": "奇奥骰子-5点",
+    "Name": "骰子5点",
     "Keywords": [],
     "Rarity": 1,
     "Description": null,
@@ -190,7 +190,7 @@
   {
     "$type": "Data.Config.OneTimeSkillConfig, Assembly-CSharp",
     "ID": "dice6",
-    "Name": "奇奥骰子-6点",
+    "Name": "骰子6点",
     "Keywords": [],
     "Rarity": 2,
     "Description": null,
@@ -642,7 +642,7 @@
     "SkillEffectConfigsOnUse": [
       {
         "$type": "Data.Config.HealEffectConfig, Assembly-CSharp",
-        "Amount": 20,
+        "Amount": 2,
         "Description": "治疗"
       }
     ]
@@ -738,7 +738,7 @@
                 "ChildEffects": [
                   {
                     "$type": "Data.Config.HealEffectConfig, Assembly-CSharp",
-                    "Amount": 20,
+                    "Amount": 2,
                     "Description": "治疗"
                   }
                 ],
@@ -1902,7 +1902,7 @@
                 "ChildEffects": [
                   {
                     "$type": "Data.Config.HealEffectConfig, Assembly-CSharp",
-                    "Amount": 20,
+                    "Amount": 2,
                     "Description": "治疗"
                   }
                 ],
