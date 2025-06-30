@@ -20,7 +20,8 @@ namespace GamePlay.Skill.Effect
 
         protected override void OnCancel()
         {
-            _skillSystem.RemoveSkill(SkillEffectConfig.SkillID, Model);
+            // ? 是否应该取消技能获取
+            // _skillSystem.RemoveSkill(SkillEffectConfig.SkillID, Model);
         }
     }
 }

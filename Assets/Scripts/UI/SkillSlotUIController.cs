@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using GamePlay.Character;
 using GamePlay.Character.Player;
 using GamePlay.Skill;
 using TMPro;
@@ -14,6 +15,9 @@ namespace UI
         [SerializeField] TextMeshProUGUI _skillInfoText;
 
         PlayerModel _playerModel;
+        SkillSystem _skillSystem;
+
+        ISkill _skillToReplace;
 
         void OnSkillAcquired(SkillAcquiredEvent e)
         {
@@ -55,15 +59,63 @@ namespace UI
 
         }
 
+        void OnSkillRemoved(SkillRemovedEvent e)
+        {
+            if (e.Model != _playerModel)
+            {
+                return;
+            }
+
+            foreach (SkillSlotUI slot in _skillSlotUIs)
+            {
+                if (slot.Skill != null && slot.Skill.ID == e.SkillID)
+                {
+                    slot.SetSkill();
+                    break;
+                }
+            }
+        }
+
+        void OnFullSlotWhenAcquireSkill(FullSlotWhenAcquireSkillEvent e)
+        {
+            if (e.Model != _playerModel)
+            {
+                return;
+            }
+
+            foreach (SkillSlotUI slot in _skillSlotUIs)
+            {
+                slot.IsRemovable = true;
+            }
+
+            _skillToReplace = e.Skill;
+        }
+
+        void ReplaceSkill(ISkill oldSkill)
+        {
+            _skillSystem.RemoveSkill(oldSkill.ID, _playerModel);
+
+            if (_skillToReplace != null)
+            {
+                _skillSystem.AcquireSkill(_skillToReplace.ID, _playerModel);
+                _skillToReplace = null;
+            }
+
+            foreach (SkillSlotUI slot in _skillSlotUIs)
+            {
+                slot.IsRemovable = false;
+            }
+        }
+
         void OnPointerEnter(ISkill skill)
         {
-            _skillInfo.gameObject.SetActive(true);
+            _skillInfo.SetActive(true);
             _skillInfoText.text = skill.Description;
         }
 
         void OnPointerExit(ISkill skill)
         {
-            _skillInfo.gameObject.SetActive(false);
+            _skillInfo.SetActive(false);
             _skillInfoText.text = "";
         }
 
@@ -77,14 +129,18 @@ namespace UI
         void Start()
         {
             _playerModel = this.GetModel<PlayersModel>().Current;
+            _skillSystem = this.GetSystem<SkillSystem>();
 
             this.RegisterEvent<SkillAcquiredEvent>(OnSkillAcquired).UnRegisterWhenDisabled(this);
             this.RegisterEvent<SkillReleasedEvent>(OnSkillReleased).UnRegisterWhenDisabled(this);
+            this.RegisterEvent<SkillRemovedEvent>(OnSkillRemoved).UnRegisterWhenDisabled(this);
+            this.RegisterEvent<FullSlotWhenAcquireSkillEvent>(OnFullSlotWhenAcquireSkill).UnRegisterWhenDisabled(this);
 
             foreach (SkillSlotUI slot in _skillSlotUIs)
             {
                 slot.OnSkillPointerEnter.Register(OnPointerEnter).UnRegisterWhenDisabled(this);
                 slot.OnSkillPointerExit.Register(OnPointerExit).UnRegisterWhenDisabled(this);
+                slot.OnSkillReplace.Register(ReplaceSkill).UnRegisterWhenDisabled(this);
             }
         }
 

@@ -12,11 +12,38 @@ namespace UI
     {
         [SerializeField] Image _icon;
         [SerializeField] TextMeshProUGUI _name;
+        [SerializeField] Button _button;
 
         public EasyEvent<ISkill> OnSkillPointerEnter = new();
         public EasyEvent<ISkill> OnSkillPointerExit = new();
+        public EasyEvent<ISkill> OnSkillReplace = new();
 
         public ISkill Skill { get; private set; }
+
+        public bool IsRemovable
+        {
+            get => _button.interactable;
+            set
+            {
+                if (Skill == null)
+                {
+                    value = false;
+                }
+
+                _button.interactable = value;
+            }
+        }
+
+        void OnReplace()
+        {
+            if (Skill == null)
+            {
+                return;
+            }
+
+            IsRemovable = false;
+            OnSkillReplace.Trigger(Skill);
+        }
 
 
         public void SetSkill(ISkill skill = null)
@@ -36,6 +63,13 @@ namespace UI
         {
             _name = transform.Find("Name").GetComponent<TextMeshProUGUI>();
             _icon = transform.Find("Icon").GetComponent<Image>();
+            _button = GetComponent<Button>();
+        }
+
+        void Awake()
+        {
+            _button.onClick.AddListener(OnReplace);
+            IsRemovable = false;
         }
 
         public void OnPointerEnter(PointerEventData eventData)

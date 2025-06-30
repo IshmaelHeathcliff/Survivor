@@ -3078,7 +3078,8 @@ MonoBehaviour:
   - {fileID: 1999326332}
   - {fileID: 2018359055}
   - {fileID: 223938127}
-  _skillInfo: {fileID: 641726181}
+  _skillInfo: {fileID: 1037325547}
+  _skillInfoText: {fileID: 641726181}
 --- !u!1001 &1303927267
 PrefabInstance:
   m_ObjectHideFlags: 0

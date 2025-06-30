@@ -100,6 +100,7 @@ namespace GamePlay.Skill
 
             if (skillsInSlot.Count >= skillsInSlot.MaxCount)
             {
+                this.SendEvent(new FullSlotWhenAcquireSkillEvent(skill, SkillCreateEnv.Model));
                 Debug.Log($"技能槽位已满，最大数量: {skillsInSlot.MaxCount}");
                 return;
             }

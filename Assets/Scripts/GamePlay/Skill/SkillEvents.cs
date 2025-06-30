@@ -88,9 +88,9 @@ namespace GamePlay.Skill
 
     public class FullSlotWhenAcquireSkillEvent : SkillEvent
     {
-        public SkillConfig Skill { get; set; }
+        public ISkill Skill { get; set; }
 
-        public FullSlotWhenAcquireSkillEvent(SkillConfig skill, ICharacterModel model) : base(model)
+        public FullSlotWhenAcquireSkillEvent(ISkill skill, ICharacterModel model) : base(model)
         {
             Skill = skill;
         }
