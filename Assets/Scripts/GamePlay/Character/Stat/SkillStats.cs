@@ -31,7 +31,7 @@ namespace GamePlay.Character.Stat
         public static StringBuilder GenerateSkillStatInfo(AttackSkill skill)
         {
             var info = new StringBuilder();
-            info.Append($"{skill.Name}:\n");
+            info.Append($"{skill.Name}: \n");
             info.Append($"  Cooldown: {FormatStatValue(skill.Cooldown)}\n");
             foreach (IStat stat in skill.SkillStats.GetAllStats())
             {

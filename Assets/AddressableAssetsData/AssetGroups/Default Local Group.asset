@@ -90,6 +90,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d7c256740bae05249bd44bdaf3e8666f
+    m_Address: Assets/Prefabs/UI/SkillReleased.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ddba823ecbf89ff44b1495b883bb0520
     m_Address: Assets/Prefabs/UI/Heart.prefab
     m_ReadOnly: 0

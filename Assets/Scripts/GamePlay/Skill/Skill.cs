@@ -26,6 +26,7 @@ namespace GamePlay.Skill
         string ID { get; }
         string Name { get; }
         string Description { get; }
+        string IconAddress { get; }
         bool ReleaseOnAcquire { get; }
         List<string> Keywords { get; }
         SkillRarity Rarity { get; }
@@ -49,6 +50,7 @@ namespace GamePlay.Skill
         public string ID => SkillConfig.ID;
         public string Name => SkillConfig.Name;
         public virtual string Description => SkillConfig.Description;
+        public string IconAddress => SkillConfig.IconAddress;
         public bool ReleaseOnAcquire => SkillConfig.ReleaseOnAcquire;
         public virtual List<string> Keywords => SkillConfig.Keywords;
         public SkillRarity Rarity => SkillConfig.Rarity;

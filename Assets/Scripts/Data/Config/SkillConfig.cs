@@ -9,6 +9,7 @@ namespace Data.Config
     {
         [ShowInInspector] public string ID { get; set; }
         [ShowInInspector] public string Name { get; set; }
+        [ShowInInspector] public string IconAddress { get; set; } = "Assets/Textures/UI/icons.aseprite[icons_74]";
         [ShowInInspector] public List<string> Keywords { get; set; }
 
         [ShowInInspector] public SkillRarity Rarity { get; set; }

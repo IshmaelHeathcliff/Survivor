@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1050696639993562845}
   - component: {fileID: 7356893381710982177}
   m_Layer: 5
-  m_Name: Slot
+  m_Name: SkillSlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63,14 +63,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9960785, g: 0.70980394, b: 0.5058824, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -455617803513433781, guid: 071e8d486614a154e91e18226d1c3ec6, type: 3}
+  m_Sprite: {fileID: 2537453318863259956, guid: fa2bb35432ac147498d0b92e3e7e41e0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -102,7 +102,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 930761474880149413}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
   m_Name: 
@@ -129,7 +129,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 0.48113197, b: 0.48113197, a: 1}
+    m_NormalColor: {r: 0.9622642, g: 0.726275, b: 0.34798843, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -186,8 +186,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.46, y: 0}
-  m_SizeDelta: {x: 83.7, y: 50}
+  m_AnchoredPosition: {x: -0.17814, y: -61.4485}
+  m_SizeDelta: {x: 100.36, y: 20.497}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8547975372648749389
 CanvasRenderer:
@@ -217,7 +217,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: Skill Name
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 85aabdaa0ca9e484ebf549fa139b3d58, type: 2}
   m_sharedMaterial: {fileID: 115598781714421582, guid: 85aabdaa0ca9e484ebf549fa139b3d58, type: 2}
@@ -244,7 +244,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
+  m_fontSize: 20.45
   m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -260,7 +260,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
+  m_TextWrappingMode: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -322,8 +322,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0, y: 2.0825}
-  m_SizeDelta: {x: 73.95, y: 54.165}
+  m_AnchoredPosition: {x: -0.46, y: 0}
+  m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &792436188678329041
 CanvasRenderer:

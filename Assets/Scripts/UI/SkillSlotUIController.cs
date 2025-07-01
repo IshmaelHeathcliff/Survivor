@@ -13,12 +13,20 @@ namespace UI
     {
         [SerializeField] List<SkillSlotUI> _skillSlotUIs;
         [SerializeField] GameObject _skillInfo;
-        [SerializeField] TextMeshProUGUI _skillInfoText;
+        TextMeshProUGUI _skillInfoText;
 
         PlayerModel _playerModel;
         SkillSystem _skillSystem;
 
         ISkill _skillToReplace;
+
+        void Init()
+        {
+            foreach (ISkill skill in _playerModel.SkillsInSlot.GetAllSkills())
+            {
+                AddSkill(skill);
+            }
+        }
 
         void OnSkillAcquired(SkillAcquiredEvent e)
         {
@@ -32,11 +40,16 @@ namespace UI
                 return;
             }
 
+            AddSkill(e.Skill);
+        }
+
+        void AddSkill(ISkill skill)
+        {
             foreach (SkillSlotUI slot in _skillSlotUIs)
             {
                 if (slot.Skill == null)
                 {
-                    slot.SetSkill(e.Skill);
+                    slot.SetSkill(skill);
                     break;
                 }
             }
@@ -142,7 +155,10 @@ namespace UI
         void OnValidate()
         {
             _skillSlotUIs = GetComponentsInChildren<SkillSlotUI>().ToList();
-            _skillInfo = transform.Find("SkillInfo").gameObject;
+        }
+
+        void Awake()
+        {
             _skillInfoText = _skillInfo.GetComponentInChildren<TextMeshProUGUI>();
         }
 
@@ -162,6 +178,8 @@ namespace UI
                 slot.OnSkillPointerExit.Register(OnPointerExit).UnRegisterWhenDisabled(this);
                 slot.OnSkillReplace.Register(ReplaceSkill).UnRegisterWhenDisabled(this);
             }
+
+            Init();
         }
 
         public IArchitecture GetArchitecture()

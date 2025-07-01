@@ -32,7 +32,7 @@ namespace GamePlay.Skill.Effect
             }
             catch (OperationCanceledException)
             {
-                Debug.Log("FixedRepeatEffect 取消");
+                // Debug.Log("FixedRepeatEffect 取消");
             }
         }
 
