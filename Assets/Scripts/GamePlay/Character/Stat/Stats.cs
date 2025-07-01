@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 using Data.Config;
 using GamePlay.Character.Modifier;
 using UnityEngine;
@@ -10,6 +11,38 @@ namespace GamePlay.Character.Stat
         protected Dictionary<string, IStat> InternalStats = new();
 
         public string FactoryID { get; set; }
+
+        public static StringBuilder GenerateStatInfo(IStat stat, int indent = 0)
+        {
+            var info = new StringBuilder();
+            info.Append($"{new string(' ', indent * 2)}");
+            info.Append($"{stat.Name}: {FormatStatValue(stat.Value)}\n");
+            info.Append($"{new string(' ', indent * 2)}");
+            info.Append($"  {stat.Name}基础值: {FormatStatValue(stat.BaseValue)}\n");
+            info.Append($"{new string(' ', indent * 2)}");
+            info.Append($"  {stat.Name}附加值: {FormatStatValue(stat.AddedValue)}\n");
+            info.Append($"{new string(' ', indent * 2)}");
+            info.Append($"  {stat.Name}固定值: {FormatStatValue(stat.FixedValue)}\n");
+            info.Append($"{new string(' ', indent * 2)}");
+            info.Append($"  {stat.Name}提高: {(int)stat.Increase}%\n");
+            info.Append($"{new string(' ', indent * 2)}");
+            info.Append($"  {stat.Name}总增: {(int)((stat.More - 1) * 100)}%\n");
+            return info;
+        }
+
+        public static string FormatStatValue(float value)
+        {
+            // 如果是整数或者很接近整数，显示为整数
+            if (Mathf.Abs(value - Mathf.Round(value)) < 0.01f)
+            {
+                return ((int)Mathf.Round(value)).ToString();
+            }
+            // 否则显示两位小数
+            else
+            {
+                return value.ToString("F2");
+            }
+        }
 
         public void AddStat(IStat stat)
         {

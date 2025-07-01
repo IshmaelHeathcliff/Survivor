@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System.Text;
 using Data.Config;
 using Data.SaveLoad;
+using GamePlay.Skill;
 
 namespace GamePlay.Character.Stat
 {
@@ -24,6 +26,18 @@ namespace GamePlay.Character.Stat
                         break;
                 }
             }
+        }
+
+        public static StringBuilder GenerateSkillStatInfo(AttackSkill skill)
+        {
+            var info = new StringBuilder();
+            info.Append($"{skill.Name}:\n");
+            info.Append($"  Cooldown: {FormatStatValue(skill.Cooldown)}\n");
+            foreach (IStat stat in skill.SkillStats.GetAllStats())
+            {
+                info.Append(GenerateStatInfo(stat, 1));
+            }
+            return info;
         }
     }
 }

@@ -58,7 +58,7 @@ namespace UI
         async UniTask CreateSkillGachaUI(int index, SkillConfig skill)
         {
             GameObject obj = await Addressables.InstantiateAsync(_skillGachaUIPrefab, transform);
-            obj.transform.localPosition = Vector3.zero + new Vector3(index * 300, 0, 0);
+            // obj.transform.localPosition = Vector3.zero + new Vector3(index * 300, 0, 0);
 
             SkillGachaUI skillGachaUI = obj.GetComponent<SkillGachaUI>();
             skillGachaUI.SetSkill(skill);

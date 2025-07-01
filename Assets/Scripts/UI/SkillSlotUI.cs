@@ -74,21 +74,11 @@ namespace UI
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            if (Skill == null)
-            {
-                return;
-            }
-
             OnSkillPointerEnter.Trigger(Skill);
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            if (Skill == null)
-            {
-                return;
-            }
-
             OnSkillPointerExit.Trigger(Skill);
         }
     }

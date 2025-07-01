@@ -59,7 +59,7 @@
       "Projectile"
     ],
     "Rarity": 0,
-    "Description": null,
+    "Description": "发射1枚骰子，对1名敌人造成伤害",
     "ReleaseOnAcquire": true,
     "SkillEffectConfigsOnEnable": null,
     "SkillEffectConfigsOnUse": null
@@ -70,7 +70,7 @@
     "Name": "骰子1点",
     "Keywords": [],
     "Rarity": 0,
-    "Description": null,
+    "Description": "基础伤害+5",
     "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {
@@ -95,7 +95,7 @@
     "Name": "骰子2点",
     "Keywords": [],
     "Rarity": 0,
-    "Description": null,
+    "Description": "CD-30%",
     "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {
@@ -119,7 +119,7 @@
     "Name": "骰子3点",
     "Keywords": [],
     "Rarity": 0,
-    "Description": null,
+    "Description": "暴击率+5%",
     "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {
@@ -144,7 +144,7 @@
     "Name": "骰子4点",
     "Keywords": [],
     "Rarity": 1,
-    "Description": null,
+    "Description": "金币收入+1",
     "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {
@@ -168,7 +168,7 @@
     "Name": "骰子5点",
     "Keywords": [],
     "Rarity": 1,
-    "Description": null,
+    "Description": "目标数+1",
     "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {
@@ -193,14 +193,14 @@
     "Name": "骰子6点",
     "Keywords": [],
     "Rarity": 2,
-    "Description": null,
+    "Description": "击杀50个敌人后进行一次投掷，获得等同于点数的木头",
     "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [],
     "SkillEffectConfigsOnUse": [
       {
         "$type": "Data.Config.CountIncrementEffectConfig, Assembly-CSharp",
         "CountValueID": "KillCount",
-        "Increment": 5,
+        "Increment": 50,
         "ChildEffects": [
           {
             "$type": "Data.Config.RollDiceEffectConfig, Assembly-CSharp",
@@ -227,7 +227,7 @@
     "Name": "奇奥骰子",
     "Keywords": [],
     "Rarity": 3,
-    "Description": null,
+    "Description": "击杀50个敌人后进行一次投掷，获得对应点数的奖励\n————————————————————————\n1点：基础伤害+5；\n2点：CD-30%；\n3点：暴击率+5%；\n4点：金币+10；\n5点：木头+5；\n6点：获得1~5点全部奖励",
     "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [],
     "SkillEffectConfigsOnUse": [
@@ -402,7 +402,7 @@
     "Name": "摇杆",
     "Keywords": [],
     "Rarity": 1,
-    "Description": null,
+    "Description": "基础伤害+10",
     "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {
@@ -427,7 +427,7 @@
     "Name": "按钮",
     "Keywords": [],
     "Rarity": 1,
-    "Description": null,
+    "Description": "弹射伤害+30%",
     "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {
@@ -439,7 +439,7 @@
     "SkillEffectConfigsOnUse": [
       {
         "$type": "Data.Config.ModifierEffectConfig, Assembly-CSharp",
-        "ModifierID": "damage_increase",
+        "ModifierID": "chain_damage_increase",
         "Value": 30,
         "Description": "添加词条"
       }
@@ -451,7 +451,7 @@
     "Name": "机箱",
     "Keywords": [],
     "Rarity": 1,
-    "Description": null,
+    "Description": "生命值增加一颗心",
     "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {
@@ -475,7 +475,7 @@
     "Name": "人头幸运币",
     "Keywords": [],
     "Rarity": 2,
-    "Description": null,
+    "Description": "弹射目标+1",
     "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {
@@ -500,7 +500,7 @@
     "Name": "轮盘",
     "Keywords": [],
     "Rarity": 2,
-    "Description": null,
+    "Description": "每隔10s进入狂暴状态，CD-70%，持续3s",
     "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {
@@ -534,7 +534,7 @@
     "Name": "弓箭图标",
     "Keywords": [],
     "Rarity": 0,
-    "Description": null,
+    "Description": "远程武器CD-10%",
     "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {
@@ -558,7 +558,7 @@
     "Name": "罐头图标",
     "Keywords": [],
     "Rarity": 0,
-    "Description": null,
+    "Description": "远程伤害增加+10%",
     "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {
@@ -582,7 +582,7 @@
     "Name": "硬币图标",
     "Keywords": [],
     "Rarity": 1,
-    "Description": null,
+    "Description": "金币收入+3",
     "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {
@@ -606,7 +606,7 @@
     "Name": "木头图标",
     "Keywords": [],
     "Rarity": 1,
-    "Description": null,
+    "Description": "木头收入+1",
     "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {
@@ -630,7 +630,7 @@
     "Name": "樱桃图标",
     "Keywords": [],
     "Rarity": 1,
-    "Description": null,
+    "Description": "恢复0.5个红心",
     "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {
@@ -653,7 +653,7 @@
     "Name": "老虎机",
     "Keywords": [],
     "Rarity": 3,
-    "Description": null,
+    "Description": "每隔30s，随机一种获得已吞噬图标奖励：\n——————————————————\n弓箭：远程武器CD-10%\n罐头：远程武器伤害+10%\n硬币：金币+50\n木头：木头+10\n樱桃：恢复0.5个红心",
     "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {
@@ -781,7 +781,7 @@
       "Projectile"
     ],
     "Rarity": 0,
-    "Description": null,
+    "Description": "随机发射1张的扑克牌，造成伤害",
     "ReleaseOnAcquire": true,
     "SkillEffectConfigsOnEnable": null,
     "SkillEffectConfigsOnUse": null
@@ -792,7 +792,7 @@
     "Name": "扑克10",
     "Keywords": [],
     "Rarity": 0,
-    "Description": null,
+    "Description": "伤害+1，杀敌奖金+1",
     "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {
@@ -823,7 +823,7 @@
     "Name": "扑克10",
     "Keywords": [],
     "Rarity": 0,
-    "Description": null,
+    "Description": "伤害+1，杀敌奖金+1",
     "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {
@@ -854,7 +854,7 @@
     "Name": "扑克10",
     "Keywords": [],
     "Rarity": 0,
-    "Description": null,
+    "Description": "伤害+1，杀敌奖金+1",
     "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {
@@ -885,7 +885,7 @@
     "Name": "扑克10",
     "Keywords": [],
     "Rarity": 0,
-    "Description": null,
+    "Description": "伤害+1，杀敌奖金+1",
     "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {
@@ -916,7 +916,7 @@
     "Name": "扑克J",
     "Keywords": [],
     "Rarity": 0,
-    "Description": null,
+    "Description": "伤害+1，杀敌奖金+1",
     "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {
@@ -947,7 +947,7 @@
     "Name": "扑克J",
     "Keywords": [],
     "Rarity": 0,
-    "Description": null,
+    "Description": "伤害+1，杀敌奖金+1",
     "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {
@@ -978,7 +978,7 @@
     "Name": "扑克J",
     "Keywords": [],
     "Rarity": 0,
-    "Description": null,
+    "Description": "伤害+1，杀敌奖金+1",
     "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {
@@ -1009,7 +1009,7 @@
     "Name": "扑克J",
     "Keywords": [],
     "Rarity": 0,
-    "Description": null,
+    "Description": "伤害+1，杀敌奖金+1",
     "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {
@@ -1040,7 +1040,7 @@
     "Name": "扑克Q",
     "Keywords": [],
     "Rarity": 0,
-    "Description": null,
+    "Description": "伤害+1，杀敌奖金+1",
     "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {
@@ -1071,7 +1071,7 @@
     "Name": "扑克Q",
     "Keywords": [],
     "Rarity": 0,
-    "Description": null,
+    "Description": "伤害+1，杀敌奖金+1",
     "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {
@@ -1102,7 +1102,7 @@
     "Name": "扑克Q",
     "Keywords": [],
     "Rarity": 0,
-    "Description": null,
+    "Description": "伤害+1，杀敌奖金+1",
     "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {
@@ -1133,7 +1133,7 @@
     "Name": "扑克Q",
     "Keywords": [],
     "Rarity": 0,
-    "Description": null,
+    "Description": "伤害+1，杀敌奖金+1",
     "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {
@@ -1164,7 +1164,7 @@
     "Name": "扑克K",
     "Keywords": [],
     "Rarity": 0,
-    "Description": null,
+    "Description": "伤害+1，杀敌奖金+1",
     "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {
@@ -1195,7 +1195,7 @@
     "Name": "扑克K",
     "Keywords": [],
     "Rarity": 0,
-    "Description": null,
+    "Description": "伤害+1，杀敌奖金+1",
     "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {
@@ -1226,7 +1226,7 @@
     "Name": "扑克K",
     "Keywords": [],
     "Rarity": 0,
-    "Description": null,
+    "Description": "伤害+1，杀敌奖金+1",
     "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {
@@ -1257,7 +1257,7 @@
     "Name": "扑克K",
     "Keywords": [],
     "Rarity": 0,
-    "Description": null,
+    "Description": "伤害+1，杀敌奖金+1",
     "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {
@@ -1288,7 +1288,7 @@
     "Name": "扑克A",
     "Keywords": [],
     "Rarity": 0,
-    "Description": null,
+    "Description": "伤害+1，杀敌奖金+1",
     "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {
@@ -1319,7 +1319,7 @@
     "Name": "扑克A",
     "Keywords": [],
     "Rarity": 0,
-    "Description": null,
+    "Description": "伤害+1，杀敌奖金+1",
     "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {
@@ -1350,7 +1350,7 @@
     "Name": "扑克A",
     "Keywords": [],
     "Rarity": 0,
-    "Description": null,
+    "Description": "伤害+1，杀敌奖金+1",
     "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {
@@ -1381,7 +1381,7 @@
     "Name": "扑克A",
     "Keywords": [],
     "Rarity": 0,
-    "Description": null,
+    "Description": "伤害+1，杀敌奖金+1",
     "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {
@@ -1412,7 +1412,7 @@
     "Name": "两对",
     "Keywords": [],
     "Rarity": 1,
-    "Description": null,
+    "Description": "木头收入+1、金币收入+10",
     "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {
@@ -1442,7 +1442,7 @@
     "Name": "三张",
     "Keywords": [],
     "Rarity": 1,
-    "Description": null,
+    "Description": "木头收入+1、金币收入+10",
     "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {
@@ -1472,7 +1472,7 @@
     "Name": "四张",
     "Keywords": [],
     "Rarity": 1,
-    "Description": null,
+    "Description": "木头收入+1、金币收入+10",
     "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {
@@ -1502,7 +1502,7 @@
     "Name": "顺子",
     "Keywords": [],
     "Rarity": 1,
-    "Description": null,
+    "Description": "木头收入+1、金币收入+10",
     "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {
@@ -1532,7 +1532,7 @@
     "Name": "小王",
     "Keywords": [],
     "Rarity": 1,
-    "Description": null,
+    "Description": "每击杀50名敌人后，获得50金币",
     "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {
@@ -1564,7 +1564,7 @@
     "Name": "大王",
     "Keywords": [],
     "Rarity": 2,
-    "Description": null,
+    "Description": "每击杀50名敌人后，获得30木头",
     "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {
@@ -1596,7 +1596,7 @@
     "Name": "扑克",
     "Keywords": [],
     "Rarity": 3,
-    "Description": null,
+    "Description": "每次发射扑克牌时，额外获得1个木头",
     "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {
@@ -1621,7 +1621,7 @@
     "Name": "大赢家",
     "Keywords": [],
     "Rarity": 4,
-    "Description": null,
+    "Description": "1.奇奥骰子投掷要求减半，解锁骰子的第七面：人头，目标数+1 2.老虎机等待时间减少10s，解锁新的老虎机奖励：靶子，远程武器目标+1 3.扑克的效果翻倍，每次发射扑克牌时，获得2个木头",
     "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [],
     "SkillEffectConfigsOnUse": [
@@ -1663,7 +1663,7 @@
     "Name": "奇奥骰子进阶",
     "Keywords": [],
     "Rarity": 4,
-    "Description": null,
+    "Description": "击杀50个敌人后进行一次投掷，获得对应点数的奖励\n————————————————————————\n1点：基础伤害+5；\n2点：CD-30%；\n3点：暴击率+5%；\n4点：金币+10；\n5点：木头+5；\n6点：获得1~5点全部奖励；\n7点：目标数+1",
     "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [],
     "SkillEffectConfigsOnUse": [
@@ -1817,7 +1817,7 @@
     "Name": "老虎机进阶",
     "Keywords": [],
     "Rarity": 4,
-    "Description": null,
+    "Description": "每隔20s，随机一种获得已吞噬图标奖励：\n——————————————————\n弓箭：远程武器CD-10%\n罐头：远程武器伤害+10%\n硬币：金币+50\n木头：木头+10\n樱桃：恢复0.5个红心",
     "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {
@@ -1928,7 +1928,7 @@
     "Name": "扑克进阶",
     "Keywords": [],
     "Rarity": 4,
-    "Description": null,
+    "Description": "每次发射扑克牌时，额外获得2个木头",
     "ReleaseOnAcquire": false,
     "SkillEffectConfigsOnEnable": [
       {

@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using GamePlay.Character;
+using System.Text;
 using GamePlay.Character.Player;
+using GamePlay.Character.Stat;
 using GamePlay.Skill;
 using TMPro;
 using UnityEngine;
@@ -109,14 +110,33 @@ namespace UI
 
         void OnPointerEnter(ISkill skill)
         {
-            _skillInfo.SetActive(true);
-            _skillInfoText.text = skill.Description;
+            // _skillInfo.SetActive(true);
+
+            if (skill == null)
+            {
+                _skillInfoText.text = "";
+                return;
+            }
+            else
+            {
+                // var info = new StringBuilder();
+                // info.Append(skill.Description);
+
+                // if (skill is AttackSkill attackSkill)
+                // {
+                //     info.AppendLine("");
+                //     info.Append(SkillStats.GenerateSkillStatInfo(attackSkill));
+                // }
+
+                // _skillInfoText.text = info.ToString();
+                _skillInfoText.text = skill.Name + "\n\n" + skill.Description;
+            }
         }
 
         void OnPointerExit(ISkill skill)
         {
-            _skillInfo.SetActive(false);
-            _skillInfoText.text = "";
+            // _skillInfo.SetActive(false);
+            // _skillInfoText.text = "";
         }
 
         void OnValidate()
