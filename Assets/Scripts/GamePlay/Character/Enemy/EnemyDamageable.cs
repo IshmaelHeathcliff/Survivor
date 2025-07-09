@@ -11,8 +11,6 @@ namespace GamePlay.Character.Enemy
 {
     public class EnemyDamageable : Damageable
     {
-        [SerializeField] float _hurtTime = 1f;
-
         FSM<EnemyStateID> _fsm;
         DropSystem _dropSystem;
 
@@ -30,34 +28,35 @@ namespace GamePlay.Character.Enemy
         {
             SetStats(CharacterController.CharaterStats);
 
-            OnHurt.Register(() => Hurt().Forget()).UnRegisterWhenDisabled(this);
+            OnHurt.Register(Hurt).UnRegisterWhenDisabled(this);
             OnDeath.Register(Dead).UnRegisterWhenDisabled(this);
         }
 
-        async UniTaskVoid Hurt()
+        public override void TakeDamage(float damage)
         {
-            _fsm.ChangeState(EnemyStateID.Hurt);
-            await UniTask.Delay(TimeSpan.FromSeconds(_hurtTime));
-
-            if (Health.CurrentValue <= 0)
+            if (!IsDamageable)
             {
-                OnDeath.Trigger();
                 return;
             }
 
-            _fsm.ChangeState(EnemyStateID.Idle);
+            Health.ChangeCurrentValue(-damage);
+            Debug.Log($"TakeDamage: {damage}, Left Health: {Health.CurrentValue}");
+            _fsm.ChangeState(EnemyStateID.Hurt);
+            OnHurt.Trigger();
+        }
+
+        void Hurt()
+        {
         }
 
 
         void Dead()
         {
-            var playerModel = this.GetModel<PlayersModel>().Current;
+            PlayerModel playerModel = this.GetModel<PlayersModel>().Current;
             this.GetSystem<CountSystem>().IncrementKillCount(playerModel, 1);
 
             this.GetSystem<ResourceSystem>().AcquireResource("Coin", (int)playerModel.Stats.GetStat("CoinOnKill").Value, playerModel);
             this.GetSystem<ResourceSystem>().AcquireResource("Wood", (int)playerModel.Stats.GetStat("WoodOnKill").Value, playerModel);
-
-            _fsm.ChangeState(EnemyStateID.Dead);
         }
     }
 }

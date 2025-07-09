@@ -6,7 +6,6 @@ namespace GamePlay.Character.Enemy
 {
     public class EnemyIdleState : EnemyState
     {
-        float _idleTime;
         public EnemyIdleState(FSM<EnemyStateID> fsm, EnemyController target) : base(fsm, target)
         {
         }
@@ -16,23 +15,11 @@ namespace GamePlay.Character.Enemy
             return FSM.CurrentStateId is not EnemyStateID.Dead;
         }
 
-        protected override void OnFixedUpdate()
+        protected async override void OnEnter()
         {
-            if (_idleTime > 0)
-            {
-                _idleTime -= Time.fixedDeltaTime;
-            }
-            else
-            {
-                FSM.ChangeState(EnemyStateID.Patrol);
-            }
-        }
-
-        protected override void OnEnter()
-        {
-            _idleTime = MoveController.IdleTime;
-            MoveController.PlayAnimation(EnemyMoveController.Idle).Forget();
-            MoveController.Freeze();
+            MoveController.Stop();
+            await MoveController.PlayAnimation(EnemyMoveController.Idle);
+            FSM.ChangeState(EnemyStateID.Patrol);
         }
     }
 }

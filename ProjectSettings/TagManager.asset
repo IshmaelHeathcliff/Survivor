@@ -12,9 +12,9 @@ TagManager:
   - 
   - Water
   - UI
-  - Damage
+  - Damageable
+  - Attacker
   - Drop
-  - 
   - 
   - 
   - 

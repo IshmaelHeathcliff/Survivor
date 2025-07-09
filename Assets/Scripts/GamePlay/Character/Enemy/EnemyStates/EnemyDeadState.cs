@@ -1,4 +1,5 @@
 ﻿using Core;
+using UnityEngine;
 
 namespace GamePlay.Character.Enemy
 {
@@ -17,7 +18,8 @@ namespace GamePlay.Character.Enemy
         {
             Target.Damageable.IsDamageable = false;
             Target.AttackerController.CanAttack = false;
-            await MoveController.PlayAnimation(EnemyMoveController.Dead).SuppressCancellationThrow();
+            Target.Damageable.OnDeath.Trigger();
+            await MoveController.PlayAnimation(EnemyMoveController.Dead);
             Target.Destroy();
         }
     }

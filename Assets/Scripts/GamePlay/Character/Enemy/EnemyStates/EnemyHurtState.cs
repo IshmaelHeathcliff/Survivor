@@ -13,11 +13,21 @@ namespace GamePlay.Character.Enemy
             return FSM.CurrentStateId is not EnemyStateID.Dead;
         }
 
-        protected override void OnEnter()
+        protected async override void OnEnter()
         {
             Target.Damageable.IsDamageable = false;
-            MoveController.PlayAnimation(EnemyMoveController.Hurt).Forget();
-            MoveController.Freeze();
+            MoveController.Stop();
+
+            if (Target.Damageable.Health.CurrentValue <= 0)
+            {
+                FSM.ChangeState(EnemyStateID.Dead);
+            }
+            else
+            {
+                await MoveController.PlayAnimation(EnemyMoveController.Hurt);
+                FSM.ChangeState(EnemyStateID.Idle);
+            }
+
         }
 
         protected override void OnExit()
