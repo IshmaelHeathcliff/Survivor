@@ -133,6 +133,11 @@ csharp_style_pattern_matching_over_is_with_cast_check = true:suggestion
 csharp_style_pattern_matching_over_as_with_null_check = true:suggestion
 
 # 其他文件类型设置
-[*.{yaml,yml,json,jsonc,md,mdc}]
+[*.{yaml,yml,json,jsonc}]
 indent_style = space
 indent_size = 2
+insert_final_newline = false
+
+[*.{md,mdc}]
+indent_style = space
+indent_size = 4

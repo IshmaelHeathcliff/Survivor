@@ -30,6 +30,7 @@ namespace GamePlay.Character.Enemy
         {
             MoveController.PlayAnimation(EnemyMoveController.Chase).Forget();
             _attackRadius = MoveController.AttackRadius;
+
         }
 
         protected override void OnUpdate()

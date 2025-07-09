@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using GamePlay.Character.Stat;
 using GamePlay.Skill;
@@ -23,7 +24,7 @@ namespace GamePlay.Character.Damage
         IKeywordStat Duration { get; }
 
         void SetSkill(AttackSkill skill);
-        UniTaskVoid Attack();
+        UniTaskVoid Attack(CancellationToken cancellationToken);
         UniTaskVoid Cancel();
     }
 
@@ -54,8 +55,8 @@ namespace GamePlay.Character.Damage
             AttackSkill = skill;
         }
 
-        protected abstract UniTask Play();
-        public abstract UniTaskVoid Attack();
+        protected abstract UniTask Play(CancellationToken cancellationToken);
+        public abstract UniTaskVoid Attack(CancellationToken cancellationToken);
         public abstract UniTaskVoid Cancel();
 
         public IArchitecture GetArchitecture()

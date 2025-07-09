@@ -23,7 +23,7 @@ namespace Core
 
         void MoveCamera()
         {
-            Vector3 targetPosition = _target == null ? this.SendQuery(new PlayerPositionQuery()) : _target.position;
+            Vector2 targetPosition = _target == null ? this.SendQuery(new PlayerPositionQuery()) : _target.position;
 
             var targetDeltaPosition = Vector3.Lerp(_camera.transform.position, targetPosition, Time.fixedDeltaTime * _speed);
 

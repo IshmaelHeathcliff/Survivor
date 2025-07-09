@@ -7,7 +7,7 @@ namespace GamePlay.Character.Player
     public class PlayerMoveController : MoveController
     {
         [SerializeField] float _speed = 10;
-        [SerializeField] float _acceleration = 10;
+        [SerializeField, Range(1, 20f)] float _acceleration = 10f;
 
         bool _isMoving;
         PlayerInput.PlayerActions _playerInput;
@@ -25,15 +25,18 @@ namespace GamePlay.Character.Player
         {
             Vector2 targetVelocity = _isMoving ? Direction * _speed : Vector2.zero;
 
+            Vector2 currentVelocity;
             if ((Rigidbody.linearVelocity - targetVelocity).sqrMagnitude > 0.01f)
             {
-                Rigidbody.linearVelocity = Vector2.Lerp(Rigidbody.linearVelocity, targetVelocity,
-                    Time.fixedDeltaTime * _acceleration);
+                currentVelocity = Vector2.Lerp(Rigidbody.linearVelocity, targetVelocity,
+                    _acceleration * Time.fixedDeltaTime);
             }
             else
             {
-                Rigidbody.linearVelocity = targetVelocity;
+                currentVelocity = targetVelocity;
             }
+
+            Rigidbody.linearVelocity = currentVelocity;
         }
 
         void MoveAction(InputAction.CallbackContext context)

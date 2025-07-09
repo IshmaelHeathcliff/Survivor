@@ -1607,10 +1607,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1241109835}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 187.81999, y: -96.755}
+  m_SizeDelta: {x: 375.63998, y: 193.51}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &641726181
 MonoBehaviour:
@@ -1981,12 +1981,12 @@ Rigidbody2D:
   m_GameObject: {fileID: 703353468}
   m_BodyType: 1
   m_Simulated: 1
-  m_UseFullKinematicContacts: 0
+  m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -1996,7 +1996,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!70 &703353477
 CapsuleCollider2D:
@@ -2061,7 +2061,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4979da59659f7fe44a793b215343f42c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _initSkill: dice_base
+  _initSkill: slot_machine_base
   _skillSlotCount: 7
 --- !u!1 &768642907
 GameObject:
@@ -2538,7 +2538,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1144986167}
   - component: {fileID: 1144986168}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: PlayerResources
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -10713,7 +10713,7 @@ MonoBehaviour:
     m_SubObjectType: 
     m_SubObjectGUID: 
     m_EditorAssetChanged: 1
-  _maxCount: 50
+  _maxCount: 3
   _generateGap: 0.2
   _minDistance: 10
   _maxDistance: 15

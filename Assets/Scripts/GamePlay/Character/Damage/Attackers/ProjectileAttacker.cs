@@ -32,17 +32,25 @@ namespace GamePlay.Character.Damage
 
 
         Collider2D _collider;
+        Rigidbody2D _rigidbody;
         SpriteRenderer _renderer;
+
+        CancellationTokenSource _cts;
+
         readonly List<string> _damaged = new();
         int _penetrateLeft;
         int _chainLeft;
+        float _durationLeft;
+
         bool _isTargetLocked;
         bool _isReturning;
+        bool _isFreeze;
 
 
         void Awake()
         {
             _collider = GetComponent<Collider2D>();
+            _rigidbody = GetComponent<Rigidbody2D>();
             _renderer = GetComponent<SpriteRenderer>();
         }
 
@@ -52,29 +60,50 @@ namespace GamePlay.Character.Damage
             _penetrateLeft = (int)PenetrateCount.Value;
             _chainLeft = (int)ChainCount.Value;
             _isTargetLocked = IsTargetLocked;
-            Attack().Forget();
+            _cts = GlobalCancellation.GetCombinedTokenSource(this);
+            Attack(_cts.Token).Forget();
+        }
+
+        void ResetDuration()
+        {
+            _durationLeft = Duration.Value;
         }
 
         void OnTriggerEnter2D(Collider2D other)
         {
-            Damageable damageable = other.GetComponent<Damageable>();
-
-            if (damageable == null
-                || !damageable.CompareTag(TargetTag)
-                || _damaged.Contains(damageable.ID)) // 不能对同一个敌人造成多次伤害
+            if (!other.TryGetComponent(out Damageable damageable) || !damageable.IsDamageable)
             {
+                Debug.Log("not damageable");
                 return;
             }
 
-            ApplyDamage(damageable).Forget();
+            if (_isTargetLocked && Target != null && !Target.GetComponentInChildren<Damageable>().Equals(damageable))
+            {
+                Debug.Log("not target");
+                return;
+            }
+
+            if (!damageable.CompareTag(TargetTag))
+            {
+                Debug.Log("not target tag");
+                return;
+            }
+
+            if (_damaged.Contains(damageable.ID)) // 不能对同一个敌人造成多次伤害
+            {
+                Debug.Log("already damaged");
+                return;
+            }
+
+            ApplyDamage(damageable);
         }
 
-        async UniTaskVoid ApplyDamage(IDamageable damageable)
+        void ApplyDamage(IDamageable damageable)
         {
             _damaged.Add(damageable.ID);
+
             var damage = new AttackDamage(this, damageable, Keywords, DamageType.Simple, Damage.BaseValue, 1, 1);
             damage.Apply();
-            _collider.enabled = false;
 
             if (_isReturning)
             {
@@ -85,28 +114,25 @@ namespace GamePlay.Character.Damage
             if (!_isTargetLocked && _penetrateLeft > 0)
             {
                 _penetrateLeft--;
-                _collider.enabled = true;
                 return;
             }
-
-            if (_chainLeft > 0)
+            else if (_chainLeft > 0)
             {
                 _chainLeft--;
                 if (Chain())
                 {
-                    _collider.enabled = true;
                     return;
                 }
             }
-
-            if (SplitCount.Value > 0)
+            else if (SplitCount.Value > 0)
             {
                 Split();
+                return;
             }
-
-            if (CanReturn)
+            else if (CanReturn)
             {
-                await Return();
+                Return();
+                return;
             }
 
             Cancel().Forget();
@@ -119,71 +145,99 @@ namespace GamePlay.Character.Damage
 
         bool Chain()
         {
-            Target = this.GetSystem<PositionQuerySystem>().QueryClosest(TargetTag, transform.position, _damaged);
-            if (Target == null)
+            Transform newTarget = this.GetSystem<PositionQuerySystem>().QueryClosest(TargetTag, transform.position, _damaged);
+            if (newTarget == null)
             {
                 Debug.LogError("Chain failed");
                 return false;
             }
+
+            Target = newTarget;
+            _isTargetLocked = true;
 
             Direction = (Target.position - transform.position).normalized;
             transform.right = Direction;
             return true;
         }
 
-        async UniTask Return()
+        void Return()
         {
             _isReturning = true;
             Target = AttackerController.CharacterController.CharacterModel.Transform;
             Direction = Target.position - transform.position;
             transform.right = Direction;
             _isTargetLocked = true;
-            _collider.enabled = true;
-
-            while (Vector2.SqrMagnitude(Target.position - transform.position) > 0.1f)
-            {
-                Move();
-                await UniTask.WaitForFixedUpdate(GlobalCancellation.GetCombinedTokenSource(this).Token);
-            }
         }
 
         void Move()
         {
-            if (_isTargetLocked && Target != null)
+            if (_isFreeze)
             {
-                Direction = ((Vector2)(Target.position - transform.position)).normalized;
+                return;
             }
 
-            transform.Translate(ProjectileSpeed.Value * Time.fixedDeltaTime * Direction, Space.World);
-            transform.Rotate(0, 0, _rotateSpeed * 360 * Time.fixedDeltaTime);
+            if (_isTargetLocked)
+            {
+                if (Target == null)
+                {
+                    Target = this.GetSystem<PositionQuerySystem>().QueryClosest(TargetTag, transform.position, _damaged);
+                    if (Target == null)
+                    {
+                        Debug.LogError("Can't find target");
+                        return;
+                    }
+                }
+
+                Direction = ((Vector2)(Target.position - transform.position)).normalized;
+                if ((transform.position - Target.position).sqrMagnitude > 1f)
+                {
+                    if (_collider.enabled)
+                    {
+                        _collider.enabled = false;
+                    }
+                }
+                else
+                {
+                    if (!_collider.enabled)
+                    {
+                        _collider.enabled = true;
+                    }
+                }
+            }
+
+            _rigidbody.MovePosition(_rigidbody.position + ProjectileSpeed.Value * Time.fixedDeltaTime * Direction);
+            _rigidbody.MoveRotation(_rigidbody.rotation + _rotateSpeed * 360 * Time.fixedDeltaTime);
         }
 
-        protected override async UniTask Play()
+        protected override async UniTask Play(CancellationToken cancellationToken)
         {
             if (Target != null)
             {
                 Direction = Target.position - transform.position;
             }
+            else
+            {
+                Direction = transform.right;
+            }
 
             // 方向产生一定随机性
-            float angle = UnityEngine.Random.Range(0, 2 * Mathf.PI);
+                float angle = UnityEngine.Random.Range(0, 2 * Mathf.PI);
             var randomDirection = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
             Direction = (Direction + _randomDirectionFactor * Direction.magnitude * randomDirection).normalized;
             transform.right = Direction;
 
-            float leftTime = Duration.Value;
-            CancellationTokenSource cts = GlobalCancellation.GetCombinedTokenSource(this);
+            ResetDuration();
 
-            while (!_isReturning && leftTime > 0)
+            while (!_isReturning && _durationLeft > 0)
             {
-                cts.Token.ThrowIfCancellationRequested();
+                cancellationToken.ThrowIfCancellationRequested();
                 Move();
-                leftTime -= Time.fixedDeltaTime;
-                await UniTask.WaitForFixedUpdate(cts.Token);
+                _durationLeft -= Time.fixedDeltaTime;
+                await UniTask.WaitForFixedUpdate(cancellationToken);
             }
         }
 
-        public override async UniTaskVoid Attack()
+        public override async UniTaskVoid Attack(CancellationToken cancellationToken)
         {
             // TODO 暂时性处理 WoodOnUse
             if (WoodOnUse.Value > 0)
@@ -196,18 +250,19 @@ namespace GamePlay.Character.Damage
 
             try
             {
-                await Play();
+                await Play(cancellationToken);
 
                 if (CanReturn && !_isReturning)
                 {
-                    await Return();
+                    Return();
                 }
 
                 if (_isReturning)
                 {
                     while (Vector2.SqrMagnitude(Target.position - transform.position) > 0.1f)
                     {
-                        await UniTask.WaitForFixedUpdate(GlobalCancellation.GetCombinedTokenSource(this).Token);
+                        cancellationToken.ThrowIfCancellationRequested();
+                        await UniTask.WaitForFixedUpdate(cancellationToken);
                     }
                 }
 
@@ -222,9 +277,10 @@ namespace GamePlay.Character.Damage
 
         public override async UniTaskVoid Cancel()
         {
-            AttackerController?.RemoveAttacker(this);
+            _cts.Cancel();
             if (this != null)
             {
+                AttackerController?.RemoveAttacker(this);
                 Addressables.ReleaseInstance(gameObject);
             }
 

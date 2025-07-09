@@ -2,9 +2,9 @@
 
 namespace GamePlay.Character.Player
 {
-    public class PlayerPositionQuery : AbstractQuery<Vector3>
+    public class PlayerPositionQuery : AbstractQuery<Vector2>
     {
-        protected override Vector3 OnDo()
+        protected override Vector2 OnDo()
         {
             return this.GetModel<PlayersModel>().Current.Position;
         }

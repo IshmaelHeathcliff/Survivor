@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
+using Core;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -8,6 +10,8 @@ namespace GamePlay.Character.Damage
     {
         Collider2D _collider;
 
+        CancellationTokenSource _cts;
+
 
         void Awake()
         {
@@ -16,25 +20,26 @@ namespace GamePlay.Character.Damage
 
         void Start()
         {
-            // _collider.enabled = false;
-
+            _cts = GlobalCancellation.GetCombinedTokenSource(this);
+            Attack(_cts.Token).Forget();
         }
 
-        protected override UniTask Play()
+        protected override UniTask Play(CancellationToken cancellationToken)
         {
             // _collider.enabled = true;
             // TODO: 添加攻击特效
             return UniTask.CompletedTask;
         }
 
-        public override async UniTaskVoid Attack()
+        public override async UniTaskVoid Attack(CancellationToken cancellationToken)
         {
-            await Play();
+            await Play(cancellationToken);
         }
 
 
         public override async UniTaskVoid Cancel()
         {
+            _cts.Cancel();
             await UniTask.CompletedTask;
         }
 

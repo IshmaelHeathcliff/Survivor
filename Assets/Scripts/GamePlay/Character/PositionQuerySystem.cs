@@ -32,8 +32,8 @@ namespace GamePlay.Character
             float radiusSquared = radius * radius;
             return GetTransforms(tag)
                 .Where(pair => exclude == null || !exclude.Contains(pair.Key))
-                .Where(pair => Vector2.SqrMagnitude((Vector2)pair.Value.position - position) <= radiusSquared)
-                .OrderBy(pair => Vector2.SqrMagnitude((Vector2)pair.Value.position - position))
+                .Where(pair => ((Vector2)pair.Value.position - position).sqrMagnitude <= radiusSquared)
+                .OrderBy(pair => ((Vector2)pair.Value.position - position).sqrMagnitude)
                 .Select(pair => pair.Value)
                 .FirstOrDefault();
         }
@@ -42,7 +42,7 @@ namespace GamePlay.Character
         {
             return GetTransforms(tag)
                 .Where(pair => exclude == null || !exclude.Contains(pair.Key))
-                .OrderBy(pair => Vector2.SqrMagnitude((Vector2)pair.Value.position - position))
+                .OrderBy(pair => ((Vector2)pair.Value.position - position).sqrMagnitude)
                 .Select(pair => pair.Value)
                 .FirstOrDefault();
         }

@@ -1,4 +1,6 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System;
+using Core;
+using Cysharp.Threading.Tasks;
 using GamePlay.Character.Damage;
 using UnityEngine;
 
@@ -7,6 +9,8 @@ namespace GamePlay.Character.Player
     [RequireComponent(typeof(Collider2D))]
     public class PlayerDamageable : Damageable
     {
+        [SerializeField] float _invincibleTime = 1f;
+
         protected override void OnInit()
         {
             base.OnInit();
@@ -21,6 +25,32 @@ namespace GamePlay.Character.Player
 
             OnHurt.Register(() => { }).UnRegisterWhenDisabled(this);
             OnDeath.Register(() => Dead().Forget()).UnRegisterWhenDisabled(this);
+        }
+
+        public override void TakeDamage(float damage)
+        {
+            if (!IsDamageable)
+            {
+                return;
+            }
+
+            Health.ChangeCurrentValue(-damage);
+            // Debug.Log($"TakeDamage: {damage}, Left Health: {Health.CurrentValue}");
+            OnHurt.Trigger();
+
+            if (Health.CurrentValue <= 0)
+            {
+                OnDeath.Trigger();
+            }
+
+            Invincible().Forget();
+        }
+
+        async UniTaskVoid Invincible()
+        {
+            IsDamageable = false;
+            await UniTask.Delay(TimeSpan.FromSeconds(_invincibleTime), cancellationToken: GlobalCancellation.GetCombinedTokenSource(this).Token);
+            IsDamageable = true;
         }
 
         async UniTaskVoid Dead()

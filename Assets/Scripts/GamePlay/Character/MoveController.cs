@@ -1,4 +1,6 @@
-﻿using Core;
+﻿using System;
+using System.Threading;
+using Core;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -11,7 +13,7 @@ namespace GamePlay.Character
         Vector2 Direction { get; set; }
         Vector2 Position { get; set; }
         void Face(Vector2 direction);
-        void Freeze();
+        void Stop();
         void MoveTo(Vector2 position);
     }
 
@@ -59,14 +61,35 @@ namespace GamePlay.Character
 
         public async UniTask PlayAnimation(string stateName)
         {
-            Animator.Play(stateName);
-            await UniTask.WaitUntil(() => Animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f, cancellationToken: GlobalCancellation.GetCombinedTokenSource(this).Token);
+            try
+            {
+                CancellationTokenSource cts = GlobalCancellation.GetCombinedTokenSource(this);
+
+                Animator.Play(stateName);
+                await UniTask.Yield(PlayerLoopTiming.FixedUpdate, cancellationToken: cts.Token);
+
+                await UniTask.WaitUntil(() => Animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f, cancellationToken: cts.Token);
+            }
+            catch (OperationCanceledException)
+            {
+            }
         }
 
         public async UniTask PlayAnimation(int stateNameHash)
         {
-            Animator.Play(stateNameHash);
-            await UniTask.WaitUntil(() => Animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f, cancellationToken: GlobalCancellation.GetCombinedTokenSource(this).Token);
+            try
+            {
+                CancellationTokenSource cts = GlobalCancellation.GetCombinedTokenSource(this);
+
+                Animator.Play(stateNameHash);
+                await UniTask.Yield(PlayerLoopTiming.FixedUpdate, cancellationToken: cts.Token);
+
+                AnimatorStateInfo stateInfo = Animator.GetCurrentAnimatorStateInfo(0);
+                await UniTask.Delay(TimeSpan.FromSeconds(stateInfo.length), cancellationToken: cts.Token);
+            }
+            catch (OperationCanceledException)
+            {
+            }
         }
 
         public virtual void Face(Vector2 direction)
@@ -76,7 +99,7 @@ namespace GamePlay.Character
             Direction = direction;
         }
 
-        public virtual void Freeze()
+        public virtual void Stop()
         {
             Rigidbody.linearVelocity = Vector2.zero;
         }

@@ -50,12 +50,12 @@ namespace GamePlay.Character.Enemy
             }
         }
 
-        Vector3 GetRandomPosition()
+        Vector2 GetRandomPosition()
         {
-            Vector3 playerPosition = this.SendQuery(new PlayerPositionQuery());
+            Vector2 playerPosition = this.SendQuery(new PlayerPositionQuery());
             float angle = Random.Range(0, 2 * Mathf.PI);
-            var randomDirection = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0);
-            Vector3 randomPosition = playerPosition + randomDirection * Random.Range(_minDistance, _maxDistance);
+            var randomDirection = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+            Vector2 randomPosition = playerPosition + randomDirection * Random.Range(_minDistance, _maxDistance);
             return randomPosition;
         }
 
