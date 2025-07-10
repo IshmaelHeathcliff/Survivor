@@ -20,6 +20,7 @@ namespace GamePlay.Character.Damage
     [RequireComponent(typeof(Collider2D), typeof(SpriteRenderer))]
     public class ProjectileAttacker : Attacker, IProjectileAttacker
     {
+        [SerializeField] float _collisionRadius = 1f;
         [SerializeField] float _rotateSpeed;
         [SerializeField] float _randomDirectionFactor = 0.5f;
 
@@ -73,25 +74,25 @@ namespace GamePlay.Character.Damage
         {
             if (!other.TryGetComponent(out Damageable damageable) || !damageable.IsDamageable)
             {
-                Debug.Log("not damageable");
+                // Debug.Log("not damageable");
                 return;
             }
 
             if (_isTargetLocked && Target != null && !Target.GetComponentInChildren<Damageable>().Equals(damageable))
             {
-                Debug.Log("not target");
+                // Debug.Log("not target");
                 return;
             }
 
             if (!damageable.CompareTag(TargetTag))
             {
-                Debug.Log("not target tag");
+                // Debug.Log("not target tag");
                 return;
             }
 
             if (_damaged.Contains(damageable.ID)) // 不能对同一个敌人造成多次伤害
             {
-                Debug.Log("already damaged");
+                // Debug.Log("already damaged");
                 return;
             }
 
@@ -102,8 +103,10 @@ namespace GamePlay.Character.Damage
         {
             _damaged.Add(damageable.ID);
 
-            var damage = new AttackDamage(this, damageable, Keywords, DamageType.Simple, Damage.BaseValue, 1, 1);
+            var damage = new AttackDamage(this, damageable, Keywords, DamageType.Simple, Damage.BaseValue, 1f, 1f);
+            Debug.Log($"Base Damage: {Damage.BaseValue}");
             damage.Apply();
+            Debug.Log($"Skill Damage: {Damage.GetValueByKeywords(Keywords)}");
 
             if (_isReturning)
             {
@@ -189,7 +192,7 @@ namespace GamePlay.Character.Damage
                 }
 
                 Direction = ((Vector2)(Target.position - transform.position)).normalized;
-                if ((transform.position - Target.position).sqrMagnitude > 1f)
+                if ((transform.position - Target.position).sqrMagnitude > _collisionRadius * _collisionRadius)
                 {
                     if (_collider.enabled)
                     {
