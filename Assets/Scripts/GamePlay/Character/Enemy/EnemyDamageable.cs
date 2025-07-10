@@ -40,7 +40,7 @@ namespace GamePlay.Character.Enemy
             }
 
             Health.ChangeCurrentValue(-damage);
-            Debug.Log($"TakeDamage: {damage}, Left Health: {Health.CurrentValue}");
+            // Debug.Log($"TakeDamage: {damage}, Left Health: {Health.CurrentValue}");
             _fsm.ChangeState(EnemyStateID.Hurt);
             OnHurt.Trigger();
         }

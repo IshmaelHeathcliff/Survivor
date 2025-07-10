@@ -52,6 +52,7 @@ namespace GamePlay.Character.Damage
                 damage *= criticalMultiplier / 100f;
             }
 
+            // Debug.Log($"AttackDamage: {damage}");
             Damageable.TakeDamage(damage);
         }
 

@@ -30,7 +30,7 @@ namespace GamePlay.Character.Damage
 
         public override float Calculate()
         {
-            return Attacker.Damage.GetValue(BaseDamage, AddedMultiplier);
+            return Attacker.Damage.GetValueByKeywords(BaseDamage, Keywords, AddedMultiplier);
         }
     }
 }
