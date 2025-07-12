@@ -1,4 +1,4 @@
-﻿using GamePlay.Character.State;
+﻿using GamePlay.State;
 using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;

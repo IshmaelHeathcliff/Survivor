@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using GamePlay.Character.Stat;
-using GamePlay.Character.State;
+using GamePlay.Stat;
+using GamePlay.State;
 using GamePlay.Item;
 using GamePlay.Skill;
 using UnityEngine;

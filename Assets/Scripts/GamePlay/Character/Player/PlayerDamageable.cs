@@ -1,7 +1,7 @@
 ﻿using System;
 using Core;
 using Cysharp.Threading.Tasks;
-using GamePlay.Character.Damage;
+using GamePlay.Damage;
 using UnityEngine;
 
 namespace GamePlay.Character.Player

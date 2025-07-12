@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using GamePlay.Character;
-using GamePlay.Character.Damage;
 using Cysharp.Threading.Tasks;
 using Data.Config;
 using UnityEngine;
+using GamePlay.Damage.Attackers;
 
 namespace GamePlay.Skill.Effect
 {
@@ -16,14 +16,16 @@ namespace GamePlay.Skill.Effect
             Description = $"创建攻击器 {config.AttackerID}";
         }
 
-        async UniTaskVoid CreateAttacker()
+        async UniTaskVoid SetAttacker()
         {
-            IEnumerable<IAttacker> attackers = await Model.Controller.AttackerController.CreateAttackers(Owner.ID, SkillEffectConfig.AttackerID);
             if (Owner is not AttackSkill attackSkill)
             {
                 Debug.LogError("AttackEffect is not owned by an AttackSkill");
                 return;
             }
+
+            List<IAttacker> attackers = await Model.Controller.AttackerController.GetAttackers(Owner.ID, SkillEffectConfig.AttackerID);
+
             foreach (IAttacker attacker in attackers)
             {
                 attacker.SetSkill(attackSkill);
@@ -34,7 +36,7 @@ namespace GamePlay.Skill.Effect
 
         protected override void OnApply()
         {
-            CreateAttacker().Forget();
+            SetAttacker().Forget();
         }
 
         protected override void OnCancel()

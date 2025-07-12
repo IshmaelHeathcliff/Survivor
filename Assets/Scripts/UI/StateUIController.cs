@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using GamePlay.Character.State;
+using GamePlay.State;
 using UnityEngine;
 
 namespace UI
@@ -25,7 +25,7 @@ namespace UI
 
         async UniTaskVoid AddStateAsync(IState state)
         {
-            StateUI stateUI = await _pool.Pop();
+            StateUI stateUI = await _pool.Allocate();
 
             if (_stateUIs.ContainsKey(state.GetID()))
             {
@@ -46,7 +46,7 @@ namespace UI
         {
             if (_stateUIs.Remove(id, out StateUI stateUI))
             {
-                _pool.Push(stateUI);
+                _pool.Recycle(stateUI);
             }
         }
 

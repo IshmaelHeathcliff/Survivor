@@ -1,10 +1,10 @@
 ﻿using Core;
 using Core.Scene;
 using GamePlay.Character.Enemy;
-using GamePlay.Character.State;
-using GamePlay.Character.Modifier;
+using GamePlay.State;
+using GamePlay.Modifier;
 using GamePlay.Character.Player;
-using GamePlay.Character.Damage;
+using GamePlay.Damage.Attackers;
 using Data.SaveLoad;
 using GamePlay.Item;
 using GamePlay.Skill;
@@ -27,7 +27,7 @@ public class GameFrame : Architecture<GameFrame>
         RegisterSystem(new SkillReleaseSystem());
         RegisterSystem(new ResourceSystem());
         RegisterSystem(new CountSystem());
-        RegisterSystem(new AttackerCreateSystem());
+        RegisterSystem(new AttackerSystem());
         RegisterSystem(new PositionQuerySystem());
 
         RegisterUtility(new SaveLoadUtility());

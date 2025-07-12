@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Cysharp.Threading.Tasks;
-using GamePlay.Character.Damage;
-using GamePlay.Character.Enemy;
-using UnityEngine;
+using GamePlay.Damage;
+using GamePlay.Damage.Attackers;
 using UnityEngine.InputSystem;
 using InputSystem = Core.InputSystem;
 
@@ -12,24 +12,16 @@ namespace GamePlay.Character.Player
     {
         PlayerInput.PlayerActions _playerInput;
 
-        protected override async UniTask<IEnumerable<IAttacker>> CreateAttackerInternal(string skillID, string attackerID)
+        public override async UniTask<List<IAttacker>> GetAttackers(string skillID, string attackerID)
         {
-            // //向鼠标位置发射
-            // Vector2 playerPos = this.SendQuery(new PlayerPositionQuery());
-            // Vector2 direction = ((Vector2)Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()) - playerPos).normalized;
+            List<IAttacker> attackers = await base.GetAttackers(skillID, attackerID);
 
-            // var attackers = (List<IAttacker>)await GetOrCreateAttacker(skillID, attackerID);
-
-            // foreach (IAttacker attacker in attackers)
-            // {
-            //     float angle = Random.Range(0, 2 * Mathf.PI);
-            //     var randomDirection = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
-            //     attacker.Direction = (direction + randomDirection * direction.magnitude / 2).normalized;
-            // }
-            // transform.DetachChildren();
+            if (attackerID == "self")
+            {
+                return attackers;
+            }
 
             // 向最近敌人位置发射
-            var attackers = (List<IAttacker>)await GetOrCreateAttacker(skillID, attackerID);
             List<string> selected = new();
             foreach (IAttacker attacker in attackers)
             {
@@ -40,7 +32,7 @@ namespace GamePlay.Character.Player
                 }
             }
 
-            transform.DetachChildren();
+            AttackerParent.DetachChildren();
             return attackers;
         }
 

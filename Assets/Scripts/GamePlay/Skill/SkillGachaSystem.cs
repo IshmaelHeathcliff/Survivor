@@ -253,12 +253,12 @@ namespace GamePlay.Skill
         void OnSkillRemoved(SkillRemovedEvent e)
         {
             // If this skill is a component in any remove rule, assume it's consumed and should not be added back to the pool.
-            // if (_skillRemoveRules.Any(rule => rule.SkillIDsToRemove.Contains(e.SkillID)))
+            // if (_skillRemoveRules.Any(rule => rule.SkillIDsToRemove.Contains(e.Skill.ID)))
             // {
             //     return;
             // }
 
-            // SkillConfig skillConfig = _skillSystem.GetSkillConfig(e.SkillID);
+            // SkillConfig skillConfig = _skillSystem.GetSkillConfig(e.Skill.ID);
             // if (skillConfig != null)
             // {
             //     e.Model.SkillPool.AddSkill(skillConfig);

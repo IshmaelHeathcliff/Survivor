@@ -1,10 +1,11 @@
 using UnityEngine;
 using Core;
-using GamePlay.Character.Damage;
-using GamePlay.Character.Modifier;
-using GamePlay.Character.Stat;
+using GamePlay.Damage;
+using GamePlay.Modifier;
+using GamePlay.Stat;
 using UnityEngine.AddressableAssets;
 using GamePlay.Skill;
+using GamePlay.Damage.Attackers;
 
 namespace GamePlay.Character
 {

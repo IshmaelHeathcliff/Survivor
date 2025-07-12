@@ -47,7 +47,7 @@ namespace GamePlay.Skill
                 return;
             }
 
-            _repetitiveSkills.Remove(e.SkillID);
+            _repetitiveSkills.Remove(e.Skill.ID);
         }
 
         [Button]

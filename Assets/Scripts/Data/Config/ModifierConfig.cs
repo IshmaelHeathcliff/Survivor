@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using GamePlay.Character.Modifier;
+using GamePlay.Modifier;
 using Sirenix.OdinInspector;
 
 namespace Data.Config
