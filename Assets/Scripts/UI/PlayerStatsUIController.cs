@@ -1,5 +1,5 @@
 ﻿using System.Text;
-using GamePlay.Character.Stat;
+using GamePlay.Stat;
 using GamePlay.Character.Player;
 using Sirenix.OdinInspector;
 using GamePlay.Skill;

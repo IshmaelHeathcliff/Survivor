@@ -1,7 +1,7 @@
 ﻿using Core;
 using Cysharp.Threading.Tasks;
-using GamePlay.Character.Modifier;
-using GamePlay.Character.Stat;
+using GamePlay.Modifier;
+using GamePlay.Stat;
 using GamePlay.Item;
 using GamePlay.Skill;
 using UnityEngine;

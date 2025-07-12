@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using GamePlay.Character.State;
+using GamePlay.State;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using GamePlay.Character.Player;

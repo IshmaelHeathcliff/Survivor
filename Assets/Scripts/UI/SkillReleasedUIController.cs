@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Text;
 using Cysharp.Threading.Tasks;
 using GamePlay.Character.Player;
-using GamePlay.Character.Stat;
+using GamePlay.Stat;
 using GamePlay.Skill;
 using TMPro;
 using UnityEngine;

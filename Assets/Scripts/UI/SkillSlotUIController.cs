@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using GamePlay.Character.Player;
-using GamePlay.Character.Stat;
+using GamePlay.Stat;
 using GamePlay.Skill;
 using TMPro;
 using UnityEngine;
@@ -82,7 +82,7 @@ namespace UI
 
             foreach (SkillSlotUI slot in _skillSlotUIs)
             {
-                if (slot.Skill != null && slot.Skill.ID == e.SkillID)
+                if (slot.Skill != null && slot.Skill == e.Skill)
                 {
                     slot.SetSkill();
                     break;

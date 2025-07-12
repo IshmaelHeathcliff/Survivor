@@ -1,5 +1,5 @@
 using Data.Config;
-using GamePlay.Character.Stat;
+using GamePlay.Stat;
 
 namespace GamePlay.Skill
 {

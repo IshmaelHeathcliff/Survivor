@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Core;
 using Cysharp.Threading.Tasks;
-using GamePlay.Character.Damage;
+using GamePlay.Damage.Attackers;
 
 namespace GamePlay.Character.Enemy
 {
@@ -10,20 +10,13 @@ namespace GamePlay.Character.Enemy
         FSM<EnemyStateID> _fsm;
         public FSM<EnemyStateID> FSM => _fsm;
 
-        AttackerCreateSystem _attackerCreateSystem;
+        AttackerSystem _attackerSystem;
 
         protected override void OnInit()
         {
             base.OnInit();
-            _fsm = (CharacterController as IHasFSM<EnemyStateID>).FSM;
-            _attackerCreateSystem = this.GetSystem<AttackerCreateSystem>();
-        }
-
-        protected override async UniTask<IEnumerable<IAttacker>> CreateAttackerInternal(string skillID, string attackerID)
-        {
-            IEnumerable<IAttacker> attackers = await GetOrCreateAttacker(skillID, attackerID);
-
-            return attackers;
+            _fsm = (CharacterController as IHasFSM<EnemyStateID>)?.FSM;
+            _attackerSystem = this.GetSystem<AttackerSystem>();
         }
     }
 }

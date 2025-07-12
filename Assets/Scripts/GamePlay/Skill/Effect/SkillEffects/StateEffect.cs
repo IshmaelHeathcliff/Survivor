@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Data.Config;
 using GamePlay.Character;
-using GamePlay.Character.State;
+using GamePlay.State;
 
 namespace GamePlay.Skill.Effect
 {

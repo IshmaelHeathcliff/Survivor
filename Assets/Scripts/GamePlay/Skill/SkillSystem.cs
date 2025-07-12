@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using Data.Config;
 using GamePlay.Character;
-using GamePlay.Character.Modifier;
+using GamePlay.Modifier;
 using Data.SaveLoad;
 using UnityEngine;
 using System.Linq;
 using GamePlay.Item;
-using GamePlay.Character.State;
+using GamePlay.State;
 
 namespace GamePlay.Skill
 {
@@ -139,9 +139,9 @@ namespace GamePlay.Skill
         {
             SetEnv(model);
 
-            if (SkillCreateEnv.Model.SkillsInSlot.RemoveSkill(id) || SkillCreateEnv.Model.SkillsReleased.RemoveSkill(id))
+            if (SkillCreateEnv.Model.SkillsInSlot.RemoveSkill(id, out ISkill skill) || SkillCreateEnv.Model.SkillsReleased.RemoveSkill(id, out skill))
             {
-                this.SendEvent(new SkillRemovedEvent(id, SkillCreateEnv.Model));
+                this.SendEvent(new SkillRemovedEvent(skill, SkillCreateEnv.Model));
             }
         }
 
@@ -149,7 +149,7 @@ namespace GamePlay.Skill
         {
             foreach (ISkill skill in model.GetAllSkills())
             {
-                this.SendEvent(new SkillRemovedEvent(skill.ID, model));
+                this.SendEvent(new SkillRemovedEvent(skill, model));
             }
 
             model.SkillsInSlot.Clear();

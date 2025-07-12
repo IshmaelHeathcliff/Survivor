@@ -1,5 +1,5 @@
 using GamePlay.Character;
-using GamePlay.Character.Damage;
+using GamePlay.Damage;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 

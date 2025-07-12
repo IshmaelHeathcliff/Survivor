@@ -1,6 +1,6 @@
 using Data.Config;
 using GamePlay.Character;
-using GamePlay.Character.Stat;
+using GamePlay.Stat;
 
 namespace GamePlay.Skill.Effect
 {

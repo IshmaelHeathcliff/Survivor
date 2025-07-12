@@ -1,5 +1,5 @@
 ﻿using GamePlay.Character.Player;
-using GamePlay.Character.Stat;
+using GamePlay.Stat;
 using GamePlay.Item;
 using TMPro;
 using UnityEngine;

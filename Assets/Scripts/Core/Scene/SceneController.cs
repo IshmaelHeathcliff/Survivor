@@ -1,5 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
-using GamePlay.Character.Modifier;
+using GamePlay.Modifier;
 using GamePlay.Character.Player;
 using UnityEngine;
 using UnityEngine.AddressableAssets;

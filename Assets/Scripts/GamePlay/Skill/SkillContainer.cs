@@ -8,7 +8,7 @@ namespace GamePlay.Skill
         bool TryGetSkill(string id, out ISkill skill);
         ISkill GetSkill(string id);
         bool AddSkill(ISkill skill);
-        bool RemoveSkill(string id);
+        bool RemoveSkill(string id, out ISkill skill);
         bool ReleaseSkill(string id, out ISkill skill);
         bool HasSkill(string id);
         bool HasSkills(IEnumerable<string> ids);
@@ -82,11 +82,11 @@ namespace GamePlay.Skill
             return count;
         }
 
-        public bool RemoveSkill(string id)
+        public bool RemoveSkill(string id, out ISkill skill)
         {
-            if (_skills.ContainsKey(id))
+            if (_skills.TryGetValue(id, out skill))
             {
-                _skills[id].Disable();
+                skill.Disable();
                 _skills.Remove(id);
                 return true;
             }
@@ -111,7 +111,7 @@ namespace GamePlay.Skill
             string[] skillIDs = _skills.Keys.ToArray();
             foreach (string id in skillIDs)
             {
-                RemoveSkill(id);
+                RemoveSkill(id, out _);
             }
         }
     }

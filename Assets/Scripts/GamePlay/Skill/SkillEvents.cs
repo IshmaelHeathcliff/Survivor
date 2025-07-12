@@ -56,11 +56,11 @@ namespace GamePlay.Skill
 
     public class SkillRemovedEvent : SkillEvent
     {
-        public string SkillID { get; set; }
+        public ISkill Skill { get; set; }
 
-        public SkillRemovedEvent(string skillID, ICharacterModel model) : base(model)
+        public SkillRemovedEvent(ISkill skill, ICharacterModel model) : base(model)
         {
-            SkillID = skillID;
+            Skill = skill;
         }
     }
 

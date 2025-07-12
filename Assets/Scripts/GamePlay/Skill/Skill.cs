@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Data.Config;
-using GamePlay.Character.Stat;
+using GamePlay.Stat;
 using GamePlay.Skill.Effect;
 
 namespace GamePlay.Skill
