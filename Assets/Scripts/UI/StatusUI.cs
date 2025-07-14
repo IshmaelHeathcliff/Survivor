@@ -1,4 +1,4 @@
-﻿using GamePlay.State;
+﻿using GamePlay.Status;
 using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class StateUI : MonoBehaviour
+    public class StatusUI : MonoBehaviour
     {
         [SerializeField] Slider _slider;
         [SerializeField] TextMeshProUGUI _info;
@@ -28,9 +28,9 @@ namespace UI
             _count.text = $"{count}";
         }
 
-        public void SetInfo(string stateName, string description)
+        public void SetInfo(string statusName, string description)
         {
-            _info.text = $"{stateName}\n<size=60%>{description}";
+            _info.text = $"{statusName}\n<size=60%>{description}";
         }
 
         public void EnableInfo()
@@ -50,22 +50,22 @@ namespace UI
             _icon.sprite = await _iconHandle;
         }
 
-        public void InitStateUI(IState state)
+        public void InitStatusUI(IStatus status)
         {
-            if (state is IStateWithTime bt)
+            if (status is IStatusWithTime bt)
             {
                 _slider.gameObject.SetActive(true);
                 SetTime(bt.TimeLeft, bt.Duration);
             }
 
-            if (state is IStateWithCount bc)
+            if (status is IStatusWithCount bc)
             {
                 _count.gameObject.SetActive(true);
                 SetCount(bc.Count);
             }
 
-            SetInfo(state.GetName(), state.GetDescription());
-            SetIcon(state.GetIconPath()).Forget();
+            SetInfo(status.GetName(), status.GetDescription());
+            SetIcon(status.GetIconPath()).Forget();
         }
 
 

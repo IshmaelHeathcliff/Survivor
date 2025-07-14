@@ -4,9 +4,9 @@ using System.Linq;
 using Data.Config;
 using GamePlay.Modifier;
 
-namespace GamePlay.State
+namespace GamePlay.Status
 {
-    public interface IState
+    public interface IStatus
     {
         string GetName();
         string GetID();
@@ -16,7 +16,7 @@ namespace GamePlay.State
         void Disable();
     }
 
-    public interface IStateWithTime : IState
+    public interface IStatusWithTime : IStatus
     {
         float Duration { get; set; }
         float TimeLeft { get; }
@@ -24,20 +24,20 @@ namespace GamePlay.State
         void DecreaseTime(float time);
     }
 
-    public interface IStateWithCount : IState
+    public interface IStatusWithCount : IStatus
     {
         int Count { get; set; }
         int MaxCount { get; set; }
     }
 
     [Serializable]
-    public class State : IState
+    public class Status : IStatus
     {
-        StateConfig _config;
+        StatusConfig _config;
 
         List<IModifier> _modifiers;
 
-        public State(StateConfig config, IEnumerable<IModifier> entries)
+        public Status(StatusConfig config, IEnumerable<IModifier> entries)
         {
             _config = config;
             _modifiers = entries.ToList();
@@ -81,11 +81,11 @@ namespace GamePlay.State
         }
     }
 
-    public class StateWithTime : State, IStateWithTime
+    public class StatusWithTime : Status, IStatusWithTime
     {
         public float Duration { get; set; }
         public float TimeLeft { get; private set; }
-        public StateWithTime(StateConfig config, IEnumerable<IModifier> entries, float time) : base(config, entries)
+        public StatusWithTime(StatusConfig config, IEnumerable<IModifier> entries, float time) : base(config, entries)
         {
             Duration = time;
             TimeLeft = time;
@@ -107,11 +107,11 @@ namespace GamePlay.State
         }
     }
 
-    public class StateWithCount : State, IStateWithCount
+    public class StatusWithCount : Status, IStatusWithCount
     {
         public int Count { get; set; }
         public int MaxCount { get; set; }
-        public StateWithCount(StateConfig config, IEnumerable<IModifier> entries, int maxCount) : base(config, entries)
+        public StatusWithCount(StatusConfig config, IEnumerable<IModifier> entries, int maxCount) : base(config, entries)
         {
             Count = 1;
             MaxCount = maxCount;
@@ -119,11 +119,11 @@ namespace GamePlay.State
         }
     }
 
-    public class StateWithTimeAndCount : StateWithTime, IStateWithCount
+    public class StatusWithTimeAndCount : StatusWithTime, IStatusWithCount
     {
         public int Count { get; set; }
         public int MaxCount { get; set; }
-        public StateWithTimeAndCount(StateConfig config, IEnumerable<IModifier> entries, float time, int maxCount) : base(config, entries, time)
+        public StatusWithTimeAndCount(StatusConfig config, IEnumerable<IModifier> entries, float time, int maxCount) : base(config, entries, time)
         {
             Count = 1;
             MaxCount = maxCount;

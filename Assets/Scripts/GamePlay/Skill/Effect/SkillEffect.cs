@@ -6,7 +6,7 @@ namespace GamePlay.Skill.Effect
 {
     public enum SkillEffectType
     {
-        Attack, Summon, State, Stat, Move, System
+        Attack, Summon, Status, Stat, Move, System
     }
 
     public interface IEffect

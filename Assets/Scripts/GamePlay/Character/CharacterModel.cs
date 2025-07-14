@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using GamePlay.Stat;
-using GamePlay.State;
+using GamePlay.Status;
 using GamePlay.Item;
 using GamePlay.Skill;
 using UnityEngine;
@@ -21,9 +21,9 @@ namespace GamePlay.Character
         bool HasSkills(IEnumerable<string> ids);
     }
 
-    public interface IHasState
+    public interface IHasStatus
     {
-        IStateContainer StateContainer { get; }
+        IStatusContainer StatusContainer { get; }
     }
 
     public interface ICanCountValue
@@ -36,7 +36,7 @@ namespace GamePlay.Character
         IResourceContainer Resources { get; }
     }
 
-    public interface ICharacterModel : IHasSkill, IHasState, ICanCountValue
+    public interface ICharacterModel : IHasSkill, IHasStatus, ICanCountValue
     {
         ICharacterController Controller { get; set; }
 
@@ -86,7 +86,7 @@ namespace GamePlay.Character
 
         public CharacterStats Stats { get; } = new CharacterStats();
 
-        public IStateContainer StateContainer { get; } = new StateContainer();
+        public IStatusContainer StatusContainer { get; } = new StatusContainer();
 
         public Dictionary<string, ValueCounter> CountValues { get; } = new();
 

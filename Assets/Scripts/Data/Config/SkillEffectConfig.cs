@@ -119,22 +119,22 @@ namespace Data.Config
         }
     }
 
-    public class StateEffectConfig : SkillEffectConfig
+    public class StatusEffectConfig : SkillEffectConfig
     {
-        [ShowInInspector] public string StateID { get; set; }
+        [ShowInInspector] public string StatusID { get; set; }
         [ShowInInspector] public List<int> Values { get; set; } = null;
 
-        public StateEffectConfig()
+        public StatusEffectConfig()
         {
             Description = "状态效果";
         }
     }
 
-    public class StateWithTimeEffectConfig : StateEffectConfig
+    public class StatusWithTimeEffectConfig : StatusEffectConfig
     {
         [ShowInInspector] public int Duration { get; set; } = -1;
 
-        public StateWithTimeEffectConfig()
+        public StatusWithTimeEffectConfig()
         {
             Description = "状态效果(持续时间)";
         }

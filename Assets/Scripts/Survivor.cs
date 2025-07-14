@@ -1,7 +1,7 @@
 ﻿using Core;
 using Core.Scene;
 using GamePlay.Character.Enemy;
-using GamePlay.State;
+using GamePlay.Status;
 using GamePlay.Modifier;
 using GamePlay.Character.Player;
 using GamePlay.Damage.Attackers;
@@ -20,7 +20,7 @@ public class GameFrame : Architecture<GameFrame>
 
         RegisterSystem(new InputSystem());
         RegisterSystem(new ModifierSystem());
-        RegisterSystem(new StateCreateSystem());
+        RegisterSystem(new StatusCreateSystem());
         RegisterSystem(new DropSystem());
         RegisterSystem(new SkillSystem());
         RegisterSystem(new SkillGachaSystem()); ;

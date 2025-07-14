@@ -6,7 +6,7 @@ using Data.SaveLoad;
 using UnityEngine;
 using System.Linq;
 using GamePlay.Item;
-using GamePlay.State;
+using GamePlay.Status;
 
 namespace GamePlay.Skill
 {
@@ -17,7 +17,7 @@ namespace GamePlay.Skill
         public ResourceSystem ResourceSystem;
         public CountSystem CountSystem;
         public SkillSystem SkillSystem;
-        public StateCreateSystem StateCreateSystem;
+        public StatusCreateSystem StatusCreateSystem;
     }
 
     public class SkillSystem : AbstractSystem
@@ -183,7 +183,7 @@ namespace GamePlay.Skill
                 ResourceSystem = this.GetSystem<ResourceSystem>(),
                 CountSystem = this.GetSystem<CountSystem>(),
                 SkillSystem = this,
-                StateCreateSystem = this.GetSystem<StateCreateSystem>()
+                StatusCreateSystem = this.GetSystem<StatusCreateSystem>()
             };
         }
     }

@@ -177,7 +177,7 @@ namespace Core
             }
             else
             {
-                Debug.LogError($"State {t} not found");
+                Debug.LogError($"Status {t} not found");
             }
         }
 

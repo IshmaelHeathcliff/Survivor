@@ -10,7 +10,7 @@ namespace Data.Config
         public int Value;
     }
 
-    public class StateConfig
+    public class StatusConfig
     {
         [ShowInInspector] public string ID { get; set; }
         [ShowInInspector] public string Name { get; set; }
