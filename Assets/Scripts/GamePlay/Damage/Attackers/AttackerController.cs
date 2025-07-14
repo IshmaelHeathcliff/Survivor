@@ -99,7 +99,8 @@ namespace GamePlay.Damage.Attackers
 
         public virtual void ClearAttacker()
         {
-            foreach (IAttacker attacker in Attackers)
+            IAttacker[] attackers = Attackers.ToArray();
+            foreach (IAttacker attacker in attackers)
             {
                 attacker.Cancel().Forget();
             }
