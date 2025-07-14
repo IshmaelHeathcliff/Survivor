@@ -1,0 +1,3 @@
+[submodule "Assets/XYZRPGSystem"]
+	path = Assets/XYZRPGSystem
+	url = https://github.com/IshmaelHeathcliff/XYZRPGSystem-Unity.git

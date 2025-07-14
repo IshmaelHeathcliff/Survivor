@@ -1,4 +1,4 @@
-using GamePlay.Skill;
+using Gameplay.Skill;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AddressableAssets;

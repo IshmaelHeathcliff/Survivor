@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using GamePlay.Character.Player;
-using GamePlay.Stat;
+using Gameplay.Character.Player;
+using Gameplay.Stat;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 

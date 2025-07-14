@@ -1,6 +1,6 @@
-﻿using GamePlay.Character.Player;
-using GamePlay.Stat;
-using GamePlay.Item;
+﻿using Gameplay.Character.Player;
+using Gameplay.Stat;
+using Gameplay.Items;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

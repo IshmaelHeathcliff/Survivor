@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Data.Config;
-using GamePlay.Character.Player;
-using GamePlay.Item;
-using GamePlay.Skill;
+using Gameplay.Character.Player;
+using Gameplay.Items;
+using Gameplay.Skill;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.AddressableAssets;

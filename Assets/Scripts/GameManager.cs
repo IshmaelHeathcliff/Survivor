@@ -1,9 +1,9 @@
-﻿using GamePlay.Status;
-using GamePlay.Modifier;
-using GamePlay.Character.Player;
+﻿using Gameplay.Status;
+using Gameplay.Modifier;
+using Gameplay.Character.Player;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using GamePlay.Stat;
+using Gameplay.Stat;
 using Data.SaveLoad;
 using System.Collections.Generic;
 
