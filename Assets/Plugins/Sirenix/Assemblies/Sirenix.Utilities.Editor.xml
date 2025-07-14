@@ -6940,7 +6940,7 @@
             <param name="messageType">Type of the message box.</param>
             <param name="hideDetailedMessage">If set to <c>true</c> the detailed message is hidden.</param>
             <param name="wide">If set to <c>true</c> the message box will be wide.</param>
-            <returns>State of isFolded.</returns>
+            <returns>Status of isFolded.</returns>
         </member>
         <member name="M:Sirenix.Utilities.Editor.SirenixEditorGUI.IconMessageBox(System.String,Sirenix.OdinInspector.SdfIconType,System.Nullable{UnityEngine.Color},UnityEngine.GUIStyle,System.Action{UnityEditor.GenericMenu})">
             <summary>
@@ -7305,7 +7305,7 @@
             </summary>
             <param name="isActive">If <c>true</c> the tab will be the active tab.</param>
             <param name="label">Name for the tab.</param>
-            <returns>State of isActive.</returns>
+            <returns>Status of isActive.</returns>
         </member>
         <member name="M:Sirenix.Utilities.Editor.SirenixEditorGUI.ToolbarTab(System.Boolean,UnityEngine.GUIContent)">
             <summary>
@@ -7313,7 +7313,7 @@
             </summary>
             <param name="isActive">If <c>true</c> the tab will be the active tab.</param>
             <param name="label">Label for the tab.</param>
-            <returns>State of isActive.</returns>
+            <returns>Status of isActive.</returns>
         </member>
         <member name="M:Sirenix.Utilities.Editor.SirenixEditorGUI.DrawSolidRect(UnityEngine.Rect,UnityEngine.Color,System.Boolean)">
             <summary>

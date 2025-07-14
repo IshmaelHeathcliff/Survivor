@@ -43,7 +43,7 @@ namespace TheraBytes.BetterUi
             }
             //else
             //{
-            //    Debug.LogWarning("Active State Transitions cannot be previewed outside play mode.");
+            //    Debug.LogWarning("Active Status Transitions cannot be previewed outside play mode.");
             //}
 
         }

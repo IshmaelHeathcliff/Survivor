@@ -1230,7 +1230,7 @@
             <para>The full path of this property as used by prefab modifications and the deep reflection system, containing all the necessary information to find this property through reflection only.</para>
             </summary>
         </member>
-        <member name="P:Sirenix.OdinInspector.Editor.InspectorProperty.State">
+        <member name="P:Sirenix.OdinInspector.Editor.InspectorProperty.Status">
             <summary>
             The PropertyState of the property at the current draw count index.
             </summary>

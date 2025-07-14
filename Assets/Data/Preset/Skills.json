@@ -530,9 +530,9 @@
         "Interval": 10,
         "ChildEffects": [
           {
-            "$type": "Data.Config.StateWithTimeEffectConfig, Assembly-CSharp",
+            "$type": "Data.Config.StatusWithTimeEffectConfig, Assembly-CSharp",
             "Duration": 3,
-            "StateID": "frenzy",
+            "StatusID": "frenzy",
             "Values": [
               70
             ],

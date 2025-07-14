@@ -57,7 +57,7 @@ namespace GamePlay.Character
             {
                 model.SkillsInSlot.Clear();
                 model.SkillsReleased.Clear();
-                model.StateContainer.Clear();
+                model.StatusContainer.Clear();
                 model.Controller = null;
                 Models.Remove(id);
             }

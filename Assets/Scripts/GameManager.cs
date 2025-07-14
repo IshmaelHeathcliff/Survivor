@@ -1,4 +1,4 @@
-﻿using GamePlay.State;
+﻿using GamePlay.Status;
 using GamePlay.Modifier;
 using GamePlay.Character.Player;
 using Sirenix.OdinInspector;
@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour, IController
 {
     PlayerModel _playerModel;
     ModifierSystem _modifierSystem;
-    StateCreateSystem _stateCreateSystem;
+    StatusCreateSystem _statusCreateSystem;
     SaveLoadUtility _saveLoadUtility;
 
     [Button]
@@ -29,8 +29,8 @@ public class GameManager : MonoBehaviour, IController
     [Button]
     public void AddBuff()
     {
-        IStateWithTime state = _stateCreateSystem.CreateState("1", "player", 4, new List<int> { 20, 20, 20 });
-        _playerModel.StateContainer.AddState(state);
+        IStatusWithTime status = _statusCreateSystem.CreateStatus("1", "player", 4, new List<int> { 20, 20, 20 });
+        _playerModel.StatusContainer.AddStatus(status);
     }
 
     [Button]
@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour, IController
     void Awake()
     {
         _modifierSystem = this.GetSystem<ModifierSystem>();
-        _stateCreateSystem = this.GetSystem<StateCreateSystem>();
+        _statusCreateSystem = this.GetSystem<StatusCreateSystem>();
         _saveLoadUtility = this.GetUtility<SaveLoadUtility>();
     }
 

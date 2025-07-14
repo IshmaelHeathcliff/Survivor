@@ -277,7 +277,7 @@ namespace TheraBytes.BetterUi.Editor
 
 
             // INITIAL STATE
-            if (BoldFoldout("Initial State", ref initialStateExpanded))
+            if (BoldFoldout("Initial Status", ref initialStateExpanded))
             {
                 // Start Location
                 int startLocSelection = Array.IndexOf<string>(fromOptions, startLocProp.stringValue);

@@ -44,10 +44,10 @@ namespace TheraBytes.BetterUi.Editor
 
 
         /// <summary>
-        ///   <para>Can this component be Previewed in its current state?</para>
+        ///   <para>Can this component be Previewed in its current status?</para>
         /// </summary>
         /// <returns>
-        ///   <para>True if this component can be Previewed in its current state.</para>
+        ///   <para>True if this component can be Previewed in its current status.</para>
         /// </returns>
         public override bool HasPreviewGUI()
         {

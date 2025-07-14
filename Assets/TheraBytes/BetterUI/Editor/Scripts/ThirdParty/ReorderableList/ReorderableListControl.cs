@@ -28,14 +28,14 @@ namespace TheraBytes.BetterUi.Editor.ThirdParty
 		/// using System.Collections.Generic;
 		/// using UnityEditor;
 		/// using UnityEngine;
-		/// 
+		///
 		/// public class ExampleWindow : EditorWindow {
 		///     public List<string> wishlist = new List<string>();
-		/// 
+		///
 		///     private void OnGUI() {
 		///         ReorderableListGUI.ListField(wishlist, DrawListItem);
 		///     }
-		/// 
+		///
 		///     private string DrawListItem(Rect position, string value) {
 		///         // Text fields do not like `null` values!
 		///         if (value == null)
@@ -47,14 +47,14 @@ namespace TheraBytes.BetterUi.Editor.ThirdParty
 		/// <code language="unityscript"><![CDATA[
 		/// import Rotorz.ReorderableList;
 		/// import System.Collections.Generic;
-		/// 
+		///
 		/// class ExampleWindow extends EditorWindow {
 		///     var wishlist:List.<String>;
-		/// 
+		///
 		///     function OnGUI() {
 		///         ReorderableListGUI.ListField(wishlist, DrawListItem);
 		///     }
-		/// 
+		///
 		///     function DrawListItem(position:Rect, value:String):String {
 		///         // Text fields do not like `null` values!
 		///         if (value == null)
@@ -85,17 +85,17 @@ namespace TheraBytes.BetterUi.Editor.ThirdParty
 		/// using System.Collections.Generic;
 		/// using UnityEditor;
 		/// using UnityEngine;
-		/// 
+		///
 		/// public class ExampleWindow : EditorWindow {
 		///     private List<string> _list;
-		/// 
+		///
 		///     private void OnEnable() {
 		///         _list = new List<string>();
 		///     }
 		///     private void OnGUI() {
 		///         ReorderableListGUI.ListField(_list, ReorderableListGUI.TextFieldItemDrawer, DrawEmptyMessage);
 		///     }
-		/// 
+		///
 		///     private string DrawEmptyMessage() {
 		///         GUILayout.Label("List is empty!", EditorStyles.miniLabel);
 		///     }
@@ -104,17 +104,17 @@ namespace TheraBytes.BetterUi.Editor.ThirdParty
 		/// <code language="unityscript"><![CDATA[
 		/// import Rotorz.ReorderableList;
 		/// import System.Collections.Generic;
-		/// 
+		///
 		/// class ExampleWindow extends EditorWindow {
 		///     private var _list:List.<String>;
-		/// 
+		///
 		///     function OnEnable() {
 		///         _list = new List.<String>();
 		///     }
 		///     function OnGUI() {
 		///         ReorderableListGUI.ListField(_list, ReorderableListGUI.TextFieldItemDrawer, DrawEmptyMessage);
 		///     }
-		/// 
+		///
 		///     function DrawEmptyMessage() {
 		///         GUILayout.Label('List is empty!', EditorStyles.miniLabel);
 		///     }
@@ -172,7 +172,7 @@ namespace TheraBytes.BetterUi.Editor.ThirdParty
 		}
 
 		/// <summary>
-		/// Generate and draw control from state object.
+		/// Generate and draw control from status object.
 		/// </summary>
 		/// <param name="adaptor">Reorderable list adaptor.</param>
 		/// <param name="drawEmpty">Delegate for drawing empty list.</param>
@@ -186,7 +186,7 @@ namespace TheraBytes.BetterUi.Editor.ThirdParty
 		}
 
 		/// <summary>
-		/// Generate and draw control from state object.
+		/// Generate and draw control from status object.
 		/// </summary>
 		/// <param name="position">Position of control.</param>
 		/// <param name="adaptor">Reorderable list adaptor.</param>
@@ -536,7 +536,7 @@ namespace TheraBytes.BetterUi.Editor.ThirdParty
 
 		#endregion
 
-		#region Control State
+		#region Control Status
 
 		/// <summary>
 		/// Unique Id of control.
@@ -578,7 +578,7 @@ namespace TheraBytes.BetterUi.Editor.ThirdParty
 		private int _newSizeInput;
 
 		/// <summary>
-		/// Prepare initial state for list control.
+		/// Prepare initial status for list control.
 		/// </summary>
 		/// <param name="controlID">Unique ID of list control.</param>
 		/// <param name="adaptor">Reorderable list adaptor.</param>
@@ -1686,13 +1686,13 @@ namespace TheraBytes.BetterUi.Editor.ThirdParty
 		/// protected override bool HandleCommand(string commandName, int itemIndex, IReorderableListAdaptor adaptor) {
 		///     if (base.HandleCommand(itemIndex, adaptor))
 		///         return true;
-		///     
+		///
 		///     // Place custom command handling code here...
 		///     switch (commandName) {
 		///         case "Your Command":
 		///             return true;
 		///     }
-		/// 
+		///
 		///     return false;
 		/// }
 		/// ]]></code>
@@ -1700,13 +1700,13 @@ namespace TheraBytes.BetterUi.Editor.ThirdParty
 		/// function HandleCommand(commandName:String, itemIndex:int, adaptor:IReorderableListAdaptor):boolean {
 		///     if (base.HandleCommand(itemIndex, adaptor))
 		///         return true;
-		///     
+		///
 		///     // Place custom command handling code here...
 		///     switch (commandName) {
 		///         case 'Your Command':
 		///             return true;
 		///     }
-		/// 
+		///
 		///     return false;
 		/// }
 		/// ]]></code>
