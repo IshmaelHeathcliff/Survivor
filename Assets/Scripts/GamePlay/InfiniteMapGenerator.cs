@@ -3,7 +3,7 @@ using UnityEngine.Tilemaps;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace GamePlay
+namespace Gameplay
 {
     [System.Serializable]
     public class TerrainType

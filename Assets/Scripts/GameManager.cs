@@ -1,29 +1,29 @@
-﻿using GamePlay.Status;
-using GamePlay.Modifier;
-using GamePlay.Character.Player;
+﻿using XYZRPGSystem.Gameplay.Status;
+using XYZRPGSystem.Gameplay.Modifier;
+using Gameplay.Character.Player;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using GamePlay.Stat;
-using Data.SaveLoad;
+using XYZRPGSystem.Gameplay.Stat;
 using System.Collections.Generic;
+using XYZRPGSystem.Data.SaveLoad;
 
 public class GameManager : MonoBehaviour, IController
 {
     PlayerModel _playerModel;
     ModifierSystem _modifierSystem;
     StatusCreateSystem _statusCreateSystem;
-    SaveLoadUtility _saveLoadUtility;
+    DataPersistUtility _dataPersistUtility;
 
     [Button]
     public void Save()
     {
-        _saveLoadUtility.SaveAllDataToFile();
+        _dataPersistUtility.SaveAllDataToFile();
     }
 
     [Button]
     public void Load()
     {
-        _saveLoadUtility.LoadAllDataFromFile();
+        _dataPersistUtility.LoadAllDataFromFile();
     }
 
     [Button]
@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour, IController
     {
         _modifierSystem = this.GetSystem<ModifierSystem>();
         _statusCreateSystem = this.GetSystem<StatusCreateSystem>();
-        _saveLoadUtility = this.GetUtility<SaveLoadUtility>();
+        _dataPersistUtility = this.GetUtility<DataPersistUtility>();
     }
 
     void Start()

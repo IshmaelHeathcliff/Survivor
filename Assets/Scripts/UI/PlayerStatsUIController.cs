@@ -1,13 +1,13 @@
 ﻿using System.Text;
-using GamePlay.Stat;
-using GamePlay.Character.Player;
+using XYZRPGSystem.Gameplay.Stat;
+using Gameplay.Character.Player;
 using Sirenix.OdinInspector;
-using GamePlay.Skill;
+using XYZRPGSystem.Gameplay.Skill;
 using TMPro;
 using UnityEngine;
-using Data.SaveLoad;
+using XYZRPGSystem.Data.SaveLoad;
 using System.Collections.Generic;
-using Data.Config;
+using XYZRPGSystem.Data.Config;
 
 namespace UI
 {
@@ -54,7 +54,7 @@ namespace UI
 
         void Awake()
         {
-            _characterStats = SaveLoadManager.Load<List<StatConfig>>("CharacterStats.json", "Preset");
+            _characterStats = SaveLoadManager.Load<List<StatConfig>>("CharacterStats.json", "Preset/JSON");
             this.RegisterEvent<SkillAcquiredEvent>(OnAttackSkillAcquired).UnRegisterWhenGameObjectDestroyed(gameObject);
         }
 

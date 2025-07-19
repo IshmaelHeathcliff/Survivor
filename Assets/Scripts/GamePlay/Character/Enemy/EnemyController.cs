@@ -1,7 +1,13 @@
-﻿namespace GamePlay.Character.Enemy
+﻿using Gameplay.Skill;
+using UnityEngine;
+using XYZRPGSystem.Gameplay.Character;
+
+namespace Gameplay.Character.Enemy
 {
     public class EnemyController : CharacterControllerWithFSM<EnemyModel, EnemiesModel, EnemyStateID>
     {
+        [SerializeField] string _skillPoolPath;
+
         protected override void AddStates()
         {
             FSM.AddState(EnemyStateID.Idle, new EnemyIdleState(FSM, this));
@@ -36,6 +42,8 @@
         {
             base.Start();
             FSM.StartState(EnemyStateID.Idle);
+
+            this.GetSystem<SkillGachaSystem>().InitSkillPool(Model, _skillPoolPath);
         }
 
 

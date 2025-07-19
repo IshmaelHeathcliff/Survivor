@@ -1,13 +1,11 @@
-﻿using System;
-using Core;
-using Cysharp.Threading.Tasks;
-using GamePlay.Damage;
-using GamePlay.Character.Player;
-using GamePlay.Item;
-using UnityEngine;
-using UnityEngine.AddressableAssets;
+﻿using XYZRPGSystem.Core;
+using XYZRPGSystem.Gameplay;
+using Gameplay.Character.Player;
+using Gameplay.Item;
+using XYZRPGSystem.Gameplay.Damage;
+using XYZRPGSystem.Gameplay.Item;
 
-namespace GamePlay.Character.Enemy
+namespace Gameplay.Character.Enemy
 {
     public class EnemyDamageable : Damageable
     {
@@ -26,7 +24,7 @@ namespace GamePlay.Character.Enemy
 
         void Start()
         {
-            SetStats(CharacterController.CharaterStats);
+            SetStats(CharacterController.CharacterStats);
 
             OnHurt.Register(Hurt).UnRegisterWhenDisabled(this);
             OnDeath.Register(Dead).UnRegisterWhenDisabled(this);

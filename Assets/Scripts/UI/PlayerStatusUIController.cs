@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
-using GamePlay.Status;
+using XYZRPGSystem.Gameplay.Status;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using GamePlay.Character.Player;
+using Gameplay.Character.Player;
+using XYZRPGSystem.UI;
 
 
 namespace UI

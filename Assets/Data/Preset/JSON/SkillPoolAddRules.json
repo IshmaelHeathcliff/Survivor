@@ -1,0 +1,28 @@
+[
+  {
+    "$type": "XYZRPGSystem.Data.Config.SpecificSkillsPoolAddRuleConfig, Assembly-CSharp",
+    "RequiredSkillIDs": [
+      "joystick",
+      "button",
+      "case"
+    ],
+    "Name": "人头幸运币",
+    "SkillIDsToAdd": [
+      "lucky_coin"
+    ]
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.SpecificSkillsPoolAddRuleConfig, Assembly-CSharp",
+    "RequiredSkillIDs": [
+      "roulette"
+    ],
+    "Name": "图标",
+    "SkillIDsToAdd": [
+      "bow_icon",
+      "can_icon",
+      "coin_icon",
+      "wood_icon",
+      "cherry_icon"
+    ]
+  }
+]

@@ -15,13 +15,13 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: 7c1749500d6a42b458b62098db2e0195
   m_SerializeEntries:
-  - m_GUID: 142f85506d88f8047a0dc3e07cc5c15c
-    m_Address: Assets/Textures/weapon_skills.aseprite
+  - m_GUID: 2a4e5b1401850e8439853b4d55a5adc0
+    m_Address: Assets/Prefabs/Enemy (1).prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 2a4e5b1401850e8439853b4d55a5adc0
-    m_Address: Assets/Prefabs/Enemy (1).prefab
+  - m_GUID: 2bcd2660ca9b64942af0de543d8d7100
+    m_Address: PlayerInput
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -80,8 +80,8 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b1f0f5feb5d52ce498144de6dc606919
-    m_Address: Assets/Textures/Background
+  - m_GUID: bc64587fc76328242bed88715a651d0a
+    m_Address: Assets/Data/Preset/SO/Attackers.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

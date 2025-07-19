@@ -1,10 +1,10 @@
 ﻿using System;
-using Core;
+using XYZRPGSystem.Core;
 using Cysharp.Threading.Tasks;
-using GamePlay.Damage;
 using UnityEngine;
+using XYZRPGSystem.Gameplay.Damage;
 
-namespace GamePlay.Character.Player
+namespace Gameplay.Character.Player
 {
     [RequireComponent(typeof(Collider2D))]
     public class PlayerDamageable : Damageable
@@ -21,7 +21,7 @@ namespace GamePlay.Character.Player
 
         void Start()
         {
-            SetStats(CharacterController.CharaterStats);
+            SetStats(CharacterController.CharacterStats);
 
             OnHurt.Register(() => { }).UnRegisterWhenDisabled(this);
             OnDeath.Register(() => Dead().Forget()).UnRegisterWhenDisabled(this);

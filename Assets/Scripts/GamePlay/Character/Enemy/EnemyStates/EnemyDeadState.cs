@@ -1,7 +1,7 @@
-﻿using Core;
+﻿using XYZRPGSystem.Core;
 using UnityEngine;
 
-namespace GamePlay.Character.Enemy
+namespace Gameplay.Character.Enemy
 {
     public class EnemyDeadState : EnemyState
     {

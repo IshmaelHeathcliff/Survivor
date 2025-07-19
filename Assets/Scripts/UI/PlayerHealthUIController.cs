@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using GamePlay.Character.Player;
-using GamePlay.Stat;
+using Gameplay.Character.Player;
+using XYZRPGSystem.Gameplay.Stat;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -13,12 +13,12 @@ namespace UI
 
         PlayerModel _model;
 
-        readonly List<HealthUI> _healthUIList = new();
+        readonly List<PlayerHealthUI> _healthUIList = new();
 
         async UniTask SetMaxHealth(int maxHealth)
         {
-            int heartCount = maxHealth / HealthUI.HeartSize;
-            int leftHealth = maxHealth % HealthUI.HeartSize;
+            int heartCount = maxHealth / PlayerHealthUI.HeartSize;
+            int leftHealth = maxHealth % PlayerHealthUI.HeartSize;
 
             if (leftHealth > 0)
             {
@@ -30,16 +30,16 @@ namespace UI
                 for (int i = _healthUIList.Count; i < heartCount; i++)
                 {
                     GameObject obj = await Addressables.InstantiateAsync(_healthUIReference, transform);
-                    _healthUIList.Add(obj.GetComponent<HealthUI>());
+                    _healthUIList.Add(obj.GetComponent<PlayerHealthUI>());
                 }
             }
 
             for (int i = 0; i < _healthUIList.Count; i++)
             {
-                if (maxHealth >= HealthUI.HeartSize)
+                if (maxHealth >= PlayerHealthUI.HeartSize)
                 {
-                    _healthUIList[i].SetMaxHealth(HealthUI.HeartSize);
-                    maxHealth -= HealthUI.HeartSize;
+                    _healthUIList[i].SetMaxHealth(PlayerHealthUI.HeartSize);
+                    maxHealth -= PlayerHealthUI.HeartSize;
                 }
                 else
                 {
@@ -53,10 +53,10 @@ namespace UI
         {
             for (int i = 0; i < _healthUIList.Count; i++)
             {
-                if (health >= HealthUI.HeartSize)
+                if (health >= PlayerHealthUI.HeartSize)
                 {
-                    _healthUIList[i].SetCurrentHealth(HealthUI.HeartSize);
-                    health -= HealthUI.HeartSize;
+                    _healthUIList[i].SetCurrentHealth(PlayerHealthUI.HeartSize);
+                    health -= PlayerHealthUI.HeartSize;
                 }
                 else
                 {

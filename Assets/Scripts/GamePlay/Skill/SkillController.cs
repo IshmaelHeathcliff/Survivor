@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
-using GamePlay.Character;
-using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using XYZRPGSystem.Gameplay.Character;
+using XYZRPGSystem.Gameplay.Skill;
 
-namespace GamePlay.Skill
+namespace Gameplay.Skill
 {
     [RequireComponent(typeof(ICharacterController))]
     public class SkillController : MonoBehaviour, IController

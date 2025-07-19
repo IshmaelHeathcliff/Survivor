@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using Cysharp.Threading.Tasks;
 using System.Threading;
-using GamePlay.Character.Player;
+using XYZRPGSystem.Gameplay.Character;
+using Gameplay.Character.Player;
 
-namespace GamePlay.Character.Enemy
+namespace Gameplay.Character.Enemy
 {
     public class EnemyMoveController : MoveController
     {

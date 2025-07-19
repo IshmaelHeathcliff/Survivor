@@ -1,16 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
-using GamePlay.Damage;
-using GamePlay.Damage.Attackers;
 using UnityEngine.InputSystem;
-using InputSystem = Core.InputSystem;
+using XYZRPGSystem.Gameplay.Character;
+using XYZRPGSystem.Gameplay.Damage;
+using XYZRPGSystem.Gameplay.Damage.Attackers;
+using InputSystem = XYZRPGSystem.Core.InputSystem;
 
-namespace GamePlay.Character.Player
+namespace Gameplay.Character.Player
 {
     public class PlayerAttackerController : AttackerController
     {
-        PlayerInput.PlayerActions _playerInput;
+        InputActionMap _playerInput;
 
         public override async UniTask<List<IAttacker>> GetAttackers(string skillID, string attackerID)
         {
@@ -43,12 +44,12 @@ namespace GamePlay.Character.Player
 
         void RegisterActions()
         {
-            _playerInput.Attack.performed += AttackAction;
+            _playerInput.FindAction("Attack").performed += AttackAction;
         }
 
         void UnregisterActions()
         {
-            _playerInput.Attack.performed -= AttackAction;
+            _playerInput.FindAction("Attack").performed -= AttackAction;
         }
 
         void OnEnable()

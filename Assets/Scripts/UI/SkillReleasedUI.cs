@@ -1,4 +1,4 @@
-using GamePlay.Skill;
+using XYZRPGSystem.Gameplay.Skill;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AddressableAssets;

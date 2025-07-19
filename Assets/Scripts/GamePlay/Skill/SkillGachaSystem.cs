@@ -1,19 +1,18 @@
 using System.Collections.Generic;
-using System.Linq;
-using Data.Config;
-using Data.SaveLoad;
-using GamePlay.Character;
-using GamePlay.Character.Player;
-using GamePlay.Item;
+using XYZRPGSystem.Data.Config;
+using XYZRPGSystem.Data.SaveLoad;
+using XYZRPGSystem.Gameplay.Character;
+using XYZRPGSystem.Gameplay.Item;
+using XYZRPGSystem.Gameplay.Skill;
 using Random = UnityEngine.Random;
 
-namespace GamePlay.Skill
+namespace Gameplay.Skill
 {
 
 
     public class SkillGachaSystem : AbstractSystem
     {
-        const string PresetPath = "Preset";
+        const string PresetPath = "Preset/JSON";
         const string AddRulesPath = "SkillPoolAddRules.json";
         const string RemoveRulesPath = "SkillPoolRemoveRules.json";
         SkillSystem _skillSystem;
@@ -37,14 +36,14 @@ namespace GamePlay.Skill
         void Load()
         {
             _skillAddRules.Clear();
-            List<SkillPoolAddRuleConfig> addRuleConfigs = this.GetUtility<SaveLoadUtility>().Load<List<SkillPoolAddRuleConfig>>(AddRulesPath, PresetPath);
+            List<SkillPoolAddRuleConfig> addRuleConfigs = SaveLoadManager.Load<List<SkillPoolAddRuleConfig>>(AddRulesPath, PresetPath);
             foreach (SkillPoolAddRuleConfig config in addRuleConfigs)
             {
                 _skillAddRules.Add(_skillPoolAddRuleLoader.Load(config));
             }
 
             _skillRemoveRules.Clear();
-            List<SkillPoolRemoveRuleConfig> removeRuleConfigs = this.GetUtility<SaveLoadUtility>().Load<List<SkillPoolRemoveRuleConfig>>(RemoveRulesPath, PresetPath);
+            List<SkillPoolRemoveRuleConfig> removeRuleConfigs = SaveLoadManager.Load<List<SkillPoolRemoveRuleConfig>>(RemoveRulesPath, PresetPath);
             foreach (SkillPoolRemoveRuleConfig config in removeRuleConfigs)
             {
                 _skillRemoveRules.Add(_skillPoolRemoveRuleLoader.Load(config));
@@ -57,7 +56,7 @@ namespace GamePlay.Skill
 
         public void InitSkillPool(ICharacterModel model, string path)
         {
-            List<SkillInPool> initSkills = this.GetUtility<SaveLoadUtility>().Load<List<SkillInPool>>(path, PresetPath);
+            List<SkillInPool> initSkills = SaveLoadManager.Load<List<SkillInPool>>(path, PresetPath);
             foreach (SkillInPool skill in initSkills)
             {
                 SkillConfig config = _skillSystem.GetSkillConfig(skill.Name);

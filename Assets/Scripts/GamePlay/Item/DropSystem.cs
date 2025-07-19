@@ -1,19 +1,20 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using Data.Config;
-using Data.SaveLoad;
+using XYZRPGSystem.Data;
+using XYZRPGSystem.Data.Config;
+using XYZRPGSystem.Data.SaveLoad;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-namespace GamePlay.Item
+namespace Gameplay.Item
 {
     public class DropSystem : AbstractSystem
     {
         Dictionary<string, DropConfig> _dropConfigs = new();
         readonly List<GameObject> _dropPrefabs = new();
 
-        const string JsonPath = "Preset";
+        const string JsonPath = "Preset/JSON";
         const string JsonName = "Drops.json";
 
         readonly List<AsyncOperationHandle<GameObject>> _dropPrefabHandles = new();
@@ -27,13 +28,13 @@ namespace GamePlay.Item
         {
             foreach (AsyncOperationHandle<GameObject> handle in _dropPrefabHandles)
             {
-                AddressablesManager.Release(handle);
+                AssetsManager.Release(handle);
             }
         }
 
         async UniTaskVoid LoadDrops()
         {
-            var dropConfigs = this.GetUtility<SaveLoadUtility>().Load<List<DropConfig>>(JsonName, JsonPath);
+            var dropConfigs = SaveLoadManager.Load<List<DropConfig>>(JsonName, JsonPath);
             foreach (DropConfig dropConfig in dropConfigs)
             {
                 AsyncOperationHandle<GameObject> handle = Addressables.LoadAssetAsync<GameObject>(dropConfig.DropPrefab);

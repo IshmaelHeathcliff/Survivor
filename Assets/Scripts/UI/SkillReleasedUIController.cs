@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Text;
 using Cysharp.Threading.Tasks;
-using GamePlay.Character.Player;
-using GamePlay.Stat;
-using GamePlay.Skill;
+using Gameplay.Character.Player;
+using XYZRPGSystem.Gameplay.Stat;
+using XYZRPGSystem.Gameplay.Skill;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AddressableAssets;

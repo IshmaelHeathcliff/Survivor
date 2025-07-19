@@ -1,13 +1,13 @@
 using System;
 using System.Threading;
-using Core;
+using XYZRPGSystem.Core;
 using Cysharp.Threading.Tasks;
-using GamePlay.Character.Player;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using Gameplay.Character.Player;
 using Random = UnityEngine.Random;
 
-namespace GamePlay.Character.Enemy
+namespace Gameplay.Character.Enemy
 {
     public class EnemyFactory : MonoBehaviour, IController
     {

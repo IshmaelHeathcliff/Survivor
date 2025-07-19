@@ -1,4 +1,6 @@
-﻿namespace GamePlay.Character.Enemy
+﻿using XYZRPGSystem.Gameplay.Character;
+
+namespace Gameplay.Character.Enemy
 {
     public class EnemyModel : CharacterModel
     {
