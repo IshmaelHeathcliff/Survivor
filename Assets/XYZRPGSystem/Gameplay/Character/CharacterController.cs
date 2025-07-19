@@ -106,6 +106,8 @@ namespace XYZRPGSystem.Gameplay.Character
             Model.Controller = this;
 
             OnInit();
+
+            this.GetSystem<PositionQuerySystem>().RegisterModel(tag, CharacterModel);
             CharacterStats.FactoryID = ID;
             ModifierSystem.RegisterFactory(CharacterStats);
             SetStats();
@@ -123,6 +125,7 @@ namespace XYZRPGSystem.Gameplay.Character
             MoveController.Deinit();
             Damageable.Deinit();
 
+            this.GetSystem<PositionQuerySystem>().UnregisterModel(tag, CharacterModel);
             OnDeinit();
             Initialized = false;
         }

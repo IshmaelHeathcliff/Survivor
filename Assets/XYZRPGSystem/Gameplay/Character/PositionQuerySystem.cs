@@ -1,21 +1,40 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Gameplay.Character.Enemy;
-using Gameplay.Character.Player;
 
 namespace XYZRPGSystem.Gameplay.Character
 {
     public class PositionQuerySystem : AbstractSystem
     {
+        readonly Dictionary<string, List<ICharacterModel>> _models = new();
+
+        public void RegisterModel(string tag, ICharacterModel model)
+        {
+            if (!_models.TryGetValue(tag, out List<ICharacterModel> models))
+            {
+                models = new List<ICharacterModel>();
+            }
+
+            models.Add(model);
+            _models[tag] = models;
+        }
+
+        public void UnregisterModel(string tag, ICharacterModel model)
+        {
+            if (_models.TryGetValue(tag, out List<ICharacterModel> models))
+            {
+                models.Remove(model);
+            }
+        }
+
         Dictionary<string, Transform> GetTransforms(string tag)
         {
-            return tag switch
+            if (_models.TryGetValue(tag, out List<ICharacterModel> models))
             {
-                "Player" => this.GetModel<PlayersModel>().GetTransforms(),
-                "Enemy" => this.GetModel<EnemiesModel>().GetTransforms(),
-                _ => new Dictionary<string, Transform>(),
-            };
+                return models.ToDictionary(pair => pair.ID, pair => pair.Transform);
+            }
+
+            return new Dictionary<string, Transform>();
         }
 
         public List<Transform> Query(string tag, Vector2 position, float radius, List<string> exclude = null)
