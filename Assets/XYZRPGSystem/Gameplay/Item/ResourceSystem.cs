@@ -1,7 +1,4 @@
 using System;
-using Gameplay.Character.Player;
-using UnityEngine;
-using XYZRPGSystem.Gameplay;
 using XYZRPGSystem.Gameplay.Character;
 
 namespace XYZRPGSystem.Gameplay.Item

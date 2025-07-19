@@ -22,12 +22,13 @@ public class GameFrame : Architecture<GameFrame>
         RegisterModel(new EnemiesModel());
         RegisterModel(new SceneModel());
 
+        RegisterSystem(new SkillGachaSystem());
+        RegisterSystem(new DropSystem());
+
         RegisterSystem(new InputSystem());
         RegisterSystem(new ModifierSystem());
         RegisterSystem(new StatusCreateSystem());
-        RegisterSystem(new DropSystem());
         RegisterSystem(new SkillSystem());
-        RegisterSystem(new SkillGachaSystem()); ;
         RegisterSystem(new SkillReleaseSystem());
         RegisterSystem(new ResourceSystem());
         RegisterSystem(new CountSystem());

@@ -1,5 +1,6 @@
 using UnityEngine.InputSystem;
 using UnityEngine.AddressableAssets;
+using Cysharp.Threading.Tasks;
 
 namespace XYZRPGSystem.Core
 {
@@ -12,8 +13,9 @@ namespace XYZRPGSystem.Core
 
         protected override void OnInit()
         {
+            // TODO: 异步加载 InputActionAsset
             _input = Addressables.LoadAssetAsync<InputActionAsset>("PlayerInput").WaitForCompletion();
-            PlayerActionMap = _input.FindActionMap("Player");
+            PlayerActionMap = _input.FindActionMap("Player", true);
         }
     }
 }
