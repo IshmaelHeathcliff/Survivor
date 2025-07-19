@@ -1,4 +1,4 @@
-using GamePlay.Character.Player;
+using Gameplay.Character.Player;
 using UnityEngine;
 
 namespace Core

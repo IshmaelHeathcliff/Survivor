@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
-namespace GamePlay.Character.Enemy
+using XYZRPGSystem.Gameplay.Character;
+
+namespace Gameplay.Character.Enemy
 {
     public class ClosestEnemyQuery : AbstractQuery<Transform>
     {

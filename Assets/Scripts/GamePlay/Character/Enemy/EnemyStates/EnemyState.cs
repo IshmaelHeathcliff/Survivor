@@ -1,6 +1,6 @@
-﻿using Core;
+﻿using XYZRPGSystem.Core;
 
-namespace GamePlay.Character.Enemy
+namespace Gameplay.Character.Enemy
 {
     public enum EnemyStateID
     {

@@ -1,7 +1,7 @@
-﻿using Core;
+﻿using XYZRPGSystem.Core;
 using Cysharp.Threading.Tasks;
 
-namespace GamePlay.Character.Enemy
+namespace Gameplay.Character.Enemy
 {
     public class EnemyChaseState : EnemyState
     {

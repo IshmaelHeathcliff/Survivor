@@ -1,9 +1,10 @@
-using GamePlay.Character;
-using GamePlay.Damage;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using XYZRPGSystem.Gameplay.Character;
+using XYZRPGSystem.Gameplay.Damage;
+using XYZRPGSystem.Gameplay.Item;
 
-namespace GamePlay.Item
+namespace Gameplay.Item
 {
     public class Drop : MonoBehaviour, IController
     {

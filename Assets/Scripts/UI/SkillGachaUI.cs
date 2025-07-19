@@ -1,4 +1,4 @@
-using Data.Config;
+using XYZRPGSystem.Data.Config;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

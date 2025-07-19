@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
-using GamePlay.Item;
+using XYZRPGSystem.Gameplay.Character;
+using XYZRPGSystem.Gameplay.Item;
 
-namespace GamePlay.Character.Player
+namespace Gameplay.Character.Player
 {
     public class PlayerModel : CharacterModel, IHasResources
     {

@@ -1,8 +1,9 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using InputSystem = Core.InputSystem;
+using XYZRPGSystem.Gameplay.Character;
+using InputSystem = XYZRPGSystem.Core.InputSystem;
 
-namespace GamePlay.Character.Player
+namespace Gameplay.Character.Player
 {
     public class PlayerMoveController : MoveController
     {
@@ -10,7 +11,7 @@ namespace GamePlay.Character.Player
         [SerializeField, Range(1, 20f)] float _acceleration = 10f;
 
         bool _isMoving;
-        PlayerInput.PlayerActions _playerInput;
+        InputActionMap _playerInput;
 
         static readonly int Walking = Animator.StringToHash("Walking");
 
@@ -57,14 +58,14 @@ namespace GamePlay.Character.Player
 
         void RegisterActions()
         {
-            _playerInput.Move.performed += MoveAction;
-            _playerInput.Move.canceled += MoveAction;
+            _playerInput.FindAction("Move").performed += MoveAction;
+            _playerInput.FindAction("Move").canceled += MoveAction;
         }
 
         void UnregisterActions()
         {
-            _playerInput.Move.performed -= MoveAction;
-            _playerInput.Move.canceled -= MoveAction;
+            _playerInput.FindAction("Move").performed -= MoveAction;
+            _playerInput.FindAction("Move").canceled -= MoveAction;
         }
 
 

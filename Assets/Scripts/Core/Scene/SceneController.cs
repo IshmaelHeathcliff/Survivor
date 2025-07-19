@@ -1,6 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
-using GamePlay.Modifier;
-using GamePlay.Character.Player;
+using XYZRPGSystem.Gameplay.Modifier;
+using Gameplay.Character.Player;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 

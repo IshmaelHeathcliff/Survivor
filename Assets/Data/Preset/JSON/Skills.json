@@ -1,0 +1,2003 @@
+[
+  {
+    "$type": "XYZRPGSystem.Data.Config.AttackSkillConfig, Assembly-CSharp",
+    "AttackEffectConfigs": [
+      {
+        "AttackerID": "self",
+        "Description": "施加攻击"
+      }
+    ],
+    "Damage": 1.0,
+    "CriticalChance": 0.0,
+    "CriticalMultiplier": 150.0,
+    "AttackArea": 0.0,
+    "Duration": 0.0,
+    "ProjectileCount": 0.0,
+    "ProjectileSpeed": 0.0,
+    "ChainCount": 0.0,
+    "PenetrateCount": 0.0,
+    "SplitCount": 0.0,
+    "IsTargetLocked": false,
+    "CanReturn": false,
+    "WoodOnUse": 0.0,
+    "Cooldown": 0.0,
+    "ID": "dash",
+    "Name": "冲刺",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 0,
+    "Description": null,
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": null,
+    "SkillEffectConfigsOnUse": null
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.AttackSkillConfig, Assembly-CSharp",
+    "AttackEffectConfigs": [
+      {
+        "AttackerID": "dice",
+        "Description": "施加攻击"
+      }
+    ],
+    "Damage": 6.0,
+    "CriticalChance": 0.0,
+    "CriticalMultiplier": 150.0,
+    "AttackArea": 1.0,
+    "Duration": 2.0,
+    "ProjectileCount": 1.0,
+    "ProjectileSpeed": 10.0,
+    "ChainCount": 0.0,
+    "PenetrateCount": 1.0,
+    "SplitCount": 0.0,
+    "IsTargetLocked": false,
+    "CanReturn": false,
+    "WoodOnUse": 0.0,
+    "Cooldown": 2.0,
+    "ID": "dice_base",
+    "Name": "奇奥骰子基础",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [
+      "Range",
+      "Projectile"
+    ],
+    "Rarity": 0,
+    "Description": "发射1枚骰子，对1名敌人造成伤害",
+    "ReleaseOnAcquire": true,
+    "SkillEffectConfigsOnEnable": null,
+    "SkillEffectConfigsOnUse": null
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "dice1",
+    "Name": "骰子1点",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 0,
+    "Description": "基础伤害+5",
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "dice_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+        "SkillID": "dice_base",
+        "ModifierID": "damage_add",
+        "Value": 5,
+        "Description": "添加局部词条"
+      }
+    ]
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "dice2",
+    "Name": "骰子2点",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 0,
+    "Description": "CD-30%",
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "dice_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "cdi_increase",
+        "Value": 30,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "dice3",
+    "Name": "骰子3点",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 0,
+    "Description": "暴击率+5%",
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "dice_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+        "SkillID": "dice_base",
+        "ModifierID": "criticalChance_add",
+        "Value": 5,
+        "Description": "添加局部词条"
+      }
+    ]
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "dice4",
+    "Name": "骰子4点",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 1,
+    "Description": "金币收入+1",
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "dice_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinGain_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "dice5",
+    "Name": "骰子5点",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 1,
+    "Description": "目标数+1",
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "dice_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+        "SkillID": "dice_base",
+        "ModifierID": "projectileCount_add",
+        "Value": 1,
+        "Description": "添加局部词条"
+      }
+    ]
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "dice6",
+    "Name": "骰子6点",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 2,
+    "Description": "击杀50个敌人后进行一次投掷，获得等同于点数的木头",
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.CountIncrementEffectConfig, Assembly-CSharp",
+        "CountValueID": "KillCount",
+        "Increment": 50,
+        "ChildEffects": [
+          {
+            "$type": "XYZRPGSystem.Data.Config.RollDiceEffectConfig, Assembly-CSharp",
+            "Min": 1,
+            "Max": 6,
+            "ChildEffects": [
+              {
+                "$type": "XYZRPGSystem.Data.Config.AcquireResourceEffectConfig, Assembly-CSharp",
+                "ResourceID": "Wood",
+                "Amount": 1,
+                "Description": "获取资源"
+              }
+            ],
+            "Description": "掷骰子"
+          }
+        ],
+        "Description": "增量触发"
+      }
+    ]
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "dice",
+    "Name": "奇奥骰子",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 3,
+    "Description": "击杀50个敌人后进行一次投掷，获得对应点数的奖励\n————————————————————————\n1点：基础伤害+5；\n2点：CD-30%；\n3点：暴击率+5%；\n4点：金币+10；\n5点：木头+5；\n6点：获得1~5点全部奖励",
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.CountIncrementEffectConfig, Assembly-CSharp",
+        "CountValueID": "KillCount",
+        "Increment": 50,
+        "ChildEffects": [
+          {
+            "$type": "XYZRPGSystem.Data.Config.RollDiceEffectConfig, Assembly-CSharp",
+            "Min": 1,
+            "Max": 6,
+            "ChildEffects": [
+              {
+                "$type": "XYZRPGSystem.Data.Config.OnValueEffectConfig, Assembly-CSharp",
+                "Value": 1,
+                "ChildEffects": [
+                  {
+                    "$type": "XYZRPGSystem.Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+                    "SkillID": "dice_base",
+                    "ModifierID": "damage_add",
+                    "Value": 5,
+                    "Description": "添加局部词条"
+                  }
+                ],
+                "Description": "对应数值时触发"
+              },
+              {
+                "$type": "XYZRPGSystem.Data.Config.OnValueEffectConfig, Assembly-CSharp",
+                "Value": 2,
+                "ChildEffects": [
+                  {
+                    "$type": "XYZRPGSystem.Data.Config.ModifierEffectConfig, Assembly-CSharp",
+                    "ModifierID": "cdi_increase",
+                    "Value": 30,
+                    "Description": "添加词条"
+                  }
+                ],
+                "Description": "对应数值时触发"
+              },
+              {
+                "$type": "XYZRPGSystem.Data.Config.OnValueEffectConfig, Assembly-CSharp",
+                "Value": 3,
+                "ChildEffects": [
+                  {
+                    "$type": "XYZRPGSystem.Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+                    "SkillID": "dice_base",
+                    "ModifierID": "criticalChance_add",
+                    "Value": 5,
+                    "Description": "添加局部词条"
+                  }
+                ],
+                "Description": "对应数值时触发"
+              },
+              {
+                "$type": "XYZRPGSystem.Data.Config.OnValueEffectConfig, Assembly-CSharp",
+                "Value": 4,
+                "ChildEffects": [
+                  {
+                    "$type": "XYZRPGSystem.Data.Config.AcquireResourceEffectConfig, Assembly-CSharp",
+                    "ResourceID": "Coin",
+                    "Amount": 10,
+                    "Description": "获取资源"
+                  }
+                ],
+                "Description": "对应数值时触发"
+              },
+              {
+                "$type": "XYZRPGSystem.Data.Config.OnValueEffectConfig, Assembly-CSharp",
+                "Value": 5,
+                "ChildEffects": [
+                  {
+                    "$type": "XYZRPGSystem.Data.Config.AcquireResourceEffectConfig, Assembly-CSharp",
+                    "ResourceID": "Wood",
+                    "Amount": 5,
+                    "Description": "获取资源"
+                  }
+                ],
+                "Description": "对应数值时触发"
+              },
+              {
+                "$type": "XYZRPGSystem.Data.Config.OnValueEffectConfig, Assembly-CSharp",
+                "Value": 6,
+                "ChildEffects": [
+                  {
+                    "$type": "XYZRPGSystem.Data.Config.NestedEffectConfig, Assembly-CSharp",
+                    "ChildEffects": [
+                      {
+                        "$type": "XYZRPGSystem.Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+                        "SkillID": "dice_base",
+                        "ModifierID": "damage_add",
+                        "Value": 5,
+                        "Description": "添加局部词条"
+                      },
+                      {
+                        "$type": "XYZRPGSystem.Data.Config.ModifierEffectConfig, Assembly-CSharp",
+                        "ModifierID": "cdi_increase",
+                        "Value": 30,
+                        "Description": "添加词条"
+                      },
+                      {
+                        "$type": "XYZRPGSystem.Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+                        "SkillID": "dice_base",
+                        "ModifierID": "criticalChance_add",
+                        "Value": 5,
+                        "Description": "添加局部词条"
+                      },
+                      {
+                        "$type": "XYZRPGSystem.Data.Config.AcquireResourceEffectConfig, Assembly-CSharp",
+                        "ResourceID": "Coin",
+                        "Amount": 10,
+                        "Description": "获取资源"
+                      },
+                      {
+                        "$type": "XYZRPGSystem.Data.Config.AcquireResourceEffectConfig, Assembly-CSharp",
+                        "ResourceID": "Wood",
+                        "Amount": 5,
+                        "Description": "获取资源"
+                      }
+                    ],
+                    "Description": null
+                  }
+                ],
+                "Description": "对应数值时触发"
+              }
+            ],
+            "Description": "掷骰子"
+          }
+        ],
+        "Description": "增量触发"
+      }
+    ]
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.AttackSkillConfig, Assembly-CSharp",
+    "AttackEffectConfigs": [
+      {
+        "AttackerID": "chip",
+        "Description": "施加攻击"
+      }
+    ],
+    "Damage": 10.0,
+    "CriticalChance": 25.0,
+    "CriticalMultiplier": 150.0,
+    "AttackArea": 1.0,
+    "Duration": 2.0,
+    "ProjectileCount": 1.0,
+    "ProjectileSpeed": 15.0,
+    "ChainCount": 2.0,
+    "PenetrateCount": 0.0,
+    "SplitCount": 0.0,
+    "IsTargetLocked": true,
+    "CanReturn": false,
+    "WoodOnUse": 0.0,
+    "Cooldown": 3.0,
+    "ID": "slot_machine_base",
+    "Name": "老虎机基础",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [
+      "Range",
+      "Projectile",
+      "Chain"
+    ],
+    "Rarity": 0,
+    "Description": null,
+    "ReleaseOnAcquire": true,
+    "SkillEffectConfigsOnEnable": null,
+    "SkillEffectConfigsOnUse": null
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "joystick",
+    "Name": "摇杆",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 1,
+    "Description": "基础伤害+10",
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "slot_machine_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+        "SkillID": "slot_machine_base",
+        "ModifierID": "damage_add",
+        "Value": 10,
+        "Description": "添加局部词条"
+      }
+    ]
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "button",
+    "Name": "按钮",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 1,
+    "Description": "弹射伤害+30%",
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "slot_machine_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "chain_damage_increase",
+        "Value": 30,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "case",
+    "Name": "机箱",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 1,
+    "Description": "生命值增加一颗心",
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "slot_machine_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "health_add",
+        "Value": 4,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "lucky_coin",
+    "Name": "人头幸运币",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 2,
+    "Description": "弹射目标+1",
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "slot_machine_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+        "SkillID": "slot_machine_base",
+        "ModifierID": "chainCount_add",
+        "Value": 1,
+        "Description": "添加局部词条"
+      }
+    ]
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "roulette",
+    "Name": "轮盘",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 2,
+    "Description": "每隔10s进入狂暴状态，CD-70%，持续3s",
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "slot_machine_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.FixedRepeatEffectConfig, Assembly-CSharp",
+        "Interval": 10,
+        "ChildEffects": [
+          {
+            "$type": "XYZRPGSystem.Data.Config.StatusWithTimeEffectConfig, Assembly-CSharp",
+            "Duration": 3,
+            "StatusID": "frenzy",
+            "Values": [
+              70
+            ],
+            "Description": "状态效果(持续时间)"
+          }
+        ],
+        "Description": "固定时间触发"
+      }
+    ]
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "bow_icon",
+    "Name": "弓箭图标",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 0,
+    "Description": "远程武器CD-10%",
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "slot_machine_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "range_cdi_increase",
+        "Value": 10,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "can_icon",
+    "Name": "罐头图标",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 0,
+    "Description": "远程伤害增加+10%",
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "slot_machine_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "range_damage_increase",
+        "Value": 10,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "coin_icon",
+    "Name": "硬币图标",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 1,
+    "Description": "金币收入+3",
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "slot_machine_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinGain_add",
+        "Value": 3,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "wood_icon",
+    "Name": "木头图标",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 1,
+    "Description": "木头收入+1",
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "slot_machine_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "woodGain_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "cherry_icon",
+    "Name": "樱桃图标",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 1,
+    "Description": "恢复0.5个红心",
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "slot_machine_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.HealEffectConfig, Assembly-CSharp",
+        "Amount": 2,
+        "Description": "治疗"
+      }
+    ]
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "slot_machine",
+    "Name": "老虎机",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 3,
+    "Description": "每隔30s，随机一种获得已吞噬图标奖励：\n——————————————————\n弓箭：远程武器CD-10%\n罐头：远程武器伤害+10%\n硬币：金币+50\n木头：木头+10\n樱桃：恢复0.5个红心",
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "slot_machine_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.FixedRepeatEffectConfig, Assembly-CSharp",
+        "Interval": 30,
+        "ChildEffects": [
+          {
+            "$type": "XYZRPGSystem.Data.Config.RandomChildEffectConfig, Assembly-CSharp",
+            "ChildEffects": [
+              {
+                "$type": "XYZRPGSystem.Data.Config.ConditionalSkillEffectConfig, Assembly-CSharp",
+                "RequiredSkillIDs": [
+                  "bow_icon"
+                ],
+                "ChildEffects": [
+                  {
+                    "$type": "XYZRPGSystem.Data.Config.ModifierEffectConfig, Assembly-CSharp",
+                    "ModifierID": "range_cdi_increase",
+                    "Value": 10,
+                    "Description": "添加词条"
+                  }
+                ],
+                "Description": "拥有指定技能时生效"
+              },
+              {
+                "$type": "XYZRPGSystem.Data.Config.ConditionalSkillEffectConfig, Assembly-CSharp",
+                "RequiredSkillIDs": [
+                  "can_icon"
+                ],
+                "ChildEffects": [
+                  {
+                    "$type": "XYZRPGSystem.Data.Config.ModifierEffectConfig, Assembly-CSharp",
+                    "ModifierID": "range_damage_increase",
+                    "Value": 10,
+                    "Description": "添加词条"
+                  }
+                ],
+                "Description": "拥有指定技能时生效"
+              },
+              {
+                "$type": "XYZRPGSystem.Data.Config.ConditionalSkillEffectConfig, Assembly-CSharp",
+                "RequiredSkillIDs": [
+                  "coin_icon"
+                ],
+                "ChildEffects": [
+                  {
+                    "$type": "XYZRPGSystem.Data.Config.AcquireResourceEffectConfig, Assembly-CSharp",
+                    "ResourceID": "Coin",
+                    "Amount": 50,
+                    "Description": "获取资源"
+                  }
+                ],
+                "Description": "拥有指定技能时生效"
+              },
+              {
+                "$type": "XYZRPGSystem.Data.Config.ConditionalSkillEffectConfig, Assembly-CSharp",
+                "RequiredSkillIDs": [
+                  "wood_icon"
+                ],
+                "ChildEffects": [
+                  {
+                    "$type": "XYZRPGSystem.Data.Config.AcquireResourceEffectConfig, Assembly-CSharp",
+                    "ResourceID": "Wood",
+                    "Amount": 10,
+                    "Description": "获取资源"
+                  }
+                ],
+                "Description": "拥有指定技能时生效"
+              },
+              {
+                "$type": "XYZRPGSystem.Data.Config.ConditionalSkillEffectConfig, Assembly-CSharp",
+                "RequiredSkillIDs": [
+                  "cherry_icon"
+                ],
+                "ChildEffects": [
+                  {
+                    "$type": "XYZRPGSystem.Data.Config.HealEffectConfig, Assembly-CSharp",
+                    "Amount": 2,
+                    "Description": "治疗"
+                  }
+                ],
+                "Description": "拥有指定技能时生效"
+              }
+            ],
+            "Description": "随机启用一个子效果"
+          }
+        ],
+        "Description": "固定时间触发"
+      }
+    ]
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.AttackSkillConfig, Assembly-CSharp",
+    "AttackEffectConfigs": [
+      {
+        "AttackerID": "poker",
+        "Description": "创建攻击器"
+      }
+    ],
+    "Damage": 10.0,
+    "CriticalChance": 0.0,
+    "CriticalMultiplier": 150.0,
+    "AttackArea": 1.0,
+    "Duration": 2.0,
+    "ProjectileCount": 1.0,
+    "ProjectileSpeed": 10.0,
+    "ChainCount": 0.0,
+    "PenetrateCount": 0.0,
+    "SplitCount": 0.0,
+    "IsTargetLocked": false,
+    "CanReturn": false,
+    "WoodOnUse": 0.0,
+    "Cooldown": 3.0,
+    "ID": "poker_base",
+    "Name": "扑克基础",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [
+      "Range",
+      "Projectile"
+    ],
+    "Rarity": 0,
+    "Description": "随机发射1张的扑克牌，造成伤害",
+    "ReleaseOnAcquire": true,
+    "SkillEffectConfigsOnEnable": null,
+    "SkillEffectConfigsOnUse": null
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "poker_10_1",
+    "Name": "扑克10",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 0,
+    "Description": "伤害+1，杀敌奖金+1",
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "ModifierID": "damage_add",
+        "Value": 1,
+        "Description": "添加局部词条"
+      },
+      {
+        "$type": "XYZRPGSystem.Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinOnKill_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "poker_10_2",
+    "Name": "扑克10",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 0,
+    "Description": "伤害+1，杀敌奖金+1",
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "ModifierID": "damage_add",
+        "Value": 1,
+        "Description": "添加局部词条"
+      },
+      {
+        "$type": "XYZRPGSystem.Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinOnKill_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "poker_10_3",
+    "Name": "扑克10",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 0,
+    "Description": "伤害+1，杀敌奖金+1",
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "ModifierID": "damage_add",
+        "Value": 1,
+        "Description": "添加局部词条"
+      },
+      {
+        "$type": "XYZRPGSystem.Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinOnKill_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "poker_10_4",
+    "Name": "扑克10",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 0,
+    "Description": "伤害+1，杀敌奖金+1",
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "ModifierID": "damage_add",
+        "Value": 1,
+        "Description": "添加局部词条"
+      },
+      {
+        "$type": "XYZRPGSystem.Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinOnKill_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "poker_J_1",
+    "Name": "扑克J",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 0,
+    "Description": "伤害+1，杀敌奖金+1",
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "ModifierID": "damage_add",
+        "Value": 1,
+        "Description": "添加局部词条"
+      },
+      {
+        "$type": "XYZRPGSystem.Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinOnKill_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "poker_J_2",
+    "Name": "扑克J",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 0,
+    "Description": "伤害+1，杀敌奖金+1",
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "ModifierID": "damage_add",
+        "Value": 1,
+        "Description": "添加局部词条"
+      },
+      {
+        "$type": "XYZRPGSystem.Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinOnKill_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "poker_J_3",
+    "Name": "扑克J",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 0,
+    "Description": "伤害+1，杀敌奖金+1",
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "ModifierID": "damage_add",
+        "Value": 1,
+        "Description": "添加局部词条"
+      },
+      {
+        "$type": "XYZRPGSystem.Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinOnKill_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "poker_J_4",
+    "Name": "扑克J",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 0,
+    "Description": "伤害+1，杀敌奖金+1",
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "ModifierID": "damage_add",
+        "Value": 1,
+        "Description": "添加局部词条"
+      },
+      {
+        "$type": "XYZRPGSystem.Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinOnKill_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "poker_Q_1",
+    "Name": "扑克Q",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 0,
+    "Description": "伤害+1，杀敌奖金+1",
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "ModifierID": "damage_add",
+        "Value": 1,
+        "Description": "添加局部词条"
+      },
+      {
+        "$type": "XYZRPGSystem.Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinOnKill_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "poker_Q_2",
+    "Name": "扑克Q",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 0,
+    "Description": "伤害+1，杀敌奖金+1",
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "ModifierID": "damage_add",
+        "Value": 1,
+        "Description": "添加局部词条"
+      },
+      {
+        "$type": "XYZRPGSystem.Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinOnKill_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "poker_Q_3",
+    "Name": "扑克Q",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 0,
+    "Description": "伤害+1，杀敌奖金+1",
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "ModifierID": "damage_add",
+        "Value": 1,
+        "Description": "添加局部词条"
+      },
+      {
+        "$type": "XYZRPGSystem.Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinOnKill_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "poker_Q_4",
+    "Name": "扑克Q",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 0,
+    "Description": "伤害+1，杀敌奖金+1",
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "ModifierID": "damage_add",
+        "Value": 1,
+        "Description": "添加局部词条"
+      },
+      {
+        "$type": "XYZRPGSystem.Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinOnKill_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "poker_K_1",
+    "Name": "扑克K",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 0,
+    "Description": "伤害+1，杀敌奖金+1",
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "ModifierID": "damage_add",
+        "Value": 1,
+        "Description": "添加局部词条"
+      },
+      {
+        "$type": "XYZRPGSystem.Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinOnKill_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "poker_K_2",
+    "Name": "扑克K",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 0,
+    "Description": "伤害+1，杀敌奖金+1",
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "ModifierID": "damage_add",
+        "Value": 1,
+        "Description": "添加局部词条"
+      },
+      {
+        "$type": "XYZRPGSystem.Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinOnKill_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "poker_K_3",
+    "Name": "扑克K",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 0,
+    "Description": "伤害+1，杀敌奖金+1",
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "ModifierID": "damage_add",
+        "Value": 1,
+        "Description": "添加局部词条"
+      },
+      {
+        "$type": "XYZRPGSystem.Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinOnKill_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "poker_K_4",
+    "Name": "扑克K",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 0,
+    "Description": "伤害+1，杀敌奖金+1",
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "ModifierID": "damage_add",
+        "Value": 1,
+        "Description": "添加局部词条"
+      },
+      {
+        "$type": "XYZRPGSystem.Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinOnKill_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "poker_A_1",
+    "Name": "扑克A",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 0,
+    "Description": "伤害+1，杀敌奖金+1",
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "ModifierID": "damage_add",
+        "Value": 1,
+        "Description": "添加局部词条"
+      },
+      {
+        "$type": "XYZRPGSystem.Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinOnKill_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "poker_A_2",
+    "Name": "扑克A",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 0,
+    "Description": "伤害+1，杀敌奖金+1",
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "ModifierID": "damage_add",
+        "Value": 1,
+        "Description": "添加局部词条"
+      },
+      {
+        "$type": "XYZRPGSystem.Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinOnKill_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "poker_A_3",
+    "Name": "扑克A",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 0,
+    "Description": "伤害+1，杀敌奖金+1",
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "ModifierID": "damage_add",
+        "Value": 1,
+        "Description": "添加局部词条"
+      },
+      {
+        "$type": "XYZRPGSystem.Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinOnKill_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "poker_A_4",
+    "Name": "扑克A",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 0,
+    "Description": "伤害+1，杀敌奖金+1",
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "ModifierID": "damage_add",
+        "Value": 1,
+        "Description": "添加局部词条"
+      },
+      {
+        "$type": "XYZRPGSystem.Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinOnKill_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "two_pair",
+    "Name": "两对",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 1,
+    "Description": "木头收入+1、金币收入+10",
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinGain_add",
+        "Value": 10,
+        "Description": "添加词条"
+      },
+      {
+        "$type": "XYZRPGSystem.Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "woodGain_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "three_of_a_kind",
+    "Name": "三张",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 1,
+    "Description": "木头收入+1、金币收入+10",
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinGain_add",
+        "Value": 10,
+        "Description": "添加词条"
+      },
+      {
+        "$type": "XYZRPGSystem.Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "woodGain_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "four_of_a_kind",
+    "Name": "四张",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 1,
+    "Description": "木头收入+1、金币收入+10",
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinGain_add",
+        "Value": 10,
+        "Description": "添加词条"
+      },
+      {
+        "$type": "XYZRPGSystem.Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "woodGain_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "straight",
+    "Name": "顺子",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 1,
+    "Description": "木头收入+1、金币收入+10",
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "coinGain_add",
+        "Value": 10,
+        "Description": "添加词条"
+      },
+      {
+        "$type": "XYZRPGSystem.Data.Config.ModifierEffectConfig, Assembly-CSharp",
+        "ModifierID": "woodGain_add",
+        "Value": 1,
+        "Description": "添加词条"
+      }
+    ]
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "little_joker",
+    "Name": "小王",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 1,
+    "Description": "每击杀50名敌人后，获得50金币",
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.CountIncrementEffectConfig, Assembly-CSharp",
+        "CountValueID": "KillCount",
+        "Increment": 50,
+        "ChildEffects": [
+          {
+            "$type": "XYZRPGSystem.Data.Config.AcquireResourceEffectConfig, Assembly-CSharp",
+            "ResourceID": "Coin",
+            "Amount": 50,
+            "Description": "获取资源"
+          }
+        ],
+        "Description": "增量触发"
+      }
+    ]
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "joker",
+    "Name": "大王",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 2,
+    "Description": "每击杀50名敌人后，获得30木头",
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.CountIncrementEffectConfig, Assembly-CSharp",
+        "CountValueID": "KillCount",
+        "Increment": 50,
+        "ChildEffects": [
+          {
+            "$type": "XYZRPGSystem.Data.Config.AcquireResourceEffectConfig, Assembly-CSharp",
+            "ResourceID": "Wood",
+            "Amount": 30,
+            "Description": "获取资源"
+          }
+        ],
+        "Description": "增量触发"
+      }
+    ]
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "poker",
+    "Name": "扑克",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 3,
+    "Description": "每次发射扑克牌时，额外获得1个木头",
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "ModifierID": "woodOnUse_add",
+        "Value": 1,
+        "Description": "添加局部词条"
+      }
+    ]
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "winner",
+    "Name": "大赢家",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 4,
+    "Description": "1.奇奥骰子投掷要求减半，解锁骰子的第七面：人头，目标数+1 2.老虎机等待时间减少10s，解锁新的老虎机奖励：靶子，远程武器目标+1 3.扑克的效果翻倍，每次发射扑克牌时，获得2个木头",
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.RemoveSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "dice",
+        "Description": "移除技能"
+      },
+      {
+        "$type": "XYZRPGSystem.Data.Config.RemoveSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "slot_machine",
+        "Description": "移除技能"
+      },
+      {
+        "$type": "XYZRPGSystem.Data.Config.RemoveSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "joker",
+        "Description": "移除技能"
+      },
+      {
+        "$type": "XYZRPGSystem.Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "dice_plus",
+        "Description": "获取技能"
+      },
+      {
+        "$type": "XYZRPGSystem.Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "slot_machine_plus",
+        "Description": "获取技能"
+      },
+      {
+        "$type": "XYZRPGSystem.Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_plus",
+        "Description": "获取技能"
+      }
+    ]
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "dice_plus",
+    "Name": "奇奥骰子进阶",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 4,
+    "Description": "击杀50个敌人后进行一次投掷，获得对应点数的奖励\n————————————————————————\n1点：基础伤害+5；\n2点：CD-30%；\n3点：暴击率+5%；\n4点：金币+10；\n5点：木头+5；\n6点：获得1~5点全部奖励；\n7点：目标数+1",
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.CountIncrementEffectConfig, Assembly-CSharp",
+        "CountValueID": "KillCount",
+        "Increment": 25,
+        "ChildEffects": [
+          {
+            "$type": "XYZRPGSystem.Data.Config.RollDiceEffectConfig, Assembly-CSharp",
+            "Min": 1,
+            "Max": 7,
+            "ChildEffects": [
+              {
+                "$type": "XYZRPGSystem.Data.Config.OnValueEffectConfig, Assembly-CSharp",
+                "Value": 1,
+                "ChildEffects": [
+                  {
+                    "$type": "XYZRPGSystem.Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+                    "SkillID": "dice_base",
+                    "ModifierID": "damage_add",
+                    "Value": 5,
+                    "Description": "添加局部词条"
+                  }
+                ],
+                "Description": "对应数值时触发"
+              },
+              {
+                "$type": "XYZRPGSystem.Data.Config.OnValueEffectConfig, Assembly-CSharp",
+                "Value": 2,
+                "ChildEffects": [
+                  {
+                    "$type": "XYZRPGSystem.Data.Config.ModifierEffectConfig, Assembly-CSharp",
+                    "ModifierID": "cdi_increase",
+                    "Value": 30,
+                    "Description": "添加词条"
+                  }
+                ],
+                "Description": "对应数值时触发"
+              },
+              {
+                "$type": "XYZRPGSystem.Data.Config.OnValueEffectConfig, Assembly-CSharp",
+                "Value": 3,
+                "ChildEffects": [
+                  {
+                    "$type": "XYZRPGSystem.Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+                    "SkillID": "dice_base",
+                    "ModifierID": "criticalChance_add",
+                    "Value": 5,
+                    "Description": "添加局部词条"
+                  }
+                ],
+                "Description": "对应数值时触发"
+              },
+              {
+                "$type": "XYZRPGSystem.Data.Config.OnValueEffectConfig, Assembly-CSharp",
+                "Value": 4,
+                "ChildEffects": [
+                  {
+                    "$type": "XYZRPGSystem.Data.Config.AcquireResourceEffectConfig, Assembly-CSharp",
+                    "ResourceID": "Coin",
+                    "Amount": 10,
+                    "Description": "获取资源"
+                  }
+                ],
+                "Description": "对应数值时触发"
+              },
+              {
+                "$type": "XYZRPGSystem.Data.Config.OnValueEffectConfig, Assembly-CSharp",
+                "Value": 5,
+                "ChildEffects": [
+                  {
+                    "$type": "XYZRPGSystem.Data.Config.AcquireResourceEffectConfig, Assembly-CSharp",
+                    "ResourceID": "Wood",
+                    "Amount": 5,
+                    "Description": "获取资源"
+                  }
+                ],
+                "Description": "对应数值时触发"
+              },
+              {
+                "$type": "XYZRPGSystem.Data.Config.OnValueEffectConfig, Assembly-CSharp",
+                "Value": 6,
+                "ChildEffects": [
+                  {
+                    "$type": "XYZRPGSystem.Data.Config.NestedEffectConfig, Assembly-CSharp",
+                    "ChildEffects": [
+                      {
+                        "$type": "XYZRPGSystem.Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+                        "SkillID": "dice_base",
+                        "ModifierID": "damage_add",
+                        "Value": 5,
+                        "Description": "添加局部词条"
+                      },
+                      {
+                        "$type": "XYZRPGSystem.Data.Config.ModifierEffectConfig, Assembly-CSharp",
+                        "ModifierID": "cdi_increase",
+                        "Value": 30,
+                        "Description": "添加词条"
+                      },
+                      {
+                        "$type": "XYZRPGSystem.Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+                        "SkillID": "dice_base",
+                        "ModifierID": "criticalChance_add",
+                        "Value": 5,
+                        "Description": "添加局部词条"
+                      },
+                      {
+                        "$type": "XYZRPGSystem.Data.Config.AcquireResourceEffectConfig, Assembly-CSharp",
+                        "ResourceID": "Coin",
+                        "Amount": 10,
+                        "Description": "获取资源"
+                      },
+                      {
+                        "$type": "XYZRPGSystem.Data.Config.AcquireResourceEffectConfig, Assembly-CSharp",
+                        "ResourceID": "Wood",
+                        "Amount": 5,
+                        "Description": "获取资源"
+                      }
+                    ],
+                    "Description": null
+                  }
+                ],
+                "Description": "对应数值时触发"
+              },
+              {
+                "$type": "XYZRPGSystem.Data.Config.OnValueEffectConfig, Assembly-CSharp",
+                "Value": 7,
+                "ChildEffects": [
+                  {
+                    "$type": "XYZRPGSystem.Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+                    "SkillID": "dice_base",
+                    "ModifierID": "projectileCount_add",
+                    "Value": 1,
+                    "Description": "添加局部词条"
+                  }
+                ],
+                "Description": "对应数值时触发"
+              }
+            ],
+            "Description": "掷骰子"
+          }
+        ],
+        "Description": "增量触发"
+      }
+    ]
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "slot_machine_plus",
+    "Name": "老虎机进阶",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 4,
+    "Description": "每隔20s，随机一种获得已吞噬图标奖励：\n——————————————————\n弓箭：远程武器CD-10%\n罐头：远程武器伤害+10%\n硬币：金币+50\n木头：木头+10\n樱桃：恢复0.5个红心",
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "slot_machine_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.FixedRepeatEffectConfig, Assembly-CSharp",
+        "Interval": 20,
+        "ChildEffects": [
+          {
+            "$type": "XYZRPGSystem.Data.Config.RandomChildEffectConfig, Assembly-CSharp",
+            "ChildEffects": [
+              {
+                "$type": "XYZRPGSystem.Data.Config.ConditionalSkillEffectConfig, Assembly-CSharp",
+                "RequiredSkillIDs": [
+                  "bow_icon"
+                ],
+                "ChildEffects": [
+                  {
+                    "$type": "XYZRPGSystem.Data.Config.ModifierEffectConfig, Assembly-CSharp",
+                    "ModifierID": "range_cdi_increase",
+                    "Value": 10,
+                    "Description": "添加词条"
+                  }
+                ],
+                "Description": "拥有指定技能时生效"
+              },
+              {
+                "$type": "XYZRPGSystem.Data.Config.ConditionalSkillEffectConfig, Assembly-CSharp",
+                "RequiredSkillIDs": [
+                  "can_icon"
+                ],
+                "ChildEffects": [
+                  {
+                    "$type": "XYZRPGSystem.Data.Config.ModifierEffectConfig, Assembly-CSharp",
+                    "ModifierID": "range_damage_increase",
+                    "Value": 10,
+                    "Description": "添加词条"
+                  }
+                ],
+                "Description": "拥有指定技能时生效"
+              },
+              {
+                "$type": "XYZRPGSystem.Data.Config.ConditionalSkillEffectConfig, Assembly-CSharp",
+                "RequiredSkillIDs": [
+                  "coin_icon"
+                ],
+                "ChildEffects": [
+                  {
+                    "$type": "XYZRPGSystem.Data.Config.AcquireResourceEffectConfig, Assembly-CSharp",
+                    "ResourceID": "Coin",
+                    "Amount": 50,
+                    "Description": "获取资源"
+                  }
+                ],
+                "Description": "拥有指定技能时生效"
+              },
+              {
+                "$type": "XYZRPGSystem.Data.Config.ConditionalSkillEffectConfig, Assembly-CSharp",
+                "RequiredSkillIDs": [
+                  "wood_icon"
+                ],
+                "ChildEffects": [
+                  {
+                    "$type": "XYZRPGSystem.Data.Config.AcquireResourceEffectConfig, Assembly-CSharp",
+                    "ResourceID": "Wood",
+                    "Amount": 10,
+                    "Description": "获取资源"
+                  }
+                ],
+                "Description": "拥有指定技能时生效"
+              },
+              {
+                "$type": "XYZRPGSystem.Data.Config.ConditionalSkillEffectConfig, Assembly-CSharp",
+                "RequiredSkillIDs": [
+                  "cherry_icon"
+                ],
+                "ChildEffects": [
+                  {
+                    "$type": "XYZRPGSystem.Data.Config.HealEffectConfig, Assembly-CSharp",
+                    "Amount": 2,
+                    "Description": "治疗"
+                  }
+                ],
+                "Description": "拥有指定技能时生效"
+              },
+              {
+                "$type": "XYZRPGSystem.Data.Config.ModifierEffectConfig, Assembly-CSharp",
+                "ModifierID": "range_projectileCount_add",
+                "Value": 1,
+                "Description": "添加词条"
+              }
+            ],
+            "Description": "随机启用一个子效果"
+          }
+        ],
+        "Description": "固定时间触发"
+      }
+    ]
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp",
+    "ID": "poker_plus",
+    "Name": "扑克进阶",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [],
+    "Rarity": 4,
+    "Description": "每次发射扑克牌时，额外获得2个木头",
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.AcquireSkillEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "Description": "获取技能"
+      }
+    ],
+    "SkillEffectConfigsOnUse": [
+      {
+        "$type": "XYZRPGSystem.Data.Config.LocalModifierEffectConfig, Assembly-CSharp",
+        "SkillID": "poker_base",
+        "ModifierID": "woodOnUse_add",
+        "Value": 2,
+        "Description": "添加局部词条"
+      }
+    ]
+  }
+]

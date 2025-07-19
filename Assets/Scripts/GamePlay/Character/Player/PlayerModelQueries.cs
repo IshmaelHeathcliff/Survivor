@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace GamePlay.Character.Player
+namespace Gameplay.Character.Player
 {
     public class PlayerPositionQuery : AbstractQuery<Vector2>
     {

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Core;
+using XYZRPGSystem.Core;
 using Cysharp.Threading.Tasks;
-using GamePlay.Damage.Attackers;
+using XYZRPGSystem.Gameplay.Damage.Attackers;
 
-namespace GamePlay.Character.Enemy
+namespace Gameplay.Character.Enemy
 {
     public class EnemyAttackerController : AttackerController
     {

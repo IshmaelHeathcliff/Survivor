@@ -1,21 +1,25 @@
-﻿using Core;
+﻿using XYZRPGSystem.Core;
 using Cysharp.Threading.Tasks;
-using GamePlay.Modifier;
-using GamePlay.Stat;
-using GamePlay.Item;
-using GamePlay.Skill;
+using Gameplay.Skill;
+using XYZRPGSystem.Gameplay.Modifier;
 using UnityEngine;
+using XYZRPGSystem.Gameplay.Character;
+using XYZRPGSystem.Gameplay.Item;
+using XYZRPGSystem.Gameplay.Skill;
+using XYZRPGSystem.Gameplay.Stat;
 
-namespace GamePlay.Character.Player
+namespace Gameplay.Character.Player
 {
     public class PlayerController : MyCharacterController<PlayerModel, PlayersModel>
     {
         [SerializeField] Vector3 _initialPosition;
+        [SerializeField] string _skillPoolPath;
+
 
         public void Respawn()
         {
             Model.Position = _initialPosition;
-            (CharaterStats.GetStat("Health") as IConsumableStat)?.SetMaxValue();
+            (CharacterStats.GetStat("Health") as IConsumableStat)?.SetMaxValue();
         }
 
         protected override void SetStats()
@@ -51,6 +55,7 @@ namespace GamePlay.Character.Player
         protected override void Start()
         {
             base.Start();
+            this.GetSystem<SkillGachaSystem>().InitSkillPool(Model, _skillPoolPath);
             new ResourceGenerator(this.GetSystem<ResourceSystem>(), Model, 1f).StartGenerating(GlobalCancellation.GetCombinedTokenSource(this).Token).Forget();
         }
     }

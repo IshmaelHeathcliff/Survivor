@@ -1,14 +1,18 @@
-﻿using Core;
-using Core.Scene;
-using GamePlay.Character.Enemy;
-using GamePlay.Status;
-using GamePlay.Modifier;
-using GamePlay.Character.Player;
-using GamePlay.Damage.Attackers;
-using Data.SaveLoad;
-using GamePlay.Item;
-using GamePlay.Skill;
-using GamePlay.Character;
+﻿using Core.Scene;
+using Gameplay.Skill;
+using Gameplay.Item;
+using Gameplay.Character.Enemy;
+using Gameplay.Character.Player;
+
+using XYZRPGSystem.Core;
+using XYZRPGSystem.Gameplay.Status;
+using XYZRPGSystem.Gameplay.Modifier;
+using XYZRPGSystem.Gameplay.Damage.Attackers;
+using XYZRPGSystem.Gameplay.Item;
+using XYZRPGSystem.Gameplay.Skill;
+using XYZRPGSystem.Gameplay.Character;
+using XYZRPGSystem.Data.SaveLoad;
+using XYZRPGSystem.Gameplay;
 
 public class GameFrame : Architecture<GameFrame>
 {
@@ -30,6 +34,6 @@ public class GameFrame : Architecture<GameFrame>
         RegisterSystem(new AttackerSystem());
         RegisterSystem(new PositionQuerySystem());
 
-        RegisterUtility(new SaveLoadUtility());
+        RegisterUtility(new DataPersistUtility());
     }
 }
