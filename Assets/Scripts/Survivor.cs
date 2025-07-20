@@ -24,6 +24,7 @@ public class GameFrame : Architecture<GameFrame>
 
         RegisterSystem(new SkillGachaSystem());
         RegisterSystem(new DropSystem());
+        RegisterSystem(new EnemySystem());
 
         RegisterSystem(new InputSystem());
         RegisterSystem(new ModifierSystem());

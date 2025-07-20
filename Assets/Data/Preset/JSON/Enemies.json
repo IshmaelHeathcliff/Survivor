@@ -1,0 +1,97 @@
+[
+  {
+    "ID": "basic_enemy",
+    "Name": "基础敌人",
+    "PrefabAddress": "Assets/Prefabs/Enemy 2.prefab",
+    "Description": "最基础的敌人类型",
+    "MaxCount": 10,
+    "GenerateCount": 1,
+    "GenerateGap": 2.0,
+    "MinDistance": 5.0,
+    "MaxDistance": 10.0,
+    "Health": 100.0,
+    "MoveSpeed": 3.0,
+    "AttackDamage": 10.0,
+    "AttackRange": 1.5,
+    "AttackCooldown": 1.0,
+    "CoinReward": 1,
+    "WoodReward": 0,
+    "DropIDs": [],
+    "Keywords": [
+      "normal"
+    ],
+    "SkillPoolPath": ""
+  },
+  {
+    "ID": "fast_enemy",
+    "Name": "快速敌人",
+    "PrefabAddress": "Assets/Prefabs/Enemy 1.prefab",
+    "Description": "移动速度较快的敌人",
+    "MaxCount": 8,
+    "GenerateCount": 1,
+    "GenerateGap": 1.5,
+    "MinDistance": 6.0,
+    "MaxDistance": 12.0,
+    "Health": 80.0,
+    "MoveSpeed": 5.0,
+    "AttackDamage": 8.0,
+    "AttackRange": 1.2,
+    "AttackCooldown": 0.8,
+    "CoinReward": 2,
+    "WoodReward": 1,
+    "DropIDs": [],
+    "Keywords": [
+      "fast",
+      "agile"
+    ],
+    "SkillPoolPath": ""
+  },
+  {
+    "ID": "tank_enemy",
+    "Name": "坦克敌人",
+    "PrefabAddress": "Assets/Prefabs/Enemy 4.prefab",
+    "Description": "血量较高的重装敌人",
+    "MaxCount": 5,
+    "GenerateCount": 1,
+    "GenerateGap": 3.0,
+    "MinDistance": 4.0,
+    "MaxDistance": 8.0,
+    "Health": 200.0,
+    "MoveSpeed": 2.0,
+    "AttackDamage": 15.0,
+    "AttackRange": 2.0,
+    "AttackCooldown": 1.5,
+    "CoinReward": 3,
+    "WoodReward": 2,
+    "DropIDs": [],
+    "Keywords": [
+      "tank",
+      "heavy"
+    ],
+    "SkillPoolPath": ""
+  },
+  {
+    "ID": "boss_enemy",
+    "Name": "高伤敌人",
+    "PrefabAddress": "Assets/Prefabs/Enemy 3.prefab",
+    "Description": "伤害较高的精英敌人",
+    "MaxCount": 5,
+    "GenerateCount": 1,
+    "GenerateGap": 3.0,
+    "MinDistance": 4.0,
+    "MaxDistance": 8.0,
+    "Health": 200.0,
+    "MoveSpeed": 2.0,
+    "AttackDamage": 15.0,
+    "AttackRange": 2.0,
+    "AttackCooldown": 1.5,
+    "CoinReward": 3,
+    "WoodReward": 2,
+    "DropIDs": [],
+    "Keywords": [
+      "tank",
+      "heavy"
+    ],
+    "SkillPoolPath": ""
+  }
+]
