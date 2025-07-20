@@ -185,7 +185,7 @@ namespace XYZRPGSystem.Gameplay.Damage.Attackers
                     Target = this.GetSystem<PositionQuerySystem>().QueryClosest(TargetTag, transform.position, _damaged);
                     if (Target == null)
                     {
-                        Debug.LogError("Can't find target");
+                        Cancel().Forget();
                         return;
                     }
                 }

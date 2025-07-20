@@ -16,17 +16,12 @@ MonoBehaviour:
   m_GUID: 7c1749500d6a42b458b62098db2e0195
   m_SerializeEntries:
   - m_GUID: 2a4e5b1401850e8439853b4d55a5adc0
-    m_Address: Assets/Prefabs/Enemy (1).prefab
+    m_Address: Assets/Prefabs/Enemy 1.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2bcd2660ca9b64942af0de543d8d7100
     m_Address: PlayerInput
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 329e44c7fcde73f43be7052590fdcee5
-    m_Address: Assets/Textures/character/Enemies.png
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -70,6 +65,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a079bcf386a3cd348a39374243d5f47e
+    m_Address: Assets/Prefabs/Enemy 4.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a821af5d713127a4e8d52ddc37ed843b
     m_Address: Assets/Prefabs/SkillGachaButton.prefab
     m_ReadOnly: 0
@@ -85,6 +85,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c4b8258b6ac8ade4db91a359aafdc312
+    m_Address: Assets/Prefabs/Enemy 3.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d3a78b04d8c98504f929e408d6bfa054
     m_Address: Assets/Prefabs/Chip.prefab
     m_ReadOnly: 0
@@ -97,6 +102,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ddba823ecbf89ff44b1495b883bb0520
     m_Address: Assets/Prefabs/UI/Heart.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e9f40e454ca12dd4a80c706bd024407e
+    m_Address: Assets/Prefabs/Enemy 2.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

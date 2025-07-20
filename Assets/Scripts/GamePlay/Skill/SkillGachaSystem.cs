@@ -8,8 +8,6 @@ using Random = UnityEngine.Random;
 
 namespace Gameplay.Skill
 {
-
-
     public class SkillGachaSystem : AbstractSystem
     {
         const string PresetPath = "Preset/JSON";
