@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace XYZRPGSystem.Data.Config
 {
@@ -10,18 +11,24 @@ namespace XYZRPGSystem.Data.Config
         [ShowInInspector] public string PrefabAddress { get; set; }
         [ShowInInspector] public string Description { get; set; }
 
+        [Header("CharacterStats")]
         [ShowInInspector] public float Health { get; set; } = 100f;
-        [ShowInInspector] public float HealthIncreasePerWave { get; set; } = 10f;
+        [ShowInInspector] public float HealthRegen { get; set; } = 0f;
         [ShowInInspector] public float MoveSpeed { get; set; } = 3f;
+
+        [Header("Skill Stats")]
         [ShowInInspector] public float Damage { get; set; } = 1f;
-        [ShowInInspector] public float DamageIncreasePerWave { get; set; } = 1f;
-        [ShowInInspector] public float AttackRange { get; set; } = 1.5f;
-        [ShowInInspector] public float AttackCooldown { get; set; } = 1f;
         [ShowInInspector] public float AttackSpeed { get; set; } = 1f;
+        [ShowInInspector] public float AttackRange { get; set; } = 3f;
+        [ShowInInspector] public float CooldownInverse { get; set; } = 1f;
 
-        [ShowInInspector] public int CoinOnKill { get; set; } = 1;
-        [ShowInInspector] public int WoodOnKill { get; set; } = 0;
+        [Header("Enemy Stats")]
+        [ShowInInspector] public int CoinOnDead { get; set; } = 1;
+        [ShowInInspector] public int WoodOnDead { get; set; } = 0;
+        [ShowInInspector] public float HealthIncreasePerWave { get; set; } = 10f;
+        [ShowInInspector] public float DamageIncreasePerWave { get; set; } = 1f;
 
-        [ShowInInspector] public List<SkillInPool> SkillPool { get; set; } = new();
+
+        [ShowInInspector] public List<string> SkillIDs { get; set; } = new();
     }
 }

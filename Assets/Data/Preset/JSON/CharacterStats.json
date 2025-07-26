@@ -16,29 +16,5 @@
     "Name": "移动速度",
     "Type": 0,
     "Description": null
-  },
-  {
-    "ID": "CoinGain",
-    "Name": "金币获取",
-    "Type": 0,
-    "Description": null
-  },
-  {
-    "ID": "WoodGain",
-    "Name": "木头获取",
-    "Type": 0,
-    "Description": null
-  },
-  {
-    "ID": "CoinOnKill",
-    "Name": "杀敌金币奖励",
-    "Type": 0,
-    "Description": null
-  },
-  {
-    "ID": "WoodOnKill",
-    "Name": "杀敌木头奖励",
-    "Type": 0,
-    "Description": null
   }
 ]

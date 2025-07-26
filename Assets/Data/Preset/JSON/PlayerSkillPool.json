@@ -1,86 +1,114 @@
 [
   {
-    "Name": "dice1"
+    "ID": "dice1",
+    "Name": "骰子1"
   },
   {
-    "Name": "dice2"
+    "ID": "dice2",
+    "Name": "骰子2"
   },
   {
-    "Name": "dice3"
+    "ID": "dice3",
+    "Name": "骰子3"
   },
   {
-    "Name": "dice4"
+    "ID": "dice4",
+    "Name": "骰子4"
   },
   {
-    "Name": "dice5"
+    "ID": "dice5",
+    "Name": "骰子5"
   },
   {
-    "Name": "joystick"
+    "ID": "joystick",
+    "Name": "摇杆"
   },
   {
-    "Name": "button"
+    "ID": "button",
+    "Name": "按钮"
   },
   {
-    "Name": "case"
+    "ID": "case",
+    "Name": "骰盒"
   },
   {
-    "Name": "poker_10_1"
+    "ID": "poker_10_1",
+    "Name": "黑桃10"
   },
   {
-    "Name": "poker_10_2"
+    "ID": "poker_10_2",
+    "Name": "红桃10"
   },
   {
-    "Name": "poker_10_3"
+    "ID": "poker_10_3",
+    "Name": "梅花10"
   },
   {
-    "Name": "poker_10_4"
+    "ID": "poker_10_4",
+    "Name": "方块10"
   },
   {
-    "Name": "poker_J_1"
+    "ID": "poker_J_1",
+    "Name": "黑桃J"
   },
   {
-    "Name": "poker_J_2"
+    "ID": "poker_J_2",
+    "Name": "红桃J"
   },
   {
-    "Name": "poker_J_3"
+    "ID": "poker_J_3",
+    "Name": "梅花J"
   },
   {
-    "Name": "poker_J_4"
+    "ID": "poker_J_4",
+    "Name": "方块J"
   },
   {
-    "Name": "poker_Q_1"
+    "ID": "poker_Q_1",
+    "Name": "黑桃Q"
   },
   {
-    "Name": "poker_Q_2"
+    "ID": "poker_Q_2",
+    "Name": "红桃Q"
   },
   {
-    "Name": "poker_Q_3"
+    "ID": "poker_Q_3",
+    "Name": "梅花Q"
   },
   {
-    "Name": "poker_Q_4"
+    "ID": "poker_Q_4",
+    "Name": "方块Q"
   },
   {
-    "Name": "poker_K_1"
+    "ID": "poker_K_1",
+    "Name": "黑桃K"
   },
   {
-    "Name": "poker_K_2"
+    "ID": "poker_K_2",
+    "Name": "红桃K"
   },
   {
-    "Name": "poker_K_3"
+    "ID": "poker_K_3",
+    "Name": "梅花K"
   },
   {
-    "Name": "poker_K_4"
+    "ID": "poker_K_4",
+    "Name": "方块K"
   },
   {
-    "Name": "poker_A_1"
+    "ID": "poker_A_1",
+    "Name": "黑桃A"
   },
   {
-    "Name": "poker_A_2"
+    "ID": "poker_A_2",
+    "Name": "红桃A"
   },
   {
-    "Name": "poker_A_3"
+    "ID": "poker_A_3",
+    "Name": "梅花A"
   },
   {
-    "Name": "poker_A_4"
+    "ID": "poker_A_4",
+    "Name": "方块A"
   }
 ]

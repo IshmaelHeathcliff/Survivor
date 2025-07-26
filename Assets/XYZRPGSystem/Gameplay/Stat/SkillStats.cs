@@ -10,19 +10,19 @@ namespace XYZRPGSystem.Gameplay.Stat
     {
         public SkillStats(List<string> keywords, CharacterStats characterStats)
         {
-            List<StatConfig> skillStats = SaveLoadManager.Load<List<StatConfig>>("SkillStats.json", "Preset/JSON");
-            foreach (StatConfig stat in skillStats)
+            List<StatConfig> skillStatConfigs = SaveLoadManager.Load<List<StatConfig>>("SkillStats.json", "Preset/JSON");
+            foreach (StatConfig statConfig in skillStatConfigs)
             {
-                switch (stat.Type)
+                switch (statConfig.Type)
                 {
                     case StatType.Consumable:
-                        InternalStats.Add(stat.ID, new LocalConsumableStat(new ConsumableStat(stat.ID, stat.Name), characterStats.GetConsumableStat(stat.ID)));
+                        InternalStats.Add(statConfig.ID, new LocalConsumableStat(new ConsumableStat(statConfig.ID, statConfig.Name), characterStats.GetConsumableStat(statConfig.ID)));
                         break;
                     case StatType.Keyword:
-                        InternalStats.Add(stat.ID, new LocalKeywordStat(keywords, new KeywordStat(stat.ID, stat.Name), characterStats.GetKeywordStat(stat.ID)));
+                        InternalStats.Add(statConfig.ID, new LocalKeywordStat(keywords, new KeywordStat(statConfig.ID, statConfig.Name), characterStats.GetKeywordStat(statConfig.ID)));
                         break;
                     default:
-                        InternalStats.Add(stat.ID, new LocalStat(new Stat(stat.ID, stat.Name), characterStats.GetStat(stat.ID)));
+                        InternalStats.Add(statConfig.ID, new LocalStat(new Stat(statConfig.ID, statConfig.Name), characterStats.GetStat(statConfig.ID)));
                         break;
                 }
             }

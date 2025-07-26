@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 448417647133177773}
   - component: {fileID: 3043336763893284360}
-  - component: {fileID: 7352825043378018076}
   - component: {fileID: 3410946234023945421}
   - component: {fileID: -3414494592244930335}
+  - component: {fileID: 7352825043378018076}
   m_Layer: 7
   m_Name: Chip
   m_TagString: Player
@@ -90,20 +90,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7352825043378018076
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4805364672990420536}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f3f3dbe4d724740a304f0cdaf9659ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _rotateSpeed: 0
-  _randomDirectionFactor: 0
 --- !u!58 &3410946234023945421
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -167,3 +153,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!114 &7352825043378018076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4805364672990420536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f3f3dbe4d724740a304f0cdaf9659ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _collisionRadius: 3
+  _rotateSpeed: 0
+  _randomDirectionFactor: 0

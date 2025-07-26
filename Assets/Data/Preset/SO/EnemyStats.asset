@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ac0a766f0ce67d48ae5ae19f9e1ebd3, type: 3}
-  m_Name: CharacterStats
+  m_Name: EnemyStats
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -27,7 +27,7 @@ MonoBehaviour:
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
-      Data: 3
+      Data: 4
     - Name: 
       Entry: 7
       Data: 1|XYZRPGSystem.Data.Config.StatConfig, Assembly-CSharp
@@ -47,10 +47,16 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
+      Entry: 7
+      Data: 4|XYZRPGSystem.Data.Config.StatConfig, Assembly-CSharp
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
       Entry: 13
       Data: 
     - Name: 
       Entry: 8
       Data: 
-  JsonName: CharacterStats.json
+  JsonName: EnemyStats.json
   JsonPath: Preset/JSON

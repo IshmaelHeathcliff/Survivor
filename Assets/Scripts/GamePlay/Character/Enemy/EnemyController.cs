@@ -19,6 +19,7 @@ namespace Gameplay.Character.Enemy
         protected override void SetStats()
         {
             base.SetStats();
+            CharacterStats.LoadStats("EnemyStats.json", "Preset/JSON");
         }
 
         protected override void MakeSureID()

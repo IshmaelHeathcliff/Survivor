@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 using XYZRPGSystem.Data.Config;
 using XYZRPGSystem.Data.SaveLoad;
 using XYZRPGSystem.Gameplay.Character;
@@ -58,9 +59,16 @@ namespace Gameplay.Skill
         public void InitSkillPool(IHasSkillPool model, string path)
         {
             List<SkillInPool> initSkills = SaveLoadManager.Load<List<SkillInPool>>(path, PresetPath);
+
+            if (initSkills == null)
+            {
+                Debug.LogError($"SkillPoolConfig {path} 不存在");
+                return;
+            }
+
             foreach (SkillInPool skill in initSkills)
             {
-                SkillConfig config = _skillSystem.GetSkillConfig(skill.Name);
+                SkillConfig config = _skillSystem.GetSkillConfig(skill.ID);
                 if (config != null)
                 {
                     model.SkillPool.AddSkill(config);
