@@ -66,11 +66,11 @@ namespace XYZRPGSystem.Gameplay.Skill
             return ids.Select(GetSkillConfig).Where(config => config != null);
         }
 
-        public void SetEnv(ICharacterModel model)
+        public void SetEnv(IHasSkill model)
         {
-            if (model != null)
+            if (model != null && model is ICharacterModel characterModel)
             {
-                SkillCreateEnv.Model = model;
+                SkillCreateEnv.Model = characterModel;
             }
 
             if (!CheckEnv())
@@ -79,14 +79,14 @@ namespace XYZRPGSystem.Gameplay.Skill
             }
         }
 
-        public ISkill CreateSkill(string id, ICharacterModel model = null)
+        public ISkill CreateSkill(string id, IHasSkill model = null)
         {
             SetEnv(model);
 
             return _skillConfigLoader.CreateSkill(GetSkillConfig(id), SkillCreateEnv);
         }
 
-        public void AcquireSkill(string id, ICharacterModel model = null)
+        public void AcquireSkill(string id, IHasSkill model = null)
         {
             SetEnv(model);
 
@@ -119,7 +119,7 @@ namespace XYZRPGSystem.Gameplay.Skill
             }
         }
 
-        public void ReleaseSkill(string id, ICharacterModel model = null)
+        public void ReleaseSkill(string id, IHasSkill model = null)
         {
             SetEnv(model);
 
@@ -136,7 +136,7 @@ namespace XYZRPGSystem.Gameplay.Skill
             this.SendEvent(new SkillReleasedEvent(skill, SkillCreateEnv.Model));
         }
 
-        public void RemoveSkill(string id, ICharacterModel model = null)
+        public void RemoveSkill(string id, IHasSkill model = null)
         {
             SetEnv(model);
 
@@ -146,7 +146,7 @@ namespace XYZRPGSystem.Gameplay.Skill
             }
         }
 
-        public void ClearSkill(ICharacterModel model)
+        public void ClearSkill(IHasSkill model)
         {
             foreach (ISkill skill in model.GetAllSkills())
             {
@@ -157,7 +157,7 @@ namespace XYZRPGSystem.Gameplay.Skill
             model.SkillsReleased.Clear();
         }
 
-        public void SetSkillSlotCount(int count, ICharacterModel model = null)
+        public void SetSkillSlotCount(int count, IHasSkill model = null)
         {
             SetEnv(model);
             SkillCreateEnv.Model.SkillSlotCount = count;

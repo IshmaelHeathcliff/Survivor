@@ -63,6 +63,11 @@ namespace XYZRPGSystem.Gameplay.Character
             }
         }
 
+        public int GetCount()
+        {
+            return Models.Count;
+        }
+
         public Dictionary<string, Transform> GetTransforms()
         {
             return Models.ToDictionary(pair => pair.Key, pair => pair.Value.Transform);

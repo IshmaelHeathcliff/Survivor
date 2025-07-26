@@ -12,11 +12,11 @@ namespace XYZRPGSystem.Gameplay.Skill
 
     public abstract class SkillEvent : ISkillEvent
     {
-        public ICharacterModel Model { get; set; }
+        public IHasSkill Model { get; set; }
         public ISkillContainer SkillsInSlot { get; set; }
         public ISkillContainer SkillsInRelease { get; set; }
 
-        public SkillEvent(ICharacterModel model)
+        public SkillEvent(IHasSkill model)
         {
             Model = model;
             SkillsInSlot = model.SkillsInSlot;
@@ -28,7 +28,7 @@ namespace XYZRPGSystem.Gameplay.Skill
     {
         public int Count { get; set; }
 
-        public SkillSlotCountChangedEvent(int count, ICharacterModel model) : base(model)
+        public SkillSlotCountChangedEvent(int count, IHasSkill model) : base(model)
         {
             Count = count;
         }
@@ -38,17 +38,17 @@ namespace XYZRPGSystem.Gameplay.Skill
     {
         public ISkill Skill { get; set; }
 
-        public SkillReleasedEvent(ISkill skill, ICharacterModel model) : base(model)
+        public SkillReleasedEvent(ISkill skill, IHasSkill model) : base(model)
         {
             Skill = skill;
         }
     }
 
-    public class SkillAcquiredEvent : SkillEvent, IReleaseEvent
+    public class SkillAcquiredEvent : SkillEvent, IReleaseSkillEvent
     {
         public ISkill Skill { get; set; }
 
-        public SkillAcquiredEvent(ISkill skill, ICharacterModel model) : base(model)
+        public SkillAcquiredEvent(ISkill skill, IHasSkill model) : base(model)
         {
             Skill = skill;
         }
@@ -58,7 +58,7 @@ namespace XYZRPGSystem.Gameplay.Skill
     {
         public ISkill Skill { get; set; }
 
-        public SkillRemovedEvent(ISkill skill, ICharacterModel model) : base(model)
+        public SkillRemovedEvent(ISkill skill, IHasSkill model) : base(model)
         {
             Skill = skill;
         }
@@ -68,7 +68,7 @@ namespace XYZRPGSystem.Gameplay.Skill
     {
         public List<SkillConfig> Skills { get; set; }
 
-        public GachaSkillsEvent(List<SkillConfig> skills, ICharacterModel model) : base(model)
+        public GachaSkillsEvent(List<SkillConfig> skills, IHasSkillPool model) : base(model)
         {
             Skills = skills;
         }
@@ -79,7 +79,7 @@ namespace XYZRPGSystem.Gameplay.Skill
         public List<SkillConfig> Skills { get; set; }
         public int Index { get; set; }
 
-        public SelectSkillEvent(List<SkillConfig> skills, int index, ICharacterModel model) : base(model)
+        public SelectSkillEvent(List<SkillConfig> skills, int index, IHasSkill model) : base(model)
         {
             Skills = skills;
             Index = index;
@@ -90,7 +90,7 @@ namespace XYZRPGSystem.Gameplay.Skill
     {
         public ISkill Skill { get; set; }
 
-        public FullSlotWhenAcquireSkillEvent(ISkill skill, ICharacterModel model) : base(model)
+        public FullSlotWhenAcquireSkillEvent(ISkill skill, IHasSkill model) : base(model)
         {
             Skill = skill;
         }
