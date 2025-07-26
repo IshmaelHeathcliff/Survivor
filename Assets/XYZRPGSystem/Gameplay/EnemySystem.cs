@@ -29,7 +29,7 @@ namespace XYZRPGSystem.Gameplay
                 {
                     _enemyConfigs[config.ID] = config;
                 }
-                Debug.Log($"Loaded {_enemyConfigs.Count} enemy configs");
+                // Debug.Log($"Loaded {_enemyConfigs.Count} enemy configs");
             }
             else
             {
@@ -90,7 +90,7 @@ namespace XYZRPGSystem.Gameplay
                 {
                     _spawnGroupConfigs[config.ID] = config;
                 }
-                Debug.Log($"Loaded {_spawnGroupConfigs.Count} enemy spawn group configs");
+                // Debug.Log($"Loaded {_spawnGroupConfigs.Count} enemy spawn group configs");
             }
             else
             {
@@ -132,43 +132,6 @@ namespace XYZRPGSystem.Gameplay
         #endregion
 
         #region Enemy Spawn Management
-        /// <summary>
-        /// 根据生成组配置选择一个随机敌人类型
-        /// </summary>
-        public string SelectRandomEnemyType(string spawnGroupID)
-        {
-            var spawnGroup = GetSpawnGroupConfig(spawnGroupID);
-            return spawnGroup?.GetRandomEnemyID();
-        }
-
-        /// <summary>
-        /// 检查指定敌人类型是否可以生成
-        /// </summary>
-        public bool CanSpawnEnemy(string spawnGroupID, string enemyID, Dictionary<string, int> currentCounts)
-        {
-            var spawnGroup = GetSpawnGroupConfig(spawnGroupID);
-            if (spawnGroup == null) return false;
-
-            if (!currentCounts.TryGetValue(enemyID, out int currentCount))
-                return false;
-
-            int maxCount = spawnGroup.GetMaxCountForEnemy(enemyID);
-            return currentCount < maxCount;
-        }
-
-        /// <summary>
-        /// 获取生成组的总体配置信息
-        /// </summary>
-        public (int totalMaxCount, float generateGap, int generateCount, float minDistance, float maxDistance)
-            GetSpawnGroupInfo(string spawnGroupID)
-        {
-            var config = GetSpawnGroupConfig(spawnGroupID);
-            if (config == null)
-                return (0, 0, 0, 0, 0);
-
-            return (config.TotalMaxCount, config.GenerateGap, config.GenerateCount,
-                    config.MinDistance, config.MaxDistance);
-        }
 
         /// <summary>
         /// 获取敌人的预制体地址
@@ -234,7 +197,7 @@ namespace XYZRPGSystem.Gameplay
         #region System Lifecycle
         protected override void OnInit()
         {
-            Debug.Log("EnemySystem initialized");
+            // Debug.Log("EnemySystem initialized");
             // 预加载配置
             LoadEnemyConfigs();
             LoadSpawnGroupConfigs();
@@ -246,7 +209,7 @@ namespace XYZRPGSystem.Gameplay
             _spawnGroupConfigs.Clear();
             _enemyConfigLoaded = false;
             _spawnGroupConfigLoaded = false;
-            Debug.Log("EnemySystem deinitialized");
+            // Debug.Log("EnemySystem deinitialized");
         }
         #endregion
     }

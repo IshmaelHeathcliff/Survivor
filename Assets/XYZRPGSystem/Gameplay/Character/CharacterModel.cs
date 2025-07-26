@@ -12,7 +12,6 @@ namespace XYZRPGSystem.Gameplay.Character
 {
     public interface IHasSkill
     {
-        SkillPool SkillPool { get; set; }
         ISkillContainer SkillsReleased { get; }
         ISkillContainer SkillsInSlot { get; }
         int SkillSlotCount { get; set; }
@@ -20,6 +19,14 @@ namespace XYZRPGSystem.Gameplay.Character
         bool TryGetSkill(string id, out ISkill skill);
         IEnumerable<ISkill> GetAllSkills();
         bool HasSkills(IEnumerable<string> ids);
+    }
+
+    /// <summary>
+    /// 技能池，存储可能获取的技能
+    /// </summary>
+    public interface IHasSkillPool : IHasSkill
+    {
+        SkillPool SkillPool { get; set; }
     }
 
     public interface IHasStatus
@@ -93,8 +100,6 @@ namespace XYZRPGSystem.Gameplay.Character
 
 
         #region IHasSkill
-        public SkillPool SkillPool { get; set; } = new();
-
         public int SkillSlotCount
         {
             get => SkillsInSlot.MaxCount;

@@ -6,9 +6,9 @@ using XYZRPGSystem.Gameplay.Character;
 
 namespace XYZRPGSystem.Gameplay.Skill
 {
-    public interface IReleaseEvent
+    public interface IReleaseSkillEvent
     {
-        ICharacterModel Model { get; set; }
+        IHasSkill Model { get; set; }
     }
 
 
@@ -17,16 +17,16 @@ namespace XYZRPGSystem.Gameplay.Skill
     /// </summary>
     public interface ISkillReleaseCondition
     {
-        EasyEvent<IReleaseEvent> OnRelease { get; }
+        EasyEvent<IReleaseSkillEvent> OnRelease { get; }
         List<string> SkillsToRelease { get; }
-        void CheckCondition(IReleaseEvent e);
-        bool IsMet(ICharacterModel model);
+        void CheckCondition(IReleaseSkillEvent e);
+        bool IsMet(IHasSkill model);
         string Description { get; }
     }
 
     public abstract class SkillReleaseCondition : ISkillReleaseCondition
     {
-        public EasyEvent<IReleaseEvent> OnRelease { get; set; } = new();
+        public EasyEvent<IReleaseSkillEvent> OnRelease { get; set; } = new();
         public string Description { get; protected set; }
         public List<string> SkillsToRelease { get; set; }
 
@@ -36,7 +36,7 @@ namespace XYZRPGSystem.Gameplay.Skill
             SkillsToRelease = skillsToRelease ?? new List<string>();
         }
 
-        public virtual void CheckCondition(IReleaseEvent e)
+        public virtual void CheckCondition(IReleaseSkillEvent e)
         {
             if (IsMet(e.Model))
             {
@@ -44,7 +44,7 @@ namespace XYZRPGSystem.Gameplay.Skill
             }
         }
 
-        public abstract bool IsMet(ICharacterModel model);
+        public abstract bool IsMet(IHasSkill model);
     }
 
 
@@ -67,7 +67,7 @@ namespace XYZRPGSystem.Gameplay.Skill
             Description = string.IsNullOrEmpty(description) ? $"凑齐技能: {string.Join(", ", RequiredSkillIDs)}" : description;
         }
 
-        public override bool IsMet(ICharacterModel model)
+        public override bool IsMet(IHasSkill model)
         {
             if (model.SkillsInSlot.HasSkills(RequiredSkillIDs))
             {
@@ -89,7 +89,7 @@ namespace XYZRPGSystem.Gameplay.Skill
             Description = string.IsNullOrEmpty(description) ? $"凑齐技能 {string.Join(", ", RequiredSkillIDs)} 至少 {RequiredCount} 个" : description;
         }
 
-        public override bool IsMet(ICharacterModel model)
+        public override bool IsMet(IHasSkill model)
         {
             int count = 0;
             List<string> releasedSkills = new();
@@ -125,11 +125,11 @@ namespace XYZRPGSystem.Gameplay.Skill
 
         }
 
-        public override bool IsMet(ICharacterModel model)
+        public override bool IsMet(IHasSkill model)
         {
-            if (model.SkillsInSlot.HasSkills(RequiredSkillIDs))
+            if (model.SkillsInSlot.HasSkills(RequiredSkillIDs) && model is ICanCountValue countValueModel)
             {
-                return model.CountValues.TryGetValue(ValueID, out ValueCounter valueCounter) && valueCounter.Value >= Value;
+                return countValueModel.CountValues.TryGetValue(ValueID, out ValueCounter valueCounter) && valueCounter.Value >= Value;
             }
 
             return false;
@@ -150,7 +150,7 @@ namespace XYZRPGSystem.Gameplay.Skill
                 : description;
         }
 
-        public override bool IsMet(ICharacterModel model)
+        public override bool IsMet(IHasSkill model)
         {
             if (Conditions.Count > 0 && Conditions.All(c => c.IsMet(model)))
             {
@@ -177,7 +177,7 @@ namespace XYZRPGSystem.Gameplay.Skill
                 : description;
         }
 
-        public override bool IsMet(ICharacterModel model)
+        public override bool IsMet(IHasSkill model)
         {
             foreach (ISkillReleaseCondition condition in Conditions)
             {
@@ -203,7 +203,7 @@ namespace XYZRPGSystem.Gameplay.Skill
             Conditions = conditions ?? new List<ISkillReleaseCondition>();
         }
 
-        public override bool IsMet(ICharacterModel model)
+        public override bool IsMet(IHasSkill model)
         {
             if (Conditions.Count == 0)
                 return false;

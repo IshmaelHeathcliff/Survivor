@@ -4,134 +4,40 @@
     "Name": "基础敌人生成组",
     "Description": "平衡的多种敌人生成配置",
     "TotalMaxCount": 20,
-    "GenerateGap": 0.5,
-    "GenerateCount": 1,
     "MinDistance": 5.0,
     "MaxDistance": 10.0,
     "EnemyEntries": [
       {
         "EnemyID": "basic_enemy",
-        "Weight": 50,
-        "MinCount": 5,
-        "MaxCount": 10,
-        "SpawnChance": 1.0,
-        "RequiredConditions": []
+        "Description": null,
+        "GenerateStartTime": 0.0,
+        "GenerateStartWave": 1,
+        "GenerateGap": 1.0,
+        "GenerateCount": 3
       },
       {
         "EnemyID": "fast_enemy",
-        "Weight": 30,
-        "MinCount": 2,
-        "MaxCount": 6,
-        "SpawnChance": 0.8,
-        "RequiredConditions": []
+        "Description": null,
+        "GenerateStartTime": 0.0,
+        "GenerateStartWave": 1,
+        "GenerateGap": 3.0,
+        "GenerateCount": 1
       },
       {
         "EnemyID": "tank_enemy",
-        "Weight": 20,
-        "MinCount": 1,
-        "MaxCount": 4,
-        "SpawnChance": 0.6,
-        "RequiredConditions": []
+        "Description": null,
+        "GenerateStartTime": 0.0,
+        "GenerateStartWave": 1,
+        "GenerateGap": 5.0,
+        "GenerateCount": 1
       },
       {
         "EnemyID": "boss_enemy",
-        "Weight": 1,
-        "MinCount": 0,
-        "MaxCount": 5,
-        "SpawnChance": 1.0,
-        "RequiredConditions": []
-      }
-    ]
-  },
-  {
-    "ID": "early_game_spawn",
-    "Name": "前期敌人生成",
-    "Description": "游戏前期的敌人配置，主要是基础敌人",
-    "TotalMaxCount": 15,
-    "GenerateGap": 3.0,
-    "GenerateCount": 1,
-    "MinDistance": 6.0,
-    "MaxDistance": 12.0,
-    "EnemyEntries": [
-      {
-        "EnemyID": "basic_enemy",
-        "Weight": 80,
-        "MinCount": 8,
-        "MaxCount": 12,
-        "SpawnChance": 1.0,
-        "RequiredConditions": []
-      },
-      {
-        "EnemyID": "fast_enemy",
-        "Weight": 20,
-        "MinCount": 0,
-        "MaxCount": 3,
-        "SpawnChance": 0.5,
-        "RequiredConditions": []
-      }
-    ]
-  },
-  {
-    "ID": "late_game_spawn",
-    "Name": "后期敌人生成",
-    "Description": "游戏后期的高难度敌人配置",
-    "TotalMaxCount": 25,
-    "GenerateGap": 1.5,
-    "GenerateCount": 2,
-    "MinDistance": 4.0,
-    "MaxDistance": 8.0,
-    "EnemyEntries": [
-      {
-        "EnemyID": "basic_enemy",
-        "Weight": 30,
-        "MinCount": 3,
-        "MaxCount": 8,
-        "SpawnChance": 1.0,
-        "RequiredConditions": []
-      },
-      {
-        "EnemyID": "fast_enemy",
-        "Weight": 40,
-        "MinCount": 4,
-        "MaxCount": 10,
-        "SpawnChance": 0.9,
-        "RequiredConditions": []
-      },
-      {
-        "EnemyID": "tank_enemy",
-        "Weight": 30,
-        "MinCount": 3,
-        "MaxCount": 7,
-        "SpawnChance": 0.8,
-        "RequiredConditions": []
-      }
-    ]
-  },
-  {
-    "ID": "boss_wave_spawn",
-    "Name": "BOSS波次生成",
-    "Description": "BOSS战期间的敌人生成配置",
-    "TotalMaxCount": 30,
-    "GenerateGap": 1.0,
-    "GenerateCount": 3,
-    "MinDistance": 3.0,
-    "MaxDistance": 6.0,
-    "EnemyEntries": [
-      {
-        "EnemyID": "fast_enemy",
-        "Weight": 60,
-        "MinCount": 10,
-        "MaxCount": 15,
-        "SpawnChance": 1.0,
-        "RequiredConditions": []
-      },
-      {
-        "EnemyID": "tank_enemy",
-        "Weight": 40,
-        "MinCount": 5,
-        "MaxCount": 10,
-        "SpawnChance": 0.9,
-        "RequiredConditions": []
+        "Description": null,
+        "GenerateStartTime": 0.0,
+        "GenerateStartWave": 1,
+        "GenerateGap": 10.0,
+        "GenerateCount": 1
       }
     ]
   }

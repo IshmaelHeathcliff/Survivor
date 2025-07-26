@@ -8,6 +8,9 @@ using Random = UnityEngine.Random;
 
 namespace Gameplay.Skill
 {
+    /// <summary>
+    /// 技能抽取系统，需要 Model 实现 IHasSkillPool 接口
+    /// </summary>
     public class SkillGachaSystem : AbstractSystem
     {
         const string PresetPath = "Preset/JSON";
@@ -52,7 +55,7 @@ namespace Gameplay.Skill
             // }
         }
 
-        public void InitSkillPool(ICharacterModel model, string path)
+        public void InitSkillPool(IHasSkillPool model, string path)
         {
             List<SkillInPool> initSkills = SaveLoadManager.Load<List<SkillInPool>>(path, PresetPath);
             foreach (SkillInPool skill in initSkills)
@@ -65,7 +68,7 @@ namespace Gameplay.Skill
             }
         }
 
-        SkillConfig GachaSkill(ICharacterModel model)
+        SkillConfig GachaSkill(IHasSkillPool model)
         {
             // 计算总权重和有效权重
             int totalWeight = 0;
@@ -101,7 +104,7 @@ namespace Gameplay.Skill
             return null;
         }
 
-        public List<SkillConfig> GachaSkills(ICharacterModel model, int count = 1)
+        public List<SkillConfig> GachaSkills(IHasSkillPool model, int count = 1)
         {
 
             if (model.SkillPool.GetCount() < count)
@@ -142,7 +145,7 @@ namespace Gameplay.Skill
             return result;
         }
 
-        public void SelectSkill(ICharacterModel model, List<SkillConfig> configs, int index)
+        public void SelectSkill(IHasSkillPool model, List<SkillConfig> configs, int index)
         {
             if (index < 0 || index >= configs.Count)
             {
@@ -167,7 +170,7 @@ namespace Gameplay.Skill
             this.SendEvent(new SelectSkillEvent(configs, index, model));
         }
 
-        public void CancelSelect(ICharacterModel model, List<SkillConfig> configs)
+        public void CancelSelect(IHasSkillPool model, List<SkillConfig> configs)
         {
             foreach (SkillConfig config in configs)
             {
@@ -204,6 +207,11 @@ namespace Gameplay.Skill
         {
             _unRegisters.Add(this.RegisterEvent<SkillAcquiredEvent>(e =>
             {
+                if (e.Model is not IHasSkillPool skillPoolModel)
+                {
+                    return;
+                }
+
                 if (!rule.RequiredSkillIDs.Contains(e.Skill.ID))
                 {
                     return;
@@ -212,7 +220,7 @@ namespace Gameplay.Skill
                 if (e.Model.HasSkills(rule.RequiredSkillIDs))
                 {
                     IEnumerable<SkillConfig> skillConfigsToAdd = _skillSystem.GetSkillConfigs(rule.SkillIDsToAdd);
-                    e.Model.SkillPool.AddSkills(skillConfigsToAdd);
+                    skillPoolModel.SkillPool.AddSkills(skillConfigsToAdd);
                     // foreach (SkillConfig config in skillConfigsToAdd)
                     // {
                     //     Debug.Log($"Skill {config.ID} added to pool");
@@ -228,6 +236,11 @@ namespace Gameplay.Skill
         {
             _unRegisters.Add(this.RegisterEvent<SkillAcquiredEvent>(e =>
             {
+                if (e.Model is not IHasSkillPool skillPoolModel)
+                {
+                    return;
+                }
+
                 if (!rule.RequiredSkillIDs.Contains(e.Skill.ID))
                 {
                     return;
@@ -236,30 +249,24 @@ namespace Gameplay.Skill
                 if (e.Model.HasSkills(rule.RequiredSkillIDs))
                 {
                     IEnumerable<SkillConfig> skillConfigsToRemove = _skillSystem.GetSkillConfigs(rule.SkillIDsToRemove);
-                    e.Model.SkillPool.RemoveSkills(skillConfigsToRemove);
+                    skillPoolModel.SkillPool.RemoveSkills(skillConfigsToRemove);
                 }
             }));
         }
 
         void OnSkillAcquired(SkillAcquiredEvent e)
         {
+            if (e.Model is not IHasSkillPool skillPoolModel)
+            {
+                return;
+            }
+
             SkillConfig skillConfig = _skillSystem.GetSkillConfig(e.Skill.ID);
-            e.Model.SkillPool.RemoveSkill(skillConfig);
+            skillPoolModel.SkillPool.RemoveSkill(skillConfig);
         }
 
         void OnSkillRemoved(SkillRemovedEvent e)
         {
-            // If this skill is a component in any remove rule, assume it's consumed and should not be added back to the pool.
-            // if (_skillRemoveRules.Any(rule => rule.SkillIDsToRemove.Contains(e.Skill.ID)))
-            // {
-            //     return;
-            // }
-
-            // SkillConfig skillConfig = _skillSystem.GetSkillConfig(e.Skill.ID);
-            // if (skillConfig != null)
-            // {
-            //     e.Model.SkillPool.AddSkill(skillConfig);
-            // }
         }
 
         protected override void OnInit()

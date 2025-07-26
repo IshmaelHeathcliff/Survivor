@@ -9,6 +9,7 @@ using Gameplay.Character.Player;
 using XYZRPGSystem.Data.Config;
 using XYZRPGSystem.Gameplay;
 using Random = UnityEngine.Random;
+using Sirenix.OdinInspector;
 
 namespace Gameplay.Character.Enemy
 {
@@ -20,11 +21,11 @@ namespace Gameplay.Character.Enemy
         EnemySpawnGroupConfig _spawnGroupConfig;
         Dictionary<string, EnemyConfig> _enemyConfigs = new();
         Dictionary<string, AssetReference> _enemyReferences = new();
-        Dictionary<string, int> _currentEnemyCounts = new();
+        Dictionary<string, CancellationTokenSource> _enemySpawnTokens = new();
 
         void LoadConfig()
         {
-            var enemySystem = this.GetSystem<EnemySystem>();
+            EnemySystem enemySystem = this.GetSystem<EnemySystem>();
 
             _spawnGroupConfig = enemySystem.GetSpawnGroupConfig(_spawnGroupID);
             if (_spawnGroupConfig == null)
@@ -43,7 +44,6 @@ namespace Gameplay.Character.Enemy
             // 加载所有敌人配置和资源引用
             _enemyConfigs.Clear();
             _enemyReferences.Clear();
-            _currentEnemyCounts.Clear();
 
             foreach (var entry in _spawnGroupConfig.EnemyEntries)
             {
@@ -52,7 +52,6 @@ namespace Gameplay.Character.Enemy
                 {
                     _enemyConfigs[entry.EnemyID] = enemyConfig;
                     _enemyReferences[entry.EnemyID] = new AssetReference(enemyConfig.PrefabAddress);
-                    _currentEnemyCounts[entry.EnemyID] = 0;
                 }
                 else
                 {
@@ -64,9 +63,10 @@ namespace Gameplay.Character.Enemy
         /// <summary>
         /// 创建Enemy实例
         /// </summary>
-        async UniTask CreateEnemy(string enemyID, Vector3 position, CancellationToken ct)
+        async UniTask CreateEnemy(EnemySpawnEntry spawnEntry, Vector3 position, CancellationToken ct)
         {
             ct.ThrowIfCancellationRequested();
+            string enemyID = spawnEntry.EnemyID;
 
             if (!_enemyReferences.TryGetValue(enemyID, out AssetReference enemyReference))
             {
@@ -76,76 +76,132 @@ namespace Gameplay.Character.Enemy
 
             var obj = await Addressables.InstantiateAsync(enemyReference, transform).ToUniTask(cancellationToken: ct);
             obj.transform.position = position;
-
-            // 更新当前敌人数量
-            _currentEnemyCounts[enemyID]++;
         }
 
-        async UniTask ProduceEnemies()
+        /// <summary>
+        /// 为单个敌人类型独立生成的协程
+        /// </summary>
+        async UniTask ProduceEnemy(EnemySpawnEntry spawnEntry, CancellationToken ct)
         {
-            CancellationToken ct = GlobalCancellation.GetCombinedTokenSource(this).Token;
+            // 获取生成配置
+            float generateGap = spawnEntry.GenerateGap;
+            int generateCount = spawnEntry.GenerateCount;
 
             try
             {
                 while (true)
                 {
-                    if (transform.childCount < _spawnGroupConfig.TotalMaxCount)
+                    ct.ThrowIfCancellationRequested();
+
+                    if (this.GetModel<EnemiesModel>().GetCount() < _spawnGroupConfig.TotalMaxCount)
                     {
-                        // 生成配置中指定数量的敌人
-                        for (int i = 0; i < _spawnGroupConfig.GenerateCount; i++)
+                        // 生成指定数量的敌人
+                        for (int i = 0; i < generateCount; i++)
                         {
-                            string enemyID = _spawnGroupConfig.GetRandomEnemyID();
-                            if (!string.IsNullOrEmpty(enemyID) && CanSpawnEnemy(enemyID))
-                            {
-                                await CreateEnemy(enemyID, GetRandomPosition(), ct);
-                            }
+                            await CreateEnemy(spawnEntry, GetRandomPosition(), ct);
                         }
                     }
 
-                    await UniTask.Delay((int)(_spawnGroupConfig.GenerateGap * 1000), cancellationToken: ct); // ms
+                    // 等待下次生成
+                    await UniTask.Delay((int)(generateGap * 1000), cancellationToken: ct);
                 }
             }
             catch (OperationCanceledException)
             {
-                // Debug.Log("EnemyFactory is canceled");
+                Debug.Log($"Enemy spawn for {spawnEntry.EnemyID} is canceled");
             }
-        }
-
-        bool CanSpawnEnemy(string enemyID)
-        {
-            if (!_currentEnemyCounts.TryGetValue(enemyID, out int currentCount))
-                return false;
-
-            int maxCount = _spawnGroupConfig.GetMaxCountForEnemy(enemyID);
-            return currentCount < maxCount;
         }
 
         /// <summary>
-        /// 当敌人被销毁时调用，更新敌人数量计数
+        /// 启动所有敌人类型的生成
         /// </summary>
-        public void OnEnemyDestroyed(string enemyID)
+        [Button("启动所有敌人生成")]
+        void StartSpawning()
         {
-            if (_currentEnemyCounts.ContainsKey(enemyID))
+            // 停止之前的生成协程
+            StopAllSpawning();
+
+            CancellationToken globalCt = GlobalCancellation.GetCombinedTokenSource(this).Token;
+
+            foreach (EnemySpawnEntry entry in _spawnGroupConfig.EnemyEntries)
             {
-                _currentEnemyCounts[enemyID] = Mathf.Max(0, _currentEnemyCounts[enemyID] - 1);
+                if (!string.IsNullOrEmpty(entry.EnemyID))
+                {
+                    // 为每个敌人类型创建独立的取消令牌
+                    var cts = CancellationTokenSource.CreateLinkedTokenSource(globalCt);
+                    _enemySpawnTokens[entry.EnemyID] = cts;
+
+                    // 启动独立的生成协程
+                    ProduceEnemy(entry, cts.Token).Forget();
+
+                    Debug.Log($"Started independent spawning for enemy: {entry.EnemyID}, Gap: {entry.GenerateGap}s, Count: {entry.GenerateCount}");
+                }
             }
+        }
+
+        /// <summary>
+        /// 停止所有敌人生成
+        /// </summary>
+        [Button("停止所有敌人生成")]
+        void StopAllSpawning()
+        {
+            foreach ((_, CancellationTokenSource cts) in _enemySpawnTokens)
+            {
+                cts?.Cancel();
+                cts?.Dispose();
+            }
+            _enemySpawnTokens.Clear();
         }
 
         /// <summary>
         /// 切换敌人生成组配置
         /// </summary>
+        [Button("切换敌人生成组配置")]
         public void SwitchSpawnGroup(string newSpawnGroupID)
         {
             _spawnGroupID = newSpawnGroupID;
             LoadConfig();
+            if (_spawnGroupConfig != null)
+            {
+                StartSpawning();
+            }
         }
 
         /// <summary>
-        /// 获取当前敌人数量信息
+        /// 停止特定敌人类型的生成
         /// </summary>
-        public Dictionary<string, int> GetCurrentEnemyCounts()
+        [Button("停止特定敌人生成")]
+        public void StopSpawning(string enemyID)
         {
-            return new Dictionary<string, int>(_currentEnemyCounts);
+            if (_enemySpawnTokens.TryGetValue(enemyID, out var cts))
+            {
+                cts.Cancel();
+                cts.Dispose();
+                _enemySpawnTokens.Remove(enemyID);
+                Debug.Log($"Stopped spawning for enemy: {enemyID}");
+            }
+        }
+
+        /// <summary>
+        /// 重新启动特定敌人类型的生成
+        /// </summary>
+        [Button("重新启动特定敌人生成")]
+        public void RestartSpawning(string enemyID)
+        {
+            var entry = _spawnGroupConfig.EnemyEntries.Find(e => e.EnemyID == enemyID);
+            if (entry != null)
+            {
+                // 停止现有的生成
+                StopSpawning(enemyID);
+
+                // 启动新的生成
+                CancellationToken globalCt = GlobalCancellation.GetCombinedTokenSource(this).Token;
+                var cts = CancellationTokenSource.CreateLinkedTokenSource(globalCt);
+                _enemySpawnTokens[enemyID] = cts;
+
+                ProduceEnemy(entry, cts.Token).Forget();
+                Debug.Log($"Restarted spawning for enemy: {enemyID}");
+            }
         }
 
         Vector2 GetRandomPosition()
@@ -162,7 +218,12 @@ namespace Gameplay.Character.Enemy
             LoadConfig();
             if (_spawnGroupConfig == null) return;
 
-            ProduceEnemies().Forget();
+            StartSpawning();
+        }
+
+        void OnDestroy()
+        {
+            StopAllSpawning();
         }
 
         public IArchitecture GetArchitecture()

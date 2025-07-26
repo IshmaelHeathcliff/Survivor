@@ -31,11 +31,11 @@ namespace XYZRPGSystem.Gameplay
 
     }
 
-    public struct CountChangedEvent : IReleaseEvent
+    public struct CountChangedEvent : IReleaseSkillEvent
     {
         public string ID { get; set; }
         public int Value { get; set; }
-        public ICharacterModel Model { get; set; }
+        public IHasSkill Model { get; set; }
 
         public CountChangedEvent(string id, int value, ICharacterModel model)
         {
