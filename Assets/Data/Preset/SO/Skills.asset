@@ -23,326 +23,326 @@ MonoBehaviour:
     SerializationNodes:
     - Name: Data
       Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[Data.Config.SkillConfig, Assembly-CSharp]],
-        mscorlib
+      Data: 0|System.Collections.Generic.List`1[[XYZRPGSystem.Data.Config.SkillConfig,
+        Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 53
     - Name: 
       Entry: 7
-      Data: 1|Data.Config.AttackSkillConfig, Assembly-CSharp
+      Data: 1|XYZRPGSystem.Data.Config.AttackSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 2|Data.Config.AttackSkillConfig, Assembly-CSharp
+      Data: 2|XYZRPGSystem.Data.Config.AttackSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 3|Data.Config.OneTimeSkillConfig, Assembly-CSharp
+      Data: 3|XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 4|Data.Config.OneTimeSkillConfig, Assembly-CSharp
+      Data: 4|XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 5|Data.Config.OneTimeSkillConfig, Assembly-CSharp
+      Data: 5|XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 6|Data.Config.OneTimeSkillConfig, Assembly-CSharp
+      Data: 6|XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 7|Data.Config.OneTimeSkillConfig, Assembly-CSharp
+      Data: 7|XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 8|Data.Config.OneTimeSkillConfig, Assembly-CSharp
+      Data: 8|XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 9|Data.Config.OneTimeSkillConfig, Assembly-CSharp
+      Data: 9|XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 10|Data.Config.AttackSkillConfig, Assembly-CSharp
+      Data: 10|XYZRPGSystem.Data.Config.AttackSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 11|Data.Config.OneTimeSkillConfig, Assembly-CSharp
+      Data: 11|XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 12|Data.Config.OneTimeSkillConfig, Assembly-CSharp
+      Data: 12|XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 13|Data.Config.OneTimeSkillConfig, Assembly-CSharp
+      Data: 13|XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 14|Data.Config.OneTimeSkillConfig, Assembly-CSharp
+      Data: 14|XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 15|Data.Config.OneTimeSkillConfig, Assembly-CSharp
+      Data: 15|XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 16|Data.Config.OneTimeSkillConfig, Assembly-CSharp
+      Data: 16|XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 17|Data.Config.OneTimeSkillConfig, Assembly-CSharp
+      Data: 17|XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 18|Data.Config.OneTimeSkillConfig, Assembly-CSharp
+      Data: 18|XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 19|Data.Config.OneTimeSkillConfig, Assembly-CSharp
+      Data: 19|XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 20|Data.Config.OneTimeSkillConfig, Assembly-CSharp
+      Data: 20|XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 21|Data.Config.OneTimeSkillConfig, Assembly-CSharp
+      Data: 21|XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 22|Data.Config.AttackSkillConfig, Assembly-CSharp
+      Data: 22|XYZRPGSystem.Data.Config.AttackSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 23|Data.Config.OneTimeSkillConfig, Assembly-CSharp
+      Data: 23|XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 24|Data.Config.OneTimeSkillConfig, Assembly-CSharp
+      Data: 24|XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 25|Data.Config.OneTimeSkillConfig, Assembly-CSharp
+      Data: 25|XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 26|Data.Config.OneTimeSkillConfig, Assembly-CSharp
+      Data: 26|XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 27|Data.Config.OneTimeSkillConfig, Assembly-CSharp
+      Data: 27|XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 28|Data.Config.OneTimeSkillConfig, Assembly-CSharp
+      Data: 28|XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 29|Data.Config.OneTimeSkillConfig, Assembly-CSharp
+      Data: 29|XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 30|Data.Config.OneTimeSkillConfig, Assembly-CSharp
+      Data: 30|XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 31|Data.Config.OneTimeSkillConfig, Assembly-CSharp
+      Data: 31|XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 32|Data.Config.OneTimeSkillConfig, Assembly-CSharp
+      Data: 32|XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 33|Data.Config.OneTimeSkillConfig, Assembly-CSharp
+      Data: 33|XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 34|Data.Config.OneTimeSkillConfig, Assembly-CSharp
+      Data: 34|XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 35|Data.Config.OneTimeSkillConfig, Assembly-CSharp
+      Data: 35|XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 36|Data.Config.OneTimeSkillConfig, Assembly-CSharp
+      Data: 36|XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 37|Data.Config.OneTimeSkillConfig, Assembly-CSharp
+      Data: 37|XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 38|Data.Config.OneTimeSkillConfig, Assembly-CSharp
+      Data: 38|XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 39|Data.Config.OneTimeSkillConfig, Assembly-CSharp
+      Data: 39|XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 40|Data.Config.OneTimeSkillConfig, Assembly-CSharp
+      Data: 40|XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 41|Data.Config.OneTimeSkillConfig, Assembly-CSharp
+      Data: 41|XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 42|Data.Config.OneTimeSkillConfig, Assembly-CSharp
+      Data: 42|XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 43|Data.Config.OneTimeSkillConfig, Assembly-CSharp
+      Data: 43|XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 44|Data.Config.OneTimeSkillConfig, Assembly-CSharp
+      Data: 44|XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 45|Data.Config.OneTimeSkillConfig, Assembly-CSharp
+      Data: 45|XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 46|Data.Config.OneTimeSkillConfig, Assembly-CSharp
+      Data: 46|XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 47|Data.Config.OneTimeSkillConfig, Assembly-CSharp
+      Data: 47|XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 48|Data.Config.OneTimeSkillConfig, Assembly-CSharp
+      Data: 48|XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 49|Data.Config.OneTimeSkillConfig, Assembly-CSharp
+      Data: 49|XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 50|Data.Config.OneTimeSkillConfig, Assembly-CSharp
+      Data: 50|XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 51|Data.Config.OneTimeSkillConfig, Assembly-CSharp
+      Data: 51|XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 52|Data.Config.OneTimeSkillConfig, Assembly-CSharp
+      Data: 52|XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 53|Data.Config.OneTimeSkillConfig, Assembly-CSharp
+      Data: 53|XYZRPGSystem.Data.Config.OneTimeSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 

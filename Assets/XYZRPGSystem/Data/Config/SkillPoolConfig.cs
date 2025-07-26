@@ -5,6 +5,7 @@ namespace XYZRPGSystem.Data.Config
 {
     public struct SkillInPool
     {
+        [ShowInInspector] public string ID { get; set; }
         [ShowInInspector] public string Name { get; set; }
     }
 

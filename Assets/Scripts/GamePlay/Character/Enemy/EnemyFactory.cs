@@ -1,15 +1,18 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
-using XYZRPGSystem.Core;
-using Cysharp.Threading.Tasks;
+
 using UnityEngine;
+using Random = UnityEngine.Random;
 using UnityEngine.AddressableAssets;
+using Cysharp.Threading.Tasks;
+using Sirenix.OdinInspector;
+
+
 using Gameplay.Character.Player;
+using XYZRPGSystem.Core;
 using XYZRPGSystem.Data.Config;
 using XYZRPGSystem.Gameplay;
-using Random = UnityEngine.Random;
-using Sirenix.OdinInspector;
 
 namespace Gameplay.Character.Enemy
 {
@@ -75,7 +78,46 @@ namespace Gameplay.Character.Enemy
             }
 
             var obj = await Addressables.InstantiateAsync(enemyReference, transform).ToUniTask(cancellationToken: ct);
+
             obj.transform.position = position;
+
+            // 初始化敌人属性
+            InitializeEnemyStats(obj, enemyID);
+        }
+
+        /// <summary>
+        /// 根据配置初始化敌人属性
+        /// </summary>
+        void InitializeEnemyStats(GameObject enemyObj, string enemyID)
+        {
+            if (!_enemyConfigs.TryGetValue(enemyID, out EnemyConfig enemyConfig))
+            {
+                Debug.LogError($"Enemy config not found for: {enemyID}");
+                return;
+            }
+
+            // 获取敌人控制器组件
+            if (!enemyObj.TryGetComponent(out EnemyController enemyController))
+            {
+                Debug.LogError($"EnemyController component not found on enemy: {enemyID}");
+                return;
+            }
+
+            // 初始化控制器
+            enemyController.Init();
+
+            // 设置基础属性
+            enemyController.SetConsumableStat("Health", enemyConfig.Health, true);
+            enemyController.SetStat("HealthRegen", enemyConfig.HealthRegen);
+            enemyController.SetStat("MoveSpeed", enemyConfig.MoveSpeed);
+            enemyController.SetStat("Damage", enemyConfig.Damage);
+            enemyController.SetStat("CooldownInverse", enemyConfig.CooldownInverse);
+            enemyController.SetStat("AttackSpeed", enemyConfig.AttackSpeed);
+            enemyController.SetStat("AttackRange", enemyConfig.AttackRange);
+            enemyController.SetStat("CoinOnDead", enemyConfig.CoinOnDead);
+            enemyController.SetStat("WoodOnDead", enemyConfig.WoodOnDead);
+            enemyController.SetStat("HealthIncreasePerWave", enemyConfig.HealthIncreasePerWave);
+            enemyController.SetStat("DamageIncreasePerWave", enemyConfig.DamageIncreasePerWave);
         }
 
         /// <summary>

@@ -42,6 +42,12 @@
     "Description": null
   },
   {
+    "ID": "AttackRange",
+    "Name": "攻击距离",
+    "Type": 2,
+    "Description": null
+  },
+  {
     "ID": "ProjectileSpeed",
     "Name": "投射物速度",
     "Type": 2,

@@ -66,8 +66,29 @@ namespace XYZRPGSystem.Gameplay.Character
 
         protected virtual void SetStats()
         {
-            CharacterStats.GetStat("Health").BaseValue = _baseHealth;
-            (CharacterStats.GetStat("Health") as IConsumableStat)?.SetMaxValue();
+            SetConsumableStat("Health", _baseHealth, true);
+        }
+
+        public void SetStat(string statID, float value)
+        {
+            IStat stat = CharacterStats.GetStat(statID);
+            if (stat != null)
+            {
+                stat.BaseValue = value;
+            }
+        }
+
+        public void SetConsumableStat(string statID, float value, bool setMaxValue = false)
+        {
+            IConsumableStat stat = CharacterStats.GetConsumableStat(statID);
+            if (stat != null)
+            {
+                stat.BaseValue = value;
+                if (setMaxValue)
+                {
+                    stat.SetMaxValue();
+                }
+            }
         }
 
         protected abstract void MakeSureID();

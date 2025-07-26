@@ -13,18 +13,19 @@ namespace Gameplay.Character.Player
     public class PlayerController : MyCharacterController<PlayerModel, PlayersModel>
     {
         [SerializeField] Vector3 _initialPosition;
-        [SerializeField] string _skillPoolPath;
+        [SerializeField] string _skillPoolConfigPath;
 
 
         public void Respawn()
         {
             Model.Position = _initialPosition;
-            (CharacterStats.GetStat("Health") as IConsumableStat)?.SetMaxValue();
+            CharacterStats.GetConsumableStat("Health").SetMaxValue();
         }
 
         protected override void SetStats()
         {
             base.SetStats();
+            CharacterStats.LoadStats("PlayerStats.json", "Preset/JSON");
         }
 
         protected override void MakeSureID()
@@ -55,7 +56,7 @@ namespace Gameplay.Character.Player
         protected override void Start()
         {
             base.Start();
-            this.GetSystem<SkillGachaSystem>().InitSkillPool(Model, _skillPoolPath);
+            this.GetSystem<SkillGachaSystem>().InitSkillPool(Model, _skillPoolConfigPath);
             new ResourceGenerator(this.GetSystem<ResourceSystem>(), Model, 1f).StartGenerating(GlobalCancellation.GetCombinedTokenSource(this).Token).Forget();
         }
     }

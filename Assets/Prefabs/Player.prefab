@@ -274,8 +274,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterId: player
   _baseHealth: 16
-  _skillPoolPath: PlayerSkillPool.json
   _initialPosition: {x: 0, y: 0, z: 0}
+  _skillPoolConfigPath: PlayerSkillPool.json
 --- !u!114 &3542865786959323187
 MonoBehaviour:
   m_ObjectHideFlags: 0

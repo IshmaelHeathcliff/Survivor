@@ -3,6 +3,7 @@ using System.Text;
 using XYZRPGSystem.Data.Config;
 using UnityEngine;
 using XYZRPGSystem.Gameplay.Modifier;
+using XYZRPGSystem.Data.SaveLoad;
 
 namespace XYZRPGSystem.Gameplay.Stat
 {
@@ -28,6 +29,26 @@ namespace XYZRPGSystem.Gameplay.Stat
             info.Append($"{new string(' ', indent * 2)}");
             info.Append($"  {stat.Name}总增: {(int)((stat.More - 1) * 100)}%\n");
             return info;
+        }
+
+        public void LoadStats(string configName, string configPath)
+        {
+            List<StatConfig> statConfigs = SaveLoadManager.Load<List<StatConfig>>(configName, configPath);
+            foreach (StatConfig statConfig in statConfigs)
+            {
+                switch (statConfig.Type)
+                {
+                    case StatType.Consumable:
+                        InternalStats.Add(statConfig.ID, new ConsumableStat(statConfig.ID, statConfig.Name));
+                        break;
+                    case StatType.Keyword:
+                        InternalStats.Add(statConfig.ID, new KeywordStat(statConfig.ID, statConfig.Name));
+                        break;
+                    default:
+                        InternalStats.Add(statConfig.ID, new Stat(statConfig.ID, statConfig.Name));
+                        break;
+                }
+            }
         }
 
         public static string FormatStatValue(float value)

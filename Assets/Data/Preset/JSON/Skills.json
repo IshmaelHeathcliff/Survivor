@@ -384,7 +384,7 @@
     "AttackArea": 1.0,
     "Duration": 2.0,
     "ProjectileCount": 1.0,
-    "ProjectileSpeed": 15.0,
+    "ProjectileSpeed": 8.0,
     "ChainCount": 2.0,
     "PenetrateCount": 0.0,
     "SplitCount": 0.0,
