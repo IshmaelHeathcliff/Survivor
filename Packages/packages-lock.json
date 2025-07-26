@@ -27,6 +27,15 @@
       },
       "hash": "ca65ae2ee9424602f8615f74f7053714483cc8f1"
     },
+    "com.justinpbarnett.unity-mcp": {
+      "version": "https://github.com/justinpbarnett/unity-mcp.git?path=/UnityMcpBridge",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.nuget.newtonsoft-json": "3.0.2"
+      },
+      "hash": "9ff89886acb84d84a57ac116858677ff171cd8f3"
+    },
     "com.unity.2d.animation": {
       "version": "10.1.4",
       "depth": 1,
