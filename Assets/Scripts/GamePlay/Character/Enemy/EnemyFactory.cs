@@ -13,6 +13,7 @@ using Gameplay.Character.Player;
 using XYZRPGSystem.Core;
 using XYZRPGSystem.Data.Config;
 using XYZRPGSystem.Gameplay;
+using XYZRPGSystem.Gameplay.Skill;
 
 namespace Gameplay.Character.Enemy
 {
@@ -83,6 +84,14 @@ namespace Gameplay.Character.Enemy
 
             // 初始化敌人属性
             InitializeEnemyStats(obj, enemyID);
+
+            await UniTask.DelayFrame(2, cancellationToken: ct);
+
+            foreach (string skillID in _enemyConfigs[enemyID].SkillIDs)
+            {
+                this.SendCommand(new AcquireSkillCommand(skillID, obj.GetComponent<EnemyController>().CharacterModel));
+            }
+
         }
 
         /// <summary>

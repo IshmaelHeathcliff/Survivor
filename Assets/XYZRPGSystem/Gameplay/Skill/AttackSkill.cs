@@ -12,6 +12,7 @@ namespace XYZRPGSystem.Gameplay.Skill
         public IKeywordStat CriticalMultiplier => SkillStats.GetKeywordStat("CriticalMultiplier");
         public IKeywordStat AttackArea => SkillStats.GetKeywordStat("AttackArea");
         public IKeywordStat AttackRange => SkillStats.GetKeywordStat("AttackRange");
+        public IKeywordStat AttackSpeed => SkillStats.GetKeywordStat("AttackSpeed");
         public IKeywordStat Duration => SkillStats.GetKeywordStat("Duration");
 
         public IStat WoodOnUse => SkillStats.GetStat("WoodOnUse");
@@ -25,6 +26,7 @@ namespace XYZRPGSystem.Gameplay.Skill
             CriticalMultiplier.BaseValue = skillConfig.CriticalMultiplier;
             AttackArea.BaseValue = skillConfig.AttackArea;
             AttackRange.BaseValue = skillConfig.AttackRange;
+            AttackSpeed.BaseValue = skillConfig.AttackSpeed;
             Duration.BaseValue = skillConfig.Duration;
 
             WoodOnUse.BaseValue = skillConfig.WoodOnUse;
@@ -55,9 +57,13 @@ namespace XYZRPGSystem.Gameplay.Skill
 
     public class SelfAttackSkill : AttackSkill
     {
+        public bool IsTargetLocked { get; set; }
+        public bool CanReturn { get; set; }
         public SelfAttackSkill(SelfAttackSkillConfig skillConfig, CharacterStats characterStats)
             : base(skillConfig, characterStats)
         {
+            IsTargetLocked = skillConfig.IsTargetLocked;
+            CanReturn = skillConfig.CanReturn;
         }
     }
 }

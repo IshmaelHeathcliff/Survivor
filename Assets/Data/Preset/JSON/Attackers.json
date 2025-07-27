@@ -16,5 +16,11 @@
     "Name": "扑克",
     "Address": "Assets/Prefabs/Poker.prefab",
     "Keywords": []
+  },
+  {
+    "AttackerID": "stone",
+    "Name": "石头",
+    "Address": "Assets/Prefabs/Attackers/Stone.prefab",
+    "Keywords": []
   }
 ]

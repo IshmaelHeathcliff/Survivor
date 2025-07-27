@@ -9,8 +9,6 @@ namespace XYZRPGSystem.Gameplay.Stat
     public class LocalStat : IStat
     {
         readonly IStat _global;
-        float _baseValue;
-
         protected IStat Local;
         protected EasyEvent<float> OnValueChanged = new();
 
@@ -21,10 +19,10 @@ namespace XYZRPGSystem.Gameplay.Stat
 
         public float BaseValue
         {
-            get => _baseValue;
+            get => Local.BaseValue + _global.BaseValue;
             set
             {
-                _baseValue = value;
+                Local.BaseValue = value;
                 OnValueChanged.Trigger(Value);
             }
         }
