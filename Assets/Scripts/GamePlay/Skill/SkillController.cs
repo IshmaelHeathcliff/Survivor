@@ -81,12 +81,6 @@ namespace Gameplay.Skill
             foreach (RepetitiveSkill skill in _repetitiveSkills.Values)
             {
                 skill.Update(Time.deltaTime);
-
-                // 自动释放
-                if (skill.IsReady)
-                {
-                    skill.Use();
-                }
             }
         }
 

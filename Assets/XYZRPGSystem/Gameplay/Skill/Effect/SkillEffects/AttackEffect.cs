@@ -4,6 +4,7 @@ using XYZRPGSystem.Data.Config;
 using UnityEngine;
 using XYZRPGSystem.Gameplay.Character;
 using XYZRPGSystem.Gameplay.Damage.Attackers;
+using XYZRPGSystem.Core;
 
 namespace XYZRPGSystem.Gameplay.Skill.Effect
 {
@@ -26,11 +27,13 @@ namespace XYZRPGSystem.Gameplay.Skill.Effect
 
             List<IAttacker> attackers = await Model.Controller.AttackerController.GetAttackers(Owner.ID, SkillEffectConfig.AttackerID);
 
+            _attackers.AddRange(attackers);
+
             foreach (IAttacker attacker in attackers)
             {
-                attacker.SetSkill(attackSkill);
-                _attackers.Add(attacker);
+                attacker.Attack().Forget();
             }
+
         }
 
 
@@ -43,7 +46,7 @@ namespace XYZRPGSystem.Gameplay.Skill.Effect
         {
             foreach (IAttacker attacker in _attackers)
             {
-                attacker?.Cancel().Forget();
+                attacker?.Cancel();
             }
 
             _attackers.Clear();

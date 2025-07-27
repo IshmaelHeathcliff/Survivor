@@ -1,0 +1,32 @@
+[
+  {
+    "$type": "XYZRPGSystem.Data.Config.SelfAttackSkillConfig, Assembly-CSharp",
+    "AttackEffectConfigs": [
+      {
+        "AttackerID": "self",
+        "Description": "施加攻击"
+      }
+    ],
+    "Damage": 1.0,
+    "CriticalChance": 0.0,
+    "CriticalMultiplier": 150.0,
+    "AttackArea": 1.0,
+    "AttackRange": 4.0,
+    "Duration": 1.0,
+    "WoodOnUse": 0.0,
+    "Cooldown": 1.0,
+    "IsAutoUse": false,
+    "ID": "dash",
+    "Name": "冲刺",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [
+      "Melee",
+      "Movement"
+    ],
+    "Rarity": 0,
+    "Description": null,
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": null,
+    "SkillEffectConfigsOnUse": null
+  }
+]

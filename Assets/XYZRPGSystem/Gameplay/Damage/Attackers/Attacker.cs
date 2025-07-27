@@ -24,8 +24,8 @@ namespace XYZRPGSystem.Gameplay.Damage.Attackers
         IKeywordStat Duration { get; }
 
         void SetSkill(AttackSkill skill);
-        UniTaskVoid Attack(CancellationToken cancellationToken);
-        UniTaskVoid Cancel();
+        UniTaskVoid Attack();
+        void Cancel();
     }
 
 
@@ -50,14 +50,14 @@ namespace XYZRPGSystem.Gameplay.Damage.Attackers
         public IKeywordStat Duration => AttackSkill.Duration;
         public IStat WoodOnUse => AttackSkill.WoodOnUse;
 
-        public void SetSkill(AttackSkill skill)
+        public virtual void SetSkill(AttackSkill skill)
         {
             AttackSkill = skill;
         }
 
         protected abstract UniTask Play(CancellationToken cancellationToken);
-        public abstract UniTaskVoid Attack(CancellationToken cancellationToken);
-        public abstract UniTaskVoid Cancel();
+        public abstract UniTaskVoid Attack();
+        public abstract void Cancel();
 
         public IArchitecture GetArchitecture()
         {

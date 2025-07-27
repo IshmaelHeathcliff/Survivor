@@ -49,9 +49,13 @@ namespace XYZRPGSystem.Gameplay.Skill
 
             switch (skillConfig)
             {
-                case AttackSkillConfig attackSkillConfig:
-                    context.Skill = new AttackSkill(attackSkillConfig, env.Model.Stats);
-                    skillEffectsOnUpdate.AddRange(CreateSkillEffects(attackSkillConfig.AttackEffectConfigs, context));
+                case ProjectileAttackSkillConfig projectileAttackSkillConfig:
+                    context.Skill = new ProjectileAttackSkill(projectileAttackSkillConfig, env.Model.Stats);
+                    skillEffectsOnUpdate.AddRange(CreateSkillEffects(projectileAttackSkillConfig.AttackEffectConfigs, context));
+                    break;
+                case SelfAttackSkillConfig selfAttackSkillConfig:
+                    context.Skill = new SelfAttackSkill(selfAttackSkillConfig, env.Model.Stats);
+                    skillEffectsOnUpdate.AddRange(CreateSkillEffects(selfAttackSkillConfig.AttackEffectConfigs, context));
                     break;
                 case RepetitiveSkillConfig repetitiveSkillConfig:
                     context.Skill = new RepetitiveSkill(repetitiveSkillConfig, env.Model.Stats);

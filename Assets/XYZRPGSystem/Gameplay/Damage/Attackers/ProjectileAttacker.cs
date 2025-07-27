@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using XYZRPGSystem.Gameplay.Character;
 using XYZRPGSystem.Gameplay.Item;
 using XYZRPGSystem.Gameplay.Stat;
+using XYZRPGSystem.Gameplay.Skill;
 
 namespace XYZRPGSystem.Gameplay.Damage.Attackers
 {
@@ -23,12 +24,14 @@ namespace XYZRPGSystem.Gameplay.Damage.Attackers
         [SerializeField] float _rotateSpeed;
         [SerializeField] float _randomDirectionFactor = 0.5f;
 
-        public IStat ProjectileSpeed => AttackSkill.ProjectileSpeed;
-        public IStat ChainCount => AttackSkill.ChainCount;
-        public IStat PenetrateCount => AttackSkill.PenetrateCount;
-        public IStat SplitCount => AttackSkill.SplitCount;
-        public bool CanReturn => AttackSkill.CanReturn;
-        public bool IsTargetLocked => AttackSkill.IsTargetLocked;
+        ProjectileAttackSkill ProjectileAttackSkill => AttackSkill as ProjectileAttackSkill;
+
+        public IStat ProjectileSpeed => ProjectileAttackSkill.ProjectileSpeed;
+        public IStat ChainCount => ProjectileAttackSkill.ChainCount;
+        public IStat PenetrateCount => ProjectileAttackSkill.PenetrateCount;
+        public IStat SplitCount => ProjectileAttackSkill.SplitCount;
+        public bool CanReturn => ProjectileAttackSkill.CanReturn;
+        public bool IsTargetLocked => ProjectileAttackSkill.IsTargetLocked;
 
 
         Collider2D _collider;
@@ -54,14 +57,15 @@ namespace XYZRPGSystem.Gameplay.Damage.Attackers
             _renderer = GetComponent<SpriteRenderer>();
         }
 
-
-        void Start()
+        public override void SetSkill(AttackSkill skill)
         {
-            _penetrateLeft = (int)PenetrateCount.Value;
-            _chainLeft = (int)ChainCount.Value;
-            _isTargetLocked = IsTargetLocked;
-            _cts = GlobalCancellation.GetCombinedTokenSource(this);
-            Attack(_cts.Token).Forget();
+            base.SetSkill(skill);
+            if (skill is ProjectileAttackSkill projectileAttackSkill)
+            {
+                _penetrateLeft = (int)projectileAttackSkill.PenetrateCount.Value;
+                _chainLeft = (int)projectileAttackSkill.ChainCount.Value;
+                _isTargetLocked = projectileAttackSkill.IsTargetLocked;
+            }
         }
 
         void ResetDuration()
@@ -69,11 +73,12 @@ namespace XYZRPGSystem.Gameplay.Damage.Attackers
             _durationLeft = Duration.Value;
         }
 
+
+        // TODO 逻辑优化
         void OnTriggerEnter2D(Collider2D other)
         {
-            if (!other.TryGetComponent(out Damageable damageable) || !damageable.IsDamageable)
+            if (!other.TryGetComponent(out Damageable damageable) || !damageable.CompareTag(TargetTag))
             {
-                // Debug.Log("not damageable");
                 return;
             }
 
@@ -83,9 +88,9 @@ namespace XYZRPGSystem.Gameplay.Damage.Attackers
                 return;
             }
 
-            if (!damageable.CompareTag(TargetTag))
+            if (!damageable.IsDamageable && Target != null && Target.GetComponentInChildren<Damageable>().Equals(damageable))
             {
-                // Debug.Log("not target tag");
+                FindNewTarget();
                 return;
             }
 
@@ -137,7 +142,7 @@ namespace XYZRPGSystem.Gameplay.Damage.Attackers
                 return;
             }
 
-            Cancel().Forget();
+            Cancel();
         }
 
         void Split()
@@ -147,14 +152,7 @@ namespace XYZRPGSystem.Gameplay.Damage.Attackers
 
         bool Chain()
         {
-            Transform newTarget = this.GetSystem<PositionQuerySystem>().QueryClosest(TargetTag, transform.position, _damaged);
-            if (newTarget == null)
-            {
-                // Debug.LogError("Chain failed");
-                return false;
-            }
-
-            Target = newTarget;
+            FindNewTarget();
             _isTargetLocked = true;
 
             Direction = (Target.position - transform.position).normalized;
@@ -171,6 +169,15 @@ namespace XYZRPGSystem.Gameplay.Damage.Attackers
             _isTargetLocked = true;
         }
 
+        void FindNewTarget()
+        {
+            Target = this.GetSystem<PositionQuerySystem>().QueryClosest(TargetTag, transform.position, _damaged);
+            if (Target == null)
+            {
+                Cancel();
+            }
+        }
+
         void Move()
         {
             if (_isFreeze)
@@ -185,7 +192,7 @@ namespace XYZRPGSystem.Gameplay.Damage.Attackers
                     Target = this.GetSystem<PositionQuerySystem>().QueryClosest(TargetTag, transform.position, _damaged);
                     if (Target == null)
                     {
-                        Cancel().Forget();
+                        Cancel();
                         return;
                     }
                 }
@@ -223,7 +230,7 @@ namespace XYZRPGSystem.Gameplay.Damage.Attackers
             }
 
             // 方向产生一定随机性
-                float angle = UnityEngine.Random.Range(0, 2 * Mathf.PI);
+            float angle = UnityEngine.Random.Range(0, 2 * Mathf.PI);
             var randomDirection = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
             Direction = (Direction + _randomDirectionFactor * Direction.magnitude * randomDirection).normalized;
             transform.right = Direction;
@@ -239,8 +246,10 @@ namespace XYZRPGSystem.Gameplay.Damage.Attackers
             }
         }
 
-        public override async UniTaskVoid Attack(CancellationToken cancellationToken)
+        public override async UniTaskVoid Attack()
         {
+            _cts = GlobalCancellation.GetCombinedTokenSource(this);
+
             // TODO 暂时性处理 WoodOnUse
             if (WoodOnUse.Value > 0)
             {
@@ -252,7 +261,7 @@ namespace XYZRPGSystem.Gameplay.Damage.Attackers
 
             try
             {
-                await Play(cancellationToken);
+                await Play(_cts.Token);
 
                 if (CanReturn && !_isReturning)
                 {
@@ -263,12 +272,12 @@ namespace XYZRPGSystem.Gameplay.Damage.Attackers
                 {
                     while (Vector2.SqrMagnitude(Target.position - transform.position) > 0.1f)
                     {
-                        cancellationToken.ThrowIfCancellationRequested();
-                        await UniTask.WaitForFixedUpdate(cancellationToken);
+                        _cts.Token.ThrowIfCancellationRequested();
+                        await UniTask.WaitForFixedUpdate(_cts.Token);
                     }
                 }
 
-                Cancel().Forget();
+                Cancel();
             }
             catch (OperationCanceledException)
             {
@@ -277,16 +286,10 @@ namespace XYZRPGSystem.Gameplay.Damage.Attackers
 
         }
 
-        public override async UniTaskVoid Cancel()
+        public override void Cancel()
         {
             _cts.Cancel();
-            if (this != null)
-            {
-                AttackerController?.RemoveAttacker(this);
-                Addressables.ReleaseInstance(gameObject);
-            }
-
-            await UniTask.CompletedTask;
+            AttackerController?.RemoveAttacker(this);
         }
     }
 }

@@ -9,7 +9,6 @@ namespace Gameplay.Character.Enemy
         protected override void AddStates()
         {
             FSM.AddState(EnemyStateID.Idle, new EnemyIdleState(FSM, this));
-            FSM.AddState(EnemyStateID.Patrol, new EnemyPatrolState(FSM, this));
             FSM.AddState(EnemyStateID.Attack, new EnemyAttackState(FSM, this));
             FSM.AddState(EnemyStateID.Chase, new EnemyChaseState(FSM, this));
             FSM.AddState(EnemyStateID.Hurt, new EnemyHurtState(FSM, this));

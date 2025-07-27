@@ -1,5 +1,6 @@
 ﻿using XYZRPGSystem.Core;
 using UnityEngine;
+using XYZRPGSystem.Gameplay.Character;
 
 namespace Gameplay.Character.Enemy
 {
@@ -17,6 +18,7 @@ namespace Gameplay.Character.Enemy
         protected async override void OnEnter()
         {
             Target.Damageable.IsDamageable = false;
+            Target.GetSystem<PositionQuerySystem>().UnregisterModel(Target.tag, Target.CharacterModel);
             Target.AttackerController.CanAttack = false;
             Target.Damageable.OnDeath.Trigger();
             await MoveController.PlayAnimation(EnemyMoveController.Dead);
