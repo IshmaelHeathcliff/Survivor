@@ -136,12 +136,12 @@ TextureImporter:
       name: Enemy_31_dead_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 6
         y: 144
-        width: 48
-        height: 48
-      alignment: 9
-      pivot: {x: 0.49227032, y: 0.1869564}
+        width: 36
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -158,12 +158,12 @@ TextureImporter:
       name: Enemy_31_dead_1
       rect:
         serializedVersion: 2
-        x: 48
+        x: 54
         y: 144
-        width: 48
-        height: 48
-      alignment: 9
-      pivot: {x: 0.4961351, y: 0.2140096}
+        width: 36
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -180,12 +180,12 @@ TextureImporter:
       name: Enemy_31_dead_2
       rect:
         serializedVersion: 2
-        x: 96
+        x: 102
         y: 144
-        width: 48
-        height: 48
-      alignment: 9
-      pivot: {x: 0.49999985, y: 0.210145}
+        width: 36
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -202,12 +202,12 @@ TextureImporter:
       name: Enemy_31_dead_3
       rect:
         serializedVersion: 2
-        x: 0
+        x: 6
         y: 96
-        width: 48
-        height: 48
+        width: 36
+        height: 18
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -224,12 +224,12 @@ TextureImporter:
       name: Enemy_31_dead_4
       rect:
         serializedVersion: 2
-        x: 48
+        x: 54
         y: 96
-        width: 48
-        height: 48
+        width: 36
+        height: 18
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -246,12 +246,12 @@ TextureImporter:
       name: Enemy_31_dead_5
       rect:
         serializedVersion: 2
-        x: 96
+        x: 102
         y: 96
-        width: 48
-        height: 48
+        width: 36
+        height: 18
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -268,12 +268,12 @@ TextureImporter:
       name: Enemy_31_dead_6
       rect:
         serializedVersion: 2
-        x: 0
+        x: 6
         y: 48
-        width: 48
-        height: 48
+        width: 36
+        height: 18
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -290,12 +290,12 @@ TextureImporter:
       name: Enemy_31_dead_7
       rect:
         serializedVersion: 2
-        x: 48
+        x: 54
         y: 48
-        width: 48
-        height: 48
+        width: 36
+        height: 18
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -312,12 +312,12 @@ TextureImporter:
       name: Enemy_31_dead_8
       rect:
         serializedVersion: 2
-        x: 96
+        x: 102
         y: 48
-        width: 48
-        height: 48
+        width: 36
+        height: 18
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -334,12 +334,12 @@ TextureImporter:
       name: Enemy_31_dead_9
       rect:
         serializedVersion: 2
-        x: 0
+        x: 6
         y: 0
-        width: 48
-        height: 48
+        width: 36
+        height: 18
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -356,12 +356,12 @@ TextureImporter:
       name: Enemy_31_dead_10
       rect:
         serializedVersion: 2
-        x: 48
+        x: 54
         y: 0
-        width: 48
-        height: 48
+        width: 36
+        height: 18
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -378,12 +378,12 @@ TextureImporter:
       name: Enemy_31_dead_11
       rect:
         serializedVersion: 2
-        x: 96
+        x: 102
         y: 0
-        width: 48
-        height: 48
+        width: 36
+        height: 18
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
