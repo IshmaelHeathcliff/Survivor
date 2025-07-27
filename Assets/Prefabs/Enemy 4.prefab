@@ -56,9 +56,37 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5473041934260718896, guid: 2a4e5b1401850e8439853b4d55a5adc0, type: 3}
+      propertyPath: m_Size.x
+      value: 0.6282394
+      objectReference: {fileID: 0}
+    - target: {fileID: 5473041934260718896, guid: 2a4e5b1401850e8439853b4d55a5adc0, type: 3}
+      propertyPath: m_Size.y
+      value: 1.3054113
+      objectReference: {fileID: 0}
+    - target: {fileID: 5473041934260718896, guid: 2a4e5b1401850e8439853b4d55a5adc0, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.0029526353
+      objectReference: {fileID: 0}
+    - target: {fileID: 5473041934260718896, guid: 2a4e5b1401850e8439853b4d55a5adc0, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.018314004
+      objectReference: {fileID: 0}
     - target: {fileID: 7152041979365510245, guid: 2a4e5b1401850e8439853b4d55a5adc0, type: 3}
       propertyPath: m_Name
       value: Enemy 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8855633025367022517, guid: 2a4e5b1401850e8439853b4d55a5adc0, type: 3}
+      propertyPath: m_Radius
+      value: 0.64225566
+      objectReference: {fileID: 0}
+    - target: {fileID: 8855633025367022517, guid: 2a4e5b1401850e8439853b4d55a5adc0, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.037430763
+      objectReference: {fileID: 0}
+    - target: {fileID: 8855633025367022517, guid: 2a4e5b1401850e8439853b4d55a5adc0, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.27456653
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
