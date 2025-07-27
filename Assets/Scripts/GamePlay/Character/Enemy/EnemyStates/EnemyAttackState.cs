@@ -5,6 +5,7 @@ using Cysharp.Threading.Tasks;
 using System.Linq;
 using XYZRPGSystem.Gameplay.Skill;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Gameplay.Character.Enemy
 {
@@ -31,17 +32,19 @@ namespace Gameplay.Character.Enemy
 
             var attackSkills = Target.CharacterModel.SkillsInSlot.GetAllSkills().Where(x => x is AttackSkill).ToList();
 
-
             _cts = new();
             try
             {
-
                 // 随机选择一个技能并使用
                 if (attackSkills.Count > 0)
                 {
                     int randomIndex = UnityEngine.Random.Range(0, attackSkills.Count);
                     _attackSkill = attackSkills[randomIndex];
                     _attackSkill.Use();
+                }
+                else
+                {
+                    Debug.Log($"[EnemyAttackState] 没有可用的攻击技能");
                 }
 
                 UniTask animationTask = MoveController.PlayAnimation(EnemyMoveController.Attack);

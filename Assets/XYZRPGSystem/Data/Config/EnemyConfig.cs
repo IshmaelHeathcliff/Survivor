@@ -18,8 +18,9 @@ namespace XYZRPGSystem.Data.Config
 
         [Header("Skill Stats")]
         [ShowInInspector] public float Damage { get; set; } = 1f;
-        [ShowInInspector] public float AttackSpeed { get; set; } = 1f;
-        [ShowInInspector] public float AttackRange { get; set; } = 3f;
+        [ShowInInspector] public float AttackSpeed { get; set; } = 4f;
+        [ShowInInspector] public float AttackArea { get; set; } = 1f;
+        [ShowInInspector] public float AttackRange { get; set; } = 4f;
         [ShowInInspector] public float CooldownInverse { get; set; } = 1f;
 
         [Header("Enemy Stats")]

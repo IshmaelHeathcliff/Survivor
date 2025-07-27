@@ -1,20 +1,23 @@
 [
   {
     "$type": "XYZRPGSystem.Data.Config.SelfAttackSkillConfig, Assembly-CSharp",
+    "CanReturn": true,
+    "IsTargetLocked": false,
     "AttackEffectConfigs": [
       {
         "AttackerID": "self",
         "Description": "施加攻击"
       }
     ],
-    "Damage": 1.0,
+    "Damage": 0.0,
     "CriticalChance": 0.0,
-    "CriticalMultiplier": 150.0,
-    "AttackArea": 1.0,
-    "AttackRange": 4.0,
-    "Duration": 1.0,
+    "CriticalMultiplier": 0.0,
+    "AttackArea": 0.0,
+    "AttackRange": 0.0,
+    "AttackSpeed": 0.0,
+    "Duration": 0.0,
     "WoodOnUse": 0.0,
-    "Cooldown": 1.0,
+    "Cooldown": 0.0,
     "IsAutoUse": false,
     "ID": "dash",
     "Name": "冲刺",
@@ -22,6 +25,77 @@
     "Keywords": [
       "Melee",
       "Movement"
+    ],
+    "Rarity": 0,
+    "Description": null,
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": null,
+    "SkillEffectConfigsOnUse": null
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.SelfAttackSkillConfig, Assembly-CSharp",
+    "CanReturn": false,
+    "IsTargetLocked": true,
+    "AttackEffectConfigs": [
+      {
+        "AttackerID": "self",
+        "Description": "施加攻击"
+      }
+    ],
+    "Damage": 0.0,
+    "CriticalChance": 0.0,
+    "CriticalMultiplier": 0.0,
+    "AttackArea": 0.0,
+    "AttackRange": 0.0,
+    "AttackSpeed": 0.0,
+    "Duration": 0.0,
+    "WoodOnUse": 0.0,
+    "Cooldown": 0.0,
+    "IsAutoUse": false,
+    "ID": "chase",
+    "Name": "追逐",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [
+      "Melee",
+      "Movement"
+    ],
+    "Rarity": 0,
+    "Description": null,
+    "ReleaseOnAcquire": false,
+    "SkillEffectConfigsOnEnable": null,
+    "SkillEffectConfigsOnUse": null
+  },
+  {
+    "$type": "XYZRPGSystem.Data.Config.ProjectileAttackSkillConfig, Assembly-CSharp",
+    "ProjectileCount": 1.0,
+    "ProjectileSpeed": 10.0,
+    "ChainCount": 0.0,
+    "PenetrateCount": 0.0,
+    "SplitCount": 0.0,
+    "IsTargetLocked": false,
+    "CanReturn": false,
+    "AttackEffectConfigs": [
+      {
+        "AttackerID": "stone",
+        "Description": "创建攻击器"
+      }
+    ],
+    "Damage": 0.0,
+    "CriticalChance": 0.0,
+    "CriticalMultiplier": 0.0,
+    "AttackArea": 0.0,
+    "AttackRange": 0.0,
+    "AttackSpeed": 0.0,
+    "Duration": 3.0,
+    "WoodOnUse": 0.0,
+    "Cooldown": 0.0,
+    "IsAutoUse": false,
+    "ID": "throw_stone",
+    "Name": "扔石头",
+    "IconAddress": "Assets/Textures/UI/icons.aseprite[icons_74]",
+    "Keywords": [
+      "Projectile",
+      "Range"
     ],
     "Rarity": 0,
     "Description": null,

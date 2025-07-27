@@ -27,10 +27,22 @@ MonoBehaviour:
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
-      Data: 1
+      Data: 3
     - Name: 
       Entry: 7
       Data: 1|XYZRPGSystem.Data.Config.SelfAttackSkillConfig, Assembly-CSharp
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 2|XYZRPGSystem.Data.Config.SelfAttackSkillConfig, Assembly-CSharp
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 3|XYZRPGSystem.Data.Config.ProjectileAttackSkillConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 

@@ -8,14 +8,17 @@
     "HealthRegen": 0.0,
     "MoveSpeed": 3.0,
     "Damage": 1.0,
-    "AttackSpeed": 8.0,
+    "AttackSpeed": 3.0,
+    "AttackArea": 1.0,
     "AttackRange": 4.0,
     "CooldownInverse": 1.0,
     "CoinOnDead": 1,
     "WoodOnDead": 0,
     "HealthIncreasePerWave": 10.0,
     "DamageIncreasePerWave": 1.0,
-    "SkillIDs": []
+    "SkillIDs": [
+      "chase"
+    ]
   },
   {
     "ID": "fast_enemy",
@@ -26,14 +29,17 @@
     "HealthRegen": 0.0,
     "MoveSpeed": 6.0,
     "Damage": 1.0,
-    "AttackSpeed": 10.0,
+    "AttackSpeed": 6.0,
+    "AttackArea": 1.0,
     "AttackRange": 4.0,
     "CooldownInverse": 1.0,
     "CoinOnDead": 1,
     "WoodOnDead": 0,
     "HealthIncreasePerWave": 10.0,
     "DamageIncreasePerWave": 1.0,
-    "SkillIDs": []
+    "SkillIDs": [
+      "chase"
+    ]
   },
   {
     "ID": "tank_enemy",
@@ -44,14 +50,17 @@
     "HealthRegen": 0.0,
     "MoveSpeed": 2.0,
     "Damage": 1.0,
-    "AttackSpeed": 8.0,
-    "AttackRange": 4.0,
+    "AttackSpeed": 2.0,
+    "AttackArea": 1.0,
+    "AttackRange": 8.0,
     "CooldownInverse": 1.0,
     "CoinOnDead": 1,
     "WoodOnDead": 0,
     "HealthIncreasePerWave": 10.0,
     "DamageIncreasePerWave": 1.0,
-    "SkillIDs": []
+    "SkillIDs": [
+      "throw_stone"
+    ]
   },
   {
     "ID": "boss_enemy",
@@ -62,13 +71,16 @@
     "HealthRegen": 1.0,
     "MoveSpeed": 5.0,
     "Damage": 2.0,
-    "AttackSpeed": 8.0,
+    "AttackSpeed": 10.0,
+    "AttackArea": 1.0,
     "AttackRange": 4.0,
     "CooldownInverse": 1.0,
     "CoinOnDead": 1,
     "WoodOnDead": 0,
     "HealthIncreasePerWave": 10.0,
     "DamageIncreasePerWave": 1.0,
-    "SkillIDs": []
+    "SkillIDs": [
+      "dash"
+    ]
   }
 ]

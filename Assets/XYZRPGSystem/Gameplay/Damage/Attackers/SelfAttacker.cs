@@ -6,6 +6,8 @@ using UnityEngine;
 using XYZRPGSystem.Gameplay.Character;
 using System;
 using Gameplay.Character.Player;
+using XYZRPGSystem.Data.Config;
+using XYZRPGSystem.Gameplay.Skill;
 
 namespace XYZRPGSystem.Gameplay.Damage.Attackers
 {
@@ -14,8 +16,10 @@ namespace XYZRPGSystem.Gameplay.Damage.Attackers
     {
         Collider2D _collider;
         MoveController _moveController;
-
         CancellationTokenSource _cts;
+
+        bool _canReturn;
+        bool _isTargetLocked;
 
 
         void Awake()
@@ -24,22 +28,42 @@ namespace XYZRPGSystem.Gameplay.Damage.Attackers
             _moveController = GetComponent<MoveController>();
         }
 
+        public override void SetSkill(AttackSkill skill)
+        {
+            base.SetSkill(skill);
+            if (skill is SelfAttackSkill selfAttackSkill)
+            {
+                _canReturn = selfAttackSkill.CanReturn;
+                _isTargetLocked = selfAttackSkill.IsTargetLocked;
+            }
+        }
+
 
         public async UniTask AttackMove(CancellationToken ct)
         {
-            float attackSpeed = AttackerController.CharacterController.CharacterStats.GetKeywordStat("AttackSpeed").Value;
+            float attackSpeed = AttackSkill.AttackSpeed.Value;
 
             Vector3 initialPosition = _moveController.Position;
             Vector2 targetPosition = this.GetSystem<PositionQuerySystem>().QueryPosition(TargetTag);
 
-            while (Vector2.Distance(targetPosition, _moveController.Position) > 0.1f)
+            while (Vector2.SqrMagnitude(targetPosition - _moveController.Position) > 0.01f)
             {
                 ct.ThrowIfCancellationRequested();
+
+                if (_isTargetLocked)
+                {
+                    targetPosition = this.GetSystem<PositionQuerySystem>().QueryPosition(TargetTag);
+                }
+
                 Vector2 velocity = (targetPosition - _moveController.Position).normalized * attackSpeed;
                 _moveController.MoveTo(_moveController.Position + velocity * Time.fixedDeltaTime);
                 await UniTask.WaitForFixedUpdate(ct);
             }
 
+            if (!_canReturn)
+            {
+                return;
+            }
 
             while (Vector2.Distance(initialPosition, _moveController.Position) > 0.1f)
             {

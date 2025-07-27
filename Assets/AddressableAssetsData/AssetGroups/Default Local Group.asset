@@ -25,7 +25,7 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 46e59e101b9d3274db0c54a2553bc151
+  - m_GUID: 3eac85df16ef23747830cdae0ac989f8
     m_Address: Assets/Prefabs/Poker.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
@@ -45,6 +45,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 62e639751d339d94482600576e89e9ce
+    m_Address: Assets/Prefabs/Attackers/Stone.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6495b54d235b3c347bd82a118ce07453
     m_Address: Assets/Textures/UI/Coin.aseprite
     m_ReadOnly: 0
@@ -57,11 +62,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7b3dfbcb94c8d514d8442a4edd1905fb
     m_Address: Assets/Textures/character/character.aseprite
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 99a5b074583124c4887a43fa42071b3c
-    m_Address: Assets/Prefabs/Dice.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -82,6 +82,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: bc64587fc76328242bed88715a651d0a
     m_Address: Assets/Data/Preset/SO/Attackers.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c365d081bcda8d7499ca5a76b22ec438
+    m_Address: Assets/Prefabs/Dice.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

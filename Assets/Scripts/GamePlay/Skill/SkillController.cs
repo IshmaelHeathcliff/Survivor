@@ -72,15 +72,18 @@ namespace Gameplay.Skill
             this.RegisterEvent<SkillReleasedEvent>(OnSkillReleased).UnRegisterWhenGameObjectDestroyed(gameObject);
             this.RegisterEvent<SkillRemovedEvent>(OnSkillRemoved).UnRegisterWhenGameObjectDestroyed(gameObject);
 
-            this.SendCommand(new AcquireSkillCommand(_initSkill, _model));
+            if (!string.IsNullOrEmpty(_initSkill))
+            {
+                this.SendCommand(new AcquireSkillCommand(_initSkill, _model));
+            }
         }
 
 
-        void Update()
+        void FixedUpdate()
         {
             foreach (RepetitiveSkill skill in _repetitiveSkills.Values)
             {
-                skill.Update(Time.deltaTime);
+                skill.Update(Time.fixedDeltaTime);
             }
         }
 

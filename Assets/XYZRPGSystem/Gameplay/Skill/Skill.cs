@@ -69,6 +69,15 @@ namespace XYZRPGSystem.Gameplay.Skill
             SkillStats = new SkillStats(skillConfig.Keywords, characterStats);
         }
 
+        public void SetStat(string statID, float value)
+        {
+            IStat stat = SkillStats.GetStat(statID);
+            if (stat != null)
+            {
+                stat.BaseValue = value;
+            }
+        }
+
         public virtual void SetEffects(IEnumerable<IEffect> effectsOnEnable, IEnumerable<IEffect> effectsOnUpdate)
         {
             if (effectsOnEnable != null)

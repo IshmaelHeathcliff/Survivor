@@ -55,6 +55,7 @@ namespace XYZRPGSystem.Data.Config
         [ShowInInspector] public float CriticalMultiplier { get; set; }
         [ShowInInspector] public float AttackArea { get; set; }
         [ShowInInspector] public float AttackRange { get; set; }
+        [ShowInInspector] public float AttackSpeed { get; set; }
         [ShowInInspector] public float Duration { get; set; }
 
         [ShowInInspector] public float WoodOnUse { get; set; }
@@ -73,6 +74,8 @@ namespace XYZRPGSystem.Data.Config
 
     public class SelfAttackSkillConfig : AttackSkillConfig
     {
+        [ShowInInspector] public bool CanReturn { get; set; }
+        [ShowInInspector] public bool IsTargetLocked { get; set; }
 
     }
 }
