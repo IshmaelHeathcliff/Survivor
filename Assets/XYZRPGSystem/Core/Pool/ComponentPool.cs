@@ -154,12 +154,18 @@ namespace XYZRPGSystem.Core.Pool
 
         public void Recycle(string id, T component)
         {
+            if (component == null)
+            {
+                return;
+            }
+
             if (!_pools.ContainsKey(id))
             {
                 _pools.Add(id, new Stack<T>());
             }
 
             component.gameObject.SetActive(false);
+            component.transform.SetParent(transform);
             if (_pools[id].Count > _maxSize)
             {
                 _factory.Destroy(component.gameObject);

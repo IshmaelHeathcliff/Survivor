@@ -9,13 +9,13 @@ namespace Gameplay.Character.Enemy
         {
         }
 
-        float _attackRadius;
+        float _attackRange;
 
 
 
         void CheckPlayer()
         {
-            if (MoveController.SqrDistanceToPlayer() < _attackRadius * _attackRadius)
+            if (MoveController.SqrDistanceToPlayer() < _attackRange * _attackRange)
             {
                 FSM.ChangeState(EnemyStateID.Attack);
             }
@@ -23,13 +23,13 @@ namespace Gameplay.Character.Enemy
 
         protected override bool OnCondition()
         {
-            return FSM.CurrentStateId is EnemyStateID.Idle or EnemyStateID.Patrol;
+            return FSM.CurrentStateId is EnemyStateID.Idle;
         }
 
         protected override void OnEnter()
         {
             MoveController.PlayAnimation(EnemyMoveController.Chase).Forget();
-            _attackRadius = MoveController.AttackRadius;
+            _attackRange = Target.CharacterModel.Stats.GetStat("AttackRange").Value;
 
         }
 
@@ -39,12 +39,6 @@ namespace Gameplay.Character.Enemy
 
         protected override void OnFixedUpdate()
         {
-            if (MoveController.LosePlayer())
-            {
-                FSM.ChangeState(EnemyStateID.Idle);
-                return;
-            }
-
             MoveController.FindPlayer();
             MoveController.Move();
             CheckPlayer();

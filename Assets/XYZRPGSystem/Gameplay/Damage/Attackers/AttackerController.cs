@@ -49,11 +49,7 @@ namespace XYZRPGSystem.Gameplay.Damage.Attackers
                 return null;
             }
 
-            var attackers = (
-                attackerID == "self" ?
-                GetComponentsInChildren<IAttacker>() :
-                (await GetAttacker(attackSkill, attackerID))
-                ).ToList();
+            List<IAttacker> attackers = await GetAttacker(attackSkill, attackerID);
 
             foreach (IAttacker attacker in attackers)
             {
@@ -69,26 +65,47 @@ namespace XYZRPGSystem.Gameplay.Damage.Attackers
             return attackers;
         }
 
-        async UniTask<IEnumerable<IAttacker>> GetAttacker(AttackSkill skill, string attackerID)
+        async UniTask<List<IAttacker>> GetAttacker(AttackSkill skill, string attackerID)
         {
             List<IAttacker> attackers = new();
 
-            for (int i = 0; i < skill.ProjectileCount.Value; i++)
+            if (skill is ProjectileAttackSkill projectileAttackSkill)
             {
-                attackers.Add(await _attackerPool.Allocate(attackerID));
-            }
-
-            foreach (IAttacker attacker in attackers)
-            {
-                if (attacker is Attacker at)
+                for (int i = 0; i < projectileAttackSkill.ProjectileCount.Value; i++)
                 {
-                    at.SetSkill(skill);
-                    at.transform.SetParent(AttackerParent);
+                    attackers.Add(await _attackerPool.Allocate(attackerID));
                 }
 
+                foreach (IAttacker attacker in attackers)
+                {
+                    if (attacker is ProjectileAttacker at)
+                    {
+                        at.SetSkill(skill);
+                        at.transform.SetParent(AttackerParent);
+                    }
+
+                }
+            }
+            else if (skill is SelfAttackSkill || attackerID == "self")
+            {
+                attackers = GetComponentsInChildren<IAttacker>(true).ToList();
+
+                foreach (IAttacker attacker in attackers)
+                {
+                    if (attacker is SelfAttacker at)
+                    {
+                        at.SetSkill(skill);
+                        at.enabled = true;
+                    }
+                }
+            }
+            else
+            {
+                Debug.LogError($"未知的攻击技能类型: {skill.GetType()}");
             }
 
             return attackers;
+
         }
 
         public void RemoveAttacker(IAttacker attacker)
@@ -102,7 +119,7 @@ namespace XYZRPGSystem.Gameplay.Damage.Attackers
             IAttacker[] attackers = Attackers.ToArray();
             foreach (IAttacker attacker in attackers)
             {
-                attacker.Cancel().Forget();
+                attacker?.Cancel();
             }
             Attackers.Clear();
         }

@@ -27,21 +27,34 @@ namespace XYZRPGSystem.Gameplay.Character
             }
         }
 
+        public Vector2 QueryPosition(string tag)
+        {
+            return GetTransforms(tag).FirstOrDefault().Value.position;
+        }
+
+        Dictionary<string, Transform> _transforms = new();
+
         Dictionary<string, Transform> GetTransforms(string tag)
         {
+            _transforms.Clear();
+
             if (_models.TryGetValue(tag, out List<ICharacterModel> models))
             {
-                return models.ToDictionary(pair => pair.ID, pair => pair.Transform);
+                foreach (ICharacterModel model in models)
+                {
+                    _transforms.Add(model.ID, model.Transform);
+                }
+
             }
 
-            return new Dictionary<string, Transform>();
+            return _transforms;
         }
 
         public List<Transform> Query(string tag, Vector2 position, float radius, List<string> exclude = null)
         {
             return GetTransforms(tag)
                 .Where(pair => exclude == null || !exclude.Contains(pair.Key))
-                .Where(pair => Vector2.Distance(pair.Value.position, position) <= radius)
+                .Where(pair => Vector2.SqrMagnitude((Vector2)pair.Value.position - position) <= radius * radius)
                 .Select(pair => pair.Value)
                 .ToList();
         }

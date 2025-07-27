@@ -51,7 +51,6 @@ namespace XYZRPGSystem.Gameplay.Character
         string ID { get; set; }
         Transform Transform { get; set; }
 
-        float Speed { get; set; }
         Vector2 Position { get; set; }
         Vector2 Direction { get; set; }
 
@@ -65,8 +64,6 @@ namespace XYZRPGSystem.Gameplay.Character
         public string ID { get; set; }
 
         public Transform Transform { get; set; }
-
-        public float Speed { get; set; }
 
         public Vector2 Position
         {

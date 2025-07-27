@@ -29,8 +29,8 @@ namespace XYZRPGSystem.Gameplay.Character
 
         public virtual float Speed
         {
-            get => Model.Speed;
-            set => Model.Speed = value;
+            get => Model.Stats.GetStat("MoveSpeed").Value;
+            set => Model.Stats.GetStat("MoveSpeed").BaseValue = value;
         }
 
         public Transform Transform => transform;
@@ -106,7 +106,7 @@ namespace XYZRPGSystem.Gameplay.Character
 
         public virtual void MoveTo(Vector2 position)
         {
-            Position = position;
+            Rigidbody.MovePosition(position);
         }
 
         public IArchitecture GetArchitecture()

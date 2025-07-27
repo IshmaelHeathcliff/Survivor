@@ -19,7 +19,7 @@ namespace Gameplay.Character.Enemy
         {
             MoveController.Stop();
             await MoveController.PlayAnimation(EnemyMoveController.Idle);
-            FSM.ChangeState(EnemyStateID.Patrol);
+            FSM.ChangeState(EnemyStateID.Chase);
         }
     }
 }

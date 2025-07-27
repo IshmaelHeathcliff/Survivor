@@ -25,7 +25,8 @@ namespace XYZRPGSystem.Gameplay.Skill
     {
         readonly Dictionary<string, SkillConfig> _skillConfigCache = new();
         const string JsonPath = "Preset/JSON";
-        const string JsonName = "Skills.json";
+        const string PlayerJsonName = "PlayerSkills.json";
+        const string EnemyJsonName = "EnemySkills.json";
 
         bool _isLoaded = false;
 
@@ -36,7 +37,13 @@ namespace XYZRPGSystem.Gameplay.Skill
         void Load()
         {
             _skillConfigCache.Clear();
-            List<SkillConfig> skillConfigList = SaveLoadManager.Load<List<SkillConfig>>(JsonName, JsonPath);
+            List<SkillConfig> skillConfigList = SaveLoadManager.Load<List<SkillConfig>>(PlayerJsonName, JsonPath);
+            foreach (SkillConfig skillConfig in skillConfigList)
+            {
+                _skillConfigCache.Add(skillConfig.ID, skillConfig);
+            }
+
+            skillConfigList = SaveLoadManager.Load<List<SkillConfig>>(EnemyJsonName, JsonPath);
             foreach (SkillConfig skillConfig in skillConfigList)
             {
                 _skillConfigCache.Add(skillConfig.ID, skillConfig);

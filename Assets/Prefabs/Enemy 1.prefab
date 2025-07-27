@@ -334,7 +334,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterId: 5511fa9c6177d214692bbbfabb853e5a
   _baseHealth: 10
-  _skillPoolPath: EnemySkillPool.json
 --- !u!114 &1009774605795107126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -361,10 +360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89eb5c5c31d94077a71b2335e51379d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 4
-  _attackSpeed: 8
-  _detectRadius: 1000
-  _attackRadius: 4
+  _detectRange: 10
 --- !u!114 &4516161229600512672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -372,7 +368,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7152041979365510245}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1bcb2888a042441ea131d7b19993507b, type: 3}
   m_Name: 

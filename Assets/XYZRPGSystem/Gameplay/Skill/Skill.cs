@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Cysharp.Threading.Tasks;
 using XYZRPGSystem.Data.Config;
 using XYZRPGSystem.Gameplay.Skill.Effect;
 using XYZRPGSystem.Gameplay.Stat;
@@ -117,6 +118,7 @@ namespace XYZRPGSystem.Gameplay.Skill
         public IKeywordStat CooldownInverse => SkillStats.GetKeywordStat("CooldownInverse");
         public float Cooldown => 1f / CooldownInverse.Value;
         public bool IsReady => _leftTime <= 0;
+        public bool IsAutoUse => SkillConfig.IsAutoUse;
 
         float _leftTime;
 
@@ -137,6 +139,12 @@ namespace XYZRPGSystem.Gameplay.Skill
             if (!IsReady)
             {
                 _leftTime -= deltaTime;
+                return;
+            }
+
+            if (IsAutoUse)
+            {
+                Use();
             }
         }
 

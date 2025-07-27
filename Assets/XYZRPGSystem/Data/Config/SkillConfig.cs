@@ -38,6 +38,7 @@ namespace XYZRPGSystem.Data.Config
     public class RepetitiveSkillConfig : SkillConfig
     {
         [ShowInInspector] public float Cooldown { get; set; }
+        [ShowInInspector] public bool IsAutoUse { get; set; } = true;
     }
 
     public class OneTimeSkillConfig : SkillConfig
@@ -53,7 +54,14 @@ namespace XYZRPGSystem.Data.Config
         [ShowInInspector] public float CriticalChance { get; set; }
         [ShowInInspector] public float CriticalMultiplier { get; set; }
         [ShowInInspector] public float AttackArea { get; set; }
+        [ShowInInspector] public float AttackRange { get; set; }
         [ShowInInspector] public float Duration { get; set; }
+
+        [ShowInInspector] public float WoodOnUse { get; set; }
+    }
+
+    public class ProjectileAttackSkillConfig : AttackSkillConfig
+    {
         [ShowInInspector] public float ProjectileCount { get; set; }
         [ShowInInspector] public float ProjectileSpeed { get; set; }
         [ShowInInspector] public float ChainCount { get; set; }
@@ -61,6 +69,10 @@ namespace XYZRPGSystem.Data.Config
         [ShowInInspector] public float SplitCount { get; set; }
         [ShowInInspector] public bool IsTargetLocked { get; set; }
         [ShowInInspector] public bool CanReturn { get; set; }
-        [ShowInInspector] public float WoodOnUse { get; set; }
+    }
+
+    public class SelfAttackSkillConfig : AttackSkillConfig
+    {
+
     }
 }
