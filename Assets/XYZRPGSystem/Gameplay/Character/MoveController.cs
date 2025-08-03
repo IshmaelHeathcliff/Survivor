@@ -67,7 +67,7 @@ namespace XYZRPGSystem.Gameplay.Character
 
                 Animator.Play(stateName);
                 await UniTask.Yield(PlayerLoopTiming.FixedUpdate, cancellationToken: cts.Token);
-
+                Animator.Update(0f);
                 await UniTask.WaitUntil(() => Animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f, cancellationToken: cts.Token);
             }
             catch (OperationCanceledException)
@@ -83,7 +83,7 @@ namespace XYZRPGSystem.Gameplay.Character
 
                 Animator.Play(stateNameHash);
                 await UniTask.Yield(PlayerLoopTiming.FixedUpdate, cancellationToken: cts.Token);
-
+                Animator.Update(0f);
                 AnimatorStateInfo stateInfo = Animator.GetCurrentAnimatorStateInfo(0);
                 await UniTask.Delay(TimeSpan.FromSeconds(stateInfo.length), cancellationToken: cts.Token);
             }
