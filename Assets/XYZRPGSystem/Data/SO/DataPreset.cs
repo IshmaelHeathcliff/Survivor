@@ -4,7 +4,7 @@ using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using Sirenix.Utilities.Editor;
 
-namespace Editor
+namespace XYZRPGSystem.Data.SO
 {
     public abstract class DataPreset<T> : SerializedScriptableObject
     {

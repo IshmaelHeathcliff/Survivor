@@ -1,7 +1,7 @@
 using XYZRPGSystem.Data.Config;
 using UnityEngine;
 
-namespace Editor
+namespace XYZRPGSystem.Data.SO
 {
     [CreateAssetMenu(menuName = "Preset/Attacker Preset", fileName = "AttackerPreset")]
     public class AttackerPreset : DataPreset<AttackerConfig>
