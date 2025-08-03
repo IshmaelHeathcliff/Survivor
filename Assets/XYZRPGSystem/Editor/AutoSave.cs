@@ -2,7 +2,7 @@
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
-namespace XYZRPGSystem.Editor
+namespace XYZRPGSystem
 {
     [InitializeOnLoad]
     public class AutoSave

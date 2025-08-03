@@ -1,7 +1,7 @@
 using XYZRPGSystem.Data.Config;
 using UnityEngine;
 
-namespace Editor
+namespace XYZRPGSystem.Data.SO
 {
     [CreateAssetMenu(menuName = "Preset/SkillPool Preset", fileName = "SkillPoolPreset")]
     public class SkillPoolPreset : DataPreset<SkillInPool>
