@@ -3253,7 +3253,7 @@
              <code>
              public class MyComponent : MonoBehaviour
              {
-            		[OnStateUpdate("@$property.Status.Visible = ToggleMyInt")]
+            		[OnStateUpdate("@$property.State.Visible = ToggleMyInt")]
             		public int MyInt;
             
             		public bool ToggleMyInt;
@@ -3265,7 +3265,7 @@
              <code>
              public class MyComponent : MonoBehaviour
              {
-            		[OnStateUpdate("@$property.Status.Expanded = ExpandList")]
+            		[OnStateUpdate("@$property.State.Expanded = ExpandList")]
             		public List&lt;string&gt; list;
             		
             		public bool ExpandList;
@@ -3277,7 +3277,7 @@
              {
             		public List&gt;string&lt; list;
             		
-            		[OnStateUpdate("@#(list).Status.Expanded = $value")]
+            		[OnStateUpdate("@#(list).State.Expanded = $value")]
             		public bool ExpandList;
              }
              </code>
