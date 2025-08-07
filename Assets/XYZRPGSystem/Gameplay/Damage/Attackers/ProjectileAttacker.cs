@@ -152,7 +152,11 @@ namespace XYZRPGSystem.Gameplay.Damage.Attackers
 
         bool Chain()
         {
-            FindNewTarget();
+            if (!FindNewTarget())
+            {
+                return false;
+            }
+
             _isTargetLocked = true;
 
             Direction = (Target.position - transform.position).normalized;
@@ -169,13 +173,16 @@ namespace XYZRPGSystem.Gameplay.Damage.Attackers
             _isTargetLocked = true;
         }
 
-        void FindNewTarget()
+        bool FindNewTarget()
         {
             Target = this.GetSystem<PositionQuerySystem>().QueryClosest(TargetTag, transform.position, _damaged);
             if (Target == null)
             {
                 Cancel();
+                return false;
             }
+
+            return true;
         }
 
         void Move()

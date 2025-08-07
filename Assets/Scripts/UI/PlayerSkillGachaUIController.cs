@@ -8,6 +8,7 @@ using XYZRPGSystem.Gameplay.Skill;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using System.Text;
 
 namespace UI
 {
@@ -28,6 +29,17 @@ namespace UI
             ResourceSystem resourceSystem = this.GetSystem<ResourceSystem>();
             resourceSystem.ConsumeResource(ResourceType.Wood, 10, _model);
             resourceSystem.ConsumeResource(ResourceType.Coin, 10, _model);
+        }
+
+        [Button]
+        public void ShowSkillPool()
+        {
+            StringBuilder skillPool = new StringBuilder();
+            foreach (SkillConfig skill in _model.SkillPool.GetAllSkills())
+            {
+                skillPool.Append($"{skill.Name},");
+            }
+            Debug.Log($"技能池：{skillPool.ToString()}");
         }
 
         public void GachaSkills()

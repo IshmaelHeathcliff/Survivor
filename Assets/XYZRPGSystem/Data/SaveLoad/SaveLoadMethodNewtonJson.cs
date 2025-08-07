@@ -27,6 +27,7 @@ namespace XYZRPGSystem.Data.SaveLoad
         public void Save(object saveObject, FileStream saveFile)
         {
             string json = JsonConvert.SerializeObject(saveObject, _settings);
+            json = json.Replace("\r\n", "\n");
             var streamWriter = new StreamWriter(saveFile);
             streamWriter.Write(json);
             streamWriter.Close();

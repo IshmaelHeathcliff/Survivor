@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Data.Config;
+using Gameplay.Level;
 using UnityEngine;
 using XYZRPGSystem.Data.Config;
 using XYZRPGSystem.Data.SaveLoad;
@@ -28,11 +30,7 @@ namespace Gameplay.Skill
 
         readonly Dictionary<SkillRarity, int> _skillGachaWeights = new()
         {
-            { SkillRarity.Common, 50 },
-            { SkillRarity.Magic, 30 },
-            { SkillRarity.Rare, 15 },
-            { SkillRarity.Epic, 4 },
-            { SkillRarity.Legendary, 1},
+            { SkillRarity.Common, 100 }
         };
 
         void Load()
@@ -73,6 +71,17 @@ namespace Gameplay.Skill
                 {
                     model.SkillPool.AddSkill(config);
                 }
+            }
+        }
+
+
+        void OnLevelWaveStart(LevelWaveStartEvent e)
+        {
+            _skillGachaWeights.Clear();
+
+            foreach (SkillRarityWeight weight in e.LevelWave.SkillRarityWeights)
+            {
+                _skillGachaWeights[weight.Rarity] = weight.Weight;
             }
         }
 
@@ -283,6 +292,8 @@ namespace Gameplay.Skill
             _resourceSystem = this.GetSystem<ResourceSystem>();
             Load();
             RegisterRules();
+
+            this.RegisterEvent<LevelWaveStartEvent>(OnLevelWaveStart);
         }
 
         protected override void OnDeinit()
@@ -292,6 +303,8 @@ namespace Gameplay.Skill
             {
                 unRegister.UnRegister();
             }
+
+            this.UnRegisterEvent<LevelWaveStartEvent>(OnLevelWaveStart);
         }
     }
 

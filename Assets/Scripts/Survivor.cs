@@ -1,4 +1,5 @@
-﻿using Core.Scene;
+using Core.Scene;
+using Gameplay.Level;
 using Gameplay.Skill;
 using Gameplay.Item;
 using Gameplay.Character.Enemy;
@@ -21,7 +22,9 @@ public class GameFrame : Architecture<GameFrame>
         RegisterModel(new PlayersModel());
         RegisterModel(new EnemiesModel());
         RegisterModel(new SceneModel());
+        RegisterModel(new LevelModel());
 
+        RegisterSystem(new LevelSystem());
         RegisterSystem(new SkillGachaSystem());
         RegisterSystem(new DropSystem());
         RegisterSystem(new EnemySystem());

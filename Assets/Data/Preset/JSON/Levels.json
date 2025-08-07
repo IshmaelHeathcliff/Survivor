@@ -1,0 +1,530 @@
+[
+  {
+    "ID": "level_1",
+    "Name": "基础测试关卡",
+    "Description": "",
+    "LevelNumber": 1,
+    "NextLevelID": null,
+    "SceneName": "GameScene",
+    "WaveConfigs": [
+      {
+        "WaveNumber": 1,
+        "EnemySpawnGroupID": "group_1",
+        "EnemySpawnRateMultiplier": 1.0,
+        "EnemyHealthMultiplier": 1.0,
+        "EnemyDamageMultiplier": 1.0,
+        "MaxEnemyCount": 80,
+        "SkillRarityWeights": [
+          {
+            "Rarity": 0,
+            "Weight": 70
+          },
+          {
+            "Rarity": 1,
+            "Weight": 30
+          }
+        ],
+        "Rewards": [
+          {
+            "Type": 0,
+            "Amount": 50
+          },
+          {
+            "Type": 1,
+            "Amount": 50
+          }
+        ],
+        "Duration": 60.0,
+        "KillTarget": 50
+      },
+      {
+        "WaveNumber": 2,
+        "EnemySpawnGroupID": "group_2",
+        "EnemySpawnRateMultiplier": 1.1,
+        "EnemyHealthMultiplier": 1.1,
+        "EnemyDamageMultiplier": 1.0,
+        "MaxEnemyCount": 90,
+        "SkillRarityWeights": [
+          {
+            "Rarity": 0,
+            "Weight": 60
+          },
+          {
+            "Rarity": 1,
+            "Weight": 40
+          }
+        ],
+        "Rewards": [
+          {
+            "Type": 0,
+            "Amount": 50
+          },
+          {
+            "Type": 1,
+            "Amount": 50
+          }
+        ],
+        "Duration": 60.0,
+        "KillTarget": 60
+      },
+      {
+        "WaveNumber": 3,
+        "EnemySpawnGroupID": "group_3",
+        "EnemySpawnRateMultiplier": 1.2,
+        "EnemyHealthMultiplier": 1.2,
+        "EnemyDamageMultiplier": 1.1,
+        "MaxEnemyCount": 100,
+        "SkillRarityWeights": [
+          {
+            "Rarity": 0,
+            "Weight": 50
+          },
+          {
+            "Rarity": 1,
+            "Weight": 40
+          },
+          {
+            "Rarity": 2,
+            "Weight": 10
+          }
+        ],
+        "Rewards": [
+          {
+            "Type": 0,
+            "Amount": 50
+          },
+          {
+            "Type": 1,
+            "Amount": 50
+          }
+        ],
+        "Duration": 60.0,
+        "KillTarget": 70
+      },
+      {
+        "WaveNumber": 4,
+        "EnemySpawnGroupID": "group_3",
+        "EnemySpawnRateMultiplier": 1.3,
+        "EnemyHealthMultiplier": 1.3,
+        "EnemyDamageMultiplier": 1.1,
+        "MaxEnemyCount": 110,
+        "SkillRarityWeights": [
+          {
+            "Rarity": 0,
+            "Weight": 45
+          },
+          {
+            "Rarity": 1,
+            "Weight": 45
+          },
+          {
+            "Rarity": 2,
+            "Weight": 10
+          }
+        ],
+        "Rewards": [
+          {
+            "Type": 0,
+            "Amount": 50
+          },
+          {
+            "Type": 1,
+            "Amount": 50
+          }
+        ],
+        "Duration": 60.0,
+        "KillTarget": 80
+      },
+      {
+        "WaveNumber": 5,
+        "EnemySpawnGroupID": "group_4",
+        "EnemySpawnRateMultiplier": 1.4,
+        "EnemyHealthMultiplier": 1.4,
+        "EnemyDamageMultiplier": 1.2,
+        "MaxEnemyCount": 120,
+        "SkillRarityWeights": [
+          {
+            "Rarity": 0,
+            "Weight": 40
+          },
+          {
+            "Rarity": 1,
+            "Weight": 50
+          },
+          {
+            "Rarity": 2,
+            "Weight": 10
+          }
+        ],
+        "Rewards": [
+          {
+            "Type": 0,
+            "Amount": 50
+          },
+          {
+            "Type": 1,
+            "Amount": 50
+          }
+        ],
+        "Duration": 60.0,
+        "KillTarget": 90
+      },
+      {
+        "WaveNumber": 6,
+        "EnemySpawnGroupID": "group_4",
+        "EnemySpawnRateMultiplier": 1.5,
+        "EnemyHealthMultiplier": 1.5,
+        "EnemyDamageMultiplier": 1.2,
+        "MaxEnemyCount": 130,
+        "SkillRarityWeights": [
+          {
+            "Rarity": 0,
+            "Weight": 35
+          },
+          {
+            "Rarity": 1,
+            "Weight": 55
+          },
+          {
+            "Rarity": 2,
+            "Weight": 10
+          }
+        ],
+        "Rewards": [
+          {
+            "Type": 0,
+            "Amount": 50
+          },
+          {
+            "Type": 1,
+            "Amount": 50
+          }
+        ],
+        "Duration": 60.0,
+        "KillTarget": 100
+      },
+      {
+        "WaveNumber": 7,
+        "EnemySpawnGroupID": "group_4",
+        "EnemySpawnRateMultiplier": 1.6,
+        "EnemyHealthMultiplier": 1.6,
+        "EnemyDamageMultiplier": 1.3,
+        "MaxEnemyCount": 140,
+        "SkillRarityWeights": [
+          {
+            "Rarity": 0,
+            "Weight": 30
+          },
+          {
+            "Rarity": 1,
+            "Weight": 60
+          },
+          {
+            "Rarity": 2,
+            "Weight": 10
+          }
+        ],
+        "Rewards": [
+          {
+            "Type": 0,
+            "Amount": 50
+          },
+          {
+            "Type": 1,
+            "Amount": 50
+          }
+        ],
+        "Duration": 60.0,
+        "KillTarget": 110
+      },
+      {
+        "WaveNumber": 8,
+        "EnemySpawnGroupID": "group_4",
+        "EnemySpawnRateMultiplier": 1.7,
+        "EnemyHealthMultiplier": 1.7,
+        "EnemyDamageMultiplier": 1.3,
+        "MaxEnemyCount": 150,
+        "SkillRarityWeights": [
+          {
+            "Rarity": 0,
+            "Weight": 25
+          },
+          {
+            "Rarity": 1,
+            "Weight": 60
+          },
+          {
+            "Rarity": 2,
+            "Weight": 15
+          }
+        ],
+        "Rewards": [
+          {
+            "Type": 0,
+            "Amount": 50
+          },
+          {
+            "Type": 1,
+            "Amount": 50
+          }
+        ],
+        "Duration": 60.0,
+        "KillTarget": 120
+      },
+      {
+        "WaveNumber": 9,
+        "EnemySpawnGroupID": "group_4",
+        "EnemySpawnRateMultiplier": 1.8,
+        "EnemyHealthMultiplier": 1.8,
+        "EnemyDamageMultiplier": 1.4,
+        "MaxEnemyCount": 160,
+        "SkillRarityWeights": [
+          {
+            "Rarity": 0,
+            "Weight": 20
+          },
+          {
+            "Rarity": 1,
+            "Weight": 60
+          },
+          {
+            "Rarity": 2,
+            "Weight": 20
+          }
+        ],
+        "Rewards": [
+          {
+            "Type": 0,
+            "Amount": 50
+          },
+          {
+            "Type": 1,
+            "Amount": 50
+          }
+        ],
+        "Duration": 60.0,
+        "KillTarget": 130
+      },
+      {
+        "WaveNumber": 10,
+        "EnemySpawnGroupID": "group_4",
+        "EnemySpawnRateMultiplier": 1.9,
+        "EnemyHealthMultiplier": 1.9,
+        "EnemyDamageMultiplier": 1.4,
+        "MaxEnemyCount": 170,
+        "SkillRarityWeights": [
+          {
+            "Rarity": 0,
+            "Weight": 15
+          },
+          {
+            "Rarity": 1,
+            "Weight": 60
+          },
+          {
+            "Rarity": 2,
+            "Weight": 25
+          }
+        ],
+        "Rewards": [
+          {
+            "Type": 0,
+            "Amount": 50
+          },
+          {
+            "Type": 1,
+            "Amount": 50
+          }
+        ],
+        "Duration": 60.0,
+        "KillTarget": 140
+      },
+      {
+        "WaveNumber": 11,
+        "EnemySpawnGroupID": "group_4",
+        "EnemySpawnRateMultiplier": 2.0,
+        "EnemyHealthMultiplier": 2.0,
+        "EnemyDamageMultiplier": 1.5,
+        "MaxEnemyCount": 180,
+        "SkillRarityWeights": [
+          {
+            "Rarity": 0,
+            "Weight": 15
+          },
+          {
+            "Rarity": 1,
+            "Weight": 55
+          },
+          {
+            "Rarity": 2,
+            "Weight": 30
+          }
+        ],
+        "Rewards": [
+          {
+            "Type": 0,
+            "Amount": 50
+          },
+          {
+            "Type": 1,
+            "Amount": 50
+          }
+        ],
+        "Duration": 60.0,
+        "KillTarget": 150
+      },
+      {
+        "WaveNumber": 12,
+        "EnemySpawnGroupID": "group_4",
+        "EnemySpawnRateMultiplier": 2.1,
+        "EnemyHealthMultiplier": 2.1,
+        "EnemyDamageMultiplier": 1.5,
+        "MaxEnemyCount": 190,
+        "SkillRarityWeights": [
+          {
+            "Rarity": 0,
+            "Weight": 15
+          },
+          {
+            "Rarity": 1,
+            "Weight": 50
+          },
+          {
+            "Rarity": 2,
+            "Weight": 30
+          },
+          {
+            "Rarity": 3,
+            "Weight": 5
+          }
+        ],
+        "Rewards": [
+          {
+            "Type": 0,
+            "Amount": 50
+          },
+          {
+            "Type": 1,
+            "Amount": 50
+          }
+        ],
+        "Duration": 60.0,
+        "KillTarget": 160
+      },
+      {
+        "WaveNumber": 13,
+        "EnemySpawnGroupID": "group_4",
+        "EnemySpawnRateMultiplier": 2.2,
+        "EnemyHealthMultiplier": 2.2,
+        "EnemyDamageMultiplier": 1.6,
+        "MaxEnemyCount": 200,
+        "SkillRarityWeights": [
+          {
+            "Rarity": 0,
+            "Weight": 15
+          },
+          {
+            "Rarity": 1,
+            "Weight": 45
+          },
+          {
+            "Rarity": 2,
+            "Weight": 30
+          },
+          {
+            "Rarity": 3,
+            "Weight": 10
+          }
+        ],
+        "Rewards": [
+          {
+            "Type": 0,
+            "Amount": 50
+          },
+          {
+            "Type": 1,
+            "Amount": 50
+          }
+        ],
+        "Duration": 60.0,
+        "KillTarget": 170
+      },
+      {
+        "WaveNumber": 14,
+        "EnemySpawnGroupID": "group_4",
+        "EnemySpawnRateMultiplier": 2.3,
+        "EnemyHealthMultiplier": 2.3,
+        "EnemyDamageMultiplier": 1.6,
+        "MaxEnemyCount": 210,
+        "SkillRarityWeights": [
+          {
+            "Rarity": 0,
+            "Weight": 15
+          },
+          {
+            "Rarity": 1,
+            "Weight": 40
+          },
+          {
+            "Rarity": 2,
+            "Weight": 30
+          },
+          {
+            "Rarity": 0,
+            "Weight": 15
+          }
+        ],
+        "Rewards": [
+          {
+            "Type": 0,
+            "Amount": 50
+          },
+          {
+            "Type": 1,
+            "Amount": 50
+          }
+        ],
+        "Duration": 60.0,
+        "KillTarget": 180
+      },
+      {
+        "WaveNumber": 15,
+        "EnemySpawnGroupID": "group_4",
+        "EnemySpawnRateMultiplier": 2.5,
+        "EnemyHealthMultiplier": 2.5,
+        "EnemyDamageMultiplier": 1.7,
+        "MaxEnemyCount": 220,
+        "SkillRarityWeights": [
+          {
+            "Rarity": 0,
+            "Weight": 15
+          },
+          {
+            "Rarity": 1,
+            "Weight": 35
+          },
+          {
+            "Rarity": 2,
+            "Weight": 30
+          },
+          {
+            "Rarity": 3,
+            "Weight": 20
+          }
+        ],
+        "Rewards": [
+          {
+            "Type": 0,
+            "Amount": 50
+          },
+          {
+            "Type": 1,
+            "Amount": 50
+          }
+        ],
+        "Duration": 60.0,
+        "KillTarget": 200
+      }
+    ]
+  }
+]
