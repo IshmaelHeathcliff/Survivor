@@ -8,8 +8,8 @@ using UnityEngine.AddressableAssets;
 using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
 
-
 using Gameplay.Character.Player;
+using Gameplay.Level;
 using XYZRPGSystem.Core;
 using XYZRPGSystem.Data.Config;
 using XYZRPGSystem.Gameplay;
@@ -19,29 +19,29 @@ namespace Gameplay.Character.Enemy
 {
     public class EnemyFactory : MonoBehaviour, IController
     {
-        [Header("敌人生成组配置")]
-        [SerializeField] string _spawnGroupID = "basic_spawn_group";
+        readonly Dictionary<string, EnemyConfig> _enemyConfigs = new();
+        readonly Dictionary<string, AssetReference> _enemyReferences = new();
+        readonly Dictionary<string, CancellationTokenSource> _enemySpawnTokens = new();
 
         EnemySpawnGroupConfig _spawnGroupConfig;
-        Dictionary<string, EnemyConfig> _enemyConfigs = new();
-        Dictionary<string, AssetReference> _enemyReferences = new();
-        Dictionary<string, CancellationTokenSource> _enemySpawnTokens = new();
 
-        void LoadConfig()
+        EnemySystem _enemySystem;
+        LevelSystem _levelSystem;
+
+        void LoadConfig(string spawnGroupID)
         {
-            EnemySystem enemySystem = this.GetSystem<EnemySystem>();
+            _spawnGroupConfig = _enemySystem.GetSpawnGroupConfig(spawnGroupID);
 
-            _spawnGroupConfig = enemySystem.GetSpawnGroupConfig(_spawnGroupID);
             if (_spawnGroupConfig == null)
             {
-                Debug.LogError($"Enemy spawn group config not found: {_spawnGroupID}");
+                Debug.LogError($"Enemy spawn group config not found: {spawnGroupID}");
                 return;
             }
 
             // 验证生成组配置有效性
-            if (!enemySystem.ValidateSpawnGroup(_spawnGroupID))
+            if (!_enemySystem.ValidateSpawnGroup(spawnGroupID))
             {
-                Debug.LogError($"Invalid spawn group configuration: {_spawnGroupID}");
+                Debug.LogError($"Invalid spawn group configuration: {spawnGroupID}");
                 return;
             }
 
@@ -49,9 +49,9 @@ namespace Gameplay.Character.Enemy
             _enemyConfigs.Clear();
             _enemyReferences.Clear();
 
-            foreach (var entry in _spawnGroupConfig.EnemyEntries)
+            foreach (EnemySpawnEntry entry in _spawnGroupConfig.EnemyEntries)
             {
-                var enemyConfig = enemySystem.GetEnemyConfig(entry.EnemyID);
+                EnemyConfig enemyConfig = _enemySystem.GetEnemyConfig(entry.EnemyID);
                 if (enemyConfig != null)
                 {
                     _enemyConfigs[entry.EnemyID] = enemyConfig;
@@ -159,7 +159,7 @@ namespace Gameplay.Character.Enemy
             }
             catch (OperationCanceledException)
             {
-                Debug.Log($"Enemy spawn for {spawnEntry.EnemyID} is canceled");
+                // Debug.Log($"Enemy spawn for {spawnEntry.EnemyID} is canceled");
             }
         }
 
@@ -185,7 +185,7 @@ namespace Gameplay.Character.Enemy
                     // 启动独立的生成协程
                     ProduceEnemy(entry, cts.Token).Forget();
 
-                    Debug.Log($"Started independent spawning for enemy: {entry.EnemyID}, Gap: {entry.GenerateGap}s, Count: {entry.GenerateCount}");
+                    // Debug.Log($"Started independent spawning for enemy: {entry.EnemyID}, Gap: {entry.GenerateGap}s, Count: {entry.GenerateCount}");
                 }
             }
         }
@@ -210,8 +210,7 @@ namespace Gameplay.Character.Enemy
         [Button("切换敌人生成组配置")]
         public void SwitchSpawnGroup(string newSpawnGroupID)
         {
-            _spawnGroupID = newSpawnGroupID;
-            LoadConfig();
+            LoadConfig(newSpawnGroupID);
             if (_spawnGroupConfig != null)
             {
                 StartSpawning();
@@ -264,12 +263,30 @@ namespace Gameplay.Character.Enemy
             return randomPosition;
         }
 
+        void Awake()
+        {
+            _enemySystem = this.GetSystem<EnemySystem>();
+            _levelSystem = this.GetSystem<LevelSystem>();
+        }
+
         void Start()
         {
-            LoadConfig();
-            if (_spawnGroupConfig == null) return;
+            LoadConfig(this.GetModel<LevelModel>().CurrentWave.EnemySpawnGroupID);
+            if (_spawnGroupConfig != null)
+            {
+                StartSpawning();
+            }
 
-            StartSpawning();
+            this.RegisterEvent<LevelWaveStartEvent>(OnLevelWaveStart);
+        }
+
+        void OnLevelWaveStart(LevelWaveStartEvent e)
+        {
+            LoadConfig(e.LevelWave.EnemySpawnGroupID);
+            if (_spawnGroupConfig != null)
+            {
+                StartSpawning();
+            }
         }
 
         void OnDestroy()

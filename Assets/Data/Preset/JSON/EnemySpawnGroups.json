@@ -1,8 +1,8 @@
 [
   {
-    "ID": "basic_spawn_group",
-    "Name": "基础敌人生成组",
-    "Description": "平衡的多种敌人生成配置",
+    "ID": "group_1",
+    "Name": "单个敌人生成组",
+    "Description": "",
     "TotalMaxCount": 20,
     "MinDistance": 5.0,
     "MaxDistance": 10.0,
@@ -13,7 +13,27 @@
         "GenerateStartTime": 0.0,
         "GenerateStartWave": 1,
         "GenerateGap": 3.0,
-        "GenerateCount": 3
+        "GenerateCount": 3,
+        "MaxCount": 20
+      }
+    ]
+  },
+  {
+    "ID": "group_2",
+    "Name": "两种敌人生成组",
+    "Description": "",
+    "TotalMaxCount": 30,
+    "MinDistance": 5.0,
+    "MaxDistance": 10.0,
+    "EnemyEntries": [
+      {
+        "EnemyID": "basic_enemy",
+        "Description": null,
+        "GenerateStartTime": 0.0,
+        "GenerateStartWave": 1,
+        "GenerateGap": 3.0,
+        "GenerateCount": 3,
+        "MaxCount": 15
       },
       {
         "EnemyID": "fast_enemy",
@@ -21,7 +41,36 @@
         "GenerateStartTime": 0.0,
         "GenerateStartWave": 1,
         "GenerateGap": 2.0,
-        "GenerateCount": 1
+        "GenerateCount": 1,
+        "MaxCount": 15
+      }
+    ]
+  },
+  {
+    "ID": "group_3",
+    "Name": "三种敌人生成组",
+    "Description": "",
+    "TotalMaxCount": 40,
+    "MinDistance": 5.0,
+    "MaxDistance": 10.0,
+    "EnemyEntries": [
+      {
+        "EnemyID": "basic_enemy",
+        "Description": null,
+        "GenerateStartTime": 0.0,
+        "GenerateStartWave": 1,
+        "GenerateGap": 3.0,
+        "GenerateCount": 3,
+        "MaxCount": 15
+      },
+      {
+        "EnemyID": "fast_enemy",
+        "Description": null,
+        "GenerateStartTime": 0.0,
+        "GenerateStartWave": 1,
+        "GenerateGap": 2.0,
+        "GenerateCount": 1,
+        "MaxCount": 15
       },
       {
         "EnemyID": "tank_enemy",
@@ -29,7 +78,45 @@
         "GenerateStartTime": 0.0,
         "GenerateStartWave": 1,
         "GenerateGap": 5.0,
-        "GenerateCount": 1
+        "GenerateCount": 1,
+        "MaxCount": 10
+      }
+    ]
+  },
+  {
+    "ID": "group_4",
+    "Name": "四种敌人生成组",
+    "Description": "",
+    "TotalMaxCount": 50,
+    "MinDistance": 5.0,
+    "MaxDistance": 10.0,
+    "EnemyEntries": [
+      {
+        "EnemyID": "basic_enemy",
+        "Description": null,
+        "GenerateStartTime": 0.0,
+        "GenerateStartWave": 1,
+        "GenerateGap": 3.0,
+        "GenerateCount": 3,
+        "MaxCount": 15
+      },
+      {
+        "EnemyID": "fast_enemy",
+        "Description": null,
+        "GenerateStartTime": 0.0,
+        "GenerateStartWave": 1,
+        "GenerateGap": 2.0,
+        "GenerateCount": 1,
+        "MaxCount": 15
+      },
+      {
+        "EnemyID": "tank_enemy",
+        "Description": null,
+        "GenerateStartTime": 0.0,
+        "GenerateStartWave": 1,
+        "GenerateGap": 5.0,
+        "GenerateCount": 1,
+        "MaxCount": 10
       },
       {
         "EnemyID": "boss_enemy",
@@ -37,7 +124,8 @@
         "GenerateStartTime": 0.0,
         "GenerateStartWave": 1,
         "GenerateGap": 10.0,
-        "GenerateCount": 1
+        "GenerateCount": 1,
+        "MaxCount": 10
       }
     ]
   }
