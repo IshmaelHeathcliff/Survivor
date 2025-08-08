@@ -3,7 +3,7 @@
     "ID": "group_1",
     "Name": "单个敌人生成组",
     "Description": "",
-    "TotalMaxCount": 20,
+    "TotalMaxCount": 100,
     "MinDistance": 5.0,
     "MaxDistance": 10.0,
     "EnemyEntries": [
@@ -22,7 +22,7 @@
     "ID": "group_2",
     "Name": "两种敌人生成组",
     "Description": "",
-    "TotalMaxCount": 30,
+    "TotalMaxCount": 100,
     "MinDistance": 5.0,
     "MaxDistance": 10.0,
     "EnemyEntries": [
@@ -50,7 +50,7 @@
     "ID": "group_3",
     "Name": "三种敌人生成组",
     "Description": "",
-    "TotalMaxCount": 40,
+    "TotalMaxCount": 100,
     "MinDistance": 5.0,
     "MaxDistance": 10.0,
     "EnemyEntries": [
@@ -87,7 +87,7 @@
     "ID": "group_4",
     "Name": "四种敌人生成组",
     "Description": "",
-    "TotalMaxCount": 50,
+    "TotalMaxCount": 100,
     "MinDistance": 5.0,
     "MaxDistance": 10.0,
     "EnemyEntries": [

@@ -10,17 +10,5 @@
     "Name": "杀敌木头奖励",
     "Type": 0,
     "Description": null
-  },
-  {
-    "ID": "HealthIncreasePerWave",
-    "Name": "每波生命增加",
-    "Type": 0,
-    "Description": null
-  },
-  {
-    "ID": "DamageIncreasePerWave",
-    "Name": "每波伤害增加",
-    "Type": 0,
-    "Description": null
   }
 ]

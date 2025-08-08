@@ -57,7 +57,6 @@ public class GameManager : MonoBehaviour, IController
     void Start()
     {
         _playerModel = this.GetModel<PlayersModel>().Current;
-        _playerModel.Stats.GetStat("WoodGain").BaseValue = 1;
         // Debug.Log("Game Start");
     }
 

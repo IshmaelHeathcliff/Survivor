@@ -27,7 +27,7 @@ MonoBehaviour:
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
-      Data: 4
+      Data: 2
     - Name: 
       Entry: 7
       Data: 1|XYZRPGSystem.Data.Config.StatConfig, Assembly-CSharp
@@ -37,18 +37,6 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 2|XYZRPGSystem.Data.Config.StatConfig, Assembly-CSharp
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 3|XYZRPGSystem.Data.Config.StatConfig, Assembly-CSharp
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 4|XYZRPGSystem.Data.Config.StatConfig, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 

@@ -1,7 +1,7 @@
-﻿using XYZRPGSystem.Core;
+﻿using Gameplay.Character.Player;
+
+using XYZRPGSystem.Core;
 using XYZRPGSystem.Gameplay;
-using Gameplay.Character.Player;
-using Gameplay.Item;
 using XYZRPGSystem.Gameplay.Damage;
 using XYZRPGSystem.Gameplay.Item;
 
@@ -10,7 +10,6 @@ namespace Gameplay.Character.Enemy
     public class EnemyDamageable : Damageable
     {
         FSM<EnemyStateID> _fsm;
-        DropSystem _dropSystem;
 
         protected override void OnInit()
         {
@@ -18,7 +17,6 @@ namespace Gameplay.Character.Enemy
             OnHurt = new EasyEvent();
             OnDeath = new EasyEvent();
             _fsm = (CharacterController as IHasFSM<EnemyStateID>)?.FSM;
-            _dropSystem = this.GetSystem<DropSystem>();
         }
 
 
@@ -53,8 +51,15 @@ namespace Gameplay.Character.Enemy
             PlayerModel playerModel = this.GetModel<PlayersModel>().Current;
             this.GetSystem<CountSystem>().IncrementKillCount(playerModel, 1);
 
-            this.GetSystem<ResourceSystem>().AcquireResource("Coin", (int)playerModel.Stats.GetStat("CoinOnKill").Value, playerModel);
-            this.GetSystem<ResourceSystem>().AcquireResource("Wood", (int)playerModel.Stats.GetStat("WoodOnKill").Value, playerModel);
+            ResourceSystem _resourceSystem = this.GetSystem<ResourceSystem>();
+
+            // 玩家击杀奖励
+            _resourceSystem.AcquireResource("Coin", (int)playerModel.Stats.GetStat("CoinOnKill").Value, playerModel);
+            _resourceSystem.AcquireResource("Wood", (int)playerModel.Stats.GetStat("WoodOnKill").Value, playerModel);
+
+            // 敌人死亡奖励
+            _resourceSystem.AcquireResource("Coin", (int)CharacterController.CharacterStats.GetStat("CoinOnDead").Value, playerModel);
+            _resourceSystem.AcquireResource("Wood", (int)CharacterController.CharacterStats.GetStat("WoodOnDead").Value, playerModel);
         }
     }
 }

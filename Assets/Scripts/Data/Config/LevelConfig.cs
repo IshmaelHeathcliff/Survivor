@@ -45,7 +45,7 @@ namespace Data.Config
         [BoxGroup("敌人生成配置")]
         [ShowInInspector] public float EnemyDamageMultiplier { get; set; } = 1.0f;
         [BoxGroup("敌人生成配置")]
-        [ShowInInspector] public int MaxEnemyCount { get; set; } = 100;
+        [ShowInInspector] public float EnemyMaxCountMultiplier { get; set; } = 1.0f;
 
         [BoxGroup("技能抽取概率配置")]
         [ShowInInspector] public List<SkillRarityWeight> SkillRarityWeights { get; set; } = new List<SkillRarityWeight>();

@@ -45,7 +45,7 @@ namespace Gameplay.Level
                     EnemySpawnRateMultiplier = waveConfig.EnemySpawnRateMultiplier,
                     EnemyHealthMultiplier = waveConfig.EnemyHealthMultiplier,
                     EnemyDamageMultiplier = waveConfig.EnemyDamageMultiplier,
-                    MaxEnemyCount = waveConfig.MaxEnemyCount,
+                    EnemyMaxCountMultiplier = waveConfig.EnemyMaxCountMultiplier,
                     SkillRarityWeights = waveConfig.SkillRarityWeights,
                     Rewards = waveConfig.Rewards,
                     Duration = waveConfig.Duration,
@@ -85,7 +85,7 @@ namespace Gameplay.Level
         public float EnemySpawnRateMultiplier { get; set; } = 1.0f;
         public float EnemyHealthMultiplier { get; set; } = 1.0f;
         public float EnemyDamageMultiplier { get; set; } = 1.0f;
-        public int MaxEnemyCount { get; set; } = 100;
+        public float EnemyMaxCountMultiplier { get; set; } = 1.0f;
 
         public List<SkillRarityWeight> SkillRarityWeights { get; set; } = new List<SkillRarityWeight>();
 
