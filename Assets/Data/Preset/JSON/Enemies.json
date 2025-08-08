@@ -13,9 +13,9 @@
     "AttackRange": 4.0,
     "CooldownInverse": 1.0,
     "CoinOnDead": 1,
-    "WoodOnDead": 0,
-    "HealthIncreasePerWave": 10.0,
-    "DamageIncreasePerWave": 1.0,
+    "WoodOnDead": 1,
+    "HealthIncreasePerWave": 2.0,
+    "DamageIncreasePerWave": 0.0,
     "SkillIDs": [
       "chase"
     ]
@@ -33,10 +33,10 @@
     "AttackArea": 1.0,
     "AttackRange": 4.0,
     "CooldownInverse": 1.0,
-    "CoinOnDead": 1,
-    "WoodOnDead": 0,
-    "HealthIncreasePerWave": 10.0,
-    "DamageIncreasePerWave": 1.0,
+    "CoinOnDead": 2,
+    "WoodOnDead": 2,
+    "HealthIncreasePerWave": 2.0,
+    "DamageIncreasePerWave": 0.0,
     "SkillIDs": [
       "chase"
     ]
@@ -54,10 +54,10 @@
     "AttackArea": 1.0,
     "AttackRange": 8.0,
     "CooldownInverse": 1.0,
-    "CoinOnDead": 1,
-    "WoodOnDead": 0,
-    "HealthIncreasePerWave": 10.0,
-    "DamageIncreasePerWave": 1.0,
+    "CoinOnDead": 3,
+    "WoodOnDead": 3,
+    "HealthIncreasePerWave": 2.0,
+    "DamageIncreasePerWave": 0.0,
     "SkillIDs": [
       "throw_stone"
     ]
@@ -75,10 +75,10 @@
     "AttackArea": 1.0,
     "AttackRange": 4.0,
     "CooldownInverse": 1.0,
-    "CoinOnDead": 1,
-    "WoodOnDead": 0,
-    "HealthIncreasePerWave": 10.0,
-    "DamageIncreasePerWave": 1.0,
+    "CoinOnDead": 5,
+    "WoodOnDead": 5,
+    "HealthIncreasePerWave": 2.0,
+    "DamageIncreasePerWave": 0.0,
     "SkillIDs": [
       "dash"
     ]

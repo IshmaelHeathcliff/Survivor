@@ -13,7 +13,7 @@
         "EnemySpawnRateMultiplier": 1.0,
         "EnemyHealthMultiplier": 1.0,
         "EnemyDamageMultiplier": 1.0,
-        "MaxEnemyCount": 80,
+        "EnemyMaxCountMultiplier": 1.0,
         "SkillRarityWeights": [
           {
             "Rarity": 0,
@@ -40,10 +40,10 @@
       {
         "WaveNumber": 2,
         "EnemySpawnGroupID": "group_2",
-        "EnemySpawnRateMultiplier": 1.1,
-        "EnemyHealthMultiplier": 1.1,
+        "EnemySpawnRateMultiplier": 1.0,
+        "EnemyHealthMultiplier": 1.0,
         "EnemyDamageMultiplier": 1.0,
-        "MaxEnemyCount": 90,
+        "EnemyMaxCountMultiplier": 1.2,
         "SkillRarityWeights": [
           {
             "Rarity": 0,
@@ -70,10 +70,10 @@
       {
         "WaveNumber": 3,
         "EnemySpawnGroupID": "group_3",
-        "EnemySpawnRateMultiplier": 1.2,
-        "EnemyHealthMultiplier": 1.2,
-        "EnemyDamageMultiplier": 1.1,
-        "MaxEnemyCount": 100,
+        "EnemySpawnRateMultiplier": 1.0,
+        "EnemyHealthMultiplier": 1.0,
+        "EnemyDamageMultiplier": 1.0,
+        "EnemyMaxCountMultiplier": 1.2,
         "SkillRarityWeights": [
           {
             "Rarity": 0,
@@ -104,10 +104,10 @@
       {
         "WaveNumber": 4,
         "EnemySpawnGroupID": "group_3",
-        "EnemySpawnRateMultiplier": 1.3,
-        "EnemyHealthMultiplier": 1.3,
-        "EnemyDamageMultiplier": 1.1,
-        "MaxEnemyCount": 110,
+        "EnemySpawnRateMultiplier": 1.0,
+        "EnemyHealthMultiplier": 1.0,
+        "EnemyDamageMultiplier": 1.0,
+        "EnemyMaxCountMultiplier": 1.2,
         "SkillRarityWeights": [
           {
             "Rarity": 0,
@@ -138,10 +138,10 @@
       {
         "WaveNumber": 5,
         "EnemySpawnGroupID": "group_4",
-        "EnemySpawnRateMultiplier": 1.4,
-        "EnemyHealthMultiplier": 1.4,
-        "EnemyDamageMultiplier": 1.2,
-        "MaxEnemyCount": 120,
+        "EnemySpawnRateMultiplier": 1.0,
+        "EnemyHealthMultiplier": 1.0,
+        "EnemyDamageMultiplier": 1.0,
+        "EnemyMaxCountMultiplier": 1.4,
         "SkillRarityWeights": [
           {
             "Rarity": 0,
@@ -172,10 +172,10 @@
       {
         "WaveNumber": 6,
         "EnemySpawnGroupID": "group_4",
-        "EnemySpawnRateMultiplier": 1.5,
-        "EnemyHealthMultiplier": 1.5,
-        "EnemyDamageMultiplier": 1.2,
-        "MaxEnemyCount": 130,
+        "EnemySpawnRateMultiplier": 1.0,
+        "EnemyHealthMultiplier": 1.0,
+        "EnemyDamageMultiplier": 1.0,
+        "EnemyMaxCountMultiplier": 1.4,
         "SkillRarityWeights": [
           {
             "Rarity": 0,
@@ -206,10 +206,10 @@
       {
         "WaveNumber": 7,
         "EnemySpawnGroupID": "group_4",
-        "EnemySpawnRateMultiplier": 1.6,
-        "EnemyHealthMultiplier": 1.6,
-        "EnemyDamageMultiplier": 1.3,
-        "MaxEnemyCount": 140,
+        "EnemySpawnRateMultiplier": 1.0,
+        "EnemyHealthMultiplier": 1.0,
+        "EnemyDamageMultiplier": 1.0,
+        "EnemyMaxCountMultiplier": 1.4,
         "SkillRarityWeights": [
           {
             "Rarity": 0,
@@ -240,10 +240,10 @@
       {
         "WaveNumber": 8,
         "EnemySpawnGroupID": "group_4",
-        "EnemySpawnRateMultiplier": 1.7,
-        "EnemyHealthMultiplier": 1.7,
-        "EnemyDamageMultiplier": 1.3,
-        "MaxEnemyCount": 150,
+        "EnemySpawnRateMultiplier": 1.0,
+        "EnemyHealthMultiplier": 1.0,
+        "EnemyDamageMultiplier": 1.0,
+        "EnemyMaxCountMultiplier": 1.6,
         "SkillRarityWeights": [
           {
             "Rarity": 0,
@@ -274,10 +274,10 @@
       {
         "WaveNumber": 9,
         "EnemySpawnGroupID": "group_4",
-        "EnemySpawnRateMultiplier": 1.8,
-        "EnemyHealthMultiplier": 1.8,
-        "EnemyDamageMultiplier": 1.4,
-        "MaxEnemyCount": 160,
+        "EnemySpawnRateMultiplier": 1.0,
+        "EnemyHealthMultiplier": 1.0,
+        "EnemyDamageMultiplier": 1.0,
+        "EnemyMaxCountMultiplier": 1.6,
         "SkillRarityWeights": [
           {
             "Rarity": 0,
@@ -308,10 +308,10 @@
       {
         "WaveNumber": 10,
         "EnemySpawnGroupID": "group_4",
-        "EnemySpawnRateMultiplier": 1.9,
-        "EnemyHealthMultiplier": 1.9,
-        "EnemyDamageMultiplier": 1.4,
-        "MaxEnemyCount": 170,
+        "EnemySpawnRateMultiplier": 1.0,
+        "EnemyHealthMultiplier": 1.0,
+        "EnemyDamageMultiplier": 1.0,
+        "EnemyMaxCountMultiplier": 1.6,
         "SkillRarityWeights": [
           {
             "Rarity": 0,
@@ -342,10 +342,10 @@
       {
         "WaveNumber": 11,
         "EnemySpawnGroupID": "group_4",
-        "EnemySpawnRateMultiplier": 2.0,
-        "EnemyHealthMultiplier": 2.0,
-        "EnemyDamageMultiplier": 1.5,
-        "MaxEnemyCount": 180,
+        "EnemySpawnRateMultiplier": 1.0,
+        "EnemyHealthMultiplier": 1.0,
+        "EnemyDamageMultiplier": 1.0,
+        "EnemyMaxCountMultiplier": 1.8,
         "SkillRarityWeights": [
           {
             "Rarity": 0,
@@ -376,10 +376,10 @@
       {
         "WaveNumber": 12,
         "EnemySpawnGroupID": "group_4",
-        "EnemySpawnRateMultiplier": 2.1,
-        "EnemyHealthMultiplier": 2.1,
-        "EnemyDamageMultiplier": 1.5,
-        "MaxEnemyCount": 190,
+        "EnemySpawnRateMultiplier": 1.0,
+        "EnemyHealthMultiplier": 1.0,
+        "EnemyDamageMultiplier": 1.0,
+        "EnemyMaxCountMultiplier": 1.8,
         "SkillRarityWeights": [
           {
             "Rarity": 0,
@@ -414,10 +414,10 @@
       {
         "WaveNumber": 13,
         "EnemySpawnGroupID": "group_4",
-        "EnemySpawnRateMultiplier": 2.2,
-        "EnemyHealthMultiplier": 2.2,
-        "EnemyDamageMultiplier": 1.6,
-        "MaxEnemyCount": 200,
+        "EnemySpawnRateMultiplier": 1.0,
+        "EnemyHealthMultiplier": 1.0,
+        "EnemyDamageMultiplier": 1.0,
+        "EnemyMaxCountMultiplier": 1.8,
         "SkillRarityWeights": [
           {
             "Rarity": 0,
@@ -452,10 +452,10 @@
       {
         "WaveNumber": 14,
         "EnemySpawnGroupID": "group_4",
-        "EnemySpawnRateMultiplier": 2.3,
-        "EnemyHealthMultiplier": 2.3,
-        "EnemyDamageMultiplier": 1.6,
-        "MaxEnemyCount": 210,
+        "EnemySpawnRateMultiplier": 1.0,
+        "EnemyHealthMultiplier": 1.0,
+        "EnemyDamageMultiplier": 1.0,
+        "EnemyMaxCountMultiplier": 2.0,
         "SkillRarityWeights": [
           {
             "Rarity": 0,
@@ -470,7 +470,7 @@
             "Weight": 30
           },
           {
-            "Rarity": 0,
+            "Rarity": 3,
             "Weight": 15
           }
         ],
@@ -490,10 +490,10 @@
       {
         "WaveNumber": 15,
         "EnemySpawnGroupID": "group_4",
-        "EnemySpawnRateMultiplier": 2.5,
-        "EnemyHealthMultiplier": 2.5,
-        "EnemyDamageMultiplier": 1.7,
-        "MaxEnemyCount": 220,
+        "EnemySpawnRateMultiplier": 1.0,
+        "EnemyHealthMultiplier": 1.0,
+        "EnemyDamageMultiplier": 1.0,
+        "EnemyMaxCountMultiplier": 2.0,
         "SkillRarityWeights": [
           {
             "Rarity": 0,

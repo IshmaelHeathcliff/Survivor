@@ -27,6 +27,7 @@ namespace Gameplay.Character.Enemy
 
         EnemySystem _enemySystem;
         LevelSystem _levelSystem;
+        LevelModel _levelModel;
 
         void LoadConfig(string spawnGroupID)
         {
@@ -83,7 +84,7 @@ namespace Gameplay.Character.Enemy
             obj.transform.position = position;
 
             // 初始化敌人属性
-            InitializeEnemyStats(obj, enemyID);
+            InitializeEnemy(obj, enemyID);
 
             await UniTask.DelayFrame(2, cancellationToken: ct);
 
@@ -95,9 +96,9 @@ namespace Gameplay.Character.Enemy
         }
 
         /// <summary>
-        /// 根据配置初始化敌人属性
+        /// 根据配置初始化敌人
         /// </summary>
-        void InitializeEnemyStats(GameObject enemyObj, string enemyID)
+        void InitializeEnemy(GameObject enemyObj, string enemyID)
         {
             if (!_enemyConfigs.TryGetValue(enemyID, out EnemyConfig enemyConfig))
             {
@@ -115,18 +116,23 @@ namespace Gameplay.Character.Enemy
             // 初始化控制器
             enemyController.Init();
 
+            (enemyController.CharacterModel as EnemyModel).EnemyID = enemyID;
+
+            LevelWave wave = _levelModel.CurrentWave;
+
+            float health = (enemyConfig.Health + enemyConfig.HealthIncreasePerWave * (wave.WaveNumber - 1)) * wave.EnemyHealthMultiplier;
+            float damage = (enemyConfig.Damage + enemyConfig.DamageIncreasePerWave * (wave.WaveNumber - 1)) * wave.EnemyDamageMultiplier;
+
             // 设置基础属性
-            enemyController.SetConsumableStat("Health", enemyConfig.Health, true);
+            enemyController.SetConsumableStat("Health", health, true);
             enemyController.SetStat("HealthRegen", enemyConfig.HealthRegen);
             enemyController.SetStat("MoveSpeed", enemyConfig.MoveSpeed);
-            enemyController.SetStat("Damage", enemyConfig.Damage);
+            enemyController.SetStat("Damage", damage);
             enemyController.SetStat("CooldownInverse", enemyConfig.CooldownInverse);
             enemyController.SetStat("AttackSpeed", enemyConfig.AttackSpeed);
             enemyController.SetStat("AttackRange", enemyConfig.AttackRange);
             enemyController.SetStat("CoinOnDead", enemyConfig.CoinOnDead);
             enemyController.SetStat("WoodOnDead", enemyConfig.WoodOnDead);
-            enemyController.SetStat("HealthIncreasePerWave", enemyConfig.HealthIncreasePerWave);
-            enemyController.SetStat("DamageIncreasePerWave", enemyConfig.DamageIncreasePerWave);
         }
 
         /// <summary>
@@ -138,20 +144,28 @@ namespace Gameplay.Character.Enemy
             float generateGap = spawnEntry.GenerateGap;
             int generateCount = spawnEntry.GenerateCount;
 
+            float spawnRateMultiplier = _levelModel.CurrentWave.EnemySpawnRateMultiplier;
+            if (spawnRateMultiplier > 0)
+            {
+                generateGap /= spawnRateMultiplier;
+            }
+
+
             try
             {
                 while (true)
                 {
                     ct.ThrowIfCancellationRequested();
 
-                    if (this.GetModel<EnemiesModel>().GetCount() < _spawnGroupConfig.TotalMaxCount)
-                    {
-                        // 生成指定数量的敌人
-                        for (int i = 0; i < generateCount; i++)
+                    if (this.GetModel<EnemiesModel>().GetCount() < _spawnGroupConfig.TotalMaxCount &&
+                            this.GetModel<EnemiesModel>().GetCountByEnemyID(spawnEntry.EnemyID) < spawnEntry.MaxCount * _levelModel.CurrentWave.EnemyMaxCountMultiplier)
                         {
-                            await CreateEnemy(spawnEntry, GetRandomPosition(), ct);
+                            // 生成指定数量的敌人
+                            for (int i = 0; i < generateCount; i++)
+                            {
+                                await CreateEnemy(spawnEntry, GetRandomPosition(), ct);
+                            }
                         }
-                    }
 
                     // 等待下次生成
                     await UniTask.Delay((int)(generateGap * 1000), cancellationToken: ct);
@@ -267,6 +281,7 @@ namespace Gameplay.Character.Enemy
         {
             _enemySystem = this.GetSystem<EnemySystem>();
             _levelSystem = this.GetSystem<LevelSystem>();
+            _levelModel = this.GetModel<LevelModel>();
         }
 
         void Start()
