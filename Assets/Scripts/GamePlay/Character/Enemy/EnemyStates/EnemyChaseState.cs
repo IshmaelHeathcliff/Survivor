@@ -1,5 +1,7 @@
 ﻿using XYZRPGSystem.Core;
 using Cysharp.Threading.Tasks;
+using System.Threading;
+using System;
 
 namespace Gameplay.Character.Enemy
 {
@@ -10,8 +12,7 @@ namespace Gameplay.Character.Enemy
         }
 
         float _attackRange;
-
-
+        CancellationTokenSource _cts;
 
         void CheckPlayer()
         {
@@ -28,13 +29,16 @@ namespace Gameplay.Character.Enemy
 
         protected override void OnEnter()
         {
-            MoveController.PlayAnimation(EnemyMoveController.Chase).Forget();
             _attackRange = Target.CharacterModel.Stats.GetStat("AttackRange").Value;
 
-        }
-
-        protected override void OnUpdate()
-        {
+            _cts = GlobalCancellation.GetCombinedTokenSource(MoveController);
+            try
+            {
+                MoveController.PlayAnimation(EnemyMoveController.Chase, _cts.Token).Forget();
+            }
+            catch (OperationCanceledException)
+            {
+            }
         }
 
         protected override void OnFixedUpdate()
@@ -42,6 +46,13 @@ namespace Gameplay.Character.Enemy
             MoveController.FindPlayer();
             MoveController.Move();
             CheckPlayer();
+        }
+
+        protected override void OnExit()
+        {
+            _cts?.Cancel();
+            _cts?.Dispose();
+            _cts = null;
         }
     }
 }

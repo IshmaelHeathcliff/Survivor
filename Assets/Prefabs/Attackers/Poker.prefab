@@ -54,19 +54,19 @@ PrefabInstance:
       objectReference: {fileID: 7209244637907178434, guid: 5a27cd3bfb112fb4189dc1123b967c40, type: 3}
     - target: {fileID: 3410946234023945421, guid: d3a78b04d8c98504f929e408d6bfa054, type: 3}
       propertyPath: m_Radius
-      value: 0.48359665
+      value: 0.32453012
       objectReference: {fileID: 0}
     - target: {fileID: 3410946234023945421, guid: d3a78b04d8c98504f929e408d6bfa054, type: 3}
       propertyPath: m_Offset.x
-      value: 0.008919805
+      value: 0.008919716
       objectReference: {fileID: 0}
     - target: {fileID: 3410946234023945421, guid: d3a78b04d8c98504f929e408d6bfa054, type: 3}
       propertyPath: m_Offset.y
-      value: 0.3362016
+      value: 0.0036078691
       objectReference: {fileID: 0}
     - target: {fileID: 4805364672990420536, guid: d3a78b04d8c98504f929e408d6bfa054, type: 3}
       propertyPath: m_Name
-      value: Poker 1
+      value: Poker
       objectReference: {fileID: 0}
     - target: {fileID: 7352825043378018076, guid: d3a78b04d8c98504f929e408d6bfa054, type: 3}
       propertyPath: _collisionRadius

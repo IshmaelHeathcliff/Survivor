@@ -16,16 +16,7 @@
         "com.unity.nuget.newtonsoft-json": "3.2.1",
         "com.unity.nuget.mono-cecil": "1.11.4"
       },
-      "hash": "41cea8e4958084e43e1bbb957a177dcc51698ac7"
-    },
-    "com.justinpbarnett.unity-mcp": {
-      "version": "https://github.com/justinpbarnett/unity-mcp.git?path=/UnityMcpBridge",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {
-        "com.unity.nuget.newtonsoft-json": "3.0.2"
-      },
-      "hash": "9ff89886acb84d84a57ac116858677ff171cd8f3"
+      "hash": "d11b1a7779d58373f11ac75011910c051144a118"
     },
     "com.unity.2d.animation": {
       "version": "10.1.4",

@@ -1,5 +1,7 @@
 ﻿using XYZRPGSystem.Core;
 using Cysharp.Threading.Tasks;
+using System.Threading;
+using System;
 namespace Gameplay.Character.Enemy
 {
     public class EnemyHurtState : EnemyState
@@ -7,6 +9,8 @@ namespace Gameplay.Character.Enemy
         public EnemyHurtState(FSM<EnemyStateID> fsm, EnemyController target) : base(fsm, target)
         {
         }
+
+        CancellationTokenSource _cts;
 
         protected override bool OnCondition()
         {
@@ -24,8 +28,15 @@ namespace Gameplay.Character.Enemy
             }
             else
             {
-                await MoveController.PlayAnimation(EnemyMoveController.Hurt);
-                FSM.ChangeState(EnemyStateID.Idle);
+                _cts = GlobalCancellation.GetCombinedTokenSource(MoveController);
+                try
+                {
+                    await MoveController.PlayAnimation(EnemyMoveController.Hurt, _cts.Token);
+                    FSM.ChangeState(EnemyStateID.Idle);
+                }
+                catch (OperationCanceledException)
+                {
+                }
             }
 
         }
@@ -33,6 +44,9 @@ namespace Gameplay.Character.Enemy
         protected override void OnExit()
         {
             Target.Damageable.IsDamageable = true;
+            _cts?.Cancel();
+            _cts?.Dispose();
+            _cts = null;
         }
     }
 }

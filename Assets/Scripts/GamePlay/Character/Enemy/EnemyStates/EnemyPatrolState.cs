@@ -1,12 +1,16 @@
-﻿using XYZRPGSystem.Core;
+﻿using System;
+using XYZRPGSystem.Core;
 using Cysharp.Threading.Tasks;
+using System.Threading;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Gameplay.Character.Enemy
 {
     public class EnemyPatrolState : EnemyState
     {
-        bool _quitting;
+        CancellationTokenSource _cts;
+
         public EnemyPatrolState(FSM<EnemyStateID> fsm, EnemyController target) : base(fsm, target)
         {
         }
@@ -18,9 +22,15 @@ namespace Gameplay.Character.Enemy
 
         protected override void OnEnter()
         {
-            _quitting = false;
-            MoveController.PlayAnimation(EnemyMoveController.Patrol).Forget();
-            ChangeDirection().Forget();
+            _cts = GlobalCancellation.GetCombinedTokenSource(MoveController);
+            try
+            {
+                MoveController.PlayAnimation(EnemyMoveController.Patrol, _cts.Token).Forget();
+                ChangeDirection().Forget();
+            }
+            catch (OperationCanceledException)
+            {
+            }
         }
 
         protected override void OnUpdate()
@@ -40,7 +50,9 @@ namespace Gameplay.Character.Enemy
 
         protected override void OnExit()
         {
-            _quitting = true;
+            _cts?.Cancel();
+            _cts?.Dispose();
+            _cts = null;
         }
 
         Vector2 RandomDirection()
@@ -52,10 +64,10 @@ namespace Gameplay.Character.Enemy
 
         async UniTaskVoid ChangeDirection()
         {
-            while (!_quitting)
+            while (true)
             {
                 MoveController.Face(RandomDirection());
-                await UniTask.Delay((int)(Random.Range(1f, 3f) * 1000));
+                await UniTask.Delay((int)(Random.Range(1f, 3f) * 1000), cancellationToken: _cts.Token);
             }
         }
     }
