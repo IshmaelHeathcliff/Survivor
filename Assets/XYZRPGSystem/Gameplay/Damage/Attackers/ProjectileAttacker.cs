@@ -17,12 +17,12 @@ namespace XYZRPGSystem.Gameplay.Damage.Attackers
         IStat ProjectileSpeed { get; }
     }
 
-    [RequireComponent(typeof(Collider2D), typeof(SpriteRenderer))]
+    [RequireComponent(typeof(Collider2D), typeof(SpriteRenderer), typeof(Rigidbody2D))]
     public class ProjectileAttacker : Attacker, IProjectileAttacker
     {
-        [SerializeField] float _collisionRadius = 1f;
         [SerializeField] float _rotateSpeed;
         [SerializeField] float _randomDirectionFactor = 0.5f;
+        [SerializeField] float _directionChangeSpeed = 10f;
 
         ProjectileAttackSkill ProjectileAttackSkill => AttackSkill as ProjectileAttackSkill;
 
@@ -47,14 +47,21 @@ namespace XYZRPGSystem.Gameplay.Damage.Attackers
 
         bool _isTargetLocked;
         bool _isReturning;
-        bool _isFreeze;
-
 
         void Awake()
         {
             _collider = GetComponent<Collider2D>();
             _rigidbody = GetComponent<Rigidbody2D>();
             _renderer = GetComponent<SpriteRenderer>();
+        }
+
+        void Update()
+        {
+            if(Target != null && _isTargetLocked)
+            {
+                Debug.DrawLine(transform.position, Target.position, Color.red);
+            }
+
         }
 
         public override void SetSkill(AttackSkill skill)
@@ -66,6 +73,8 @@ namespace XYZRPGSystem.Gameplay.Damage.Attackers
                 _chainLeft = (int)projectileAttackSkill.ChainCount.Value;
                 _isTargetLocked = projectileAttackSkill.IsTargetLocked;
             }
+
+            _collider.enabled = true;
         }
 
         void ResetDuration()
@@ -84,22 +93,24 @@ namespace XYZRPGSystem.Gameplay.Damage.Attackers
 
             if (_isTargetLocked && Target != null && !Target.GetComponentInChildren<Damageable>().Equals(damageable))
             {
-                // Debug.Log("not target");
                 return;
             }
 
             if (!damageable.IsDamageable && Target != null && Target.GetComponentInChildren<Damageable>().Equals(damageable))
             {
+                _damaged.Add(damageable.ID);
+                // Debug.Log("target not damageable", this);
                 FindNewTarget();
                 return;
             }
 
             if (_damaged.Contains(damageable.ID)) // 不能对同一个敌人造成多次伤害
             {
-                // Debug.Log("already damaged");
+                Debug.Log("already damaged", this);
                 return;
             }
 
+            Target = damageable.transform;
             ApplyDamage(damageable);
         }
 
@@ -175,50 +186,32 @@ namespace XYZRPGSystem.Gameplay.Damage.Attackers
 
         bool FindNewTarget()
         {
-            Target = this.GetSystem<PositionQuerySystem>().QueryClosest(TargetTag, transform.position, _damaged);
-            if (Target == null)
+            Transform closest = this.GetSystem<PositionQuerySystem>().QueryClosest(TargetTag, transform.position, _damaged);
+
+            Damageable damageable = closest?.GetComponentInChildren<Damageable>();
+            if (damageable == null)
             {
-                Cancel();
-                return false;
+                Target = damageable.Transform;
+                return true;
             }
 
-            return true;
+            Cancel();
+            return false;
         }
 
         void Move()
         {
-            if (_isFreeze)
-            {
-                return;
-            }
-
             if (_isTargetLocked)
             {
                 if (Target == null)
                 {
-                    Target = this.GetSystem<PositionQuerySystem>().QueryClosest(TargetTag, transform.position, _damaged);
-                    if (Target == null)
+                    if (!FindNewTarget())
                     {
-                        Cancel();
                         return;
                     }
                 }
 
-                Direction = ((Vector2)(Target.position - transform.position)).normalized;
-                if ((transform.position - Target.position).sqrMagnitude > _collisionRadius * _collisionRadius)
-                {
-                    if (_collider.enabled)
-                    {
-                        _collider.enabled = false;
-                    }
-                }
-                else
-                {
-                    if (!_collider.enabled)
-                    {
-                        _collider.enabled = true;
-                    }
-                }
+                Direction = Vector2.Lerp(Direction, ((Vector2)(Target.position - transform.position)).normalized, _directionChangeSpeed * Time.fixedDeltaTime);
             }
 
             _rigidbody.MovePosition(_rigidbody.position + ProjectileSpeed.Value * Time.fixedDeltaTime * Direction);
@@ -295,7 +288,10 @@ namespace XYZRPGSystem.Gameplay.Damage.Attackers
 
         public override void Cancel()
         {
-            _cts.Cancel();
+            _cts?.Cancel();
+            _cts?.Dispose();
+            _cts = null;
+
             AttackerController?.RemoveAttacker(this);
         }
     }

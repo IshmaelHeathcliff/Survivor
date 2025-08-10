@@ -59,37 +59,21 @@ namespace XYZRPGSystem.Gameplay.Character
 
         }
 
-        public async UniTask PlayAnimation(string stateName)
+        public async UniTask PlayAnimation(string stateName, CancellationToken cancellationToken)
         {
-            try
-            {
-                CancellationTokenSource cts = GlobalCancellation.GetCombinedTokenSource(this);
-
-                Animator.Play(stateName);
-                await UniTask.Yield(PlayerLoopTiming.FixedUpdate, cancellationToken: cts.Token);
-                Animator.Update(0f);
-                await UniTask.WaitUntil(() => Animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f, cancellationToken: cts.Token);
-            }
-            catch (OperationCanceledException)
-            {
-            }
+            Animator.Play(stateName);
+            await UniTask.Yield(PlayerLoopTiming.FixedUpdate, cancellationToken);
+            Animator.Update(0f);
+            await UniTask.WaitUntil(() => Animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f, cancellationToken: cancellationToken);
         }
 
-        public async UniTask PlayAnimation(int stateNameHash)
+        public async UniTask PlayAnimation(int stateNameHash, CancellationToken cancellationToken)
         {
-            try
-            {
-                CancellationTokenSource cts = GlobalCancellation.GetCombinedTokenSource(this);
-
-                Animator.Play(stateNameHash);
-                await UniTask.Yield(PlayerLoopTiming.FixedUpdate, cancellationToken: cts.Token);
-                Animator.Update(0f);
-                AnimatorStateInfo stateInfo = Animator.GetCurrentAnimatorStateInfo(0);
-                await UniTask.Delay(TimeSpan.FromSeconds(stateInfo.length), cancellationToken: cts.Token);
-            }
-            catch (OperationCanceledException)
-            {
-            }
+            Animator.Play(stateNameHash);
+            await UniTask.Yield(PlayerLoopTiming.FixedUpdate, cancellationToken: cancellationToken);
+            Animator.Update(0f);
+            AnimatorStateInfo stateInfo = Animator.GetCurrentAnimatorStateInfo(0);
+            await UniTask.Delay(TimeSpan.FromSeconds(stateInfo.length), cancellationToken: cancellationToken);
         }
 
         public virtual void Face(Vector2 direction)

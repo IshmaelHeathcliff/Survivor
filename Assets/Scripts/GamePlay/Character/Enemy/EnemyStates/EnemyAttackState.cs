@@ -16,7 +16,7 @@ namespace Gameplay.Character.Enemy
         }
 
         EnemyAttackerController AttackerController { get; set; }
-        CancellationTokenSource _cts = new();
+        CancellationTokenSource _cts;
         ISkill _attackSkill;
 
         protected override bool OnCondition()
@@ -32,7 +32,7 @@ namespace Gameplay.Character.Enemy
 
             var attackSkills = Target.CharacterModel.SkillsInSlot.GetAllSkills().Where(x => x is AttackSkill).ToList();
 
-            _cts = new();
+            _cts = GlobalCancellation.GetCombinedTokenSource(AttackerController);
             try
             {
                 // 随机选择一个技能并使用
@@ -47,8 +47,7 @@ namespace Gameplay.Character.Enemy
                     Debug.Log($"[EnemyAttackState] 没有可用的攻击技能");
                 }
 
-                UniTask animationTask = MoveController.PlayAnimation(EnemyMoveController.Attack);
-                await UniTask.WhenAll(animationTask);
+                await MoveController.PlayAnimation(EnemyMoveController.Attack, _cts.Token);
                 FSM.ChangeState(EnemyStateID.Idle);
             }
             catch (OperationCanceledException)
@@ -61,8 +60,10 @@ namespace Gameplay.Character.Enemy
             AttackerController.CanAttack = false;
             _attackSkill?.Cancel();
             _attackSkill = null;
+
             _cts?.Cancel();
             _cts?.Dispose();
+            _cts = null;
         }
     }
 }

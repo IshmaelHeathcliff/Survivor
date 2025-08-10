@@ -1,5 +1,5 @@
 ﻿using Gameplay.Character.Player;
-
+using UnityEngine;
 using XYZRPGSystem.Core;
 using XYZRPGSystem.Gameplay;
 using XYZRPGSystem.Gameplay.Damage;
@@ -10,6 +10,7 @@ namespace Gameplay.Character.Enemy
     public class EnemyDamageable : Damageable
     {
         FSM<EnemyStateID> _fsm;
+        Collider2D _collider;
 
         protected override void OnInit()
         {
@@ -17,6 +18,7 @@ namespace Gameplay.Character.Enemy
             OnHurt = new EasyEvent();
             OnDeath = new EasyEvent();
             _fsm = (CharacterController as IHasFSM<EnemyStateID>)?.FSM;
+            _collider = GetComponent<Collider2D>();
         }
 
 
@@ -32,6 +34,8 @@ namespace Gameplay.Character.Enemy
         {
             if (!IsDamageable)
             {
+                // TODO 关注此处逻辑可能出现时的问题
+                // Debug.Log("Can't take damage", this);
                 return;
             }
 
@@ -51,15 +55,15 @@ namespace Gameplay.Character.Enemy
             PlayerModel playerModel = this.GetModel<PlayersModel>().Current;
             this.GetSystem<CountSystem>().IncrementKillCount(playerModel, 1);
 
-            ResourceSystem _resourceSystem = this.GetSystem<ResourceSystem>();
+            ResourceSystem resourceSystem = this.GetSystem<ResourceSystem>();
 
             // 玩家击杀奖励
-            _resourceSystem.AcquireResource("Coin", (int)playerModel.Stats.GetStat("CoinOnKill").Value, playerModel);
-            _resourceSystem.AcquireResource("Wood", (int)playerModel.Stats.GetStat("WoodOnKill").Value, playerModel);
+            resourceSystem.AcquireResource("Coin", (int)playerModel.Stats.GetStat("CoinOnKill").Value, playerModel);
+            resourceSystem.AcquireResource("Wood", (int)playerModel.Stats.GetStat("WoodOnKill").Value, playerModel);
 
             // 敌人死亡奖励
-            _resourceSystem.AcquireResource("Coin", (int)CharacterController.CharacterStats.GetStat("CoinOnDead").Value, playerModel);
-            _resourceSystem.AcquireResource("Wood", (int)CharacterController.CharacterStats.GetStat("WoodOnDead").Value, playerModel);
+            resourceSystem.AcquireResource("Coin", (int)CharacterController.CharacterStats.GetStat("CoinOnDead").Value, playerModel);
+            resourceSystem.AcquireResource("Wood", (int)CharacterController.CharacterStats.GetStat("WoodOnDead").Value, playerModel);
         }
     }
 }
